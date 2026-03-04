@@ -15,7 +15,7 @@ export function LocationSection() {
   const today = new Date().getDay();
 
   return (
-    <section className="py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+    <section className="bg-surface-light py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
           {/* Map placeholder */}
@@ -31,17 +31,17 @@ export function LocationSection() {
           {/* Info */}
           <AnimateOnScroll variants={slideInRight}>
             <div>
-              <h2 className="font-display text-[length:var(--font-size-heading)] font-bold text-brand-navy">
+              <h2 className="font-display text-[length:var(--font-size-heading)] font-bold text-text-inverse">
                 Como Chegar
               </h2>
 
               <div className="mt-6 flex items-start gap-3">
-                <MapPin className="mt-1 h-5 w-5 shrink-0 text-brand-coral" />
+                <MapPin className="mt-1 h-5 w-5 shrink-0 text-brand-gold" />
                 <div>
-                  <p className="font-medium text-text-primary">
+                  <p className="font-medium text-text-inverse">
                     Rod. Antônio Heil, 301
                   </p>
-                  <p className="text-sm text-text-secondary">
+                  <p className="text-sm text-text-muted">
                     Brusque, SC — CEP 88353-100
                   </p>
                 </div>
@@ -50,8 +50,8 @@ export function LocationSection() {
               {/* Hours */}
               <div className="mt-8">
                 <div className="flex items-center gap-2">
-                  <Clock className="h-5 w-5 text-brand-coral" />
-                  <h3 className="font-display text-lg font-bold text-brand-navy">
+                  <Clock className="h-5 w-5 text-brand-gold" />
+                  <h3 className="font-display text-lg font-bold text-text-inverse">
                     Horário de Funcionamento
                   </h3>
                 </div>
@@ -62,8 +62,8 @@ export function LocationSection() {
                       key={schedule.day}
                       className={`flex items-center justify-between rounded-button px-4 py-3 text-sm ${
                         schedule.days.includes(today)
-                          ? "bg-brand-coral/10 font-semibold text-brand-coral"
-                          : "bg-surface-light text-text-secondary"
+                          ? "bg-brand-gold/10 font-semibold text-brand-gold-dark"
+                          : "bg-surface-muted text-text-muted"
                       }`}
                     >
                       <span>{schedule.day}</span>
@@ -88,6 +88,7 @@ export function LocationSection() {
                   external
                   variant="secondary"
                   size="md"
+                  className="border-text-inverse/20 text-text-inverse hover:border-brand-gold hover:text-brand-gold"
                 >
                   Abrir no Apple Maps
                 </CTAButton>

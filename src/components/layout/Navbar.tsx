@@ -6,7 +6,6 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { Search, Menu, X } from "lucide-react";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { MobileNav } from "./MobileNav";
-import { cn } from "@/lib/utils";
 
 const navLinks = [
   { label: "Lojas", href: "/lojas" },
@@ -31,14 +30,14 @@ export function Navbar() {
         style={{
           backgroundColor: useTransform(
             bgOpacity,
-            (v) => `rgba(255, 255, 255, ${v * 0.95})`
+            (v) => `rgba(10, 15, 28, ${v * 0.95})`
           ),
           backdropFilter: useTransform(bgOpacity, (v) =>
             v > 0.1 ? "blur(12px)" : "none"
           ),
           borderBottomColor: useTransform(
             borderOpacity,
-            (v) => `rgba(0, 0, 0, ${v})`
+            (v) => `rgba(255, 255, 255, ${v})`
           ),
           borderBottomWidth: "1px",
           borderBottomStyle: "solid",
@@ -47,8 +46,8 @@ export function Navbar() {
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <span className="font-display text-2xl font-bold text-brand-navy">
-              Stop<span className="text-brand-coral">Shop</span>
+            <span className="font-display text-2xl font-bold text-white">
+              Stop<span className="text-brand-gold">Shop</span>
             </span>
           </Link>
 
@@ -58,7 +57,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-text-secondary transition-colors hover:text-brand-navy"
+                className="text-sm font-medium text-text-secondary transition-colors hover:text-white"
               >
                 {link.label}
               </Link>
@@ -68,7 +67,7 @@ export function Navbar() {
           {/* Desktop Actions */}
           <div className="hidden items-center gap-4 lg:flex">
             <button
-              className="flex h-10 w-10 items-center justify-center rounded-full text-text-secondary transition-colors hover:bg-surface-light hover:text-brand-navy"
+              className="flex h-10 w-10 items-center justify-center rounded-full text-text-secondary transition-colors hover:bg-white/5 hover:text-white"
               aria-label="Buscar"
             >
               <Search className="h-5 w-5" />
@@ -86,7 +85,7 @@ export function Navbar() {
           {/* Mobile Hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-10 w-10 items-center justify-center rounded-full text-brand-navy lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-white lg:hidden"
             aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
           >
             {mobileOpen ? (

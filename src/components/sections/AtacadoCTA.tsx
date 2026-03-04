@@ -21,28 +21,28 @@ const stats = [
 
 export function AtacadoCTA() {
   return (
-    <section className="bg-brand-navy py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+    <section className="bg-gradient-to-b from-surface-dark to-surface-card py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           {/* Text */}
           <AnimateOnScroll>
-            <span className="text-sm font-semibold uppercase tracking-wider text-brand-coral">
+            <span className="text-sm font-semibold uppercase tracking-wider text-brand-gold">
               Atacado em Brusque
             </span>
             <h2 className="mt-3 font-display text-[length:var(--font-size-heading)] font-bold text-white">
               Compre no atacado com preços imbatíveis
             </h2>
-            <p className="mt-4 text-lg leading-relaxed text-white/70">
+            <p className="mt-4 text-lg leading-relaxed text-text-secondary">
               O Stop Shop é referência em atacado de moda em Santa Catarina. Lojistas de todo o Brasil vêm até Brusque para renovar seus estoques.
             </p>
 
             <StaggerChildren className="mt-8 space-y-4">
               {bullets.map((bullet) => (
                 <StaggerItem key={bullet} className="flex items-start gap-3">
-                  <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-coral">
-                    <Check className="h-3 w-3 text-white" />
+                  <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-gold">
+                    <Check className="h-3 w-3 text-surface-dark" />
                   </div>
-                  <span className="text-white/80">{bullet}</span>
+                  <span className="text-text-secondary">{bullet}</span>
                 </StaggerItem>
               ))}
             </StaggerChildren>
@@ -58,14 +58,14 @@ export function AtacadoCTA() {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 lg:grid-cols-1 lg:gap-8">
             {stats.map((stat) => (
               <AnimateOnScroll key={stat.label}>
-                <div className="rounded-card border border-white/10 bg-white/5 p-6 text-center lg:text-left">
-                  <div className="font-display text-4xl font-bold text-brand-coral">
+                <div className="rounded-card border border-border-gold bg-surface-card p-6 text-center lg:text-left">
+                  <div className="font-display text-4xl font-bold text-brand-gold">
                     <CounterAnimation
                       target={stat.value}
                       suffix={stat.suffix}
                     />
                   </div>
-                  <p className="mt-2 text-sm text-white/60">{stat.label}</p>
+                  <p className="mt-2 text-sm text-text-muted">{stat.label}</p>
                 </div>
               </AnimateOnScroll>
             ))}

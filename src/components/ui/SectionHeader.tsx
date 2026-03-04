@@ -6,16 +6,35 @@ import { cn } from "@/lib/utils";
 interface SectionHeaderProps {
   title: string;
   subtitle?: string;
+  highlight?: string;
   align?: "left" | "center";
+  light?: boolean;
   className?: string;
 }
 
 export function SectionHeader({
   title,
   subtitle,
+  highlight,
   align = "center",
+  light = false,
   className,
 }: SectionHeaderProps) {
+  const renderTitle = () => {
+    if (!highlight) {
+      return title;
+    }
+    const parts = title.split(highlight);
+    if (parts.length < 2) return title;
+    return (
+      <>
+        {parts[0]}
+        <span className="text-brand-gold">{highlight}</span>
+        {parts[1]}
+      </>
+    );
+  };
+
   return (
     <AnimateOnScroll
       className={cn(
@@ -24,11 +43,22 @@ export function SectionHeader({
         className
       )}
     >
-      <h2 className="font-display text-[length:var(--font-size-heading)] font-bold text-brand-navy">
-        {title}
+      <h2
+        className={cn(
+          "font-display text-[length:var(--font-size-heading)] font-bold",
+          light ? "text-text-inverse" : "text-text-primary"
+        )}
+      >
+        {renderTitle()}
       </h2>
       {subtitle && (
-        <p className="mt-3 text-lg text-text-secondary max-w-2xl mx-auto">
+        <p
+          className={cn(
+            "mt-3 text-lg max-w-2xl",
+            align === "center" && "mx-auto",
+            light ? "text-text-muted" : "text-text-secondary"
+          )}
+        >
           {subtitle}
         </p>
       )}

@@ -16,19 +16,19 @@ export function StoreCard({ store, className }: StoreCardProps) {
       whileHover={{ y: -8 }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
       className={cn(
-        "group overflow-hidden rounded-card bg-white shadow-card hover:shadow-card-hover transition-shadow duration-300",
+        "group overflow-hidden rounded-card bg-surface-card border border-border-subtle shadow-card hover:shadow-card-hover hover:border-brand-gold/30 transition-all duration-300",
         className
       )}
     >
       {/* Photo */}
-      <div className="relative h-48 overflow-hidden bg-surface-muted">
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/40 to-transparent z-10" />
-        <div className="h-full w-full bg-brand-navy/10 group-hover:scale-110 transition-transform duration-500" />
+      <div className="relative h-48 overflow-hidden bg-surface-elevated">
+        <div className="absolute inset-0 bg-gradient-to-t from-surface-dark/60 to-transparent z-10" />
+        <div className="h-full w-full bg-brand-navy-light group-hover:scale-110 transition-transform duration-500" />
       </div>
 
       {/* Content */}
       <div className="p-5">
-        <h3 className="font-display text-lg font-bold text-brand-navy">
+        <h3 className="font-display text-lg font-bold text-text-primary">
           {store.name}
         </h3>
 
@@ -37,7 +37,7 @@ export function StoreCard({ store, className }: StoreCardProps) {
           {store.categories.slice(0, 2).map((cat) => (
             <span
               key={cat}
-              className="rounded-pill bg-brand-cream px-2.5 py-0.5 text-xs font-medium text-brand-navy"
+              className="rounded-pill bg-brand-gold/10 px-2.5 py-0.5 text-xs font-medium text-brand-gold"
             >
               {cat}
             </span>
@@ -55,7 +55,7 @@ export function StoreCard({ store, className }: StoreCardProps) {
           {store.phone && (
             <a
               href={`tel:${store.phone}`}
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-surface-light text-text-secondary hover:bg-brand-navy hover:text-white transition-colors"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-surface-elevated text-text-secondary hover:bg-brand-gold hover:text-surface-dark transition-colors"
               aria-label={`Ligar para ${store.name}`}
             >
               <Phone className="h-4 w-4" />

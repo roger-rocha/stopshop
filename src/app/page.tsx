@@ -5,6 +5,7 @@ import { FeaturedStores } from "@/components/sections/FeaturedStores";
 import { AtacadoCTA } from "@/components/sections/AtacadoCTA";
 import { FacilitiesGrid } from "@/components/sections/FacilitiesGrid";
 import { BlogPreview } from "@/components/sections/BlogPreview";
+import { FAQSection } from "@/components/sections/FAQSection";
 import { LocationSection } from "@/components/sections/LocationSection";
 import { NewsletterCTA } from "@/components/sections/NewsletterCTA";
 
@@ -72,6 +73,7 @@ export default function HomePage() {
       <AtacadoCTA />
       <FacilitiesGrid />
       <BlogPreview />
+      <FAQSection />
       <LocationSection />
       <NewsletterCTA />
     </>

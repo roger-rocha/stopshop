@@ -2,25 +2,34 @@
 
 @theme {
   /* Colors — Brand */
-  --color-brand-navy: #1B2A4A;
-  --color-brand-navy-light: #2A3D66;
+  --color-brand-navy: #0A0F1C;
+  --color-brand-navy-light: #141B2E;
   --color-brand-coral: #FF6B6B;
   --color-brand-coral-light: #FF8A8A;
   --color-brand-coral-dark: #E55555;
   --color-brand-cream: #FFF8F0;
-  --color-brand-gold: #D4A853;
+  --color-brand-gold: #C9A84C;
+  --color-brand-gold-light: #D4B85E;
+  --color-brand-gold-dark: #B8973E;
 
   /* Colors — Surfaces */
+  --color-surface-dark: #0A0F1C;
+  --color-surface-card: #111827;
+  --color-surface-elevated: #1E293B;
   --color-surface-white: #FFFFFF;
   --color-surface-light: #F8F9FA;
   --color-surface-muted: #F1F3F5;
-  --color-surface-dark: #1B2A4A;
 
   /* Colors — Text */
-  --color-text-primary: #1A1A2E;
-  --color-text-secondary: #4A5568;
-  --color-text-muted: #718096;
-  --color-text-inverse: #FFFFFF;
+  --color-text-primary: #F1F5F9;
+  --color-text-secondary: #94A3B8;
+  --color-text-muted: #64748B;
+  --color-text-inverse: #1A1A2E;
+
+  /* Colors — Borders */
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-border-default: rgba(255, 255, 255, 0.10);
+  --color-border-gold: rgba(201, 168, 76, 0.30);
 
   /* Colors — Semantic */
   --color-success: #48BB78;
@@ -47,9 +56,10 @@
   --radius-button: 12px;
 
   /* Shadows */
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.06);
-  --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.12);
-  --shadow-nav: 0 2px 20px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.2);
+  --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.4);
+  --shadow-nav: 0 2px 20px rgba(0, 0, 0, 0.3);
+  --shadow-glow-gold: 0 0 30px rgba(201, 168, 76, 0.25);
   --shadow-glow-coral: 0 0 30px rgba(255, 107, 107, 0.3);
 
   /* Spacing — Section */
@@ -61,7 +71,7 @@
 body {
   font-family: var(--font-body);
   color: var(--color-text-primary);
-  background: var(--color-surface-white);
+  background: var(--color-surface-dark);
 }
 
 /* Smooth scrolling */
@@ -86,6 +96,6 @@ html {
 
 /* Selection color */
 ::selection {
-  background: var(--color-brand-coral);
-  color: white;
+  background: var(--color-brand-gold);
+  color: var(--color-surface-dark);
 }

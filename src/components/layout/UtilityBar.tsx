@@ -8,7 +8,7 @@ export function UtilityBar() {
   const isOpen = isShoppingOpen();
 
   return (
-    <div className="hidden bg-brand-navy text-white sm:block">
+    <div className="hidden bg-surface-card text-white sm:block">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-1.5 sm:px-6 lg:px-8">
         <StatusBadge isOpen={isOpen} temperature="24°C" />
 
@@ -22,7 +22,7 @@ export function UtilityBar() {
           </a>
           <a
             href="/cadastro"
-            className="text-brand-gold transition-colors hover:text-brand-gold/80"
+            className="text-brand-gold transition-colors hover:text-brand-gold-light"
           >
             Cadastre-se
           </a>

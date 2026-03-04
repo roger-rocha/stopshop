@@ -19,7 +19,7 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-40 bg-white lg:hidden"
+          className="fixed inset-0 z-40 bg-surface-dark lg:hidden"
         >
           <nav className="flex h-full flex-col items-center justify-center gap-6 px-6">
             {links.map((link, i) => (
@@ -32,7 +32,7 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
                 <Link
                   href={link.href}
                   onClick={onClose}
-                  className="font-display text-3xl font-bold text-brand-navy transition-colors hover:text-brand-coral"
+                  className="font-display text-3xl font-bold text-white transition-colors hover:text-brand-gold"
                 >
                   {link.label}
                 </Link>

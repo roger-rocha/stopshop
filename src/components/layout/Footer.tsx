@@ -15,14 +15,14 @@ const quickLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-brand-navy text-white">
+    <footer className="bg-[#060A14] text-white">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div>
             <Link href="/" className="inline-block">
               <span className="font-display text-2xl font-bold">
-                Stop<span className="text-brand-coral">Shop</span>
+                Stop<span className="text-brand-gold">Shop</span>
               </span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-white/70">
@@ -45,7 +45,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/70 transition-colors hover:text-white"
+                    className="text-sm text-white/70 transition-colors hover:text-brand-gold"
                   >
                     {link.label}
                   </Link>
@@ -87,7 +87,7 @@ export function Footer() {
                 href="https://instagram.com/stopshop"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-brand-coral"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-brand-gold hover:text-surface-dark"
                 aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
@@ -96,7 +96,7 @@ export function Footer() {
                 href="https://facebook.com/stopshop"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-brand-coral"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-brand-gold hover:text-surface-dark"
                 aria-label="Facebook"
               >
                 <Facebook className="h-5 w-5" />
@@ -108,11 +108,11 @@ export function Footer() {
               <input
                 type="email"
                 placeholder="Seu e-mail"
-                className="flex-1 rounded-button bg-white/10 px-4 py-2.5 text-sm text-white placeholder:text-white/50 outline-none focus:ring-2 focus:ring-brand-coral"
+                className="flex-1 rounded-button border border-border-subtle bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/50 outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold"
               />
               <button
                 type="submit"
-                className="rounded-button bg-brand-coral px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-coral-dark"
+                className="rounded-button bg-brand-gold px-4 py-2.5 text-sm font-medium text-surface-dark transition-colors hover:bg-brand-gold-light"
               >
                 Enviar
               </button>

@@ -12,10 +12,10 @@ export function SegmentCarousel() {
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           title="Explore por Segmento"
+          highlight="Segmento"
           subtitle="Encontre exatamente o que você procura entre nossos mais de 13 segmentos de moda"
         />
 
-        {/* Mobile: horizontal scroll / Desktop: grid */}
         <StaggerChildren className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {segments.map((segment) => (
             <StaggerItem key={segment.id}>
@@ -23,7 +23,7 @@ export function SegmentCarousel() {
                 <motion.div
                   whileHover={{ y: -4 }}
                   transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                  className="group relative overflow-hidden rounded-card bg-surface-light"
+                  className="group relative overflow-hidden rounded-card bg-surface-card border border-border-subtle hover:border-brand-gold/30 transition-all duration-300"
                   style={{ aspectRatio: "4/3" }}
                 >
                   {/* Colored overlay */}
@@ -43,7 +43,7 @@ export function SegmentCarousel() {
                         style={{ backgroundColor: segment.color }}
                       />
                     </div>
-                    <h3 className="font-display text-sm font-bold text-brand-navy sm:text-base">
+                    <h3 className="font-display text-sm font-bold text-text-primary sm:text-base">
                       {segment.name}
                     </h3>
                     <span className="mt-1 text-xs text-text-muted">
