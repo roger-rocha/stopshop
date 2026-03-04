@@ -1,68 +1,63 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
 
 const steps = [
   {
     number: "01",
-    title: "+160 Marcas",
-    description:
-      "O maior mix de marcas de moda da região, reunidas em um único endereço.",
+    title: "Direto de Fábrica",
+    description: "Mais de 160 marcas com preços de fábrica no atacado e varejo.",
   },
   {
     number: "02",
-    title: "Atacado e Varejo",
-    description:
-      "Compre para sua loja ou para uso pessoal — com preços imbatíveis nos dois formatos.",
+    title: "Estrutura Completa",
+    description: "Ambiente climatizado, estacionamento para 310 carros e 15 ônibus.",
   },
   {
     number: "03",
-    title: "Estrutura Premium",
-    description:
-      "Ambiente climatizado, estacionamento gratuito, praça de alimentação e muito conforto.",
+    title: "Atacado Especializado",
+    description: "Central de guias e atendimento dedicado para lojistas.",
   },
   {
     number: "04",
-    title: "Localização Privilegiada",
-    description:
-      "Fácil acesso pela BR-101, em Brusque, SC — polo de moda de Santa Catarina.",
+    title: "Stop Cred",
+    description: "Crediário próprio com anuidade zero e até 6x sem juros.",
   },
 ];
 
 export function FacilitiesGrid() {
   return (
-    <section className="py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+    <section className="bg-brand-cream py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
-          title="Por que visitar o Stop Shop?"
-          highlight="Stop Shop"
-          subtitle="Tudo que você precisa para uma experiência de compras completa"
+          label="Por que o Stop Shop?"
+          title="O que nos diferencia"
+          highlight="diferencia"
+          light
         />
 
         <StaggerChildren className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, index) => (
             <StaggerItem key={step.number} className="relative">
-              <div className="group rounded-card border border-border-subtle bg-surface-card p-8 text-center transition-all hover:border-brand-gold/30 h-full">
-                {/* Large faded number */}
-                <span className="font-display text-6xl font-bold text-brand-gold/15">
+              <div className="group h-full rounded-2xl bg-white p-8 text-center shadow-sm transition-shadow hover:shadow-md">
+                <span className="font-display text-5xl font-bold text-brand-coral/20">
                   {step.number}
                 </span>
-
-                <h3 className="mt-2 font-display text-lg font-bold text-text-primary">
+                <h3 className="mt-3 font-body text-lg font-semibold text-text-inverse">
                   {step.title}
                 </h3>
-
-                <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+                <p className="mt-2 text-sm leading-relaxed text-text-muted">
                   {step.description}
                 </p>
               </div>
 
-              {/* Arrow connector (hidden on last item and on mobile) */}
+              {/* Arrow connector — desktop only */}
               {index < steps.length - 1 && (
-                <div className="absolute -right-3 top-1/2 z-10 hidden -translate-y-1/2 text-text-muted lg:block">
-                  <ArrowRight className="h-5 w-5" />
+                <div className="absolute -right-3 top-1/2 z-10 hidden -translate-y-1/2 text-brand-coral/30 lg:block">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M4 10h12m0 0l-4-4m4 4l-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </div>
               )}
             </StaggerItem>

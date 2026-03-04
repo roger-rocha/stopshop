@@ -7,11 +7,11 @@ import type { ReactNode } from "react";
 
 const variants = {
   primary:
-    "bg-brand-gold text-surface-dark hover:bg-brand-gold-light shadow-md hover:shadow-glow-gold font-semibold",
+    "bg-brand-coral text-white hover:bg-brand-coral-dark shadow-md hover:shadow-glow-coral font-semibold",
   secondary:
-    "border-2 border-white/20 text-white hover:border-brand-gold hover:text-brand-gold",
+    "border-2 border-brand-cream/30 text-brand-cream hover:border-brand-coral hover:text-brand-coral",
   whatsapp: "bg-[#25D366] text-white hover:bg-[#20BD5A]",
-  ghost: "text-text-secondary hover:text-brand-gold",
+  ghost: "text-text-secondary hover:text-brand-coral",
 };
 
 const sizes = {

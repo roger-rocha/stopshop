@@ -1,75 +1,68 @@
 "use client";
 
-import { Check } from "lucide-react";
+import Image from "next/image";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { CounterAnimation } from "@/components/motion/CounterAnimation";
 import { AnimateOnScroll } from "@/components/motion/AnimateOnScroll";
-import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
+import { slideInLeft, slideInRight } from "@/lib/animations";
 
-const bullets = [
-  "Preços até 70% abaixo do varejo tradicional",
-  "Compra mínima a partir de 6 peças por modelo",
-  "Mais de 80 lojas com opção atacado",
-  "Atendimento especializado para lojistas",
-];
-
-const stats = [
-  { value: 70, suffix: "%", label: "Economia no atacado" },
-  { value: 80, suffix: "+", label: "Lojas atacadistas" },
-  { value: 160, suffix: "+", label: "Marcas disponíveis" },
+const atacadoStats = [
+  { value: 48, suffix: "%", label: "Moda Feminina" },
+  { value: 28, suffix: "%", label: "Moda Masculina" },
+  { value: 14, suffix: "%", label: "Moda Infantil" },
+  { value: 10, suffix: "%", label: "Jeans" },
 ];
 
 export function AtacadoCTA() {
   return (
-    <section className="bg-gradient-to-b from-surface-dark to-surface-card py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-          {/* Text */}
-          <AnimateOnScroll>
-            <span className="text-sm font-semibold uppercase tracking-wider text-brand-gold">
-              Atacado em Brusque
+    <section className="relative overflow-hidden py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <Image
+          src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&q=80"
+          alt=""
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-surface-dark/85" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-5">
+          {/* Text — 60% */}
+          <AnimateOnScroll variants={slideInLeft} className="lg:col-span-3">
+            <span className="text-sm font-semibold uppercase tracking-[0.15em] text-brand-coral">
+              Atacado
             </span>
-            <h2 className="mt-3 font-display text-[length:var(--font-size-heading)] font-bold text-white">
-              Compre no atacado com preços imbatíveis
+            <h2 className="mt-3 font-display text-[length:var(--font-size-heading)] font-bold text-brand-cream">
+              Preço de fábrica para lojistas
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-text-secondary">
-              O Stop Shop é referência em atacado de moda em Santa Catarina. Lojistas de todo o Brasil vêm até Brusque para renovar seus estoques.
+              Ambiente climatizado, central de guias, transporte para o Catarina Moda Shopping a cada 30 minutos.
             </p>
-
-            <StaggerChildren className="mt-8 space-y-4">
-              {bullets.map((bullet) => (
-                <StaggerItem key={bullet} className="flex items-start gap-3">
-                  <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-gold">
-                    <Check className="h-3 w-3 text-surface-dark" />
-                  </div>
-                  <span className="text-text-secondary">{bullet}</span>
-                </StaggerItem>
-              ))}
-            </StaggerChildren>
-
             <div className="mt-8">
-              <CTAButton href="/atacado" size="lg">
-                Saiba Mais sobre Atacado
+              <CTAButton href="/atacado" size="lg" className="rounded-full">
+                Saiba mais sobre atacado
               </CTAButton>
             </div>
           </AnimateOnScroll>
 
-          {/* Stats */}
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 lg:grid-cols-1 lg:gap-8">
-            {stats.map((stat) => (
-              <AnimateOnScroll key={stat.label}>
-                <div className="rounded-card border border-border-gold bg-surface-card p-6 text-center lg:text-left">
-                  <div className="font-display text-4xl font-bold text-brand-gold">
-                    <CounterAnimation
-                      target={stat.value}
-                      suffix={stat.suffix}
-                    />
+          {/* Stats — 40% */}
+          <AnimateOnScroll variants={slideInRight} className="lg:col-span-2">
+            <div className="grid grid-cols-2 gap-4">
+              {atacadoStats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-card border border-border-subtle bg-surface-card/60 backdrop-blur-sm p-5 text-center"
+                >
+                  <div className="font-display text-3xl font-bold text-brand-coral lg:text-4xl">
+                    <CounterAnimation target={stat.value} suffix={stat.suffix} />
                   </div>
-                  <p className="mt-2 text-sm text-text-muted">{stat.label}</p>
+                  <p className="mt-1 text-sm text-text-secondary">{stat.label}</p>
                 </div>
-              </AnimateOnScroll>
-            ))}
-          </div>
+              ))}
+            </div>
+          </AnimateOnScroll>
         </div>
       </div>
     </section>

@@ -4,6 +4,7 @@ import { AnimateOnScroll } from "@/components/motion/AnimateOnScroll";
 import { cn } from "@/lib/utils";
 
 interface SectionHeaderProps {
+  label?: string;
   title: string;
   subtitle?: string;
   highlight?: string;
@@ -13,6 +14,7 @@ interface SectionHeaderProps {
 }
 
 export function SectionHeader({
+  label,
   title,
   subtitle,
   highlight,
@@ -21,16 +23,14 @@ export function SectionHeader({
   className,
 }: SectionHeaderProps) {
   const renderTitle = () => {
-    if (!highlight) {
-      return title;
-    }
-    const parts = title.split(highlight);
-    if (parts.length < 2) return title;
+    if (!highlight) return title;
+    const idx = title.indexOf(highlight);
+    if (idx === -1) return title;
     return (
       <>
-        {parts[0]}
-        <span className="text-brand-gold">{highlight}</span>
-        {parts[1]}
+        {title.slice(0, idx)}
+        <span className="text-brand-coral">{highlight}</span>
+        {title.slice(idx + highlight.length)}
       </>
     );
   };
@@ -43,10 +43,15 @@ export function SectionHeader({
         className
       )}
     >
+      {label && (
+        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.15em] text-brand-coral">
+          {label}
+        </p>
+      )}
       <h2
         className={cn(
           "font-display text-[length:var(--font-size-heading)] font-bold",
-          light ? "text-text-inverse" : "text-text-primary"
+          light ? "text-text-inverse" : "text-brand-cream"
         )}
       >
         {renderTitle()}

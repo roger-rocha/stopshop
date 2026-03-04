@@ -12,7 +12,7 @@ export function StatusBadge({ isOpen, temperature, className }: StatusBadgeProps
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-2 rounded-pill bg-surface-card/90 border border-border-subtle px-3 py-1.5 text-sm font-medium backdrop-blur-sm",
+        "inline-flex items-center gap-2 rounded-pill bg-surface-card/80 border border-border-subtle px-3 py-1.5 text-sm font-medium backdrop-blur-md",
         className
       )}
     >

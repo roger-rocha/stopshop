@@ -2,34 +2,32 @@
 
 @theme {
   /* Colors — Brand */
-  --color-brand-navy: #0A0F1C;
-  --color-brand-navy-light: #141B2E;
-  --color-brand-coral: #FF6B6B;
-  --color-brand-coral-light: #FF8A8A;
-  --color-brand-coral-dark: #E55555;
-  --color-brand-cream: #FFF8F0;
-  --color-brand-gold: #C9A84C;
-  --color-brand-gold-light: #D4B85E;
-  --color-brand-gold-dark: #B8973E;
+  --color-brand-navy: #0F1117;
+  --color-brand-navy-light: #1A1D27;
+  --color-brand-coral: #E94560;
+  --color-brand-coral-light: #F06B82;
+  --color-brand-coral-dark: #D63B54;
+  --color-brand-cream: #FDF6EC;
+  --color-brand-gold: #D4A853;
 
   /* Colors — Surfaces */
-  --color-surface-dark: #0A0F1C;
-  --color-surface-card: #111827;
-  --color-surface-elevated: #1E293B;
+  --color-surface-dark: #0F1117;
+  --color-surface-card: #1A1D27;
+  --color-surface-elevated: #2A2D37;
   --color-surface-white: #FFFFFF;
-  --color-surface-light: #F8F9FA;
+  --color-surface-light: #F7F8FA;
   --color-surface-muted: #F1F3F5;
 
   /* Colors — Text */
-  --color-text-primary: #F1F5F9;
-  --color-text-secondary: #94A3B8;
-  --color-text-muted: #64748B;
-  --color-text-inverse: #1A1A2E;
+  --color-text-primary: #FDF6EC;
+  --color-text-secondary: #E8DFD0;
+  --color-text-muted: #6B7280;
+  --color-text-inverse: #0F1117;
 
   /* Colors — Borders */
-  --color-border-subtle: rgba(255, 255, 255, 0.06);
-  --color-border-default: rgba(255, 255, 255, 0.10);
-  --color-border-gold: rgba(201, 168, 76, 0.30);
+  --color-border-subtle: #2A2D37;
+  --color-border-default: rgba(255, 255, 255, 0.08);
+  --color-border-coral: rgba(233, 69, 96, 0.30);
 
   /* Colors — Semantic */
   --color-success: #48BB78;
@@ -42,9 +40,9 @@
   --font-body: var(--font-dm-sans), "DM Sans", sans-serif;
 
   /* Font sizes — fluid with clamp */
-  --font-size-hero: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  --font-size-hero: clamp(2.2rem, 6vw, 4.5rem);
   --font-size-display: clamp(2rem, 3vw + 0.5rem, 3rem);
-  --font-size-heading: clamp(1.5rem, 2vw + 0.5rem, 2.25rem);
+  --font-size-heading: clamp(1.8rem, 4vw, 3rem);
   --font-size-title: clamp(1.125rem, 1.5vw + 0.25rem, 1.5rem);
   --font-size-body: 1rem;
   --font-size-small: 0.875rem;
@@ -56,15 +54,15 @@
   --radius-button: 12px;
 
   /* Shadows */
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.2);
-  --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 20px 40px rgba(0, 0, 0, 0.4);
   --shadow-nav: 0 2px 20px rgba(0, 0, 0, 0.3);
-  --shadow-glow-gold: 0 0 30px rgba(201, 168, 76, 0.25);
-  --shadow-glow-coral: 0 0 30px rgba(255, 107, 107, 0.3);
+  --shadow-glow-coral: 0 0 30px rgba(233, 69, 96, 0.2);
+  --shadow-glow-gold: 0 0 30px rgba(212, 168, 83, 0.25);
 
   /* Spacing — Section */
   --spacing-section-y: clamp(4rem, 8vw, 8rem);
-  --spacing-section-x: clamp(1rem, 4vw, 2rem);
+  --spacing-section-x: clamp(1.25rem, 4vw, 2rem);
 }
 
 /* Base styles */
@@ -96,6 +94,15 @@ html {
 
 /* Selection color */
 ::selection {
-  background: var(--color-brand-gold);
-  color: var(--color-surface-dark);
+  background: var(--color-brand-coral);
+  color: white;
+}
+
+/* Hide scrollbar for horizontal scroll sections */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

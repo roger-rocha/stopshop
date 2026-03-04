@@ -4,10 +4,11 @@ import { SegmentCarousel } from "@/components/sections/SegmentCarousel";
 import { FeaturedStores } from "@/components/sections/FeaturedStores";
 import { AtacadoCTA } from "@/components/sections/AtacadoCTA";
 import { FacilitiesGrid } from "@/components/sections/FacilitiesGrid";
+import { GallerySection } from "@/components/sections/GallerySection";
+import { StopCredSection } from "@/components/sections/StopCredSection";
 import { BlogPreview } from "@/components/sections/BlogPreview";
-import { FAQSection } from "@/components/sections/FAQSection";
 import { LocationSection } from "@/components/sections/LocationSection";
-import { NewsletterCTA } from "@/components/sections/NewsletterCTA";
+import { ContactSection } from "@/components/sections/ContactSection";
 
 export const metadata: Metadata = {
   title: "Stop Shop — Shopping de Moda em Brusque, SC | 160+ Marcas",
@@ -28,10 +29,10 @@ export default function HomePage() {
             description:
               "Shopping de moda com mais de 160 marcas. Atacado e varejo em Brusque, SC.",
             url: "https://stopshop.com.br",
-            telephone: "+55-47-3351-0000",
+            telephone: "+55-47-3255-7000",
             address: {
               "@type": "PostalAddress",
-              streetAddress: "Rod. Antônio Heil, 301",
+              streetAddress: "Rod. Antônio Heil, 635",
               addressLocality: "Brusque",
               addressRegion: "SC",
               postalCode: "88353-100",
@@ -51,15 +52,10 @@ export default function HomePage() {
                   "Wednesday",
                   "Thursday",
                   "Friday",
+                  "Saturday",
                 ],
                 opens: "09:00",
                 closes: "19:00",
-              },
-              {
-                "@type": "OpeningHoursSpecification",
-                dayOfWeek: "Saturday",
-                opens: "09:00",
-                closes: "17:00",
               },
             ],
             numberOfStores: 160,
@@ -72,10 +68,11 @@ export default function HomePage() {
       <FeaturedStores />
       <AtacadoCTA />
       <FacilitiesGrid />
+      <GallerySection />
+      <StopCredSection />
       <BlogPreview />
-      <FAQSection />
       <LocationSection />
-      <NewsletterCTA />
+      <ContactSection />
     </>
   );
 }

@@ -15,10 +15,10 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
+          initial={{ opacity: 0, x: "100%" }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: "100%" }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           className="fixed inset-0 z-40 bg-surface-dark lg:hidden"
         >
           <nav className="flex h-full flex-col items-center justify-center gap-6 px-6">
@@ -32,7 +32,7 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
                 <Link
                   href={link.href}
                   onClick={onClose}
-                  className="font-display text-3xl font-bold text-white transition-colors hover:text-brand-gold"
+                  className="font-display text-3xl font-bold text-brand-cream transition-colors hover:text-brand-coral"
                 >
                   {link.label}
                 </Link>
@@ -48,7 +48,7 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
               <CTAButton
                 variant="whatsapp"
                 size="lg"
-                href="https://wa.me/554733510000?text=Olá! Gostaria de informações sobre o Stop Shop."
+                href="https://wa.me/554732557000?text=Olá! Gostaria de informações sobre o Stop Shop."
                 external
               >
                 Fale pelo WhatsApp
