@@ -16,7 +16,6 @@ const atacadoStats = [
 export function AtacadoCTA() {
   return (
     <section className="relative overflow-hidden py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
-      {/* Background image */}
       <div className="absolute inset-0">
         <Image
           src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&q=80"
@@ -29,9 +28,8 @@ export function AtacadoCTA() {
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-5">
-          {/* Text — 60% */}
           <AnimateOnScroll variants={slideInLeft} className="lg:col-span-3">
-            <span className="text-sm font-semibold uppercase tracking-[0.15em] text-brand-coral">
+            <span className="text-sm font-semibold uppercase tracking-[0.15em] text-brand-coral-light">
               Atacado
             </span>
             <h2 className="mt-3 font-display text-[length:var(--font-size-heading)] font-bold text-brand-cream">
@@ -47,7 +45,6 @@ export function AtacadoCTA() {
             </div>
           </AnimateOnScroll>
 
-          {/* Stats — 40% */}
           <AnimateOnScroll variants={slideInRight} className="lg:col-span-2">
             <div className="grid grid-cols-2 gap-4">
               {atacadoStats.map((stat) => (
@@ -55,7 +52,7 @@ export function AtacadoCTA() {
                   key={stat.label}
                   className="rounded-card border border-border-subtle bg-surface-card/60 backdrop-blur-sm p-5 text-center"
                 >
-                  <div className="font-display text-3xl font-bold text-brand-coral lg:text-4xl">
+                  <div className="font-display text-3xl font-bold text-brand-coral-light lg:text-4xl">
                     <CounterAnimation target={stat.value} suffix={stat.suffix} />
                   </div>
                   <p className="mt-1 text-sm text-text-secondary">{stat.label}</p>

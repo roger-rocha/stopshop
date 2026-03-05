@@ -24,7 +24,7 @@ export function StopCredSection() {
               className="relative w-full max-w-[380px] rounded-2xl p-8 text-white"
               style={{
                 aspectRatio: "1.6/1",
-                background: "linear-gradient(135deg, #E94560 0%, #0F1117 100%)",
+                background: "linear-gradient(135deg, #121856 0%, #0F1117 100%)",
                 transform: "perspective(800px) rotateY(-5deg)",
               }}
             >
@@ -45,7 +45,6 @@ export function StopCredSection() {
                   <p className="mt-3 text-xs text-white/50">Stop Shop · Brusque, SC</p>
                 </div>
               </div>
-              {/* Decorative circles */}
               <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-white/5" />
               <div className="absolute -bottom-6 -right-4 h-24 w-24 rounded-full bg-white/5" />
             </div>
@@ -53,7 +52,7 @@ export function StopCredSection() {
 
           {/* Benefits */}
           <AnimateOnScroll variants={slideInRight}>
-            <span className="text-sm font-semibold uppercase tracking-[0.15em] text-brand-coral">
+            <span className="text-sm font-semibold uppercase tracking-[0.15em] text-brand-coral-light">
               Stop Cred
             </span>
             <h2 className="mt-3 font-display text-[length:var(--font-size-heading)] font-bold text-brand-cream">

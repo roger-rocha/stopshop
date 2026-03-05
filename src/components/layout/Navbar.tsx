@@ -76,7 +76,7 @@ export function Navbar() {
             className="absolute left-1/2 -translate-x-1/2 lg:relative lg:left-0 lg:translate-x-0"
           >
             <span className="font-display text-2xl font-bold text-brand-cream">
-              Stop<span className="text-brand-coral">Shop</span>
+              Stop<span className="text-brand-coral-light">Shop</span>
             </span>
           </Link>
 

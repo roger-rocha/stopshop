@@ -64,7 +64,7 @@ export function FeaturedStores() {
                   <h3 className="font-body text-lg font-semibold text-brand-cream">
                     {store.name}
                   </h3>
-                  <span className="mt-1 inline-block rounded-pill bg-brand-coral/15 px-2.5 py-0.5 text-xs font-medium text-brand-coral">
+                  <span className="mt-1 inline-block rounded-pill bg-brand-coral-light/15 px-2.5 py-0.5 text-xs font-medium text-brand-coral-light">
                     {store.category}
                   </span>
                   <div className="mt-3 flex items-center gap-1.5 text-sm text-text-muted">
@@ -103,7 +103,7 @@ export function FeaturedStores() {
         >
           <a
             href="/lojas"
-            className="group inline-flex items-center gap-2 font-medium text-brand-coral transition-colors hover:text-brand-coral-light"
+            className="group inline-flex items-center gap-2 font-medium text-brand-coral-light transition-colors hover:text-brand-cream"
           >
             Ver todas as lojas
             <span className="inline-block transition-transform group-hover:translate-x-1">→</span>

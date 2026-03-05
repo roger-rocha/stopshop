@@ -4,9 +4,9 @@
   /* Colors — Brand */
   --color-brand-navy: #0F1117;
   --color-brand-navy-light: #1A1D27;
-  --color-brand-coral: #E94560;
-  --color-brand-coral-light: #F06B82;
-  --color-brand-coral-dark: #D63B54;
+  --color-brand-coral: #121856;
+  --color-brand-coral-light: #7B8BFF;
+  --color-brand-coral-dark: #0D1240;
   --color-brand-cream: #FDF6EC;
   --color-brand-gold: #D4A853;
 
@@ -27,7 +27,7 @@
   /* Colors — Borders */
   --color-border-subtle: #2A2D37;
   --color-border-default: rgba(255, 255, 255, 0.08);
-  --color-border-coral: rgba(233, 69, 96, 0.30);
+  --color-border-coral: rgba(18, 24, 86, 0.30);
 
   /* Colors — Semantic */
   --color-success: #48BB78;
@@ -57,7 +57,7 @@
   --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.3);
   --shadow-card-hover: 0 20px 40px rgba(0, 0, 0, 0.4);
   --shadow-nav: 0 2px 20px rgba(0, 0, 0, 0.3);
-  --shadow-glow-coral: 0 0 30px rgba(233, 69, 96, 0.2);
+  --shadow-glow-coral: 0 0 30px rgba(18, 24, 86, 0.3);
   --shadow-glow-gold: 0 0 30px rgba(212, 168, 83, 0.25);
 
   /* Spacing — Section */

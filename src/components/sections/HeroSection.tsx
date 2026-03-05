@@ -33,7 +33,6 @@ export function HeroSection() {
       <div className="relative z-10 flex flex-1 items-center">
         <div className="mx-auto w-full max-w-7xl px-5 py-32 sm:px-8">
           <div className="max-w-3xl text-center lg:text-left">
-            {/* Label */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -43,7 +42,6 @@ export function HeroSection() {
               O Ninho da Moda · Brusque, SC
             </motion.p>
 
-            {/* Headline */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -53,7 +51,6 @@ export function HeroSection() {
               Moda direto de fábrica com os melhores preços
             </motion.h1>
 
-            {/* Subtitle */}
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -63,7 +60,6 @@ export function HeroSection() {
               Mais de 160 marcas em um só lugar. Atacado e varejo no coração de Santa Catarina.
             </motion.p>
 
-            {/* CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -101,7 +97,7 @@ export function HeroSection() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 divide-y sm:grid-cols-3 sm:divide-x sm:divide-y-0 divide-border-subtle px-5 sm:px-8">
           {heroStats.map((stat) => (
             <div key={stat.label} className="py-8 text-center">
-              <div className="font-display text-[clamp(2.5rem,4vw,4rem)] font-bold text-brand-coral">
+              <div className="font-display text-[clamp(2.5rem,4vw,4rem)] font-bold text-brand-coral-light">
                 {stat.prefix}
                 <CounterAnimation target={stat.value} />
               </div>

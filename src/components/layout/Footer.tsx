@@ -30,7 +30,7 @@ export function Footer() {
             <div>
               <Link href="/" className="inline-block">
                 <span className="font-display text-2xl font-bold">
-                  Stop<span className="text-brand-coral">Shop</span>
+                  Stop<span className="text-brand-coral-light">Shop</span>
                 </span>
               </Link>
               <p className="mt-4 text-sm leading-relaxed text-brand-cream/60">
@@ -60,7 +60,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-brand-cream/60 transition-colors hover:text-brand-coral"
+                      className="text-sm text-brand-cream/60 transition-colors hover:text-brand-coral-light"
                     >
                       {link.label}
                     </Link>
@@ -111,7 +111,7 @@ export function Footer() {
                 <input
                   type="email"
                   placeholder="Seu e-mail"
-                  className="flex-1 rounded-button border border-border-subtle bg-white/5 px-4 py-2.5 text-sm text-brand-cream placeholder:text-brand-cream/40 outline-none focus:border-brand-coral focus:ring-1 focus:ring-brand-coral"
+                  className="flex-1 rounded-button border border-border-subtle bg-white/5 px-4 py-2.5 text-sm text-brand-cream placeholder:text-brand-cream/40 outline-none focus:border-brand-coral-light focus:ring-1 focus:ring-brand-coral-light"
                 />
                 <button
                   type="submit"

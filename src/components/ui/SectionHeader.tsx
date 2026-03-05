@@ -29,7 +29,7 @@ export function SectionHeader({
     return (
       <>
         {title.slice(0, idx)}
-        <span className="text-brand-coral">{highlight}</span>
+        <span className={light ? "text-brand-coral" : "text-brand-coral-light"}>{highlight}</span>
         {title.slice(idx + highlight.length)}
       </>
     );
@@ -44,7 +44,10 @@ export function SectionHeader({
       )}
     >
       {label && (
-        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.15em] text-brand-coral">
+        <p className={cn(
+          "mb-3 text-sm font-semibold uppercase tracking-[0.15em]",
+          light ? "text-brand-coral" : "text-brand-coral-light"
+        )}>
           {label}
         </p>
       )}
