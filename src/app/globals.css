@@ -2,32 +2,33 @@
 
 @theme {
   /* Colors — Brand */
-  --color-brand-navy: #0F1117;
-  --color-brand-navy-light: #1A1D27;
-  --color-brand-coral: #121856;
-  --color-brand-coral-light: #7B8BFF;
-  --color-brand-coral-dark: #0D1240;
-  --color-brand-cream: #FDF6EC;
-  --color-brand-gold: #D4A853;
+  --color-brand-navy: #121856;
+  --color-brand-navy-light: #24317a;
+  --color-brand-coral: #2947f0;
+  --color-brand-coral-light: #6b81ff;
+  --color-brand-coral-dark: #1e36b9;
+  --color-brand-cream: #fff8ef;
+  --color-brand-gold: #c89f4f;
 
   /* Colors — Surfaces */
-  --color-surface-dark: #0F1117;
-  --color-surface-card: #1A1D27;
-  --color-surface-elevated: #2A2D37;
+  --color-surface-dark: #121856;
+  --color-surface-card: #ffffff;
+  --color-surface-elevated: #f7f9ff;
   --color-surface-white: #FFFFFF;
-  --color-surface-light: #F7F8FA;
-  --color-surface-muted: #F1F3F5;
+  --color-surface-light: #f4f6fb;
+  --color-surface-muted: #eef1f7;
+  --color-surface-soft: #fbfcff;
 
   /* Colors — Text */
-  --color-text-primary: #FDF6EC;
-  --color-text-secondary: #E8DFD0;
-  --color-text-muted: #6B7280;
-  --color-text-inverse: #0F1117;
+  --color-text-primary: #151b3d;
+  --color-text-secondary: #4d577e;
+  --color-text-muted: #7a849f;
+  --color-text-inverse: #ffffff;
 
   /* Colors — Borders */
-  --color-border-subtle: #2A2D37;
-  --color-border-default: rgba(255, 255, 255, 0.08);
-  --color-border-coral: rgba(18, 24, 86, 0.30);
+  --color-border-subtle: #d9dfea;
+  --color-border-default: rgba(18, 24, 86, 0.10);
+  --color-border-coral: rgba(41, 71, 240, 0.22);
 
   /* Colors — Semantic */
   --color-success: #48BB78;
@@ -54,11 +55,11 @@
   --radius-button: 12px;
 
   /* Shadows */
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.3);
-  --shadow-card-hover: 0 20px 40px rgba(0, 0, 0, 0.4);
-  --shadow-nav: 0 2px 20px rgba(0, 0, 0, 0.3);
-  --shadow-glow-coral: 0 0 30px rgba(18, 24, 86, 0.3);
-  --shadow-glow-gold: 0 0 30px rgba(212, 168, 83, 0.25);
+  --shadow-card: 0 18px 50px rgba(18, 24, 86, 0.08);
+  --shadow-card-hover: 0 24px 60px rgba(18, 24, 86, 0.14);
+  --shadow-nav: 0 16px 40px rgba(18, 24, 86, 0.08);
+  --shadow-glow-coral: 0 14px 36px rgba(41, 71, 240, 0.18);
+  --shadow-glow-gold: 0 14px 36px rgba(200, 159, 79, 0.16);
 
   /* Spacing — Section */
   --spacing-section-y: clamp(4rem, 8vw, 8rem);
@@ -69,7 +70,7 @@
 body {
   font-family: var(--font-body);
   color: var(--color-text-primary);
-  background: var(--color-surface-dark);
+  background: var(--color-surface-white);
 }
 
 /* Smooth scrolling */
@@ -96,6 +97,16 @@ html {
 ::selection {
   background: var(--color-brand-coral);
   color: white;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  transition-property: color, background-color, border-color, box-shadow, opacity,
+    transform;
+  transition-duration: 200ms;
 }
 
 /* Hide scrollbar for horizontal scroll sections */

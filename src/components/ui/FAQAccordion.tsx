@@ -19,16 +19,16 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
         return (
           <div
             key={index}
-            className="rounded-card border border-border-subtle bg-surface-card overflow-hidden"
+            className="overflow-hidden rounded-card border border-border-default bg-white shadow-card"
           >
             <button
               onClick={() => setOpenIndex(isOpen ? null : index)}
-              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left hover:bg-surface-soft"
             >
               <span className="font-medium text-text-primary">
                 {item.question}
               </span>
-              <span className="shrink-0 text-brand-gold">
+              <span className="shrink-0 text-brand-coral">
                 {isOpen ? (
                   <Minus className="h-5 w-5" />
                 ) : (

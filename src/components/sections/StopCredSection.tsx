@@ -5,26 +5,20 @@ import { CTAButton } from "@/components/ui/CTAButton";
 import { AnimateOnScroll } from "@/components/motion/AnimateOnScroll";
 import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
 import { slideInLeft, slideInRight } from "@/lib/animations";
-
-const benefits = [
-  "Anuidade ZERO",
-  "Primeiro vencimento em 30 dias",
-  "Até 6x sem juros",
-  "Linha direta com atendentes",
-];
+import { stopCredBenefits } from "@/lib/site";
 
 export function StopCredSection() {
   return (
-    <section className="bg-surface-card py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+    <section className="bg-surface-light py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           {/* Credit card mockup */}
           <AnimateOnScroll variants={slideInLeft} className="flex justify-center">
             <div
-              className="relative w-full max-w-[380px] rounded-2xl p-8 text-white"
+              className="relative w-full max-w-[380px] rounded-[28px] p-8 text-white shadow-card"
               style={{
                 aspectRatio: "1.6/1",
-                background: "linear-gradient(135deg, #121856 0%, #0F1117 100%)",
+                background: "linear-gradient(135deg, #121856 0%, #2947F0 100%)",
                 transform: "perspective(800px) rotateY(-5deg)",
               }}
             >
@@ -52,15 +46,18 @@ export function StopCredSection() {
 
           {/* Benefits */}
           <AnimateOnScroll variants={slideInRight}>
-            <span className="text-sm font-semibold uppercase tracking-[0.15em] text-brand-coral-light">
+            <span className="text-sm font-semibold uppercase tracking-[0.15em] text-brand-coral">
               Stop Cred
             </span>
-            <h2 className="mt-3 font-display text-[length:var(--font-size-heading)] font-bold text-brand-cream">
+            <h2 className="mt-3 font-display text-[length:var(--font-size-heading)] font-bold text-text-primary">
               Seu crediário sem complicação
             </h2>
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-text-secondary">
+              Uma solução prática para clientes de Brusque e região comprarem com mais flexibilidade e atendimento próximo.
+            </p>
 
             <StaggerChildren className="mt-8 space-y-4">
-              {benefits.map((benefit) => (
+              {stopCredBenefits.map((benefit) => (
                 <StaggerItem key={benefit} className="flex items-center gap-3">
                   <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-coral">
                     <Check className="h-3.5 w-3.5 text-white" />

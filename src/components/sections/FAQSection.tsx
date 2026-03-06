@@ -8,7 +8,7 @@ import { slideInLeft, slideInRight } from "@/lib/animations";
 
 export function FAQSection() {
   return (
-    <section className="py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+    <section className="bg-white py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-5">
           {/* Left: decorative */}
@@ -20,6 +20,7 @@ export function FAQSection() {
               title="Perguntas Frequentes"
               highlight="Frequentes"
               align="left"
+              light
               className="mb-6"
             />
             <p className="text-text-secondary leading-relaxed">

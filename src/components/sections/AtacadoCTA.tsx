@@ -23,24 +23,27 @@ export function AtacadoCTA() {
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-surface-dark/85" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,_rgba(18,24,86,0.92)_0%,_rgba(18,24,86,0.84)_55%,_rgba(18,24,86,0.72)_100%)]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-5">
           <AnimateOnScroll variants={slideInLeft} className="lg:col-span-3">
-            <span className="text-sm font-semibold uppercase tracking-[0.15em] text-brand-coral-light">
+            <span className="text-sm font-semibold uppercase tracking-[0.15em] text-brand-gold">
               Atacado
             </span>
-            <h2 className="mt-3 font-display text-[length:var(--font-size-heading)] font-bold text-brand-cream">
-              Preço de fábrica para lojistas
+            <h2 className="mt-3 font-display text-[length:var(--font-size-heading)] font-bold text-white">
+              Estrutura profissional para compras no atacado
             </h2>
-            <p className="mt-4 text-lg leading-relaxed text-text-secondary">
-              Ambiente climatizado, central de guias, transporte para o Catarina Moda Shopping a cada 30 minutos.
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-white/76">
+              O Stop Shop recebe lojistas, excursões e compradores de diferentes regiões com variedade de marcas, circulação prática e uma jornada de compra mais eficiente.
             </p>
-            <div className="mt-8">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <CTAButton href="/atacado" size="lg" className="rounded-full">
                 Saiba mais sobre atacado
+              </CTAButton>
+              <CTAButton href="/cadastro" variant="secondary" size="lg" className="rounded-full border-white/20 bg-white/10 text-white hover:bg-white hover:text-brand-navy">
+                Cadastre-se
               </CTAButton>
             </div>
           </AnimateOnScroll>
@@ -50,12 +53,12 @@ export function AtacadoCTA() {
               {atacadoStats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-card border border-border-subtle bg-surface-card/60 backdrop-blur-sm p-5 text-center"
+                  className="rounded-card border border-white/14 bg-white/10 p-5 text-center backdrop-blur-sm"
                 >
-                  <div className="font-display text-3xl font-bold text-brand-coral-light lg:text-4xl">
+                  <div className="font-display text-3xl font-bold text-brand-gold lg:text-4xl">
                     <CounterAnimation target={stat.value} suffix={stat.suffix} />
                   </div>
-                  <p className="mt-1 text-sm text-text-secondary">{stat.label}</p>
+                  <p className="mt-1 text-sm text-white/70">{stat.label}</p>
                 </div>
               ))}
             </div>

@@ -45,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={`${playfair.variable} ${dmSans.variable}`}>
-      <body className="bg-surface-dark font-body antialiased">
+      <body className="bg-surface-white font-body antialiased text-text-primary">
         <Navbar />
         <main>{children}</main>
         <Footer />

@@ -28,19 +28,20 @@ const steps = [
 
 export function FacilitiesGrid() {
   return (
-    <section className="bg-brand-cream py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+    <section className="bg-surface-light py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           label="Por que o Stop Shop?"
           title="O que nos diferencia"
           highlight="diferencia"
+          subtitle="Uma estrutura completa para quem quer comprar bem, com conforto e atendimento pensado para diferentes perfis de público."
           light
         />
 
         <StaggerChildren className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, index) => (
             <StaggerItem key={step.number} className="relative">
-              <div className="group h-full rounded-2xl bg-white p-8 text-center shadow-sm transition-shadow hover:shadow-md">
+              <div className="group h-full rounded-[28px] border border-border-default bg-white p-8 text-center shadow-card transition-all hover:-translate-y-1 hover:shadow-card-hover">
                 <span className="font-display text-5xl font-bold text-brand-coral/20">
                   {step.number}
                 </span>

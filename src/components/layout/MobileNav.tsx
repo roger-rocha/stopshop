@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { CTAButton } from "@/components/ui/CTAButton";
+import { siteContact } from "@/lib/site";
 
 interface MobileNavProps {
   isOpen: boolean;
   onClose: () => void;
-  links: { label: string; href: string }[];
+  links: readonly { label: string; href: string }[];
 }
 
 export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
@@ -19,7 +20,7 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: "100%" }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 z-40 bg-surface-dark lg:hidden"
+          className="fixed inset-0 z-40 border-l border-border-default bg-[linear-gradient(180deg,_#ffffff_0%,_#f6f8ff_100%)] lg:hidden"
         >
           <nav className="flex h-full flex-col items-center justify-center gap-6 px-6">
             {links.map((link, i) => (
@@ -32,7 +33,7 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
                 <Link
                   href={link.href}
                   onClick={onClose}
-                  className="font-display text-3xl font-bold text-brand-cream transition-colors hover:text-brand-coral"
+                  className="font-display text-3xl font-bold text-brand-navy transition-colors hover:text-brand-coral"
                 >
                   {link.label}
                 </Link>
@@ -48,7 +49,7 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
               <CTAButton
                 variant="whatsapp"
                 size="lg"
-                href="https://wa.me/554732557000?text=Olá! Gostaria de informações sobre o Stop Shop."
+                href={`https://wa.me/${siteContact.whatsapp}?text=Olá! Gostaria de informações sobre o Stop Shop.`}
                 external
               >
                 Fale pelo WhatsApp

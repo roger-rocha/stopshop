@@ -16,19 +16,25 @@ export function StoreCard({ store, className }: StoreCardProps) {
       whileHover={{ y: -8 }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
       className={cn(
-        "group overflow-hidden rounded-card bg-surface-card border border-border-subtle shadow-card hover:shadow-card-hover hover:border-brand-gold/30 transition-all duration-300",
+        "group overflow-hidden rounded-[24px] border border-border-default bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-brand-coral/20 hover:shadow-card-hover",
         className
       )}
     >
       {/* Photo */}
-      <div className="relative h-48 overflow-hidden bg-surface-elevated">
-        <div className="absolute inset-0 bg-gradient-to-t from-surface-dark/60 to-transparent z-10" />
-        <div className="h-full w-full bg-brand-navy-light group-hover:scale-110 transition-transform duration-500" />
+      <div className="relative h-48 overflow-hidden bg-[linear-gradient(135deg,_rgba(18,24,86,0.96),_rgba(41,71,240,0.82))]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.22),_transparent_35%)]" />
+        <div className="absolute inset-x-6 bottom-6 rounded-2xl border border-white/12 bg-white/10 p-4 backdrop-blur-sm transition-transform duration-500 group-hover:translate-y-[-4px]">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+            Stop Shop
+          </p>
+          <p className="mt-2 font-display text-2xl font-bold text-white">{store.name}</p>
+          <p className="mt-1 text-sm text-white/75">{store.floor}</p>
+        </div>
       </div>
 
       {/* Content */}
       <div className="p-5">
-        <h3 className="font-display text-lg font-bold text-text-primary">
+        <h3 className="font-display text-xl font-bold text-text-primary">
           {store.name}
         </h3>
 
@@ -37,7 +43,7 @@ export function StoreCard({ store, className }: StoreCardProps) {
           {store.categories.slice(0, 2).map((cat) => (
             <span
               key={cat}
-              className="rounded-pill bg-brand-gold/10 px-2.5 py-0.5 text-xs font-medium text-brand-gold"
+              className="rounded-pill bg-brand-coral/10 px-2.5 py-0.5 text-xs font-medium text-brand-coral"
             >
               {cat}
             </span>
@@ -55,7 +61,7 @@ export function StoreCard({ store, className }: StoreCardProps) {
           {store.phone && (
             <a
               href={`tel:${store.phone}`}
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-surface-elevated text-text-secondary hover:bg-brand-gold hover:text-surface-dark transition-colors"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-surface-elevated text-text-secondary hover:bg-brand-navy hover:text-white"
               aria-label={`Ligar para ${store.name}`}
             >
               <Phone className="h-4 w-4" />

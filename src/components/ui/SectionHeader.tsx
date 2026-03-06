@@ -29,7 +29,7 @@ export function SectionHeader({
     return (
       <>
         {title.slice(0, idx)}
-        <span className={light ? "text-brand-coral" : "text-brand-coral-light"}>{highlight}</span>
+        <span className="text-brand-coral">{highlight}</span>
         {title.slice(idx + highlight.length)}
       </>
     );
@@ -46,7 +46,7 @@ export function SectionHeader({
       {label && (
         <p className={cn(
           "mb-3 text-sm font-semibold uppercase tracking-[0.15em]",
-          light ? "text-brand-coral" : "text-brand-coral-light"
+          light ? "text-brand-coral" : "text-brand-gold"
         )}>
           {label}
         </p>
@@ -54,7 +54,7 @@ export function SectionHeader({
       <h2
         className={cn(
           "font-display text-[length:var(--font-size-heading)] font-bold",
-          light ? "text-text-inverse" : "text-brand-cream"
+          light ? "text-text-primary" : "text-text-primary"
         )}
       >
         {renderTitle()}
@@ -64,7 +64,7 @@ export function SectionHeader({
           className={cn(
             "mt-3 text-lg max-w-2xl",
             align === "center" && "mx-auto",
-            light ? "text-text-muted" : "text-text-secondary"
+            light ? "text-text-secondary" : "text-text-secondary"
           )}
         >
           {subtitle}

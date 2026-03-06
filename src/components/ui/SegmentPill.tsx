@@ -23,10 +23,10 @@ export function SegmentPill({
       onClick={onClick}
       whileTap={{ scale: 0.95 }}
       className={cn(
-        "relative rounded-pill px-4 py-2 text-sm font-medium transition-colors duration-200",
+        "relative rounded-pill border px-4 py-2 text-sm font-medium transition-colors duration-200",
         active
           ? "text-white"
-          : "bg-surface-card border border-border-subtle text-text-secondary hover:border-border-default",
+          : "border-border-default bg-white text-text-secondary hover:border-brand-coral/25 hover:text-text-primary",
         className
       )}
     >

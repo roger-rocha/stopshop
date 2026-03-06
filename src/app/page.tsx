@@ -9,6 +9,7 @@ import { StopCredSection } from "@/components/sections/StopCredSection";
 import { BlogPreview } from "@/components/sections/BlogPreview";
 import { LocationSection } from "@/components/sections/LocationSection";
 import { ContactSection } from "@/components/sections/ContactSection";
+import { FAQSection } from "@/components/sections/FAQSection";
 
 export const metadata: Metadata = {
   title: "Stop Shop — Shopping de Moda em Brusque, SC | 160+ Marcas",
@@ -72,6 +73,7 @@ export default function HomePage() {
       <StopCredSection />
       <BlogPreview />
       <LocationSection />
+      <FAQSection />
       <ContactSection />
     </>
   );

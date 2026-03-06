@@ -4,50 +4,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
-
-const blogPosts = [
-  {
-    slug: "alto-verao-2025",
-    title: "Alto Verão 2025: tendências que chegam ao Stop Shop",
-    date: "2025-01-15",
-    excerpt: "Descubra as peças-chave da temporada e encontre tudo com preço de fábrica.",
-    category: "Moda",
-    image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80",
-  },
-  {
-    slug: "natal-2024-stop-shop",
-    title: "Natal 2024: promoções especiais e horário estendido",
-    date: "2024-12-10",
-    excerpt: "Programação completa, sorteios e descontos exclusivos para o fim de ano.",
-    category: "Eventos",
-    image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80",
-  },
-  {
-    slug: "tendencias-verao-2024",
-    title: "Tendências Verão 2024: o que bomba em Brusque",
-    date: "2024-10-20",
-    excerpt: "De linho a estampas tropicais — veja o que os lojistas estão apostando.",
-    category: "Moda",
-    image: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=600&q=80",
-  },
-];
+import { posts } from "@/lib/data/posts";
 
 export function BlogPreview() {
   return (
-    <section className="bg-brand-cream py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+    <section className="bg-surface-light py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           label="Blog"
           title="Últimas novidades"
           highlight="novidades"
+          subtitle="Conteúdo com campanhas, tendências e informações úteis para clientes e compradores que acompanham o Stop Shop."
           light
         />
 
         <StaggerChildren className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {blogPosts.map((post) => (
+          {posts.map((post) => (
             <StaggerItem key={post.slug}>
               <Link href={`/blog/${post.slug}`} className="group block">
-                <article className="overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-md">
+                <article className="overflow-hidden rounded-[28px] border border-border-default bg-white shadow-card transition-all hover:-translate-y-1 hover:shadow-card-hover">
                   <div className="relative aspect-video overflow-hidden">
                     <Image
                       src={post.image}
@@ -87,13 +62,13 @@ export function BlogPreview() {
         </StaggerChildren>
 
         <div className="mt-10 text-center">
-          <a
+          <Link
             href="/blog"
             className="group inline-flex items-center gap-2 font-medium text-brand-coral transition-colors hover:text-brand-coral-dark"
           >
             Ver todos os posts
             <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

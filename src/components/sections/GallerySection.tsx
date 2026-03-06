@@ -35,12 +35,14 @@ const galleryImages = [
 
 export function GallerySection() {
   return (
-    <section className="bg-surface-dark py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+    <section className="bg-white py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           label="Nosso Espaço"
           title="Conheça o Stop Shop"
           highlight="Stop Shop"
+          subtitle="Ambientes planejados para facilitar a circulação, valorizar as lojas e tornar a visita mais confortável."
+          light
         />
 
         <StaggerChildren className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:grid-rows-2">
@@ -52,7 +54,7 @@ export function GallerySection() {
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                className="group relative h-full min-h-[180px] overflow-hidden rounded-card sm:min-h-[220px]"
+                className="group relative h-full min-h-[180px] overflow-hidden rounded-[24px] shadow-card sm:min-h-[220px]"
               >
                 <Image
                   src={img.src}
@@ -61,8 +63,8 @@ export function GallerySection() {
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                   sizes={i === 0 ? "50vw" : "25vw"}
                 />
-                <div className="absolute inset-0 bg-surface-dark/0 group-hover:bg-surface-dark/40 transition-colors duration-300 flex items-center justify-center">
-                  <span className="text-brand-cream font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm">
+                <div className="absolute inset-0 flex items-center justify-center bg-brand-navy/0 transition-colors duration-300 group-hover:bg-brand-navy/38">
+                  <span className="text-sm font-medium text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     Ver mais
                   </span>
                 </div>

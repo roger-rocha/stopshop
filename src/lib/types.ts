@@ -29,6 +29,8 @@ export interface BlogPost {
   image: string;
   date: string;
   category: string;
+  readingTime?: string;
+  content: string[];
 }
 
 export interface ContactInfo {

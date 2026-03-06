@@ -5,13 +5,15 @@ import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
+const MotionLink = motion.create(Link);
+
 const variants = {
   primary:
-    "bg-brand-coral text-white hover:bg-brand-coral-dark shadow-md hover:shadow-glow-coral font-semibold",
+    "bg-brand-coral text-white hover:bg-brand-coral-dark shadow-glow-coral font-semibold",
   secondary:
-    "border-2 border-brand-cream/30 text-brand-cream hover:border-brand-coral hover:text-brand-coral",
+    "border border-border-subtle bg-white text-text-primary hover:border-brand-coral hover:text-brand-coral hover:shadow-card",
   whatsapp: "bg-[#25D366] text-white hover:bg-[#20BD5A]",
-  ghost: "text-text-secondary hover:text-brand-coral",
+  ghost: "bg-transparent text-text-secondary hover:text-brand-coral",
 };
 
 const sizes = {
@@ -40,7 +42,7 @@ export function CTAButton({
   external,
 }: CTAButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 font-medium rounded-button transition-colors duration-200",
+    "inline-flex items-center justify-center gap-2 rounded-button font-medium transition-all duration-200",
     variants[variant],
     sizes[size],
     className
@@ -67,16 +69,14 @@ export function CTAButton({
       );
     }
     return (
-      <Link href={href} passHref legacyBehavior>
-        <motion.a className={classes} {...motionProps}>
-          {children}
-        </motion.a>
-      </Link>
+      <MotionLink href={href} className={classes} {...motionProps}>
+        {children}
+      </MotionLink>
     );
   }
 
   return (
-    <motion.button onClick={onClick} className={classes} {...motionProps}>
+    <motion.button type="button" onClick={onClick} className={classes} {...motionProps}>
       {children}
     </motion.button>
   );
