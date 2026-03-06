@@ -37,7 +37,7 @@ export function BlogPreview() {
                       <span className="rounded-pill bg-brand-coral/10 px-2.5 py-0.5 font-medium text-brand-coral">
                         {post.category}
                       </span>
-                      <span className="text-text-muted">
+                      <span className="text-text-secondary">
                         {new Date(post.date).toLocaleDateString("pt-BR", {
                           day: "2-digit",
                           month: "short",
@@ -45,10 +45,10 @@ export function BlogPreview() {
                         })}
                       </span>
                     </div>
-                    <h3 className="mt-3 font-body text-lg font-semibold text-text-inverse group-hover:text-brand-coral transition-colors line-clamp-2">
+                    <h3 className="mt-3 font-body text-lg font-semibold text-text-primary transition-colors line-clamp-2 group-hover:text-brand-coral">
                       {post.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-text-muted line-clamp-2">
+                    <p className="mt-2 text-sm leading-relaxed text-text-secondary line-clamp-2">
                       {post.excerpt}
                     </p>
                     <p className="mt-3 text-sm font-medium text-brand-coral group-hover:underline">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useTransform } from "motion/react";
@@ -72,10 +73,16 @@ export function Navbar() {
           <Link
             href="/"
             className="absolute left-1/2 -translate-x-1/2 lg:relative lg:left-0 lg:translate-x-0"
+            aria-label="Stop Shop"
           >
-            <span className="font-display text-2xl font-bold text-brand-navy">
-              Stop<span className="text-brand-coral">Shop</span>
-            </span>
+            <Image
+              src="/images/stopshop-logo.png"
+              alt="Logo Stop Shop"
+              width={136}
+              height={148}
+              className="h-auto w-[52px] sm:w-[58px] lg:w-[64px]"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}

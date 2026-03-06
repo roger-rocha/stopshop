@@ -21,10 +21,10 @@ export function HeroSection() {
       {/* Background image */}
       <div className="absolute inset-x-0 top-0 h-[78%]">
         <Image
-          src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=1920&q=80"
-          alt=""
+          src="/images/stopshop-hero.png"
+          alt="Fachada do Stop Shop em Brusque"
           fill
-          className="object-cover"
+          className="object-cover object-center"
           priority
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,_rgba(255,255,255,0.92)_0%,_rgba(255,255,255,0.68)_48%,_rgba(255,255,255,0.30)_100%)]" />
