@@ -19,7 +19,7 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
         return (
           <div
             key={index}
-            className="overflow-hidden rounded-card border border-border-default bg-white shadow-card"
+            className="overflow-hidden rounded-card border border-border-default bg-white"
           >
             <button
               onClick={() => setOpenIndex(isOpen ? null : index)}

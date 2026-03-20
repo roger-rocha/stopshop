@@ -3,14 +3,14 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import { CTAButton } from "@/components/ui/CTAButton";
-import { StatusBadge } from "@/components/ui/StatusBadge";
 import { CounterAnimation } from "@/components/motion/CounterAnimation";
+import { ArrowRight } from "lucide-react";
 import { siteContact } from "@/lib/site";
 
 const heroStats = [
-  { value: 160, prefix: "+", label: "marcas direto de fábrica" },
-  { value: 30, prefix: "+", label: "anos de tradição" },
-  { value: 310, prefix: "", label: "vagas de estacionamento" },
+  { value: 160, prefix: "+", label: "marcas" },
+  { value: 30, prefix: "+", label: "anos" },
+  { value: 310, prefix: "", label: "vagas" },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -27,7 +27,7 @@ export function HeroSection() {
           className="object-cover object-center"
           priority
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,_rgba(255,255,255,0.92)_0%,_rgba(255,255,255,0.68)_48%,_rgba(255,255,255,0.30)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,_rgba(255,255,255,0.72)_0%,_rgba(255,255,255,0.45)_48%,_rgba(255,255,255,0.10)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,_transparent_0%,_#f4f7ff_100%)]" />
       </div>
 
@@ -71,61 +71,47 @@ export function HeroSection() {
               <CTAButton href="/lojas" size="lg" className="rounded-full">
                 Conheça as Lojas
               </CTAButton>
-              <CTAButton variant="secondary" size="lg" href="/localizacao" className="rounded-full">
+              <CTAButton variant="ghost" size="md" href="/localizacao" className="rounded-full">
                 Como chegar
+                <ArrowRight className="ml-1 h-4 w-4" />
               </CTAButton>
-              <CTAButton variant="ghost" size="lg" href="/atacado" className="rounded-full">
+              <CTAButton variant="ghost" size="md" href="/atacado" className="rounded-full">
                 Atacado
+                <ArrowRight className="ml-1 h-4 w-4" />
               </CTAButton>
             </motion.div>
 
-            <motion.div
+            <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.8, ease }}
-              className="mt-10 inline-flex flex-wrap items-center gap-3 rounded-[22px] border border-white/70 bg-white/75 px-5 py-4 text-left shadow-card backdrop-blur-md"
+              className="mt-10 text-sm text-text-secondary"
             >
-              <div>
-                <p className="text-sm font-semibold text-text-primary">{siteContact.hours}</p>
-                <p className="text-sm text-text-secondary">
-                  {siteContact.addressLine1} · {siteContact.city}
-                </p>
-              </div>
-            </motion.div>
+              {siteContact.hours} · {siteContact.addressLine1} · {siteContact.city}
+            </motion.p>
           </div>
         </div>
       </div>
 
-      {/* Status pill */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        className="absolute bottom-36 left-1/2 z-10 -translate-x-1/2"
-      >
-        <StatusBadge isOpen={true} temperature={siteContact.temperature} />
-      </motion.div>
-
-      {/* Stats bar */}
+      {/* Stats strip */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.1, duration: 0.8, ease }}
         className="relative z-10"
       >
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 px-5 pb-10 sm:grid-cols-3 sm:px-8">
-          {heroStats.map((stat) => (
-            <div
-              key={stat.label}
-              className="rounded-[28px] border border-border-default bg-white px-6 py-8 text-center shadow-card"
-            >
-              <div className="font-display text-[clamp(2.5rem,4vw,4rem)] font-bold text-brand-coral">
-                {stat.prefix}
-                <CounterAnimation target={stat.value} />
+        <div className="mx-auto max-w-7xl border-t border-border-default px-5 pb-10 pt-8 sm:px-8">
+          <div className="flex flex-col items-center justify-center gap-8 sm:flex-row sm:gap-16">
+            {heroStats.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <div className="font-display text-2xl font-bold text-brand-coral sm:text-3xl">
+                  {stat.prefix}
+                  <CounterAnimation target={stat.value} />
+                </div>
+                <p className="mt-1 text-sm text-text-secondary">{stat.label}</p>
               </div>
-              <p className="mt-1 text-sm text-text-secondary">{stat.label}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </motion.div>
     </section>

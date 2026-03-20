@@ -15,7 +15,7 @@ export function StopCredSection() {
           {/* Credit card mockup */}
           <AnimateOnScroll variants={slideInLeft} className="flex justify-center">
             <div
-              className="relative w-full max-w-[380px] rounded-[28px] p-8 text-white shadow-card"
+              className="relative w-full max-w-[380px] rounded-[28px] p-8 text-white"
               style={{
                 aspectRatio: "1.6/1",
                 background: "linear-gradient(135deg, #121856 0%, #2947F0 100%)",

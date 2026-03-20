@@ -3,12 +3,9 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { SegmentCarousel } from "@/components/sections/SegmentCarousel";
 import { FeaturedStores } from "@/components/sections/FeaturedStores";
 import { AtacadoCTA } from "@/components/sections/AtacadoCTA";
-import { FacilitiesGrid } from "@/components/sections/FacilitiesGrid";
 import { GallerySection } from "@/components/sections/GallerySection";
 import { StopCredSection } from "@/components/sections/StopCredSection";
-import { BlogPreview } from "@/components/sections/BlogPreview";
 import { LocationSection } from "@/components/sections/LocationSection";
-import { ContactSection } from "@/components/sections/ContactSection";
 import { FAQSection } from "@/components/sections/FAQSection";
 
 export const metadata: Metadata = {
@@ -68,13 +65,10 @@ export default function HomePage() {
       <SegmentCarousel />
       <FeaturedStores />
       <AtacadoCTA />
-      <FacilitiesGrid />
       <GallerySection />
       <StopCredSection />
-      <BlogPreview />
       <LocationSection />
       <FAQSection />
-      <ContactSection />
     </>
   );
 }

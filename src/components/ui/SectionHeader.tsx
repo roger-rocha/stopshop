@@ -54,7 +54,7 @@ export function SectionHeader({
       <h2
         className={cn(
           "font-display text-[length:var(--font-size-heading)] font-bold",
-          light ? "text-text-primary" : "text-text-primary"
+          "text-text-primary"
         )}
       >
         {renderTitle()}
@@ -64,7 +64,7 @@ export function SectionHeader({
           className={cn(
             "mt-3 text-lg max-w-2xl",
             align === "center" && "mx-auto",
-            light ? "text-text-secondary" : "text-text-secondary"
+            "text-text-secondary"
           )}
         >
           {subtitle}

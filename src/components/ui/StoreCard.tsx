@@ -16,7 +16,7 @@ export function StoreCard({ store, className }: StoreCardProps) {
       whileHover={{ y: -8 }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
       className={cn(
-        "group overflow-hidden rounded-[24px] border border-border-default bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-brand-coral/20 hover:shadow-card-hover",
+        "group overflow-hidden rounded-2xl border border-border-default bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-brand-coral/20 hover:shadow-card-hover",
         className
       )}
     >

@@ -35,8 +35,8 @@ const galleryImages = [
 
 export function GallerySection() {
   return (
-    <section className="bg-white py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
-      <div className="mx-auto max-w-7xl">
+    <section className="bg-white py-[var(--spacing-section-y)]">
+      <div className="mx-auto max-w-7xl px-[var(--spacing-section-x)]">
         <SectionHeader
           label="Nosso Espaço"
           title="Conheça o Stop Shop"
@@ -44,35 +44,30 @@ export function GallerySection() {
           subtitle="Ambientes planejados para facilitar a circulação, valorizar as lojas e tornar a visita mais confortável."
           light
         />
-
-        <StaggerChildren className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:grid-rows-2">
-          {galleryImages.map((img, i) => (
-            <StaggerItem
-              key={img.src}
-              className={i === 0 ? "col-span-2 row-span-2" : ""}
-            >
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                className="group relative h-full min-h-[180px] overflow-hidden rounded-[24px] shadow-card sm:min-h-[220px]"
-              >
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  sizes={i === 0 ? "50vw" : "25vw"}
-                />
-                <div className="absolute inset-0 flex items-center justify-center bg-brand-navy/0 transition-colors duration-300 group-hover:bg-brand-navy/38">
-                  <span className="text-sm font-medium text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    Ver mais
-                  </span>
-                </div>
-              </motion.div>
-            </StaggerItem>
-          ))}
-        </StaggerChildren>
       </div>
+
+      <StaggerChildren className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:grid-rows-2">
+        {galleryImages.map((img, i) => (
+          <StaggerItem
+            key={img.src}
+            className={i === 0 ? "col-span-2 row-span-2" : ""}
+          >
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              className="group relative h-full min-h-[180px] overflow-hidden rounded-xl sm:min-h-[220px]"
+            >
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                sizes={i === 0 ? "50vw" : "25vw"}
+              />
+            </motion.div>
+          </StaggerItem>
+        ))}
+      </StaggerChildren>
     </section>
   );
 }

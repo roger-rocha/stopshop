@@ -4,6 +4,7 @@
   /* Colors — Brand */
   --color-brand-navy: #121856;
   --color-brand-navy-light: #24317a;
+  /* Legacy name: was coral (#FF6B6B), now brand blue */
   --color-brand-coral: #2947f0;
   --color-brand-coral-light: #6b81ff;
   --color-brand-coral-dark: #1e36b9;
@@ -15,7 +16,7 @@
   --color-surface-card: #ffffff;
   --color-surface-elevated: #f7f9ff;
   --color-surface-white: #FFFFFF;
-  --color-surface-light: #f4f6fb;
+  --color-surface-light: #eaeff8;
   --color-surface-muted: #eef1f7;
   --color-surface-soft: #fbfcff;
 
@@ -55,7 +56,7 @@
   --radius-button: 12px;
 
   /* Shadows */
-  --shadow-card: 0 18px 50px rgba(18, 24, 86, 0.08);
+  --shadow-card: 0 8px 30px rgba(18, 24, 86, 0.06);
   --shadow-card-hover: 0 24px 60px rgba(18, 24, 86, 0.14);
   --shadow-nav: 0 16px 40px rgba(18, 24, 86, 0.08);
   --shadow-glow-coral: 0 14px 36px rgba(41, 71, 240, 0.18);
