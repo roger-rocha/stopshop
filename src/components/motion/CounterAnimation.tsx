@@ -35,10 +35,12 @@ export function CounterAnimation({
   }, [isInView, target, duration]);
 
   return (
-    <span ref={ref} className={className}>
-      {prefix}
-      {value}
-      {suffix}
+    <span ref={ref} className={className} aria-label={`${prefix}${target}${suffix}`}>
+      <span aria-hidden="true">
+        {prefix}
+        {value}
+        {suffix}
+      </span>
     </span>
   );
 }

@@ -17,7 +17,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export function HeroSection() {
   return (
-    <section className="relative flex min-h-screen flex-col overflow-hidden bg-[linear-gradient(180deg,_#fff_0%,_#f4f7ff_100%)] pt-28 sm:pt-32">
+    <section className="relative flex min-h-screen flex-col overflow-hidden bg-[image:var(--gradient-hero-fade)] pt-28 sm:pt-32">
       {/* Background image */}
       <div className="absolute inset-x-0 top-0 h-[78%]">
         <Image
@@ -28,7 +28,7 @@ export function HeroSection() {
           priority
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,_rgba(255,255,255,0.72)_0%,_rgba(255,255,255,0.45)_48%,_rgba(255,255,255,0.10)_100%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,_transparent_0%,_#f4f7ff_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,_transparent_0%,_#f4f7ff_100%)]" aria-hidden="true" />
       </div>
 
       {/* Content */}

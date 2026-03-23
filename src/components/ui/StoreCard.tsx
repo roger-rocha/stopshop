@@ -13,16 +13,16 @@ interface StoreCardProps {
 export function StoreCard({ store, className }: StoreCardProps) {
   return (
     <motion.div
-      whileHover={{ y: -8 }}
-      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
-        "group overflow-hidden rounded-2xl border border-border-default bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-brand-coral/20 hover:shadow-card-hover",
+        "group overflow-hidden rounded-2xl border border-border-default bg-white shadow-card transition-[border-color,box-shadow] duration-300 hover:border-brand-coral/20 hover:shadow-card-hover",
         className
       )}
     >
       {/* Photo */}
-      <div className="relative h-48 overflow-hidden bg-[linear-gradient(135deg,_rgba(18,24,86,0.96),_rgba(41,71,240,0.82))]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.22),_transparent_35%)]" />
+      <div className="relative h-48 overflow-hidden bg-[image:var(--gradient-brand-diagonal)]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.18),_transparent_35%)]" />
         <div className="absolute inset-x-6 bottom-6 rounded-2xl border border-white/12 bg-white/10 p-4 backdrop-blur-sm transition-transform duration-500 group-hover:translate-y-[-4px]">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
             Stop Shop
@@ -61,7 +61,7 @@ export function StoreCard({ store, className }: StoreCardProps) {
           {store.phone && (
             <a
               href={`tel:${store.phone}`}
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-surface-elevated text-text-secondary hover:bg-brand-navy hover:text-white"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-surface-elevated text-text-secondary hover:bg-brand-navy hover:text-white"
               aria-label={`Ligar para ${store.name}`}
             >
               <Phone className="h-4 w-4" />
@@ -72,7 +72,7 @@ export function StoreCard({ store, className }: StoreCardProps) {
               href={whatsappLink(store.whatsapp, `Olá! Gostaria de saber mais sobre a loja ${store.name} no Stop Shop.`)}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-whatsapp/10 text-whatsapp hover:bg-whatsapp hover:text-white transition-colors"
               aria-label={`WhatsApp ${store.name}`}
             >
               <MessageCircle className="h-4 w-4" />

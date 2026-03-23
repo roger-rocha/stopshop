@@ -67,7 +67,7 @@ export default function ContatoPage() {
             </article>
 
             <article className="rounded-[28px] border border-border-default bg-white p-7 shadow-card">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#25D366]/10 text-[#25D366]">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-whatsapp/10 text-whatsapp">
                 <MessageCircle className="h-5 w-5" />
               </div>
               <h2 className="mt-5 font-display text-3xl font-bold text-text-primary">
@@ -77,7 +77,7 @@ export default function ContatoPage() {
                 href={`https://wa.me/${siteContact.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-block text-base text-text-secondary hover:text-[#25D366]"
+                className="mt-3 inline-block text-base text-text-secondary hover:text-whatsapp"
               >
                 Fale com nossa equipe
               </a>

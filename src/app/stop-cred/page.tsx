@@ -47,7 +47,7 @@ export default function StopCredPage() {
 
       <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-16">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="rounded-[32px] border border-border-default bg-[linear-gradient(135deg,_rgba(18,24,86,1)_0%,_rgba(41,71,240,0.95)_100%)] p-8 text-white shadow-card sm:p-10">
+          <div className="rounded-[32px] border border-border-default bg-[image:var(--gradient-brand-diagonal)] p-8 text-white shadow-card sm:p-10">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
               Benefícios
             </p>

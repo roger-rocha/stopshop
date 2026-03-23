@@ -34,7 +34,7 @@ export default function BlogPage() {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="group block overflow-hidden rounded-[28px] border border-border-default bg-white shadow-card transition-all hover:-translate-y-1 hover:shadow-card-hover"
+              className="group block overflow-hidden rounded-[28px] border border-border-default bg-white shadow-card transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-card-hover"
             >
               <div className="relative aspect-[1.3/1] overflow-hidden">
                 <Image

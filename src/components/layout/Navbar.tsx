@@ -65,6 +65,7 @@ export function Navbar() {
             onClick={() => setMobileOpen(!mobileOpen)}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-border-default bg-white text-text-primary shadow-sm lg:hidden"
             aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -91,6 +92,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
+                aria-current={pathname === link.href ? "page" : undefined}
                 className={`text-sm font-medium transition-colors hover:text-brand-coral ${
                   pathname === link.href ? "text-brand-coral" : "text-text-secondary"
                 }`}
@@ -105,7 +107,7 @@ export function Navbar() {
             href={`https://wa.me/${siteContact.whatsapp}?text=Olá! Gostaria de informações sobre o Stop Shop.`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border-default bg-white text-[#25D366] shadow-sm lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-border-default bg-white text-whatsapp shadow-sm lg:hidden"
             aria-label="WhatsApp"
           >
             <MessageCircle className="h-6 w-6" />

@@ -21,7 +21,7 @@ function SegmentCard({ name, slug, count, image }: (typeof segmentCards)[number]
     <Link href={`/segmentos/${slug}`} className="block">
       <motion.div
         whileHover={{ scale: 1.03 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className="group relative overflow-hidden rounded-2xl"
         style={{ aspectRatio: "3/4" }}
       >

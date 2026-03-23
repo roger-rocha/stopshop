@@ -40,7 +40,10 @@ export function LocationSection() {
             </div>
 
             <div className="mt-6 text-sm text-white/70">
-              Telefone: (47) 3255-7000
+              Telefone:{" "}
+              <a href={`tel:${siteContact.phone}`} className="hover:text-white transition-colors">
+                (47) 3255-7000
+              </a>
             </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">

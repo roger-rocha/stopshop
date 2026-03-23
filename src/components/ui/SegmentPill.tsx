@@ -22,6 +22,7 @@ export function SegmentPill({
     <motion.button
       onClick={onClick}
       whileTap={{ scale: 0.95 }}
+      aria-pressed={active}
       className={cn(
         "relative rounded-pill border px-4 py-2 text-sm font-medium transition-colors duration-200",
         active

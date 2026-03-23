@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "motion/react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
 
@@ -52,19 +51,17 @@ export function GallerySection() {
             key={img.src}
             className={i === 0 ? "col-span-2 row-span-2" : ""}
           >
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            <div
               className="group relative h-full min-h-[180px] overflow-hidden rounded-xl sm:min-h-[220px]"
             >
               <Image
                 src={img.src}
                 alt={img.alt}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                className="object-cover transition-transform duration-500 will-change-transform group-hover:scale-105"
                 sizes={i === 0 ? "50vw" : "25vw"}
               />
-            </motion.div>
+            </div>
           </StaggerItem>
         ))}
       </StaggerChildren>

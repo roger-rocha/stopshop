@@ -12,7 +12,7 @@ const variants = {
     "bg-brand-coral text-white hover:bg-brand-coral-dark shadow-glow-coral font-semibold",
   secondary:
     "border border-border-subtle bg-white text-text-primary hover:border-brand-coral hover:text-brand-coral hover:shadow-card",
-  whatsapp: "bg-[#25D366] text-white hover:bg-[#20BD5A]",
+  whatsapp: "bg-whatsapp text-white hover:bg-whatsapp-dark",
   ghost: "bg-transparent text-text-secondary hover:text-brand-coral",
 };
 
@@ -42,7 +42,7 @@ export function CTAButton({
   external,
 }: CTAButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 rounded-button font-medium transition-all duration-200",
+    "inline-flex items-center justify-center gap-2 rounded-button font-medium transition-[color,background-color,border-color,box-shadow] duration-200",
     variants[variant],
     sizes[size],
     className
@@ -51,7 +51,7 @@ export function CTAButton({
   const motionProps = {
     whileHover: { scale: 1.03 },
     whileTap: { scale: 0.97 },
-    transition: { type: "spring" as const, stiffness: 400, damping: 25 },
+    transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] as const },
   };
 
   if (href) {

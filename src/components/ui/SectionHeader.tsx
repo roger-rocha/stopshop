@@ -10,6 +10,7 @@ interface SectionHeaderProps {
   highlight?: string;
   align?: "left" | "center";
   light?: boolean;
+  as?: "h1" | "h2" | "h3" | "h4";
   className?: string;
 }
 
@@ -20,6 +21,7 @@ export function SectionHeader({
   highlight,
   align = "center",
   light = false,
+  as: Heading = "h2",
   className,
 }: SectionHeaderProps) {
   const renderTitle = () => {
@@ -51,14 +53,14 @@ export function SectionHeader({
           {label}
         </p>
       )}
-      <h2
+      <Heading
         className={cn(
           "font-display text-[length:var(--font-size-heading)] font-bold",
           "text-text-primary"
         )}
       >
         {renderTitle()}
-      </h2>
+      </Heading>
       {subtitle && (
         <p
           className={cn(

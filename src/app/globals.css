@@ -4,7 +4,6 @@
   /* Colors — Brand */
   --color-brand-navy: #121856;
   --color-brand-navy-light: #24317a;
-  /* Legacy name: was coral (#FF6B6B), now brand blue */
   --color-brand-coral: #2947f0;
   --color-brand-coral-light: #6b81ff;
   --color-brand-coral-dark: #1e36b9;
@@ -30,6 +29,10 @@
   --color-border-subtle: #d9dfea;
   --color-border-default: rgba(18, 24, 86, 0.10);
   --color-border-coral: rgba(41, 71, 240, 0.22);
+
+  /* Colors — Third-party */
+  --color-whatsapp: #25D366;
+  --color-whatsapp-dark: #20BD5A;
 
   /* Colors — Semantic */
   --color-success: #48BB78;
@@ -61,6 +64,14 @@
   --shadow-nav: 0 16px 40px rgba(18, 24, 86, 0.08);
   --shadow-glow-coral: 0 14px 36px rgba(41, 71, 240, 0.18);
   --shadow-glow-gold: 0 14px 36px rgba(200, 159, 79, 0.16);
+  --shadow-whatsapp: 0 12px 30px rgba(37, 211, 102, 0.32);
+  --shadow-whatsapp-hover: 0 18px 36px rgba(37, 211, 102, 0.42);
+
+  /* Gradients — reusable backgrounds */
+  --gradient-surface-fade: linear-gradient(180deg, #ffffff 0%, #f7f9ff 100%);
+  --gradient-brand-diagonal: linear-gradient(135deg, var(--color-brand-navy) 0%, var(--color-brand-coral) 100%);
+  --gradient-navy-overlay: linear-gradient(90deg, rgba(18,24,86,0.92) 0%, rgba(18,24,86,0.84) 55%, rgba(18,24,86,0.72) 100%);
+  --gradient-hero-fade: linear-gradient(180deg, #ffffff 0%, #f4f7ff 100%);
 
   /* Spacing — Section */
   --spacing-section-y: clamp(4rem, 8vw, 8rem);
@@ -97,7 +108,7 @@ html {
 /* Selection color */
 ::selection {
   background: var(--color-brand-coral);
-  color: white;
+  color: var(--color-text-inverse);
 }
 
 a,

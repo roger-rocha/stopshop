@@ -19,8 +19,12 @@ export function NewsletterCTA() {
             className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-0"
             onSubmit={(e) => e.preventDefault()}
           >
+            <label htmlFor="newsletter-email" className="sr-only">Seu e-mail</label>
             <input
+              id="newsletter-email"
+              name="email"
               type="email"
+              required
               placeholder="Digite seu melhor e-mail"
               className="flex-1 rounded-button border border-border-subtle bg-surface-card px-6 py-4 text-text-primary outline-none placeholder:text-text-muted focus:border-brand-gold focus:ring-1 focus:ring-brand-gold sm:rounded-r-none"
             />

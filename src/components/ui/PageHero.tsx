@@ -34,11 +34,11 @@ export function PageHero({
   return (
     <section
       className={cn(
-        "relative overflow-hidden border-b border-border-default bg-[radial-gradient(circle_at_top_left,_rgba(41,71,240,0.10),_transparent_35%),linear-gradient(180deg,_#ffffff_0%,_#f7f9ff_100%)] pt-36 pb-16 sm:pt-40 sm:pb-20",
+        "relative overflow-hidden border-b border-border-default bg-[radial-gradient(circle_at_top_left,_var(--color-brand-coral)/0.10,_transparent_35%),var(--gradient-surface-fade)] pt-36 pb-16 sm:pt-40 sm:pb-20",
         className
       )}
     >
-      <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(18,24,86,0.18),transparent)]" />
+      <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,var(--color-brand-navy)/0.18,transparent)]" />
       <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
         <AnimateOnScroll className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-coral">

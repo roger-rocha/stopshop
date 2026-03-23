@@ -7,10 +7,9 @@ export const springSmooth: Transition = {
   damping: 30,
 };
 
-export const springBouncy: Transition = {
-  type: "spring",
-  stiffness: 300,
-  damping: 20,
+export const easeOutExpo: Transition = {
+  duration: 0.5,
+  ease: [0.16, 1, 0.3, 1],
 };
 
 export const easeOut: Transition = {

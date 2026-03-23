@@ -23,7 +23,7 @@ export function AtacadoCTA() {
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,_rgba(18,24,86,0.92)_0%,_rgba(18,24,86,0.84)_55%,_rgba(18,24,86,0.72)_100%)]" />
+        <div className="absolute inset-0 bg-[image:var(--gradient-navy-overlay)]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl">

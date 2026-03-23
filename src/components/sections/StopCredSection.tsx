@@ -18,7 +18,7 @@ export function StopCredSection() {
               className="relative w-full max-w-[380px] rounded-[28px] p-8 text-white"
               style={{
                 aspectRatio: "1.6/1",
-                background: "linear-gradient(135deg, #121856 0%, #2947F0 100%)",
+                background: "var(--gradient-brand-diagonal)",
                 transform: "perspective(800px) rotateY(-5deg)",
               }}
             >

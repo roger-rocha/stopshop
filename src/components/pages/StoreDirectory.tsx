@@ -65,7 +65,7 @@ export function StoreDirectory({ initialSegment = "todos" }: StoreDirectoryProps
         <div className="mt-6 flex flex-wrap gap-3">
           <SegmentPill
             name="Todos os segmentos"
-            color="#2947F0"
+            color="var(--color-brand-coral)"
             active={selectedSegment === "todos"}
             onClick={() => setSelectedSegment("todos")}
           />
@@ -82,7 +82,7 @@ export function StoreDirectory({ initialSegment = "todos" }: StoreDirectoryProps
       </div>
 
       <div className="mt-8 flex items-center justify-between gap-4">
-        <p className="text-sm text-text-secondary">
+        <p className="text-sm text-text-secondary" aria-live="polite" aria-atomic="true">
           {filteredStores.length} {filteredStores.length === 1 ? "loja encontrada" : "lojas encontradas"}
         </p>
         <p className="text-sm text-text-muted">Segunda a sábado, das 09h às 19h</p>
