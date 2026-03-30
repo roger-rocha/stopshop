@@ -7,11 +7,9 @@ import { StoreCard } from "@/components/ui/StoreCard";
 import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
 import { stores } from "@/lib/data/stores";
 
-const featuredStores = stores.filter((store) => store.featured).slice(0, 5);
+const featuredStores = stores.filter((store) => store.featured).slice(0, 6);
 
 export function FeaturedStores() {
-  const [featured, ...rest] = featuredStores;
-
   return (
     <section className="bg-white py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
       <div className="mx-auto max-w-7xl">
@@ -23,14 +21,8 @@ export function FeaturedStores() {
           light
         />
 
-        <StaggerChildren className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {/* Featured large card */}
-          <StaggerItem className="sm:col-span-2 sm:row-span-2">
-            <StoreCard store={featured} variant="featured" />
-          </StaggerItem>
-
-          {/* Remaining stores */}
-          {rest.map((store) => (
+        <StaggerChildren className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredStores.map((store) => (
             <StaggerItem key={store.name}>
               <StoreCard store={store} />
             </StaggerItem>

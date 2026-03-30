@@ -4,48 +4,51 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, useScroll, useTransform } from "motion/react";
-import { Menu, X, MessageCircle } from "lucide-react";
+import { motion, useScroll, useMotionValueEvent } from "motion/react";
+import { Menu, MessageCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { MobileNav } from "./MobileNav";
 import { siteContact, siteNavigation } from "@/lib/site";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const isHome = pathname === "/";
   const { scrollY } = useScroll();
 
-  const bgOpacity = useTransform(scrollY, [0, 100], [0.97, 0.99]);
-  const blurValue = useTransform(scrollY, [0, 100], [12, 20]);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsScrolled(latest > 80);
+  });
+
+  const useSolidStyle = !isHome || isScrolled;
   const navLinks = siteNavigation;
 
   return (
     <>
-      <motion.header
-        className="fixed left-0 right-0 z-50 top-0"
-        style={{
-          backgroundColor: useTransform(
-            bgOpacity,
-            (v) => `rgba(255, 255, 255, ${v})`
-          ),
-          backdropFilter: useTransform(blurValue, (v) => `blur(${v}px)`),
-          borderBottomColor: useTransform(
-            bgOpacity,
-            (v) => `rgba(28, 25, 23, ${v * 0.08})`
-          ),
-          borderBottomWidth: "1px",
-          borderBottomStyle: "solid",
-        }}
+      <header
+        className={cn(
+          "fixed left-0 right-0 top-0 z-50 transition-all duration-300",
+          useSolidStyle
+            ? "border-b border-border-default bg-white/97 shadow-nav backdrop-blur-xl"
+            : "bg-transparent"
+        )}
       >
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8 sm:py-4">
           {/* Mobile: hamburger left */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border-default bg-white text-text-primary shadow-sm lg:hidden"
+            className={cn(
+              "flex h-10 w-10 items-center justify-center rounded-lg transition-colors lg:hidden",
+              useSolidStyle
+                ? "text-text-primary hover:bg-surface-muted"
+                : "text-white hover:bg-white/10"
+            )}
             aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            <Menu className="h-6 w-6" />
           </button>
 
           {/* Logo — center on mobile, left on desktop */}
@@ -57,32 +60,32 @@ export function Navbar() {
             <Image
               src="/images/stopshop-logo.png"
               alt="Logo Stop Shop"
-              width={136}
-              height={148}
-              className="h-auto w-[52px] sm:w-[58px] lg:w-[64px]"
+              width={131}
+              height={110}
+              className="h-auto w-[48px] drop-shadow-md transition-all duration-300 sm:w-[54px] lg:w-[60px]"
               priority
             />
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden items-center gap-8 lg:flex">
+          <div className="hidden items-center gap-1 lg:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 aria-current={pathname === link.href ? "page" : undefined}
-                className={`relative text-sm font-medium transition-colors hover:text-brand-coral ${
-                  pathname === link.href ? "text-brand-coral" : "text-text-secondary"
-                }`}
+                className={cn(
+                  "rounded-lg px-4 py-2 text-sm font-medium transition-colors",
+                  useSolidStyle
+                    ? pathname === link.href
+                      ? "text-brand-coral"
+                      : "text-text-secondary hover:bg-surface-muted hover:text-text-primary"
+                    : pathname === link.href
+                      ? "text-white"
+                      : "text-white/75 hover:bg-white/10 hover:text-white"
+                )}
               >
                 {link.label}
-                {pathname === link.href && (
-                  <motion.span
-                    layoutId="nav-indicator"
-                    className="absolute -bottom-1.5 left-0 right-0 h-0.5 rounded-full bg-brand-coral"
-                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  />
-                )}
               </Link>
             ))}
           </div>
@@ -92,23 +95,29 @@ export function Navbar() {
             href={`https://wa.me/${siteContact.whatsapp}?text=Olá! Gostaria de informações sobre o Stop Shop.`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border-default bg-white text-whatsapp shadow-sm lg:hidden"
+            className={cn(
+              "flex h-10 w-10 items-center justify-center rounded-lg transition-colors lg:hidden",
+              useSolidStyle
+                ? "text-whatsapp hover:bg-surface-muted"
+                : "text-white hover:bg-white/10"
+            )}
             aria-label="WhatsApp"
           >
             <MessageCircle className="h-6 w-6" />
           </a>
           <div className="hidden lg:block">
             <CTAButton
-              variant="whatsapp"
+              variant={useSolidStyle ? "whatsapp" : "outline-light"}
               size="sm"
               href={`https://wa.me/${siteContact.whatsapp}?text=Olá! Gostaria de informações sobre o Stop Shop.`}
               external
+              className="rounded-full"
             >
               WhatsApp
             </CTAButton>
           </div>
         </nav>
-      </motion.header>
+      </header>
 
       <MobileNav
         isOpen={mobileOpen}

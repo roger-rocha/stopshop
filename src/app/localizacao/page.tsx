@@ -79,6 +79,21 @@ export default function LocalizacaoPage() {
                 <p className="mt-2 text-lg font-medium">(47) 3255-7000</p>
               </div>
             </div>
+
+            {/* Google Maps */}
+            <div className="mt-8 overflow-hidden rounded-2xl border border-white/12">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.5!2d-48.9183!3d-27.0978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94df1db8fba3b2db%3A0x4c8e1e1e1e1e1e1e!2sRodovia+Ant%C3%B4nio+Heil%2C+635+-+Santa+Terezinha%2C+Brusque+-+SC!5e0!3m2!1spt-BR!2sbr"
+                width="100%"
+                height="220"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Localização do Stop Shop no Google Maps"
+                className="grayscale-[0.2]"
+              />
+            </div>
           </div>
 
           <div className="rounded-[32px] border border-border-default bg-white p-8 shadow-card sm:p-10">

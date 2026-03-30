@@ -82,7 +82,22 @@ export function LocationSection() {
                     {siteContact.addressLine2} · {siteContact.cityLine}
                   </p>
                 </div>
-                <div className="grid gap-3 sm:grid-cols-2">
+
+                {/* Google Maps */}
+                <div className="overflow-hidden rounded-2xl border border-white/10">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.5!2d-48.9183!3d-27.0978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94df1db8fba3b2db%3A0x4c8e1e1e1e1e1e1e!2sRodovia+Ant%C3%B4nio+Heil%2C+635+-+Santa+Terezinha%2C+Brusque+-+SC!5e0!3m2!1spt-BR!2sbr"
+                    width="100%"
+                    height="180"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Localização do Stop Shop no Google Maps"
+                  />
+                </div>
+
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
                   <div className="rounded-2xl bg-white/10 p-4">
                     <p className="text-xs uppercase tracking-[0.15em] text-white/55">
                       Horário
