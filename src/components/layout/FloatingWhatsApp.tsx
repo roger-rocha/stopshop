@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { MessageCircle } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 
 export function FloatingWhatsApp() {
   return (
@@ -17,7 +17,7 @@ export function FloatingWhatsApp() {
       className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-whatsapp text-white shadow-whatsapp hover:shadow-whatsapp-hover"
       aria-label="Fale pelo WhatsApp"
     >
-      <MessageCircle className="h-7 w-7" />
+      <WhatsAppIcon className="h-7 w-7" />
     </motion.a>
   );
 }

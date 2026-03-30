@@ -16,7 +16,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-brand-navy sm:min-h-[92svh] sm:flex sm:flex-col">
+    <section className="relative min-h-[85svh] overflow-hidden bg-brand-navy sm:min-h-[92svh] sm:flex sm:flex-col">
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
@@ -30,8 +30,8 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-[rgba(8,12,40,0.50)] via-[rgba(8,12,40,0.20)] to-transparent" />
       </div>
 
-      {/* Content — flows naturally on mobile, flex-1 on desktop */}
-      <div className="relative z-10 px-5 pb-8 pt-24 sm:flex sm:flex-1 sm:items-center sm:px-8 sm:pt-36">
+      {/* Content */}
+      <div className="relative z-10 px-5 pb-10 pt-28 sm:flex sm:flex-1 sm:items-center sm:px-8 sm:pt-36">
         <div className="mx-auto w-full max-w-7xl">
           <div className="max-w-2xl">
             {/* Eyebrow */}
@@ -51,7 +51,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8, ease }}
-              className="mt-4 font-display text-[length:var(--font-size-hero)] font-bold leading-[1.05] text-white sm:mt-6"
+              className="mt-5 font-display text-[length:var(--font-size-hero)] font-bold leading-[1.05] text-white sm:mt-6"
             >
               Moda direto de fábrica{" "}
               <br className="hidden sm:block" />
@@ -62,7 +62,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.8, ease }}
-              className="mt-4 max-w-xl text-base leading-relaxed text-white/75 sm:mt-6 sm:text-lg sm:text-white/80"
+              className="mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:mt-6 sm:text-lg sm:text-white/80"
             >
               Mais de 160 marcas em um só lugar, com experiência pensada para varejo, atacado e compras com variedade.
             </motion.p>
@@ -72,7 +72,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.8, ease }}
-              className="mt-6 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:gap-4"
+              className="mt-10 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:gap-4"
             >
               <CTAButton href="/lojas" size="lg" className="rounded-full">
                 Conheça as Lojas
@@ -89,21 +89,26 @@ export function HeroSection() {
               </div>
             </motion.div>
 
-            {/* Stats — directly below CTAs on mobile, bottom-pinned on desktop */}
+            {/* Stats */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.1, duration: 0.8, ease }}
-              className="mt-8 sm:mt-12"
+              className="mt-12 sm:mt-12"
             >
-              <div className="flex w-full items-center justify-between gap-4 rounded-2xl border border-white/15 bg-white/10 px-5 py-4 backdrop-blur-lg sm:inline-flex sm:w-auto sm:justify-start sm:gap-12 sm:px-8 sm:py-6">
+              <div className="grid w-full grid-cols-3 rounded-2xl border border-white/15 bg-white/10 py-5 backdrop-blur-lg sm:inline-flex sm:w-auto sm:gap-12 sm:px-8 sm:py-6">
                 {heroStats.map((stat, i) => (
-                  <div key={stat.label} className="flex items-center gap-3 sm:gap-4">
+                  <div
+                    key={stat.label}
+                    className={`flex flex-col items-center justify-center sm:flex-row sm:gap-4 ${
+                      i > 0 ? "border-l border-white/15 sm:border-0" : ""
+                    }`}
+                  >
                     {i > 0 && (
-                      <div className="h-8 w-px bg-white/20 sm:h-10" aria-hidden="true" />
+                      <div className="hidden h-10 w-px bg-white/20 sm:block" aria-hidden="true" />
                     )}
                     <div className="text-center sm:text-left">
-                      <div className="font-display text-xl font-bold text-white sm:text-3xl">
+                      <div className="font-display text-2xl font-bold text-white sm:text-3xl">
                         {stat.prefix}
                         <CounterAnimation target={stat.value} />
                       </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Mail, MessageCircle, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { ContactFormCard } from "@/components/pages/ContactFormCard";
 import { PageHero } from "@/components/ui/PageHero";
 import { siteContact } from "@/lib/site";
@@ -68,7 +69,7 @@ export default function ContatoPage() {
 
             <article className="rounded-[28px] border border-border-default bg-white p-7 shadow-card">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-whatsapp/10 text-whatsapp">
-                <MessageCircle className="h-5 w-5" />
+                <WhatsAppIcon className="h-5 w-5" />
               </div>
               <h2 className="mt-5 font-display text-3xl font-bold text-text-primary">
                 WhatsApp

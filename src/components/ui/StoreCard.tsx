@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { MapPin, Phone, MessageCircle } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
+import { WhatsAppIcon } from "./WhatsAppIcon";
 import { cn, whatsappLink } from "@/lib/utils";
 import type { Store } from "@/lib/types";
 
@@ -79,7 +80,7 @@ export function StoreCard({ store, className }: StoreCardProps) {
             className="flex h-9 w-9 items-center justify-center rounded-full bg-whatsapp/10 text-whatsapp transition-colors hover:bg-whatsapp hover:text-white"
             aria-label={`WhatsApp ${store.name}`}
           >
-            <MessageCircle className="h-3.5 w-3.5" />
+            <WhatsAppIcon className="h-3.5 w-3.5" />
           </a>
         )}
       </div>
