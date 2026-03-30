@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Sans } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingWhatsApp } from "@/components/layout/FloatingWhatsApp";
@@ -11,9 +12,12 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
+const matter = localFont({
+  src: [
+    { path: "../fonts/Matter-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/Matter-Medium.woff2", weight: "500", style: "normal" },
+  ],
+  variable: "--font-matter",
   display: "swap",
 });
 
@@ -44,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${playfair.variable} ${dmSans.variable}`}>
+    <html lang="pt-BR" className={`${playfair.variable} ${matter.variable}`}>
       <body className="bg-surface-white font-body antialiased text-text-primary">
         <Navbar />
         <main>{children}</main>

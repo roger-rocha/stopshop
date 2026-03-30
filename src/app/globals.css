@@ -42,7 +42,7 @@
 
   /* Fonts */
   --font-display: var(--font-playfair), "Playfair Display", serif;
-  --font-body: var(--font-dm-sans), "DM Sans", sans-serif;
+  --font-body: var(--font-matter), "Matter", sans-serif;
 
   /* Font sizes — fluid with clamp */
   --font-size-hero: clamp(2.2rem, 6vw, 4.5rem);

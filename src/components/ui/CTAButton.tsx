@@ -14,6 +14,8 @@ const variants = {
     "border border-border-subtle bg-white text-text-primary hover:border-brand-coral hover:text-brand-coral hover:shadow-card",
   whatsapp: "bg-whatsapp text-white hover:bg-whatsapp-dark",
   ghost: "bg-transparent text-text-secondary hover:text-brand-coral",
+  "outline-light":
+    "border border-white/30 bg-white/10 text-white hover:bg-white/20 hover:border-white/50",
 };
 
 const sizes = {

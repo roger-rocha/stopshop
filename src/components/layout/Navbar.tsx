@@ -5,10 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useTransform } from "motion/react";
-import { Menu, X, MessageCircle, Phone } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { MobileNav } from "./MobileNav";
-import { formatPhone } from "@/lib/utils";
 import { siteContact, siteNavigation } from "@/lib/site";
 
 export function Navbar() {
@@ -16,41 +15,20 @@ export function Navbar() {
   const pathname = usePathname();
   const { scrollY } = useScroll();
 
-  const bgOpacity = useTransform(scrollY, [0, 100], [0.75, 0.96]);
-  const blurValue = useTransform(scrollY, [0, 100], [0, 20]);
+  const bgOpacity = useTransform(scrollY, [0, 100], [0.97, 0.99]);
+  const blurValue = useTransform(scrollY, [0, 100], [12, 20]);
   const navLinks = siteNavigation;
 
   return (
     <>
-      {/* Utility bar — desktop only */}
-      <div className="fixed left-0 right-0 top-0 z-[51] hidden border-b border-border-default bg-white/90 text-text-primary backdrop-blur-sm sm:block">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-1.5 sm:px-8 text-xs">
-          <div className="flex items-center gap-2">
-            <span className="inline-block h-2 w-2 rounded-full bg-success animate-pulse" />
-            <span className="text-text-secondary">
-              Aberto às 09:00 horas · Brusque {siteContact.temperature}
-            </span>
-          </div>
-          <a
-            href={`tel:${siteContact.phone}`}
-            className="flex items-center gap-1.5 text-text-secondary hover:text-brand-coral"
-          >
-            <Phone className="h-3 w-3" />
-            {formatPhone(siteContact.phone)}
-          </a>
-        </div>
-      </div>
-
       <motion.header
-        className="fixed left-0 right-0 z-50 top-0 sm:top-[29px]"
+        className="fixed left-0 right-0 z-50 top-0"
         style={{
           backgroundColor: useTransform(
             bgOpacity,
             (v) => `rgba(255, 255, 255, ${v})`
           ),
-          backdropFilter: useTransform(blurValue, (v) =>
-            v > 1 ? `blur(${v}px)` : "none"
-          ),
+          backdropFilter: useTransform(blurValue, (v) => `blur(${v}px)`),
           borderBottomColor: useTransform(
             bgOpacity,
             (v) => `rgba(28, 25, 23, ${v * 0.08})`
@@ -93,11 +71,18 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 aria-current={pathname === link.href ? "page" : undefined}
-                className={`text-sm font-medium transition-colors hover:text-brand-coral ${
+                className={`relative text-sm font-medium transition-colors hover:text-brand-coral ${
                   pathname === link.href ? "text-brand-coral" : "text-text-secondary"
                 }`}
               >
                 {link.label}
+                {pathname === link.href && (
+                  <motion.span
+                    layoutId="nav-indicator"
+                    className="absolute -bottom-1.5 left-0 right-0 h-0.5 rounded-full bg-brand-coral"
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  />
+                )}
               </Link>
             ))}
           </div>
