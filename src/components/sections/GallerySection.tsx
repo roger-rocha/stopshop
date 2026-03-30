@@ -34,7 +34,7 @@ const galleryImages = [
 
 export function GallerySection() {
   return (
-    <section className="bg-white py-[var(--spacing-section-y)]">
+    <section className="bg-surface-light py-[var(--spacing-section-y)]">
       <div className="mx-auto max-w-7xl px-[var(--spacing-section-x)]">
         <SectionHeader
           label="Nosso Espaço"

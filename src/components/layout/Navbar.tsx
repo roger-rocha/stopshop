@@ -53,7 +53,7 @@ export function Navbar() {
           ),
           borderBottomColor: useTransform(
             bgOpacity,
-            (v) => `rgba(18, 24, 86, ${v * 0.08})`
+            (v) => `rgba(28, 25, 23, ${v * 0.08})`
           ),
           borderBottomWidth: "1px",
           borderBottomStyle: "solid",

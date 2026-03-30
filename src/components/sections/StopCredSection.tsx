@@ -9,7 +9,7 @@ import { stopCredBenefits } from "@/lib/site";
 
 export function StopCredSection() {
   return (
-    <section className="bg-surface-light py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+    <section className="bg-white py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           {/* Credit card mockup */}

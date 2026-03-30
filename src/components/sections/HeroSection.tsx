@@ -28,7 +28,7 @@ export function HeroSection() {
           priority
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,_rgba(255,255,255,0.72)_0%,_rgba(255,255,255,0.45)_48%,_rgba(255,255,255,0.10)_100%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,_transparent_0%,_#f4f7ff_100%)]" aria-hidden="true" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,_transparent_0%,_#faf8f4_100%)]" aria-hidden="true" />
       </div>
 
       {/* Content */}

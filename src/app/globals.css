@@ -13,21 +13,21 @@
   /* Colors — Surfaces */
   --color-surface-dark: #121856;
   --color-surface-card: #ffffff;
-  --color-surface-elevated: #f7f9ff;
+  --color-surface-elevated: #faf8f4;
   --color-surface-white: #FFFFFF;
-  --color-surface-light: #eaeff8;
-  --color-surface-muted: #eef1f7;
-  --color-surface-soft: #fbfcff;
+  --color-surface-light: #f5f2ed;
+  --color-surface-muted: #f2ede6;
+  --color-surface-soft: #fefdfb;
 
   /* Colors — Text */
-  --color-text-primary: #151b3d;
-  --color-text-secondary: #4d577e;
-  --color-text-muted: #7a849f;
+  --color-text-primary: #1c1917;
+  --color-text-secondary: #57534e;
+  --color-text-muted: #a8a29e;
   --color-text-inverse: #ffffff;
 
   /* Colors — Borders */
-  --color-border-subtle: #d9dfea;
-  --color-border-default: rgba(18, 24, 86, 0.10);
+  --color-border-subtle: #e5ded4;
+  --color-border-default: rgba(28, 25, 23, 0.08);
   --color-border-coral: rgba(41, 71, 240, 0.22);
 
   /* Colors — Third-party */
@@ -59,19 +59,19 @@
   --radius-button: 12px;
 
   /* Shadows */
-  --shadow-card: 0 8px 30px rgba(18, 24, 86, 0.06);
-  --shadow-card-hover: 0 24px 60px rgba(18, 24, 86, 0.14);
-  --shadow-nav: 0 16px 40px rgba(18, 24, 86, 0.08);
+  --shadow-card: 0 0 0 1px rgba(28, 25, 23, 0.05), 0 8px 30px rgba(28, 25, 23, 0.08);
+  --shadow-card-hover: 0 0 0 1px rgba(28, 25, 23, 0.06), 0 20px 40px rgba(28, 25, 23, 0.12);
+  --shadow-nav: 0 8px 30px rgba(28, 25, 23, 0.06);
   --shadow-glow-coral: 0 14px 36px rgba(41, 71, 240, 0.18);
   --shadow-glow-gold: 0 14px 36px rgba(200, 159, 79, 0.16);
   --shadow-whatsapp: 0 12px 30px rgba(37, 211, 102, 0.32);
   --shadow-whatsapp-hover: 0 18px 36px rgba(37, 211, 102, 0.42);
 
   /* Gradients — reusable backgrounds */
-  --gradient-surface-fade: linear-gradient(180deg, #ffffff 0%, #f7f9ff 100%);
+  --gradient-surface-fade: linear-gradient(180deg, #ffffff 0%, #faf8f4 100%);
   --gradient-brand-diagonal: linear-gradient(135deg, var(--color-brand-navy) 0%, var(--color-brand-coral) 100%);
   --gradient-navy-overlay: linear-gradient(90deg, rgba(18,24,86,0.92) 0%, rgba(18,24,86,0.84) 55%, rgba(18,24,86,0.72) 100%);
-  --gradient-hero-fade: linear-gradient(180deg, #ffffff 0%, #f4f7ff 100%);
+  --gradient-hero-fade: linear-gradient(180deg, #ffffff 0%, #faf8f4 100%);
 
   /* Spacing — Section */
   --spacing-section-y: clamp(4rem, 8vw, 8rem);
@@ -83,6 +83,10 @@ body {
   font-family: var(--font-body);
   color: var(--color-text-primary);
   background: var(--color-surface-white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
 }
 
 /* Smooth scrolling */

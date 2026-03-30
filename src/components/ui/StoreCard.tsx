@@ -1,40 +1,47 @@
 "use client";
 
-import { motion } from "motion/react";
 import { MapPin, Phone, MessageCircle } from "lucide-react";
 import { cn, whatsappLink } from "@/lib/utils";
 import type { Store } from "@/lib/types";
 
 interface StoreCardProps {
   store: Store;
+  variant?: "default" | "featured";
   className?: string;
 }
 
-export function StoreCard({ store, className }: StoreCardProps) {
+export function StoreCard({ store, variant = "default", className }: StoreCardProps) {
+  const isFeatured = variant === "featured";
+
   return (
-    <motion.div
-      whileHover={{ y: -6 }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+    <div
       className={cn(
-        "group overflow-hidden rounded-2xl border border-border-default bg-white shadow-card transition-[border-color,box-shadow] duration-300 hover:border-brand-coral/20 hover:shadow-card-hover",
+        "group h-full overflow-hidden rounded-xl border border-border-default bg-white shadow-card transition-shadow duration-300 hover:shadow-card-hover",
         className
       )}
     >
-      {/* Photo */}
-      <div className="relative h-48 overflow-hidden bg-[image:var(--gradient-brand-diagonal)]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.18),_transparent_35%)]" />
-        <div className="absolute inset-x-6 bottom-6 rounded-2xl border border-white/12 bg-white/10 p-4 backdrop-blur-sm transition-transform duration-500 group-hover:translate-y-[-4px]">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+      {/* Header */}
+      <div className={cn("relative overflow-hidden bg-surface-muted", isFeatured ? "h-64" : "h-44")}>
+        <div className="flex h-full flex-col items-center justify-center p-6 text-center">
+          <p className="text-xs font-medium uppercase tracking-[0.18em] text-text-muted">
             Stop Shop
           </p>
-          <p className="mt-2 font-display text-2xl font-bold text-white">{store.name}</p>
-          <p className="mt-1 text-sm text-white/75">{store.floor}</p>
+          <p className={cn(
+            "mt-2 font-display font-bold text-text-primary",
+            isFeatured ? "text-3xl" : "text-2xl"
+          )}>
+            {store.name}
+          </p>
+          <p className="mt-1.5 text-sm text-text-muted">{store.floor}</p>
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-5">
-        <h3 className="font-display text-xl font-bold text-text-primary">
+      <div className={cn("p-5", isFeatured && "p-6")}>
+        <h3 className={cn(
+          "font-display font-bold text-text-primary",
+          isFeatured ? "text-xl" : "text-lg"
+        )}>
           {store.name}
         </h3>
 
@@ -43,7 +50,7 @@ export function StoreCard({ store, className }: StoreCardProps) {
           {store.categories.slice(0, 2).map((cat) => (
             <span
               key={cat}
-              className="rounded-pill bg-brand-coral/10 px-2.5 py-0.5 text-xs font-medium text-brand-coral"
+              className="rounded-pill bg-surface-muted px-2.5 py-0.5 text-xs font-medium text-text-secondary"
             >
               {cat}
             </span>
@@ -61,7 +68,7 @@ export function StoreCard({ store, className }: StoreCardProps) {
           {store.phone && (
             <a
               href={`tel:${store.phone}`}
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-surface-elevated text-text-secondary hover:bg-brand-navy hover:text-white"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-surface-elevated text-text-secondary transition-colors hover:bg-brand-navy hover:text-white"
               aria-label={`Ligar para ${store.name}`}
             >
               <Phone className="h-4 w-4" />
@@ -72,7 +79,7 @@ export function StoreCard({ store, className }: StoreCardProps) {
               href={whatsappLink(store.whatsapp, `Olá! Gostaria de saber mais sobre a loja ${store.name} no Stop Shop.`)}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-whatsapp/10 text-whatsapp hover:bg-whatsapp hover:text-white transition-colors"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-whatsapp/10 text-whatsapp transition-colors hover:bg-whatsapp hover:text-white"
               aria-label={`WhatsApp ${store.name}`}
             >
               <MessageCircle className="h-4 w-4" />
@@ -80,6 +87,6 @@ export function StoreCard({ store, className }: StoreCardProps) {
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
