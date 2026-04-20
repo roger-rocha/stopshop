@@ -30,11 +30,11 @@ export function HeroSection() {
         {/* Vertical depth */}
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(8,12,40,0.45)] via-transparent to-[rgba(8,12,40,0.75)]" />
         {/* Soft vignette */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(8,12,40,0.55)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(8,12,40,0.55)_100%)]" />
       </div>
 
       {/* Main content */}
-      <div className="relative flex flex-1 items-center px-5 pb-40 pt-32 sm:px-8 sm:pb-44 sm:pt-40">
+      <div className="relative flex flex-1 items-center px-5 pb-20 pt-32 sm:px-8 sm:pb-24 sm:pt-40">
         <div className="mx-auto w-full max-w-7xl">
           <div className="max-w-2xl">
             {/* Eyebrow */}
@@ -109,7 +109,7 @@ export function HeroSection() {
                   {stat.prefix}
                   <CounterAnimation target={stat.value} />
                 </div>
-                <p className="mt-1.5 text-[11px] font-medium uppercase tracking-wider text-white/60 sm:text-xs">
+                <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.16em] text-white/70 sm:text-xs">
                   {stat.label}
                 </p>
               </div>

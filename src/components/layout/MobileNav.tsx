@@ -91,14 +91,14 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
                 href="/"
                 onClick={onClose}
                 aria-label="Stop Shop"
-                className="whitespace-nowrap font-display text-2xl font-bold leading-none tracking-[0.04em] text-brand-navy"
+                className="inline-flex h-10 items-center whitespace-nowrap font-display text-2xl font-bold leading-none tracking-[0.04em] text-brand-navy"
               >
-                STOP<span className="font-normal"> SHOP</span>
+                STOP<span className="font-normal">&nbsp;SHOP</span>
               </Link>
               <button
                 ref={closeButtonRef}
                 onClick={onClose}
-                className="rounded-lg p-2 text-text-muted transition-colors hover:bg-surface-muted hover:text-text-primary"
+                className="flex h-10 w-10 items-center justify-center rounded-lg text-text-muted transition-colors hover:bg-surface-muted hover:text-text-primary"
                 aria-label="Fechar menu"
               >
                 <X className="h-6 w-6" />

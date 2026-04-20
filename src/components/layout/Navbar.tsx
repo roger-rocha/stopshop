@@ -47,11 +47,11 @@ export function Navbar() {
             href="/"
             aria-label="Stop Shop"
             className={cn(
-              "whitespace-nowrap font-display text-2xl font-bold leading-none tracking-[0.04em] transition-colors sm:text-[28px]",
+              "inline-flex h-10 items-center whitespace-nowrap font-display text-2xl font-bold leading-none tracking-[0.04em] transition-colors sm:text-[28px]",
               useSolidStyle ? "text-brand-navy" : "text-white"
             )}
           >
-            STOP<span className="font-normal"> SHOP</span>
+            STOP<span className="font-normal">&nbsp;SHOP</span>
           </Link>
 
           {/* Desktop Nav */}
