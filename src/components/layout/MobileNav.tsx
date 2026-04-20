@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { X } from "lucide-react";
 import { CTAButton } from "@/components/ui/CTAButton";
@@ -88,14 +87,13 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
           >
             {/* Header */}
             <div className="flex items-center justify-between border-b border-border-default p-5">
-              <Link href="/" onClick={onClose} aria-label="Stop Shop">
-                <Image
-                  src="/images/stopshop-logo.png"
-                  alt="Logo Stop Shop"
-                  width={131}
-                  height={110}
-                  className="h-auto w-10"
-                />
+              <Link
+                href="/"
+                onClick={onClose}
+                aria-label="Stop Shop"
+                className="whitespace-nowrap font-display text-2xl font-bold leading-none tracking-[0.04em] text-brand-navy"
+              >
+                STOP<span className="font-normal"> SHOP</span>
               </Link>
               <button
                 ref={closeButtonRef}

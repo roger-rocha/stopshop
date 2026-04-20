@@ -18,7 +18,7 @@ export function Footer() {
     <AnimateOnScroll>
       <footer className="border-t border-border-default bg-[linear-gradient(180deg,_var(--color-surface-elevated)_0%,_#ffffff_100%)] text-text-primary">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
-          <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
             {/* Brand */}
             <div>
               <Link href="/" className="inline-block">
@@ -95,30 +95,6 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Newsletter */}
-            <div>
-              <h3 className="font-display text-lg font-bold">Receba Novidades</h3>
-              <p className="mt-2 text-sm text-text-secondary">
-                Cadastre-se para receber promoções e novidades.
-              </p>
-              <form className="mt-4 flex gap-2" onSubmit={(e) => e.preventDefault()}>
-                <label htmlFor="footer-email" className="sr-only">Seu e-mail</label>
-                <input
-                  id="footer-email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Seu e-mail"
-                  className="flex-1 rounded-button border border-border-subtle bg-white px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted outline-none focus:border-brand-coral focus:ring-1 focus:ring-brand-coral"
-                />
-                <button
-                  type="submit"
-                  className="rounded-button bg-brand-coral px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-coral-dark"
-                >
-                  Enviar
-                </button>
-              </form>
-            </div>
           </div>
 
           <div className="mt-12 border-t border-border-default pt-8 text-center text-sm text-text-muted">

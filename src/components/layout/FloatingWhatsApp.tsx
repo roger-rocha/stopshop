@@ -14,10 +14,10 @@ export function FloatingWhatsApp() {
       transition={{ delay: 2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
-      className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-whatsapp text-white shadow-whatsapp hover:shadow-whatsapp-hover"
+      className="fixed bottom-6 right-6 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-whatsapp text-white shadow-whatsapp hover:shadow-whatsapp-hover"
       aria-label="Fale pelo WhatsApp"
     >
-      <WhatsAppIcon className="h-7 w-7" />
+      <WhatsAppIcon className="h-9 w-9" />
     </motion.a>
   );
 }

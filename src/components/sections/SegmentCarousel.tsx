@@ -46,8 +46,8 @@ function SegmentCard({ name, slug, count, image }: (typeof segmentCards)[number]
 
 export function SegmentCarousel() {
   return (
-    <section className="bg-surface-light py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
-      <div className="mx-auto max-w-7xl">
+    <section className="overflow-hidden bg-surface-light py-[var(--spacing-section-y)]">
+      <div className="mx-auto max-w-7xl px-[var(--spacing-section-x)]">
         <SectionHeader
           label="Segmentos"
           title="Explore por categoria"
@@ -55,15 +55,6 @@ export function SegmentCarousel() {
           subtitle="Navegue pelos principais segmentos do Stop Shop e descubra marcas para comprar com praticidade."
           light
         />
-
-        {/* Mobile: horizontal scroll */}
-        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide lg:hidden -mx-[var(--spacing-section-x)] px-[var(--spacing-section-x)]">
-          {segmentCards.map((seg) => (
-            <div key={seg.slug} className="shrink-0 w-[65vw] sm:w-[45vw] snap-start">
-              <SegmentCard {...seg} />
-            </div>
-          ))}
-        </div>
 
         {/* Desktop: grid */}
         <StaggerChildren className="hidden lg:grid grid-cols-3 gap-5">
@@ -73,6 +64,15 @@ export function SegmentCarousel() {
             </StaggerItem>
           ))}
         </StaggerChildren>
+      </div>
+
+      {/* Mobile: horizontal scroll — full-bleed, contained to this section */}
+      <div className="flex gap-4 overflow-x-auto scroll-px-[var(--spacing-section-x)] snap-x snap-mandatory px-[var(--spacing-section-x)] pb-4 scrollbar-hide lg:hidden">
+        {segmentCards.map((seg) => (
+          <div key={seg.slug} className="w-[65vw] shrink-0 snap-start sm:w-[45vw]">
+            <SegmentCard {...seg} />
+          </div>
+        ))}
       </div>
     </section>
   );
