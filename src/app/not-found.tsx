@@ -39,10 +39,10 @@ export default function NotFound() {
               Atacado
             </Link>
             <Link
-              href="/blog"
+              href="/contato"
               className="rounded-full border border-border-subtle px-5 py-3 font-medium text-text-primary hover:border-brand-coral hover:text-brand-coral"
             >
-              Blog
+              Contato
             </Link>
           </div>
         </div>

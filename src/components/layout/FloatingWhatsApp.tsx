@@ -2,11 +2,21 @@
 
 import { motion } from "motion/react";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
+import { whatsappLink } from "@/lib/utils";
 
-export function FloatingWhatsApp() {
+interface FloatingWhatsAppProps {
+  whatsapp?: string;
+}
+
+export function FloatingWhatsApp({
+  whatsapp = "554732557000",
+}: FloatingWhatsAppProps) {
   return (
     <motion.a
-      href="https://wa.me/554732557000?text=Olá! Gostaria de informações sobre o Stop Shop."
+      href={whatsappLink(
+        whatsapp,
+        "Olá! Gostaria de informações sobre o Stop Shop."
+      )}
       target="_blank"
       rel="noopener noreferrer"
       initial={{ scale: 0, opacity: 0 }}

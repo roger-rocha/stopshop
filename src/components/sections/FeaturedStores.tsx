@@ -5,14 +5,22 @@ import { motion } from "motion/react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StoreCard } from "@/components/ui/StoreCard";
 import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
-import { stores } from "@/lib/data/stores";
+import type { Store } from "@/db/schema";
 
-const featuredStores = stores.filter((store) => store.featured).slice(0, 6);
+interface FeaturedStoresProps {
+  stores: Store[];
+}
 
-export function FeaturedStores() {
+export function FeaturedStores({ stores }: FeaturedStoresProps) {
+  const featuredStores = stores.slice(0, 6);
+
   return (
-    <section className="bg-white py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
-      <div className="mx-auto max-w-7xl">
+    <section className="relative overflow-hidden bg-white py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 top-1/3 h-80 w-80 rounded-full bg-brand-coral/4 blur-3xl"
+      />
+      <div className="relative mx-auto max-w-7xl">
         <SectionHeader
           label="Lojas em Destaque"
           title="Conheça algumas das nossas lojas"

@@ -9,8 +9,12 @@ import { stopCredBenefits } from "@/lib/site";
 
 export function StopCredSection() {
   return (
-    <section className="bg-white py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
-      <div className="mx-auto max-w-7xl">
+    <section className="relative overflow-hidden bg-white py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-brand-navy/5 blur-3xl"
+      />
+      <div className="relative mx-auto max-w-7xl">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           {/* Credit card mockup */}
           <AnimateOnScroll variants={slideInLeft} className="flex justify-center">

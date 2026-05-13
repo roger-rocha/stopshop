@@ -4,14 +4,19 @@ import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { SegmentPill } from "@/components/ui/SegmentPill";
 import { StoreCard } from "@/components/ui/StoreCard";
-import { segments } from "@/lib/data/segments";
-import { stores } from "@/lib/data/stores";
+import type { Segment, Store } from "@/db/schema";
 
 interface StoreDirectoryProps {
   initialSegment?: string;
+  segments: Segment[];
+  stores: Store[];
 }
 
-export function StoreDirectory({ initialSegment = "todos" }: StoreDirectoryProps) {
+export function StoreDirectory({
+  initialSegment = "todos",
+  segments,
+  stores,
+}: StoreDirectoryProps) {
   const [selectedSegment, setSelectedSegment] = useState(initialSegment);
   const [query, setQuery] = useState("");
 

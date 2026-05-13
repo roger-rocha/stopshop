@@ -1,12 +1,22 @@
 import type { Metadata } from "next";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { OpeningHoursStrip } from "@/components/sections/OpeningHoursStrip";
+import { AnchorBrandsStrip } from "@/components/sections/AnchorBrandsStrip";
 import { SegmentCarousel } from "@/components/sections/SegmentCarousel";
 import { FeaturedStores } from "@/components/sections/FeaturedStores";
+import { AgendaSection } from "@/components/sections/AgendaSection";
 import { AtacadoCTA } from "@/components/sections/AtacadoCTA";
 import { GallerySection } from "@/components/sections/GallerySection";
+import { PlanejeSection } from "@/components/sections/PlanejeSection";
+import { InstagramFeed } from "@/components/sections/InstagramFeed";
 import { StopCredSection } from "@/components/sections/StopCredSection";
-import { LocationSection } from "@/components/sections/LocationSection";
 import { FAQSection } from "@/components/sections/FAQSection";
+import { MapSection } from "@/components/sections/MapSection";
+import {
+  getAllSegments,
+  getFeaturedStores,
+  getHero,
+} from "@/lib/server/queries";
 
 export const metadata: Metadata = {
   title: "Stop Shop — Shopping de Moda em Brusque, SC | 160+ Marcas",
@@ -14,7 +24,13 @@ export const metadata: Metadata = {
     "Mais de 160 marcas de moda em um só lugar. Atacado e varejo com os melhores preços. Visite o Stop Shop em Brusque, SC.",
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [hero, segments, featuredStores] = await Promise.all([
+    getHero(),
+    getAllSegments(),
+    getFeaturedStores(6),
+  ]);
+
   return (
     <>
       <script
@@ -61,14 +77,19 @@ export default function HomePage() {
         }}
       />
 
-      <HeroSection />
-      <SegmentCarousel />
-      <FeaturedStores />
+      <HeroSection hero={hero} />
+      <OpeningHoursStrip />
+      <AnchorBrandsStrip />
+      <SegmentCarousel segments={segments} />
+      <FeaturedStores stores={featuredStores} />
+      <AgendaSection />
       <AtacadoCTA />
       <GallerySection />
+      <PlanejeSection />
+      <InstagramFeed />
       <StopCredSection />
-      <LocationSection />
       <FAQSection />
+      <MapSection />
     </>
   );
 }

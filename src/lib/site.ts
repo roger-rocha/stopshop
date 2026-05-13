@@ -5,7 +5,6 @@ export const siteNavigation = [
   { label: "Stop Cred", href: "/stop-cred" },
   { label: "Cadastro", href: "/cadastro" },
   { label: "Atacado", href: "/atacado" },
-  { label: "Blog", href: "/blog" },
   { label: "Contato", href: "/contato" },
 ] as const;
 

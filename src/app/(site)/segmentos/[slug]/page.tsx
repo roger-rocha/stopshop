@@ -2,14 +2,18 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/ui/PageHero";
 import { StoreCard } from "@/components/ui/StoreCard";
-import { segments } from "@/lib/data/segments";
-import { stores } from "@/lib/data/stores";
+import {
+  getAllSegments,
+  getSegmentBySlug,
+  getStoresBySegment,
+} from "@/lib/server/queries";
 
 interface SegmentPageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
+  const segments = await getAllSegments();
   return segments.map((segment) => ({ slug: segment.slug }));
 }
 
@@ -17,7 +21,7 @@ export async function generateMetadata({
   params,
 }: SegmentPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const segment = segments.find((entry) => entry.slug === slug);
+  const segment = await getSegmentBySlug(slug);
 
   if (!segment) {
     return { title: "Segmento não encontrado" };
@@ -31,13 +35,10 @@ export async function generateMetadata({
 
 export default async function SegmentPage({ params }: SegmentPageProps) {
   const { slug } = await params;
-  const segment = segments.find((entry) => entry.slug === slug);
+  const segment = await getSegmentBySlug(slug);
+  if (!segment) notFound();
 
-  if (!segment) {
-    notFound();
-  }
-
-  const segmentStores = stores.filter((store) => store.segment === slug);
+  const segmentStores = await getStoresBySegment(slug);
 
   return (
     <>

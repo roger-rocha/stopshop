@@ -8,8 +8,12 @@ import { slideInLeft, slideInRight } from "@/lib/animations";
 
 export function FAQSection() {
   return (
-    <section className="bg-surface-light py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
-      <div className="mx-auto max-w-7xl">
+    <section className="relative overflow-hidden bg-surface-light py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-20 top-20 h-72 w-72 rounded-full bg-brand-gold/6 blur-3xl"
+      />
+      <div className="relative mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-5">
           {/* Left: decorative */}
           <AnimateOnScroll

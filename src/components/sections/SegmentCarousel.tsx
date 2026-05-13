@@ -5,18 +5,20 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
-import { segments } from "@/lib/data/segments";
+import type { Segment } from "@/db/schema";
 
-const segmentCards = segments.slice(0, 6).map((segment) => ({
-  name: segment.name,
-  slug: segment.slug,
-  count: segment.storeCount,
-  image:
-    segment.image ??
-    "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80",
-}));
+interface SegmentCarouselProps {
+  segments: Pick<Segment, "name" | "slug" | "storeCount" | "image">[];
+}
 
-function SegmentCard({ name, slug, count, image }: (typeof segmentCards)[number]) {
+interface SegmentCardData {
+  name: string;
+  slug: string;
+  count: number;
+  image: string;
+}
+
+function SegmentCard({ name, slug, count, image }: SegmentCardData) {
   return (
     <Link href={`/segmentos/${slug}`} className="block">
       <motion.div
@@ -44,10 +46,27 @@ function SegmentCard({ name, slug, count, image }: (typeof segmentCards)[number]
   );
 }
 
-export function SegmentCarousel() {
+export function SegmentCarousel({ segments }: SegmentCarouselProps) {
+  const segmentCards: SegmentCardData[] = segments.slice(0, 6).map((segment) => ({
+    name: segment.name,
+    slug: segment.slug,
+    count: segment.storeCount,
+    image:
+      segment.image ??
+      "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80",
+  }));
+
   return (
-    <section className="overflow-hidden bg-surface-light py-[var(--spacing-section-y)]">
-      <div className="mx-auto max-w-7xl px-[var(--spacing-section-x)]">
+    <section className="relative overflow-hidden bg-surface-light py-[var(--spacing-section-y)]">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-20 top-10 h-64 w-64 rounded-full bg-brand-coral/5 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-24 bottom-10 h-72 w-72 rounded-full bg-brand-gold/8 blur-3xl"
+      />
+      <div className="relative mx-auto max-w-7xl px-[var(--spacing-section-x)]">
         <SectionHeader
           label="Segmentos"
           title="Explore por categoria"

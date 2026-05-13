@@ -4,7 +4,12 @@ import Link from "next/link";
 import { MapPin, Phone, Mail, Instagram, Facebook, Linkedin } from "lucide-react";
 import { AnimateOnScroll } from "@/components/motion/AnimateOnScroll";
 import { formatPhone } from "@/lib/utils";
-import { siteContact, siteNavigation, siteSocialLinks } from "@/lib/site";
+import { siteNavigation, siteSocialLinks } from "@/lib/site";
+import type { ContactSettings } from "@/lib/validators";
+
+interface FooterProps {
+  contact: ContactSettings;
+}
 
 const quickLinks = siteNavigation;
 const socialLinks = [
@@ -13,7 +18,7 @@ const socialLinks = [
   { icon: Linkedin, href: siteSocialLinks[2].href, label: "LinkedIn" },
 ];
 
-export function Footer() {
+export function Footer({ contact }: FooterProps) {
   return (
     <AnimateOnScroll>
       <footer className="border-t border-border-default bg-[linear-gradient(180deg,_var(--color-surface-elevated)_0%,_#ffffff_100%)] text-text-primary">
@@ -66,30 +71,34 @@ export function Footer() {
             <div>
               <h3 className="font-display text-lg font-bold">Contato</h3>
               <ul className="mt-4 space-y-3">
-                <li>
-                  <a
-                    href={`tel:${siteContact.phone}`}
-                    className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-brand-coral"
-                  >
-                    <Phone className="h-4 w-4" />
-                    {formatPhone(siteContact.phone)}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={`mailto:${siteContact.email}`}
-                    className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-brand-coral"
-                  >
-                    <Mail className="h-4 w-4" />
-                    {siteContact.email}
-                  </a>
-                </li>
+                {contact.phone && (
+                  <li>
+                    <a
+                      href={`tel:${contact.phone}`}
+                      className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-brand-coral"
+                    >
+                      <Phone className="h-4 w-4" />
+                      {formatPhone(contact.phone)}
+                    </a>
+                  </li>
+                )}
+                {contact.email && (
+                  <li>
+                    <a
+                      href={`mailto:${contact.email}`}
+                      className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-brand-coral"
+                    >
+                      <Mail className="h-4 w-4" />
+                      {contact.email}
+                    </a>
+                  </li>
+                )}
                 <li className="flex items-start gap-2 text-sm text-text-secondary">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
                   <span>
-                    {siteContact.addressLine1}
+                    {contact.addressLine1}
                     <br />
-                    {siteContact.city}, {siteContact.state} — {siteContact.zip}
+                    {contact.city}, {contact.state} — {contact.zip}
                   </span>
                 </li>
               </ul>

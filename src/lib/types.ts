@@ -12,6 +12,8 @@ export interface Store {
   name: string;
   slug: string;
   photo: string;
+  storefront?: string;
+  instagram?: string;
   categories: string[];
   segment: string;
   phone?: string;
@@ -19,18 +21,6 @@ export interface Store {
   location: string;
   floor: string;
   featured: boolean;
-}
-
-export interface BlogPost {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt: string;
-  image: string;
-  date: string;
-  category: string;
-  readingTime?: string;
-  content: string[];
 }
 
 export interface ContactInfo {

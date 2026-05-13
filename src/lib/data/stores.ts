@@ -6,6 +6,9 @@ export const stores: Store[] = [
     name: "Colcci",
     slug: "colcci",
     photo: "/logos/colcci.png",
+    storefront:
+      "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=900&q=80",
+    instagram: "colcci",
     categories: ["Moda Feminina", "Moda Masculina"],
     segment: "moda-feminina",
     phone: "4733511000",
@@ -19,6 +22,9 @@ export const stores: Store[] = [
     name: "Hering",
     slug: "hering",
     photo: "/logos/hering.png",
+    storefront:
+      "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=900&q=80",
+    instagram: "hering",
     categories: ["Moda Feminina", "Moda Masculina", "Moda Infantil"],
     segment: "moda-feminina",
     phone: "4733512000",
@@ -32,6 +38,9 @@ export const stores: Store[] = [
     name: "Malwee",
     slug: "malwee",
     photo: "/logos/malwee.png",
+    storefront:
+      "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=900&q=80",
+    instagram: "malwee",
     categories: ["Moda Feminina", "Moda Masculina"],
     segment: "moda-feminina",
     phone: "4733513000",
@@ -45,6 +54,9 @@ export const stores: Store[] = [
     name: "Lunender",
     slug: "lunender",
     photo: "/logos/lunender.png",
+    storefront:
+      "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=900&q=80",
+    instagram: "lunender",
     categories: ["Moda Feminina"],
     segment: "moda-feminina",
     phone: "4733514000",
@@ -58,6 +70,9 @@ export const stores: Store[] = [
     name: "Dudalina",
     slug: "dudalina",
     photo: "/logos/dudalina.png",
+    storefront:
+      "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=900&q=80",
+    instagram: "dudalina",
     categories: ["Moda Masculina", "Moda Feminina"],
     segment: "moda-masculina",
     phone: "4733515000",
@@ -71,6 +86,9 @@ export const stores: Store[] = [
     name: "Havan Kids",
     slug: "havan-kids",
     photo: "",
+    storefront:
+      "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?w=900&q=80",
+    instagram: "havan",
     categories: ["Moda Infantil"],
     segment: "moda-infantil",
     phone: "4733516000",
