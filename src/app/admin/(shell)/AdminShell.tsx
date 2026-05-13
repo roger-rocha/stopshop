@@ -14,13 +14,20 @@ import {
 import { cn } from "@/lib/utils";
 import { logoutAction } from "@/lib/server/actions/auth";
 
-const navItems = [
+type NavItem = {
+  href: string;
+  label: string;
+  icon: typeof LayoutDashboard;
+  exact?: boolean;
+};
+
+const navItems: NavItem[] = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/admin/stores", label: "Lojas", icon: Store },
   { href: "/admin/segments", label: "Segmentos", icon: Layers },
   { href: "/admin/posts", label: "Posts", icon: FileText },
   { href: "/admin/settings", label: "Configurações", icon: Settings },
-] as const;
+];
 
 export function AdminShell({
   children,

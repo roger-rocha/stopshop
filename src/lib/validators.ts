@@ -32,7 +32,7 @@ export const storeSchema = z.object({
   photo: z.string().default(""),
   storefront: optionalString,
   instagram: optionalString,
-  categories: csvList.pipe(z.array(z.string()).default([])),
+  categories: csvList.pipe(z.array(z.string())),
   segment: z.string().min(1, "Selecione um segmento."),
   phone: optionalString,
   whatsapp: optionalString,
@@ -85,7 +85,7 @@ export const postSchema = z.object({
     .string()
     .optional()
     .transform((v) => (v && v.trim().length > 0 ? v.trim() : null)),
-  content: paragraphList.pipe(z.array(z.string()).default([])),
+  content: paragraphList.pipe(z.array(z.string())),
   published: z.preprocess(
     (v) => v === "on" || v === true || v === "true",
     z.boolean()

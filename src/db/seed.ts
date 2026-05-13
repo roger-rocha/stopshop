@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import { db, schema } from "./index";
+import { db, schema } from "./client";
 import { eq } from "drizzle-orm";
 import { stores as mockStores } from "@/lib/data/stores";
 import { segments as mockSegments } from "@/lib/data/segments";

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { MapPin, Phone, Instagram, Store as StoreIcon } from "lucide-react";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { cn, whatsappLink } from "@/lib/utils";
-import type { Store } from "@/lib/types";
+import type { Store } from "@/db/schema";
 
 interface StoreCardProps {
   store: Store;
