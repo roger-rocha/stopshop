@@ -1,6 +1,10 @@
 import type { MetadataRoute } from "next";
 import { getAllSegments, getAllPosts } from "@/lib/server/queries";
 
+// Regenerated on demand and cached (ISR) so it picks up new content without a
+// redeploy, and so the DB query isn't a hard build-time dependency.
+export const revalidate = 3600;
+
 const BASE_URL = "https://stopshop.com.br";
 
 const STATIC_ROUTES = [

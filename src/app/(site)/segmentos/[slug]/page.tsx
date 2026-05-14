@@ -2,19 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/ui/PageHero";
 import { StoreCard } from "@/components/ui/StoreCard";
-import {
-  getAllSegments,
-  getSegmentBySlug,
-  getStoresBySegment,
-} from "@/lib/server/queries";
+import { getSegmentBySlug, getStoresBySegment } from "@/lib/server/queries";
+
+// Rendered on demand and cached (ISR) — avoids build-time queries to the
+// remote Turso DB, which can hang the build when the DB is slow to respond.
+export const revalidate = 3600;
 
 interface SegmentPageProps {
   params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  const segments = await getAllSegments();
-  return segments.map((segment) => ({ slug: segment.slug }));
 }
 
 export async function generateMetadata({

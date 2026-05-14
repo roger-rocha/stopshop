@@ -2,15 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllPosts, getPostBySlug } from "@/lib/server/queries";
+import { getPostBySlug } from "@/lib/server/queries";
+
+// Rendered on demand and cached (ISR) — avoids build-time queries to the
+// remote Turso DB, which can hang the build when the DB is slow to respond.
+export const revalidate = 3600;
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  const posts = await getAllPosts({ onlyPublished: true });
-  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({
