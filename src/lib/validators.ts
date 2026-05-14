@@ -98,6 +98,7 @@ export const heroSettingsSchema = z.object({
   eyebrow: z.string().default(""),
   title: z.string().min(1, "Informe o título do hero."),
   titleHighlight: z.string().default(""),
+  image: z.string().default(""),
   ctaLabel: z.string().default(""),
   ctaHref: z.string().default("/"),
 });

@@ -43,6 +43,7 @@ export async function saveHeroAction(
     eyebrow: formData.get("eyebrow") ?? "",
     title: formData.get("title") ?? "",
     titleHighlight: formData.get("titleHighlight") ?? "",
+    image: formData.get("image") ?? "",
     ctaLabel: formData.get("ctaLabel") ?? "",
     ctaHref: formData.get("ctaHref") ?? "",
   });

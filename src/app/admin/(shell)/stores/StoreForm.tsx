@@ -7,6 +7,7 @@ import {
   type StoreFormState,
 } from "@/lib/server/actions/stores";
 import { Field, inputCls } from "../_components/Field";
+import { ImageUpload } from "../_components/ImageUpload";
 import type { Segment, Store } from "@/db/schema";
 
 const initial: StoreFormState = { status: "idle" };
@@ -57,17 +58,6 @@ export function StoreForm({ segments, store }: StoreFormProps) {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Field
-          label="Foto/Logo (URL)"
-          hint="Caminho local (/logos/x.png) ou URL completa"
-          error={errors.photo?.[0]}
-        >
-          <input
-            name="photo"
-            defaultValue={store?.photo ?? ""}
-            className={inputCls}
-          />
-        </Field>
-        <Field
           label="Segmento"
           hint="Categoria principal"
           error={errors.segment?.[0]}
@@ -86,20 +76,6 @@ export function StoreForm({ segments, store }: StoreFormProps) {
             ))}
           </select>
         </Field>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Field
-          label="Foto da fachada (URL)"
-          hint="Imagem grande para destaque"
-          error={errors.storefront?.[0]}
-        >
-          <input
-            name="storefront"
-            defaultValue={store?.storefront ?? ""}
-            className={inputCls}
-          />
-        </Field>
         <Field
           label="Instagram (handle)"
           hint="Sem @, ex.: colcci"
@@ -111,6 +87,27 @@ export function StoreForm({ segments, store }: StoreFormProps) {
             className={inputCls}
           />
         </Field>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <ImageUpload
+          name="photo"
+          label="Foto / Logo"
+          hint="Logo da marca — PNG com fundo transparente fica melhor"
+          defaultValue={store?.photo}
+          folder="stores"
+          variant="logo"
+          error={errors.photo?.[0]}
+        />
+        <ImageUpload
+          name="storefront"
+          label="Foto da fachada"
+          hint="Imagem grande exibida no card da loja"
+          defaultValue={store?.storefront}
+          folder="stores"
+          variant="wide"
+          error={errors.storefront?.[0]}
+        />
       </div>
 
       <Field

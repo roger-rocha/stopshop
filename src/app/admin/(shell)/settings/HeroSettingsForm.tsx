@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { saveHeroAction, type SettingsState } from "@/lib/server/actions/settings";
 import { Field, inputCls, textareaCls } from "../_components/Field";
+import { ImageUpload } from "../_components/ImageUpload";
 import type { HeroSettings } from "@/lib/validators";
 import { StatusMessage } from "./StatusMessage";
 
@@ -39,6 +40,15 @@ export function HeroSettingsForm({ hero }: { hero: HeroSettings }) {
           className={inputCls}
         />
       </Field>
+
+      <ImageUpload
+        name="image"
+        label="Imagem de fundo do banner"
+        hint="Quando enviada, substitui o vídeo de fundo do hero. Deixe vazio para manter o vídeo."
+        defaultValue={hero.image}
+        folder="hero"
+        variant="wide"
+      />
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Texto do botão">

@@ -28,27 +28,41 @@ function renderTitle(title: string, highlight: string) {
 }
 
 export function HeroSection({ hero }: HeroSectionProps) {
+  const hasCustomImage = Boolean(hero.image);
+
   return (
     <section className="relative isolate flex min-h-[92svh] flex-col overflow-hidden bg-brand-navy">
-      {/* Background video + image fallback */}
+      {/* Background: imagem enviada pelo admin substitui o vídeo padrão */}
       <div className="absolute inset-0 -z-10">
-        <video
-          className="absolute inset-0 h-full w-full object-cover object-[center_65%]"
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster="/images/stopshop-hero.png"
-        >
-          <source src="/videos/stopshop-hero.mp4" type="video/mp4" />
-        </video>
-        <Image
-          src="/images/stopshop-hero.png"
-          alt="Fachada do Stop Shop em Brusque"
-          fill
-          className="object-cover object-[center_65%]"
-          priority
-        />
+        {hasCustomImage ? (
+          <Image
+            src={hero.image}
+            alt="Banner do Stop Shop em Brusque"
+            fill
+            className="object-cover object-[center_65%]"
+            priority
+          />
+        ) : (
+          <>
+            <video
+              className="absolute inset-0 h-full w-full object-cover object-[center_65%]"
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster="/images/stopshop-hero.png"
+            >
+              <source src="/videos/stopshop-hero.mp4" type="video/mp4" />
+            </video>
+            <Image
+              src="/images/stopshop-hero.png"
+              alt="Fachada do Stop Shop em Brusque"
+              fill
+              className="object-cover object-[center_65%]"
+              priority
+            />
+          </>
+        )}
         <div className="absolute inset-0 bg-gradient-to-r from-[rgba(8,12,40,0.92)] via-[rgba(8,12,40,0.55)] to-[rgba(8,12,40,0.15)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(8,12,40,0.45)] via-transparent to-[rgba(8,12,40,0.75)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(8,12,40,0.55)_100%)]" />

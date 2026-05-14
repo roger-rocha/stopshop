@@ -117,6 +117,7 @@ export const defaultHero: HeroSettings = {
   eyebrow: "O Ninho da Moda · Brusque, SC",
   title: "30 anos de tradição. Mais de 160 lojas. O ninho da moda de Brusque.",
   titleHighlight: "Mais de 160 lojas.",
+  image: "",
   ctaLabel: "Explore as lojas",
   ctaHref: "/lojas",
 };

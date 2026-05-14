@@ -7,6 +7,7 @@ import {
   type SegmentFormState,
 } from "@/lib/server/actions/segments";
 import { Field, inputCls } from "../_components/Field";
+import { ImageUpload } from "../_components/ImageUpload";
 import type { Segment } from "@/db/schema";
 
 const initial: SegmentFormState = { status: "idle" };
@@ -53,7 +54,17 @@ export function SegmentForm({ segment }: SegmentFormProps) {
         </Field>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <ImageUpload
+        name="image"
+        label="Imagem do segmento"
+        hint="Imagem exibida nos cards de segmento do site"
+        defaultValue={segment?.image}
+        folder="segments"
+        variant="wide"
+        error={errors.image?.[0]}
+      />
+
+      <div className="grid gap-4 sm:grid-cols-3">
         <Field label="Cor (hex)" error={errors.color?.[0]}>
           <input
             name="color"
@@ -62,20 +73,6 @@ export function SegmentForm({ segment }: SegmentFormProps) {
             className={`${inputCls} h-10 cursor-pointer p-1`}
           />
         </Field>
-        <Field
-          label="Imagem (URL)"
-          hint="Imagem usada nos cards do site"
-          error={errors.image?.[0]}
-        >
-          <input
-            name="image"
-            defaultValue={segment?.image ?? ""}
-            className={inputCls}
-          />
-        </Field>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
         <Field
           label="Contagem de lojas"
           hint="Quantidade exibida no card"
