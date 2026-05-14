@@ -9,9 +9,9 @@ export const siteNavigation = [
 ] as const;
 
 export const siteSocialLinks = [
-  { label: "Instagram", href: "https://instagram.com/stopshop" },
-  { label: "Facebook", href: "https://facebook.com/stopshop" },
-  { label: "LinkedIn", href: "https://linkedin.com/company/stopshop" },
+  { label: "Instagram", href: "https://instagram.com/stopshopbrusque" },
+  { label: "Facebook", href: "https://facebook.com/stopshopbrusque" },
+  { label: "YouTube", href: "https://youtube.com/user/NINHODAMODA" },
 ] as const;
 
 export const siteContact = {

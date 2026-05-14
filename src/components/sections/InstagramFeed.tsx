@@ -35,7 +35,7 @@ const posts = [
 
 const instagramHandle =
   siteSocialLinks.find((l) => l.label === "Instagram")?.href ??
-  "https://instagram.com/stopshop";
+  "https://instagram.com/stopshopbrusque";
 
 export function InstagramFeed() {
   return (

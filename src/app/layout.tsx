@@ -19,6 +19,7 @@ const matter = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://stopshop.com.br"),
   title: {
     default: "Stop Shop — Shopping de Moda em Brusque, SC",
     template: "%s | Stop Shop",

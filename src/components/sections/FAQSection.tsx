@@ -33,7 +33,7 @@ export function FAQSection() {
             <div className="mt-8 hidden lg:block">
               <div className="h-px w-16 bg-brand-gold/30" />
               <p className="mt-4 text-sm text-text-muted">
-                Atendimento de segunda a sexta, das 09h às 19h.
+                Atendimento de segunda a sábado, das 09h às 19h.
               </p>
             </div>
           </AnimateOnScroll>

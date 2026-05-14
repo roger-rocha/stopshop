@@ -14,9 +14,11 @@ import { FAQSection } from "@/components/sections/FAQSection";
 import { MapSection } from "@/components/sections/MapSection";
 import {
   getAllSegments,
+  getContact,
   getFeaturedStores,
   getHero,
 } from "@/lib/server/queries";
+import { faqItems } from "@/lib/data/faq";
 
 export const metadata: Metadata = {
   title: "Stop Shop — Shopping de Moda em Brusque, SC | 160+ Marcas",
@@ -25,55 +27,77 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const [hero, segments, featuredStores] = await Promise.all([
+  const [hero, segments, featuredStores, contact] = await Promise.all([
     getHero(),
     getAllSegments(),
     getFeaturedStores(6),
+    getContact(),
   ]);
+
+  const shoppingCenterSchema = {
+    "@context": "https://schema.org",
+    "@type": "ShoppingCenter",
+    name: "Stop Shop",
+    description:
+      "Shopping de moda com mais de 160 marcas. Atacado e varejo em Brusque, SC.",
+    url: "https://stopshop.com.br",
+    telephone: `+55${contact.phone}`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: contact.addressLine1,
+      addressLocality: contact.city,
+      addressRegion: contact.state,
+      postalCode: contact.zip,
+      addressCountry: "BR",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: -27.0979,
+      longitude: -48.9118,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
+        opens: "09:00",
+        closes: "19:00",
+      },
+    ],
+    numberOfStores: 160,
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ShoppingCenter",
-            name: "Stop Shop",
-            description:
-              "Shopping de moda com mais de 160 marcas. Atacado e varejo em Brusque, SC.",
-            url: "https://stopshop.com.br",
-            telephone: "+55-47-3255-7000",
-            address: {
-              "@type": "PostalAddress",
-              streetAddress: "Rod. Antônio Heil, 635",
-              addressLocality: "Brusque",
-              addressRegion: "SC",
-              postalCode: "88353-100",
-              addressCountry: "BR",
-            },
-            geo: {
-              "@type": "GeoCoordinates",
-              latitude: -27.0979,
-              longitude: -48.9118,
-            },
-            openingHoursSpecification: [
-              {
-                "@type": "OpeningHoursSpecification",
-                dayOfWeek: [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                  "Saturday",
-                ],
-                opens: "09:00",
-                closes: "19:00",
-              },
-            ],
-            numberOfStores: 160,
-          }),
+          __html: JSON.stringify(shoppingCenterSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema),
         }}
       />
 

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { MapPin, Phone, Mail, Instagram, Facebook, Linkedin } from "lucide-react";
+import { MapPin, Phone, Mail, Instagram, Facebook, Youtube } from "lucide-react";
 import { AnimateOnScroll } from "@/components/motion/AnimateOnScroll";
 import { formatPhone } from "@/lib/utils";
 import { siteNavigation, siteSocialLinks } from "@/lib/site";
@@ -13,9 +13,9 @@ interface FooterProps {
 
 const quickLinks = siteNavigation;
 const socialLinks = [
-  { icon: Instagram, href: siteSocialLinks[0].href, label: "Instagram" },
-  { icon: Facebook, href: siteSocialLinks[1].href, label: "Facebook" },
-  { icon: Linkedin, href: siteSocialLinks[2].href, label: "LinkedIn" },
+  { icon: Instagram, href: siteSocialLinks[0].href, label: siteSocialLinks[0].label },
+  { icon: Facebook, href: siteSocialLinks[1].href, label: siteSocialLinks[1].label },
+  { icon: Youtube, href: siteSocialLinks[2].href, label: siteSocialLinks[2].label },
 ];
 
 export function Footer({ contact }: FooterProps) {

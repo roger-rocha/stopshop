@@ -1,0 +1,20 @@
+# Stop Shop
+
+> O Stop Shop é um shopping de moda em Brusque, Santa Catarina, com mais de 160 marcas de roupas, calçados e acessórios para compra no atacado e no varejo. Conhecido como "O Ninho da Moda", reúne moda feminina, masculina, infantil, jeans, praia, fitness e outros segmentos em quatro pavimentos, com praça de alimentação e estacionamento gratuito.
+
+Endereço: Rodovia Antônio Heil, 635, Bairro Santa Terezinha, Brusque/SC, CEP 88352-288.
+Horário de funcionamento: segunda a sábado, das 09h às 19h. Domingos e feriados com horário divulgado antecipadamente.
+Telefone e WhatsApp: +55 47 3255-7000.
+
+## Páginas principais
+
+- [Lojas](https://stopshop.com.br/lojas): diretório das marcas e lojas organizadas por segmento de moda.
+- [Localização](https://stopshop.com.br/localizacao): como chegar, mapa, horários e estrutura de estacionamento.
+- [Atacado](https://stopshop.com.br/atacado): informações para compradores no atacado, lojistas multimarcas e excursões.
+- [Stop Cred](https://stopshop.com.br/stop-cred): o cartão de crédito próprio do Stop Shop e seus benefícios.
+- [Cadastro de Cliente](https://stopshop.com.br/cadastro): cadastro para receber novidades e promoções.
+- [Contato](https://stopshop.com.br/contato): canais de atendimento do Stop Shop.
+
+## Blog
+
+- [Notícias e novidades](https://stopshop.com.br/blog): conteúdos sobre moda, eventos e novidades das lojas do Stop Shop.
