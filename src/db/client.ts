@@ -1,20 +1,23 @@
-import Database from "better-sqlite3";
-import { drizzle } from "drizzle-orm/better-sqlite3";
+import { createClient } from "@libsql/client";
+import { drizzle } from "drizzle-orm/libsql";
 import { mkdirSync } from "node:fs";
 import path from "node:path";
 import * as schema from "./schema";
 
 const raw = process.env.DATABASE_URL ?? "file:./data/stopshop.db";
-const filePath = raw.startsWith("file:") ? raw.slice(5) : raw;
-const absolutePath = path.isAbsolute(filePath)
-  ? filePath
-  : path.join(process.cwd(), filePath);
+const authToken = process.env.DATABASE_AUTH_TOKEN;
 
-mkdirSync(path.dirname(absolutePath), { recursive: true });
+let url = raw;
+if (raw.startsWith("file:")) {
+  const filePath = raw.slice("file:".length);
+  const absolutePath = path.isAbsolute(filePath)
+    ? filePath
+    : path.join(process.cwd(), filePath);
+  mkdirSync(path.dirname(absolutePath), { recursive: true });
+  url = `file:${absolutePath}`;
+}
 
-const sqlite = new Database(absolutePath);
-sqlite.pragma("journal_mode = WAL");
-sqlite.pragma("foreign_keys = ON");
+const client = createClient({ url, authToken });
 
-export const db = drizzle(sqlite, { schema });
+export const db = drizzle(client, { schema });
 export { schema };

@@ -3,16 +3,28 @@ import { mkdirSync } from "node:fs";
 import path from "node:path";
 
 const raw = process.env.DATABASE_URL ?? "file:./data/stopshop.db";
-const filePath = raw.startsWith("file:") ? raw.slice(5) : raw;
-const absolute = path.isAbsolute(filePath)
-  ? filePath
-  : path.join(process.cwd(), filePath);
+const authToken = process.env.DATABASE_AUTH_TOKEN;
 
-mkdirSync(path.dirname(absolute), { recursive: true });
+let url = raw;
+if (raw.startsWith("file:")) {
+  const filePath = raw.slice("file:".length);
+  const absolute = path.isAbsolute(filePath)
+    ? filePath
+    : path.join(process.cwd(), filePath);
+  mkdirSync(path.dirname(absolute), { recursive: true });
+  url = `file:${absolute}`;
+}
 
-export default defineConfig({
-  schema: "./src/db/schema.ts",
-  out: "./drizzle",
-  dialect: "sqlite",
-  dbCredentials: { url: `file:${absolute}` },
-});
+export default authToken
+  ? defineConfig({
+      schema: "./src/db/schema.ts",
+      out: "./drizzle",
+      dialect: "turso",
+      dbCredentials: { url, authToken },
+    })
+  : defineConfig({
+      schema: "./src/db/schema.ts",
+      out: "./drizzle",
+      dialect: "sqlite",
+      dbCredentials: { url },
+    });
