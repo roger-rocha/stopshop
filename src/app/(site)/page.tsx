@@ -19,7 +19,6 @@ import {
   getFeaturedStores,
   getGalleryImages,
   getHero,
-  getInstagramPosts,
 } from "@/lib/server/queries";
 import { withEventStatus } from "@/lib/events";
 import { faqItems } from "@/lib/data/faq";
@@ -38,7 +37,6 @@ export default async function HomePage() {
     contact,
     events,
     galleryImages,
-    instagramPosts,
   ] = await Promise.all([
     getHero(),
     getAllSegments(),
@@ -46,7 +44,6 @@ export default async function HomePage() {
     getContact(),
     getActiveEvents(),
     getGalleryImages(),
-    getInstagramPosts(),
   ]);
 
   const agendaEvents = withEventStatus(events);
@@ -127,7 +124,7 @@ export default async function HomePage() {
       <AtacadoCTA />
       <GallerySection images={galleryImages} />
       <PlanejeSection />
-      <InstagramFeed posts={instagramPosts} />
+      <InstagramFeed />
       <StopCredSection />
       <FAQSection />
       <MapSection />
