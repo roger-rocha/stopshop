@@ -94,6 +94,37 @@ export const postSchema = z.object({
 
 export type PostInput = z.infer<typeof postSchema>;
 
+export const eventSchema = z.object({
+  title: z.string().min(2, "Informe o título."),
+  description: z.string().min(1, "Informe a descrição."),
+  image: z.string().min(1, "Envie uma imagem para o evento."),
+  dateLabel: z.string().min(1, "Informe a data (ex.: 01 a 12 de Maio)."),
+  startDate: optionalString,
+  endDate: optionalString,
+  ctaLabel: optionalString,
+  ctaHref: optionalString,
+  position: z.coerce.number().int().min(0).default(0),
+});
+
+export type EventInput = z.infer<typeof eventSchema>;
+
+export const galleryImageSchema = z.object({
+  image: z.string().min(1, "Envie uma imagem."),
+  alt: z.string().min(1, "Descreva a imagem (usado para acessibilidade)."),
+  position: z.coerce.number().int().min(0).default(0),
+});
+
+export type GalleryImageInput = z.infer<typeof galleryImageSchema>;
+
+export const instagramPostSchema = z.object({
+  image: z.string().min(1, "Envie uma imagem."),
+  alt: z.string().min(1, "Descreva a imagem (usado para acessibilidade)."),
+  link: optionalString,
+  position: z.coerce.number().int().min(0).default(0),
+});
+
+export type InstagramPostInput = z.infer<typeof instagramPostSchema>;
+
 export const heroSettingsSchema = z.object({
   eyebrow: z.string().default(""),
   title: z.string().min(1, "Informe o título do hero."),

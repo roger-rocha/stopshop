@@ -99,6 +99,64 @@ export async function getPostBySlug(slug: string) {
   return row ?? null;
 }
 
+export async function getAllEvents() {
+  return db
+    .select()
+    .from(schema.events)
+    .orderBy(schema.events.position, schema.events.id);
+}
+
+// Esconde eventos já encerrados — um evento sem data é tratado como permanente.
+export async function getActiveEvents() {
+  const all = await getAllEvents();
+  const today = new Date().toISOString().slice(0, 10);
+  return all.filter((event) => {
+    const effectiveEnd = event.endDate ?? event.startDate;
+    return !effectiveEnd || effectiveEnd >= today;
+  });
+}
+
+export async function getEventById(id: number) {
+  const [row] = await db
+    .select()
+    .from(schema.events)
+    .where(eq(schema.events.id, id))
+    .limit(1);
+  return row ?? null;
+}
+
+export async function getGalleryImages() {
+  return db
+    .select()
+    .from(schema.galleryImages)
+    .orderBy(schema.galleryImages.position, schema.galleryImages.id);
+}
+
+export async function getGalleryImageById(id: number) {
+  const [row] = await db
+    .select()
+    .from(schema.galleryImages)
+    .where(eq(schema.galleryImages.id, id))
+    .limit(1);
+  return row ?? null;
+}
+
+export async function getInstagramPosts() {
+  return db
+    .select()
+    .from(schema.instagramPosts)
+    .orderBy(schema.instagramPosts.position, schema.instagramPosts.id);
+}
+
+export async function getInstagramPostById(id: number) {
+  const [row] = await db
+    .select()
+    .from(schema.instagramPosts)
+    .where(eq(schema.instagramPosts.id, id))
+    .limit(1);
+  return row ?? null;
+}
+
 async function getSetting<T>(key: string, fallback: T): Promise<T> {
   const [row] = await db
     .select()

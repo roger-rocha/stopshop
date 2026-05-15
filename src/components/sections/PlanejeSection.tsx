@@ -11,6 +11,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SectionBackground } from "@/components/ui/SectionBackground";
 import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
 
 const items = [
@@ -67,7 +68,8 @@ const items = [
 
 export function PlanejeSection() {
   return (
-    <section className="relative overflow-hidden bg-brand-cream py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+    <section className="relative isolate overflow-hidden bg-brand-cream py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+      <SectionBackground src="/images/sections/planeje.jpg" />
       {/* Subtle background ornament */}
       <div
         aria-hidden="true"

@@ -7,6 +7,9 @@ import {
   Store,
   Layers,
   FileText,
+  CalendarDays,
+  Images,
+  Instagram,
   Settings,
   LogOut,
   ExternalLink,
@@ -26,6 +29,9 @@ const navItems: NavItem[] = [
   { href: "/admin/stores", label: "Lojas", icon: Store },
   { href: "/admin/segments", label: "Segmentos", icon: Layers },
   { href: "/admin/posts", label: "Posts", icon: FileText },
+  { href: "/admin/agenda", label: "Agenda", icon: CalendarDays },
+  { href: "/admin/gallery", label: "Galeria", icon: Images },
+  { href: "/admin/instagram", label: "Instagram", icon: Instagram },
   { href: "/admin/settings", label: "Configurações", icon: Settings },
 ];
 

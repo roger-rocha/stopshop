@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StoreCard } from "@/components/ui/StoreCard";
 import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
+import { SectionBackground } from "@/components/ui/SectionBackground";
 import type { Store } from "@/db/schema";
 
 interface FeaturedStoresProps {
@@ -15,7 +16,8 @@ export function FeaturedStores({ stores }: FeaturedStoresProps) {
   const featuredStores = stores.slice(0, 6);
 
   return (
-    <section className="relative overflow-hidden bg-white py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+    <section className="relative isolate overflow-hidden bg-white py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+      <SectionBackground src="/images/sections/lojas-destaque.jpg" />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute right-0 top-1/3 h-80 w-80 rounded-full bg-brand-coral/4 blur-3xl"

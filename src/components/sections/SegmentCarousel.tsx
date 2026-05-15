@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
+import { SectionBackground } from "@/components/ui/SectionBackground";
 import type { Segment } from "@/db/schema";
 
 interface SegmentCarouselProps {
@@ -57,7 +58,8 @@ export function SegmentCarousel({ segments }: SegmentCarouselProps) {
   }));
 
   return (
-    <section className="relative overflow-hidden bg-surface-light py-[var(--spacing-section-y)]">
+    <section className="relative isolate overflow-hidden bg-surface-light py-[var(--spacing-section-y)]">
+      <SectionBackground src="/images/sections/segmentos.jpg" />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-20 top-10 h-64 w-64 rounded-full bg-brand-coral/5 blur-3xl"

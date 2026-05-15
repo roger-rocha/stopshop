@@ -11,7 +11,6 @@ export const siteNavigation = [
 export const siteSocialLinks = [
   { label: "Instagram", href: "https://instagram.com/stopshopbrusque" },
   { label: "Facebook", href: "https://facebook.com/stopshopbrusque" },
-  { label: "YouTube", href: "https://youtube.com/user/NINHODAMODA" },
 ] as const;
 
 export const siteContact = {

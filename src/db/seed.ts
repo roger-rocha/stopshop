@@ -3,6 +3,9 @@ import { db, schema } from "./client";
 import { eq } from "drizzle-orm";
 import { stores as mockStores } from "@/lib/data/stores";
 import { segments as mockSegments } from "@/lib/data/segments";
+import { seedEvents } from "@/lib/data/agenda";
+import { seedGalleryImages } from "@/lib/data/gallery";
+import { seedInstagramPosts } from "@/lib/data/instagram";
 import {
   siteContact,
   siteHighlights,
@@ -73,6 +76,32 @@ async function seed() {
     console.log(`✓ ${mockStores.length} lojas inseridas`);
   } else {
     console.log(`= Lojas já populadas (${storeCount})`);
+  }
+
+  const eventCount = await db.$count(schema.events);
+  if (eventCount === 0) {
+    await db.insert(schema.events).values(seedEvents);
+    console.log(`✓ ${seedEvents.length} eventos inseridos`);
+  } else {
+    console.log(`= Eventos já populados (${eventCount})`);
+  }
+
+  const galleryCount = await db.$count(schema.galleryImages);
+  if (galleryCount === 0) {
+    await db.insert(schema.galleryImages).values(seedGalleryImages);
+    console.log(`✓ ${seedGalleryImages.length} fotos da galeria inseridas`);
+  } else {
+    console.log(`= Galeria já populada (${galleryCount})`);
+  }
+
+  const instagramCount = await db.$count(schema.instagramPosts);
+  if (instagramCount === 0) {
+    await db.insert(schema.instagramPosts).values(seedInstagramPosts);
+    console.log(
+      `✓ ${seedInstagramPosts.length} publicações do Instagram inseridas`
+    );
+  } else {
+    console.log(`= Instagram já populado (${instagramCount})`);
   }
 
   const defaults: Array<{ key: string; value: unknown }> = [

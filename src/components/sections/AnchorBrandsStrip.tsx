@@ -42,17 +42,17 @@ function BrandLogo({ brand }: { brand: (typeof anchorBrands)[number] }) {
   return (
     <div
       className={cn(
-        "flex h-14 shrink-0 items-center justify-center px-3",
-        brand.anchor && "min-w-[140px]"
+        "flex h-16 shrink-0 items-center justify-center px-3",
+        brand.anchor && "min-w-[160px]"
       )}
     >
       {brand.logo ? (
         <Image
           src={brand.logo}
           alt={brand.name}
-          width={120}
-          height={48}
-          className="h-10 w-auto object-contain opacity-80 transition-opacity hover:opacity-100"
+          width={160}
+          height={64}
+          className="h-12 w-auto object-contain opacity-80 transition-opacity hover:opacity-100"
         />
       ) : (
         <span

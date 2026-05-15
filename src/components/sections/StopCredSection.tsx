@@ -2,6 +2,7 @@
 
 import { Check } from "lucide-react";
 import { CTAButton } from "@/components/ui/CTAButton";
+import { SectionBackground } from "@/components/ui/SectionBackground";
 import { AnimateOnScroll } from "@/components/motion/AnimateOnScroll";
 import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
 import { slideInLeft, slideInRight } from "@/lib/animations";
@@ -9,7 +10,8 @@ import { stopCredBenefits } from "@/lib/site";
 
 export function StopCredSection() {
   return (
-    <section className="relative overflow-hidden bg-white py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+    <section className="relative isolate overflow-hidden bg-white py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
+      <SectionBackground src="/images/sections/stop-cred.jpg" />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -left-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-brand-navy/5 blur-3xl"

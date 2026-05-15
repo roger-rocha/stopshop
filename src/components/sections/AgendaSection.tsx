@@ -6,26 +6,32 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { agendaEvents } from "@/lib/data/agenda";
+import { eventStatusLabel, type AgendaEventWithStatus } from "@/lib/events";
 import { cn } from "@/lib/utils";
 
 const ROTATE_INTERVAL = 6000;
 
-export function AgendaSection() {
+interface AgendaSectionProps {
+  events: AgendaEventWithStatus[];
+}
+
+export function AgendaSection({ events }: AgendaSectionProps) {
   const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const total = agendaEvents.length;
+  const total = events.length;
 
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || total <= 1) return;
     const id = setInterval(() => setIndex((i) => (i + 1) % total), ROTATE_INTERVAL);
     return () => clearInterval(id);
   }, [isPaused, total]);
 
+  if (total === 0) return null;
+
   const next = () => setIndex((i) => (i + 1) % total);
   const prev = () => setIndex((i) => (i - 1 + total) % total);
 
-  const event = agendaEvents[index];
+  const event = events[Math.min(index, total - 1)];
 
   return (
     <section className="relative bg-surface-light py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
@@ -76,7 +82,7 @@ export function AgendaSection() {
                   className="max-w-2xl"
                 >
                   <span className="inline-flex items-center gap-2 rounded-pill bg-brand-coral px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-white">
-                    {event.badge}
+                    {eventStatusLabel[event.status]}
                   </span>
                   <h3 className="mt-4 font-display text-2xl font-bold leading-tight text-white sm:text-4xl">
                     {event.title}
@@ -87,14 +93,14 @@ export function AgendaSection() {
                   <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-white/80">
                     <span className="inline-flex items-center gap-2">
                       <Calendar className="h-4 w-4 text-brand-gold" />
-                      {event.date}
+                      {event.dateLabel}
                     </span>
-                    {event.cta && (
+                    {event.ctaLabel && event.ctaHref && (
                       <Link
-                        href={event.cta.href}
+                        href={event.ctaHref}
                         className="inline-flex items-center gap-1 font-semibold text-white underline-offset-4 hover:underline"
                       >
-                        {event.cta.label} →
+                        {event.ctaLabel} →
                       </Link>
                     )}
                   </div>
@@ -104,40 +110,44 @@ export function AgendaSection() {
           </div>
 
           {/* Controls */}
-          <div className="absolute right-4 top-4 flex gap-2 sm:right-6 sm:top-6">
-            <button
-              type="button"
-              onClick={prev}
-              aria-label="Evento anterior"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md transition-colors hover:bg-white hover:text-brand-navy"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-            <button
-              type="button"
-              onClick={next}
-              aria-label="Próximo evento"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md transition-colors hover:bg-white hover:text-brand-navy"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
-          </div>
+          {total > 1 && (
+            <div className="absolute right-4 top-4 flex gap-2 sm:right-6 sm:top-6">
+              <button
+                type="button"
+                onClick={prev}
+                aria-label="Evento anterior"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md transition-colors hover:bg-white hover:text-brand-navy"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={next}
+                aria-label="Próximo evento"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md transition-colors hover:bg-white hover:text-brand-navy"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          )}
 
           {/* Dots */}
-          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2 sm:bottom-6">
-            {agendaEvents.map((e, i) => (
-              <button
-                key={e.id}
-                type="button"
-                onClick={() => setIndex(i)}
-                aria-label={`Ir para evento ${i + 1}`}
-                className={cn(
-                  "h-1.5 rounded-full transition-all",
-                  i === index ? "w-8 bg-white" : "w-1.5 bg-white/40 hover:bg-white/70"
-                )}
-              />
-            ))}
-          </div>
+          {total > 1 && (
+            <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2 sm:bottom-6">
+              {events.map((e, i) => (
+                <button
+                  key={e.id}
+                  type="button"
+                  onClick={() => setIndex(i)}
+                  aria-label={`Ir para evento ${i + 1}`}
+                  className={cn(
+                    "h-1.5 rounded-full transition-all",
+                    i === index ? "w-8 bg-white" : "w-1.5 bg-white/40 hover:bg-white/70"
+                  )}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

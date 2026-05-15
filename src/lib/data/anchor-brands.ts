@@ -5,11 +5,11 @@ export interface AnchorBrand {
 }
 
 export const anchorBrands: AnchorBrand[] = [
-  { name: "McDonald's", anchor: true },
+  { name: "McDonald's", logo: "/logos/mcdonalds.svg", anchor: true },
   { name: "Colcci", logo: "/logos/colcci.png" },
-  { name: "Subway", anchor: true },
+  { name: "Subway", logo: "/logos/subway.svg", anchor: true },
   { name: "Hering", logo: "/logos/hering.png" },
-  { name: "Wepink", anchor: true },
+  { name: "Wepink", logo: "/logos/wepink.png", anchor: true },
   { name: "Malwee", logo: "/logos/malwee.png" },
   { name: "Arezzo", logo: "/logos/arezzo.png" },
   { name: "Dudalina", logo: "/logos/dudalina.png" },

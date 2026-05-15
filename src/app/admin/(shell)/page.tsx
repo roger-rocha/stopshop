@@ -1,20 +1,48 @@
 import Link from "next/link";
-import { Store, Layers, FileText, Settings } from "lucide-react";
+import {
+  Store,
+  Layers,
+  FileText,
+  CalendarDays,
+  Images,
+  Instagram,
+  Settings,
+} from "lucide-react";
 import { db, schema } from "@/db";
 import { eq } from "drizzle-orm";
 
 export const dynamic = "force-dynamic";
 
 async function loadCounts() {
-  const [storesTotal, storesFeatured, segmentsTotal, postsTotal, postsPublished] =
-    await Promise.all([
-      db.$count(schema.stores),
-      db.$count(schema.stores, eq(schema.stores.featured, true)),
-      db.$count(schema.segments),
-      db.$count(schema.posts),
-      db.$count(schema.posts, eq(schema.posts.published, true)),
-    ]);
-  return { storesTotal, storesFeatured, segmentsTotal, postsTotal, postsPublished };
+  const [
+    storesTotal,
+    storesFeatured,
+    segmentsTotal,
+    postsTotal,
+    postsPublished,
+    eventsTotal,
+    galleryTotal,
+    instagramTotal,
+  ] = await Promise.all([
+    db.$count(schema.stores),
+    db.$count(schema.stores, eq(schema.stores.featured, true)),
+    db.$count(schema.segments),
+    db.$count(schema.posts),
+    db.$count(schema.posts, eq(schema.posts.published, true)),
+    db.$count(schema.events),
+    db.$count(schema.galleryImages),
+    db.$count(schema.instagramPosts),
+  ]);
+  return {
+    storesTotal,
+    storesFeatured,
+    segmentsTotal,
+    postsTotal,
+    postsPublished,
+    eventsTotal,
+    galleryTotal,
+    instagramTotal,
+  };
 }
 
 export default async function DashboardPage() {
@@ -43,6 +71,27 @@ export default async function DashboardPage() {
       hint: `${counts.postsPublished} publicados`,
     },
     {
+      href: "/admin/agenda",
+      icon: CalendarDays,
+      label: "Agenda",
+      value: counts.eventsTotal,
+      hint: "Eventos do carrossel da home",
+    },
+    {
+      href: "/admin/gallery",
+      icon: Images,
+      label: "Galeria",
+      value: counts.galleryTotal,
+      hint: "Fotos da seção Sobre",
+    },
+    {
+      href: "/admin/instagram",
+      icon: Instagram,
+      label: "Instagram",
+      value: counts.instagramTotal,
+      hint: "Publicações da grade da home",
+    },
+    {
       href: "/admin/settings",
       icon: Settings,
       label: "Configurações",
@@ -61,7 +110,8 @@ export default async function DashboardPage() {
           Olá! O que vamos atualizar hoje?
         </h1>
         <p className="mt-2 text-sm text-text-secondary">
-          Gerencie lojas, segmentos, posts e configurações gerais do site.
+          Gerencie lojas, segmentos, posts, agenda, galeria e configurações do
+          site.
         </p>
       </header>
 

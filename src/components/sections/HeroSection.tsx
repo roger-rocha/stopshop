@@ -43,25 +43,16 @@ export function HeroSection({ hero }: HeroSectionProps) {
             priority
           />
         ) : (
-          <>
-            <video
-              className="absolute inset-0 h-full w-full object-cover object-[center_65%]"
-              autoPlay
-              loop
-              muted
-              playsInline
-              poster="/images/stopshop-hero.png"
-            >
-              <source src="/videos/stopshop-hero.mp4" type="video/mp4" />
-            </video>
-            <Image
-              src="/images/stopshop-hero.png"
-              alt="Fachada do Stop Shop em Brusque"
-              fill
-              className="object-cover object-[center_65%]"
-              priority
-            />
-          </>
+          <video
+            className="absolute inset-0 h-full w-full object-cover object-[center_65%]"
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="/images/stopshop-hero.png"
+          >
+            <source src="/videos/stopshop-hero.mp4" type="video/mp4" />
+          </video>
         )}
         <div className="absolute inset-0 bg-gradient-to-r from-[rgba(8,12,40,0.92)] via-[rgba(8,12,40,0.55)] to-[rgba(8,12,40,0.15)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(8,12,40,0.45)] via-transparent to-[rgba(8,12,40,0.75)]" />

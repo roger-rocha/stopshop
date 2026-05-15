@@ -4,42 +4,7 @@ import Image from "next/image";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
 import { AnimateOnScroll } from "@/components/motion/AnimateOnScroll";
-
-const galleryImages = [
-  {
-    src: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=1200&q=80",
-    alt: "Corredor principal do Stop Shop",
-    span: "lg:col-span-2 lg:row-span-2",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80",
-    alt: "Vitrines e lojas de moda",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1567521464027-f127ff144326?w=800&q=80",
-    alt: "Praça de alimentação",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&q=80",
-    alt: "Vitrines de marcas",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80",
-    alt: "Ambiente interno",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800&q=80",
-    alt: "Espaço de descanso",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?w=800&q=80",
-    alt: "Detalhes da decoração",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1591085686350-798c0f9faa7f?w=800&q=80",
-    alt: "Iluminação do mall",
-  },
-];
+import type { GalleryImage } from "@/db/schema";
 
 const highlights = [
   { value: "30+", label: "anos de história" },
@@ -48,7 +13,11 @@ const highlights = [
   { value: "310+", label: "vagas de estacionamento" },
 ];
 
-export function GallerySection() {
+interface GallerySectionProps {
+  images: GalleryImage[];
+}
+
+export function GallerySection({ images }: GallerySectionProps) {
   return (
     <section className="relative overflow-hidden bg-surface-light py-[var(--spacing-section-y)]">
       {/* Subtle ornament */}
@@ -82,24 +51,26 @@ export function GallerySection() {
         </AnimateOnScroll>
       </div>
 
-      <StaggerChildren className="grid grid-cols-2 gap-3 px-[var(--spacing-section-x)] sm:gap-4 lg:grid-cols-4 lg:auto-rows-[180px]">
-        {galleryImages.map((img, i) => (
-          <StaggerItem
-            key={img.src}
-            className={img.span ?? ""}
-          >
-            <div className="group relative h-full min-h-[180px] overflow-hidden rounded-xl sm:min-h-[200px]">
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                className="object-cover transition-transform duration-500 will-change-transform group-hover:scale-105"
-                sizes={i === 0 ? "50vw" : "25vw"}
-              />
-            </div>
-          </StaggerItem>
-        ))}
-      </StaggerChildren>
+      {images.length > 0 && (
+        <StaggerChildren className="grid grid-cols-2 gap-3 px-[var(--spacing-section-x)] sm:gap-4 lg:grid-cols-4 lg:auto-rows-[180px]">
+          {images.map((image, i) => (
+            <StaggerItem
+              key={image.id}
+              className={i === 0 ? "lg:col-span-2 lg:row-span-2" : ""}
+            >
+              <div className="group relative h-full min-h-[180px] overflow-hidden rounded-xl sm:min-h-[200px]">
+                <Image
+                  src={image.image}
+                  alt={image.alt}
+                  fill
+                  className="object-cover transition-transform duration-500 will-change-transform group-hover:scale-105"
+                  sizes={i === 0 ? "50vw" : "25vw"}
+                />
+              </div>
+            </StaggerItem>
+          ))}
+        </StaggerChildren>
+      )}
     </section>
   );
 }

@@ -1,45 +1,55 @@
-export interface AgendaEvent {
-  id: string;
+// Conteúdo inicial da Agenda — usado apenas pelo seed do banco.
+// O conteúdo real é gerenciado pelo painel /admin/agenda.
+export interface SeedEvent {
   title: string;
   description: string;
-  date: string;
-  badge: string;
   image: string;
-  cta?: { label: string; href: string };
+  dateLabel: string;
+  startDate: string | null;
+  endDate: string | null;
+  ctaLabel: string | null;
+  ctaHref: string | null;
+  position: number;
 }
 
-export const agendaEvents: AgendaEvent[] = [
+export const seedEvents: SeedEvent[] = [
   {
-    id: "1",
     title: "Mês das Mães no Stop Shop",
     description:
       "Promoções especiais nas marcas participantes, sorteios e estações de presentes prontos para levar.",
-    date: "01 a 12 de Maio",
-    badge: "Em cartaz",
     image:
       "https://images.unsplash.com/photo-1513161455079-7dc1de15ef3e?w=1600&q=80",
-    cta: { label: "Ver participantes", href: "/lojas" },
+    dateLabel: "Maio inteiro",
+    startDate: null,
+    endDate: null,
+    ctaLabel: "Ver participantes",
+    ctaHref: "/lojas",
+    position: 0,
   },
   {
-    id: "2",
     title: "Excursão dos Lojistas",
     description:
       "Recepção especial para lojistas e excursões com áreas de descanso, café e atendimento exclusivo.",
-    date: "Toda quinta-feira",
-    badge: "Recorrente",
     image:
       "https://images.unsplash.com/photo-1607082352121-fa243f3dde32?w=1600&q=80",
-    cta: { label: "Saiba mais", href: "/atacado" },
+    dateLabel: "Toda quinta-feira",
+    startDate: null,
+    endDate: null,
+    ctaLabel: "Saiba mais",
+    ctaHref: "/atacado",
+    position: 1,
   },
   {
-    id: "3",
     title: "Festival de Inverno",
     description:
       "Lançamentos das coleções de inverno com descontos exclusivos, food trucks e música ao vivo no estacionamento.",
-    date: "07 a 09 de Junho",
-    badge: "Próximo",
     image:
       "https://images.unsplash.com/photo-1532635241-17e820acc59f?w=1600&q=80",
-    cta: { label: "Programação", href: "#" },
+    dateLabel: "Junho",
+    startDate: null,
+    endDate: null,
+    ctaLabel: "Programação",
+    ctaHref: "/contato",
+    position: 2,
   },
 ];

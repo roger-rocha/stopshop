@@ -13,11 +13,15 @@ import { StopCredSection } from "@/components/sections/StopCredSection";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { MapSection } from "@/components/sections/MapSection";
 import {
+  getActiveEvents,
   getAllSegments,
   getContact,
   getFeaturedStores,
+  getGalleryImages,
   getHero,
+  getInstagramPosts,
 } from "@/lib/server/queries";
+import { withEventStatus } from "@/lib/events";
 import { faqItems } from "@/lib/data/faq";
 
 export const metadata: Metadata = {
@@ -27,12 +31,25 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const [hero, segments, featuredStores, contact] = await Promise.all([
+  const [
+    hero,
+    segments,
+    featuredStores,
+    contact,
+    events,
+    galleryImages,
+    instagramPosts,
+  ] = await Promise.all([
     getHero(),
     getAllSegments(),
     getFeaturedStores(6),
     getContact(),
+    getActiveEvents(),
+    getGalleryImages(),
+    getInstagramPosts(),
   ]);
+
+  const agendaEvents = withEventStatus(events);
 
   const shoppingCenterSchema = {
     "@context": "https://schema.org",
@@ -106,11 +123,11 @@ export default async function HomePage() {
       <AnchorBrandsStrip />
       <SegmentCarousel segments={segments} />
       <FeaturedStores stores={featuredStores} />
-      <AgendaSection />
+      <AgendaSection events={agendaEvents} />
       <AtacadoCTA />
-      <GallerySection />
+      <GallerySection images={galleryImages} />
       <PlanejeSection />
-      <InstagramFeed />
+      <InstagramFeed posts={instagramPosts} />
       <StopCredSection />
       <FAQSection />
       <MapSection />

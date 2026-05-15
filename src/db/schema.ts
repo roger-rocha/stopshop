@@ -82,8 +82,57 @@ export const settings = sqliteTable("settings", {
     .default(sql`(unixepoch())`),
 });
 
+export const events = sqliteTable("events", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  image: text("image").notNull(),
+  dateLabel: text("date_label").notNull(),
+  startDate: text("start_date"),
+  endDate: text("end_date"),
+  ctaLabel: text("cta_label"),
+  ctaHref: text("cta_href"),
+  position: integer("position").notNull().default(0),
+  createdAt: integer("created_at")
+    .notNull()
+    .default(sql`(unixepoch())`),
+  updatedAt: integer("updated_at")
+    .notNull()
+    .default(sql`(unixepoch())`),
+});
+
+export const galleryImages = sqliteTable("gallery_images", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  image: text("image").notNull(),
+  alt: text("alt").notNull(),
+  position: integer("position").notNull().default(0),
+  createdAt: integer("created_at")
+    .notNull()
+    .default(sql`(unixepoch())`),
+  updatedAt: integer("updated_at")
+    .notNull()
+    .default(sql`(unixepoch())`),
+});
+
+export const instagramPosts = sqliteTable("instagram_posts", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  image: text("image").notNull(),
+  alt: text("alt").notNull(),
+  link: text("link"),
+  position: integer("position").notNull().default(0),
+  createdAt: integer("created_at")
+    .notNull()
+    .default(sql`(unixepoch())`),
+  updatedAt: integer("updated_at")
+    .notNull()
+    .default(sql`(unixepoch())`),
+});
+
 export type User = typeof users.$inferSelect;
 export type Segment = typeof segments.$inferSelect;
 export type Store = typeof stores.$inferSelect;
 export type Post = typeof posts.$inferSelect;
 export type Setting = typeof settings.$inferSelect;
+export type AgendaEvent = typeof events.$inferSelect;
+export type GalleryImage = typeof galleryImages.$inferSelect;
+export type InstagramPost = typeof instagramPosts.$inferSelect;
