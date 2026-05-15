@@ -20,16 +20,14 @@ export function InstagramFeed() {
   return (
     <section className="bg-white py-[var(--spacing-section-y)] px-[var(--spacing-section-x)]">
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <SectionHeader
-            label="@stopshopbrusque"
-            title="Siga a gente no Instagram"
-            highlight="Instagram"
-            subtitle="Novidades, lançamentos das lojas e os bastidores do Stop Shop."
-            align="left"
-            light
-            className="mb-0"
-          />
+        <SectionHeader
+          label="@stopshopbrusque"
+          title="Siga a gente no Instagram"
+          highlight="Instagram"
+          subtitle="Novidades, lançamentos das lojas e os bastidores do Stop Shop."
+          light
+        />
+        <div className="flex justify-center">
           <a
             href={instagramHandle}
             target="_blank"
