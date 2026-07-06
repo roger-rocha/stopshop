@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useScroll, useMotionValueEvent } from "motion/react";
 import { Menu } from "lucide-react";
@@ -42,16 +43,16 @@ export function Navbar() {
         )}
 
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 sm:py-5">
-          {/* Logo — text-based, single line */}
-          <Link
-            href="/"
-            aria-label="Stop Shop"
-            className={cn(
-              "inline-flex h-10 items-center whitespace-nowrap font-display text-2xl font-bold leading-none tracking-[0.04em] transition-colors sm:text-[28px]",
-              useSolidStyle ? "text-brand-navy" : "text-white"
-            )}
-          >
-            STOP<span className="font-normal">&nbsp;SHOP</span>
+          {/* Logo */}
+          <Link href="/" aria-label="Stop Shop" className="inline-flex items-center">
+            <Image
+              src="/logo.png"
+              alt="Stop Shop — Ninho da Moda"
+              width={131}
+              height={150}
+              priority
+              className="h-12 w-auto"
+            />
           </Link>
 
           {/* Desktop Nav */}

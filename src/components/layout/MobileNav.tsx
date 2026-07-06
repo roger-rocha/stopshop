@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { X } from "lucide-react";
 import { CTAButton } from "@/components/ui/CTAButton";
@@ -91,9 +92,15 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
                 href="/"
                 onClick={onClose}
                 aria-label="Stop Shop"
-                className="inline-flex h-10 items-center whitespace-nowrap font-display text-2xl font-bold leading-none tracking-[0.04em] text-brand-navy"
+                className="inline-flex items-center"
               >
-                STOP<span className="font-normal">&nbsp;SHOP</span>
+                <Image
+                  src="/logo.png"
+                  alt="Stop Shop — Ninho da Moda"
+                  width={131}
+                  height={150}
+                  className="h-11 w-auto"
+                />
               </Link>
               <button
                 ref={closeButtonRef}

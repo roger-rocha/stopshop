@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
@@ -51,10 +52,14 @@ export function AdminShell({
         <div className="flex h-full flex-col">
           <div className="px-6 py-6">
             <Link href="/admin" className="block">
-              <span className="font-display text-xl font-bold text-brand-navy">
-                Stop<span className="text-brand-coral">Shop</span>
-              </span>
-              <span className="mt-1 block text-[11px] font-medium uppercase tracking-[0.18em] text-text-muted">
+              <Image
+                src="/logo.png"
+                alt="Stop Shop — Ninho da Moda"
+                width={131}
+                height={150}
+                className="h-12 w-auto"
+              />
+              <span className="mt-2 block text-[11px] font-medium uppercase tracking-[0.18em] text-text-muted">
                 Painel administrativo
               </span>
             </Link>

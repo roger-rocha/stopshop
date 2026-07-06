@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Phone, Mail, Instagram, Facebook } from "lucide-react";
 import { AnimateOnScroll } from "@/components/motion/AnimateOnScroll";
 import { formatPhone } from "@/lib/utils";
@@ -25,10 +26,14 @@ export function Footer({ contact }: FooterProps) {
           <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
             {/* Brand */}
             <div>
-              <Link href="/" className="inline-block">
-                <span className="font-display text-2xl font-bold text-brand-navy">
-                  Stop<span className="text-brand-coral">Shop</span>
-                </span>
+              <Link href="/" className="inline-block" aria-label="Stop Shop">
+                <Image
+                  src="/logo.png"
+                  alt="Stop Shop — Ninho da Moda"
+                  width={131}
+                  height={150}
+                  className="h-14 w-auto"
+                />
               </Link>
               <p className="mt-4 text-sm leading-relaxed text-text-secondary">
                 Mais de 160 marcas de moda em um só lugar. Atacado e varejo com os melhores preços de Brusque, SC.
