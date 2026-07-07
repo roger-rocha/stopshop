@@ -130,6 +130,14 @@ export const heroSettingsSchema = z.object({
   title: z.string().min(1, "Informe o título do hero."),
   titleHighlight: z.string().default(""),
   image: z.string().default(""),
+  slides: z
+    .union([z.string(), z.array(z.string())])
+    .default([])
+    .transform((value) =>
+      (Array.isArray(value) ? value : [value])
+        .map((s) => s.trim())
+        .filter(Boolean)
+    ),
   ctaLabel: z.string().default(""),
   ctaHref: z.string().default("/"),
 });

@@ -44,6 +44,7 @@ export async function saveHeroAction(
     title: formData.get("title") ?? "",
     titleHighlight: formData.get("titleHighlight") ?? "",
     image: formData.get("image") ?? "",
+    slides: formData.getAll("slides").filter((v): v is string => typeof v === "string"),
     ctaLabel: formData.get("ctaLabel") ?? "",
     ctaHref: formData.get("ctaHref") ?? "",
   });

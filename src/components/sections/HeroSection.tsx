@@ -1,15 +1,53 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Image from "next/image";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { CTAButton } from "@/components/ui/CTAButton";
 import type { HeroSettings } from "@/lib/validators";
 
 const ease = [0.22, 1, 0.36, 1] as const;
+const SLIDE_INTERVAL = 6000;
 
 interface HeroSectionProps {
   hero: HeroSettings;
+}
+
+function HeroBackground({ slides }: { slides: string[] }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (slides.length <= 1) return;
+    const id = setInterval(
+      () => setIndex((i) => (i + 1) % slides.length),
+      SLIDE_INTERVAL
+    );
+    return () => clearInterval(id);
+  }, [slides.length]);
+
+  const current = slides[Math.min(index, slides.length - 1)];
+
+  return (
+    <AnimatePresence mode="sync">
+      <motion.div
+        key={current}
+        initial={{ opacity: 0, scale: 1.05 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ opacity: { duration: 1.2, ease }, scale: { duration: 6, ease: "linear" } }}
+        className="absolute inset-0"
+      >
+        <Image
+          src={current}
+          alt="Banner do Stop Shop em Brusque"
+          fill
+          className="object-cover object-[center_65%]"
+          priority={index === 0}
+          sizes="100vw"
+        />
+      </motion.div>
+    </AnimatePresence>
+  );
 }
 
 function renderTitle(title: string, highlight: string) {
@@ -28,20 +66,15 @@ function renderTitle(title: string, highlight: string) {
 }
 
 export function HeroSection({ hero }: HeroSectionProps) {
-  const hasCustomImage = Boolean(hero.image);
+  const slides = hero.slides.length > 0 ? hero.slides : hero.image ? [hero.image] : [];
+  const hasSlides = slides.length > 0;
 
   return (
     <section className="relative isolate flex min-h-[92svh] flex-col overflow-hidden bg-brand-navy">
-      {/* Background: imagem enviada pelo admin substitui o vídeo padrão */}
+      {/* Background: carrossel de imagens do admin substitui o vídeo padrão */}
       <div className="absolute inset-0 -z-10">
-        {hasCustomImage ? (
-          <Image
-            src={hero.image}
-            alt="Banner do Stop Shop em Brusque"
-            fill
-            className="object-cover object-[center_65%]"
-            priority
-          />
+        {hasSlides ? (
+          <HeroBackground slides={slides} />
         ) : (
           <video
             className="absolute inset-0 h-full w-full object-cover object-[center_65%]"

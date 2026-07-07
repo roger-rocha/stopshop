@@ -176,6 +176,7 @@ export const defaultHero: HeroSettings = {
   title: "30 anos de tradição. Mais de 160 lojas. O ninho da moda de Brusque.",
   titleHighlight: "Mais de 160 lojas.",
   image: "",
+  slides: [],
   ctaLabel: "Explore as lojas",
   ctaHref: "/lojas",
 };
@@ -195,7 +196,9 @@ export const defaultContact: ContactSettings = {
 };
 
 export async function getHero() {
-  return getSetting<HeroSettings>("hero", defaultHero);
+  const hero = await getSetting<HeroSettings>("hero", defaultHero);
+  // Registros salvos antes do carrossel não têm `slides`; garante o array.
+  return { ...hero, slides: Array.isArray(hero.slides) ? hero.slides : [] };
 }
 
 export async function getContact() {

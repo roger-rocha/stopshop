@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { InstitutionalVideo } from "@/components/ui/InstitutionalVideo";
 import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
 import { AnimateOnScroll } from "@/components/motion/AnimateOnScroll";
 import type { GalleryImage } from "@/db/schema";
@@ -34,6 +35,13 @@ export function GallerySection({ images }: GallerySectionProps) {
           subtitle="Ambientes planejados para facilitar a circulação, valorizar as lojas e tornar a visita mais confortável para clientes, lojistas e excursões."
           light
         />
+
+        <AnimateOnScroll className="mb-10">
+          <InstitutionalVideo
+            src="/videos/video-insti.mp4"
+            poster="/videos/video-insti-poster.jpg"
+          />
+        </AnimateOnScroll>
 
         <AnimateOnScroll>
           <div className="mb-10 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
