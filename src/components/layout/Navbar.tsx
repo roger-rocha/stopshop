@@ -3,9 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useScroll, useMotionValueEvent } from "motion/react";
-import { Menu } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MobileNav } from "./MobileNav";
 import { siteNavigation } from "@/lib/site";
@@ -13,7 +13,9 @@ import { siteNavigation } from "@/lib/site";
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [search, setSearch] = useState("");
   const pathname = usePathname();
+  const router = useRouter();
   const isHome = pathname === "/";
   const { scrollY } = useScroll();
 
@@ -23,6 +25,12 @@ export function Navbar() {
 
   const useSolidStyle = !isHome || isScrolled;
   const navLinks = siteNavigation;
+
+  const handleSearch = (event: React.FormEvent) => {
+    event.preventDefault();
+    const term = search.trim();
+    router.push(term ? `/lojas?q=${encodeURIComponent(term)}` : "/lojas");
+  };
 
   return (
     <>
@@ -77,6 +85,44 @@ export function Navbar() {
               </Link>
             ))}
           </div>
+
+          {/* Search — desktop */}
+          <form
+            onSubmit={handleSearch}
+            role="search"
+            className={cn(
+              "hidden items-center gap-2 rounded-pill border px-4 py-2 transition-colors lg:flex",
+              useSolidStyle
+                ? "border-border-default bg-surface-soft focus-within:border-brand-coral"
+                : "border-white/25 bg-white/10 backdrop-blur-sm focus-within:border-white/60"
+            )}
+          >
+            <input
+              type="search"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder="Qual loja você procura?"
+              aria-label="Qual loja você procura?"
+              className={cn(
+                "w-44 bg-transparent text-sm outline-none xl:w-52",
+                useSolidStyle
+                  ? "text-text-primary placeholder:text-text-muted"
+                  : "text-white placeholder:text-white/70"
+              )}
+            />
+            <button
+              type="submit"
+              aria-label="Buscar lojas"
+              className={cn(
+                "shrink-0 transition-colors",
+                useSolidStyle
+                  ? "text-text-muted hover:text-brand-coral"
+                  : "text-white/80 hover:text-white"
+              )}
+            >
+              <Search className="h-4 w-4" />
+            </button>
+          </form>
 
           {/* Menu trigger — right side */}
           <button

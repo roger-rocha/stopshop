@@ -83,9 +83,9 @@ export function PlanejeSection() {
       <div className="relative mx-auto max-w-7xl">
         <SectionHeader
           label="Planeje sua viagem"
-          title="Tudo o que você precisa para vir ao Stop Shop"
-          highlight="vir ao Stop Shop"
-          subtitle="Hospedagem, transporte, alimentação e dicas práticas para aproveitar o melhor de Brusque."
+          title="Planeje sua visita e aproveite o melhor do Stop Shop"
+          highlight="o melhor do Stop Shop"
+          subtitle="Reunimos todas as informações essenciais para que você aproveite o Stop Shop do começo ao fim."
           light
         />
 

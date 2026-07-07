@@ -55,10 +55,10 @@ export function AtacadoCTA() {
                   key={stat.label}
                   className="rounded-card border border-white/14 bg-white/10 p-5 text-center backdrop-blur-sm"
                 >
-                  <div className="font-display text-3xl font-bold text-brand-gold lg:text-4xl">
+                  <div className="font-display text-4xl font-bold text-brand-gold sm:text-5xl lg:text-6xl">
                     <CounterAnimation target={stat.value} suffix={stat.suffix} />
                   </div>
-                  <p className="mt-1 text-sm text-white/70">{stat.label}</p>
+                  <p className="mt-2 text-sm text-white/70">{stat.label}</p>
                 </div>
               ))}
             </div>

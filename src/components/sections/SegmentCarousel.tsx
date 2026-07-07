@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
+import { ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
 import { SectionBackground } from "@/components/ui/SectionBackground";
@@ -35,11 +36,15 @@ function SegmentCard({ name, slug, count, image }: SegmentCardData) {
           className="object-cover transition-transform duration-500 group-hover:scale-110"
           sizes="(max-width: 768px) 65vw, 25vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/85 via-brand-navy/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/60 via-brand-navy/10 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-5">
           <h3 className="font-display text-lg font-bold text-white">{name}</h3>
           <span className="mt-1.5 inline-block rounded-pill bg-white/90 px-2.5 py-0.5 text-xs font-medium text-brand-navy">
             {count} lojas
+          </span>
+          <span className="mt-3 flex w-fit items-center gap-1.5 rounded-pill bg-brand-coral px-3.5 py-1.5 text-xs font-semibold text-white shadow-card transition-transform group-hover:translate-x-0.5">
+            Ver Lojas
+            <ArrowRight className="h-3.5 w-3.5" />
           </span>
         </div>
       </motion.div>

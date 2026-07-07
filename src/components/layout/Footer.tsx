@@ -110,8 +110,14 @@ export function Footer({ contact }: FooterProps) {
 
           </div>
 
-          <div className="mt-12 border-t border-border-default pt-8 text-center text-sm text-text-muted">
-            © {new Date().getFullYear()} Stop Shop — Brusque, Santa Catarina
+          <div className="mt-12 flex flex-col items-center gap-3 border-t border-border-default pt-8 text-center text-sm text-text-muted sm:flex-row sm:justify-between sm:text-left">
+            <span>© {new Date().getFullYear()} Stop Shop — Brusque, Santa Catarina</span>
+            <Link
+              href="/denuncia"
+              className="font-medium text-text-secondary transition-colors hover:text-brand-coral"
+            >
+              Portal de Denúncia
+            </Link>
           </div>
         </div>
       </footer>

@@ -10,7 +10,6 @@ import { GallerySection } from "@/components/sections/GallerySection";
 import { PlanejeSection } from "@/components/sections/PlanejeSection";
 import { InstagramFeed } from "@/components/sections/InstagramFeed";
 import { StopCredSection } from "@/components/sections/StopCredSection";
-import { FAQSection } from "@/components/sections/FAQSection";
 import { MapSection } from "@/components/sections/MapSection";
 import {
   getActiveEvents,
@@ -117,16 +116,15 @@ export default async function HomePage() {
 
       <HeroSection hero={hero} />
       <OpeningHoursStrip />
+      <AgendaSection events={agendaEvents} />
       <AnchorBrandsStrip />
       <SegmentCarousel segments={segments} />
       <FeaturedStores stores={featuredStores} />
-      <AgendaSection events={agendaEvents} />
       <AtacadoCTA />
       <GallerySection images={galleryImages} />
       <PlanejeSection />
       <InstagramFeed />
       <StopCredSection />
-      <FAQSection />
       <MapSection />
     </>
   );

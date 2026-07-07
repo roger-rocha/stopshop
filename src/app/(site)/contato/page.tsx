@@ -3,6 +3,7 @@ import { Mail, Phone } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { ContactFormCard } from "@/components/pages/ContactFormCard";
 import { PageHero } from "@/components/ui/PageHero";
+import { FAQSection } from "@/components/sections/FAQSection";
 import { siteContact } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -88,6 +89,8 @@ export default function ContatoPage() {
           <ContactFormCard />
         </div>
       </section>
+
+      <FAQSection />
     </>
   );
 }

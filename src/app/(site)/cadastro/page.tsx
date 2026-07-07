@@ -38,9 +38,9 @@ export default function CadastroPage() {
           { label: "Conhecer o Stop Cred", href: "/stop-cred", variant: "secondary" },
         ]}
         stats={[
-          { label: "Atendimento", value: "Humanizado" },
-          { label: "Processo", value: "Prático" },
-          { label: "Benefícios", value: "Exclusivos" },
+          { label: "Humanizado", value: "Atendimento" },
+          { label: "Prático", value: "Processo" },
+          { label: "Exclusivos", value: "Benefícios" },
         ]}
       />
 

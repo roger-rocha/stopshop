@@ -8,17 +8,19 @@ import type { Segment, Store } from "@/db/schema";
 
 interface StoreDirectoryProps {
   initialSegment?: string;
+  initialQuery?: string;
   segments: Segment[];
   stores: Store[];
 }
 
 export function StoreDirectory({
   initialSegment = "todos",
+  initialQuery = "",
   segments,
   stores,
 }: StoreDirectoryProps) {
   const [selectedSegment, setSelectedSegment] = useState(initialSegment);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(initialQuery);
 
   const filteredStores = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -37,7 +39,7 @@ export function StoreDirectory({
 
       return matchesSegment && matchesQuery;
     });
-  }, [query, selectedSegment]);
+  }, [query, selectedSegment, stores]);
 
   return (
     <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-16">
@@ -86,11 +88,10 @@ export function StoreDirectory({
         </div>
       </div>
 
-      <div className="mt-8 flex items-center justify-between gap-4">
+      <div className="mt-8">
         <p className="text-sm text-text-secondary" aria-live="polite" aria-atomic="true">
           {filteredStores.length} {filteredStores.length === 1 ? "loja encontrada" : "lojas encontradas"}
         </p>
-        <p className="text-sm text-text-muted">Segunda a sábado, das 09h às 19h</p>
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">

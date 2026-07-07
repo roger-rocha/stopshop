@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { MapPin, Phone, Instagram, Store as StoreIcon } from "lucide-react";
+import { Phone, Instagram, Store as StoreIcon } from "lucide-react";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { cn, whatsappLink } from "@/lib/utils";
 import type { Store } from "@/db/schema";
@@ -12,8 +12,10 @@ interface StoreCardProps {
 }
 
 export function StoreCard({ store, className }: StoreCardProps) {
-  const hasLogo = store.photo && store.photo.length > 0;
   const hasStorefront = store.storefront && store.storefront.length > 0;
+  const hasLogo = store.photo && store.photo.length > 0;
+  const image = hasStorefront ? store.storefront! : hasLogo ? store.photo : null;
+  const segmentLabel = store.categories[0];
   const instagramUrl = store.instagram
     ? store.instagram.startsWith("http")
       ? store.instagram
@@ -21,72 +23,44 @@ export function StoreCard({ store, className }: StoreCardProps) {
     : undefined;
 
   return (
-    <article
-      className={cn(
-        "group flex h-full flex-col overflow-hidden rounded-2xl border border-border-default bg-white shadow-card transition-shadow duration-300 hover:shadow-card-hover",
-        className
-      )}
-    >
-      {/* Storefront photo */}
-      <div className="relative h-44 w-full overflow-hidden bg-surface-muted sm:h-48">
-        {hasStorefront ? (
+    <article className={cn("group flex h-full flex-col", className)}>
+      {/* Image */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-surface-muted">
+        {image ? (
           <Image
-            src={store.storefront!}
-            alt={`Fachada da loja ${store.name}`}
+            src={image}
+            alt={`Loja ${store.name}`}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className={cn(
+              "transition-transform duration-500 group-hover:scale-105",
+              hasStorefront ? "object-cover" : "object-contain p-8"
+            )}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-surface-muted to-surface-light text-text-muted">
+          <div className="flex h-full w-full items-center justify-center text-text-muted">
             <StoreIcon className="h-10 w-10" aria-hidden="true" />
           </div>
         )}
-        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/40 to-transparent" />
-
-        {/* Logo badge */}
-        <div className="absolute bottom-3 left-3 flex h-14 w-14 items-center justify-center rounded-xl border border-white/60 bg-white p-2 shadow-card">
-          {hasLogo ? (
-            <Image
-              src={store.photo}
-              alt={`Logo ${store.name}`}
-              width={48}
-              height={48}
-              className="object-contain"
-            />
-          ) : (
-            <span className="text-center font-display text-[10px] font-bold leading-tight text-text-primary/40">
-              {store.name}
-            </span>
-          )}
-        </div>
+        {segmentLabel && (
+          <span className="absolute left-3 top-3 rounded-pill bg-white/95 px-3 py-1 text-[11px] font-semibold text-brand-navy shadow-card backdrop-blur-sm">
+            {segmentLabel}
+          </span>
+        )}
       </div>
 
       {/* Info */}
-      <div className="flex flex-1 flex-col gap-3 p-5">
-        <div>
-          <h3 className="font-display text-base font-bold text-text-primary">
-            {store.name}
-          </h3>
-          <div className="mt-1.5 flex flex-wrap gap-1">
-            {store.categories.slice(0, 2).map((cat) => (
-              <span
-                key={cat}
-                className="rounded-pill bg-surface-muted px-2 py-0.5 text-[11px] font-medium text-text-secondary"
-              >
-                {cat}
-              </span>
-            ))}
-          </div>
-        </div>
+      <div className="mt-3 flex flex-1 flex-col">
+        <h3 className="font-display text-base font-bold text-text-primary">
+          {store.name}
+        </h3>
+        <p className="mt-0.5 text-sm text-text-secondary">
+          {store.categories.slice(0, 2).join(" · ")}
+        </p>
+        <p className="mt-0.5 text-sm text-text-muted">{store.location}</p>
 
-        <div className="flex items-center gap-1.5 text-xs text-text-muted">
-          <MapPin className="h-3 w-3" />
-          <span>{store.location}</span>
-        </div>
-
-        {/* Actions */}
-        <div className="mt-auto flex items-center gap-2 pt-2">
+        {/* Social buttons */}
+        <div className="mt-auto flex items-center gap-2 pt-3">
           {store.phone && (
             <a
               href={`tel:${store.phone}`}

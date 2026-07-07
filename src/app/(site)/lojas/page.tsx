@@ -9,8 +9,13 @@ export const metadata: Metadata = {
     "Explore as lojas do Stop Shop, filtre por segmento e encontre marcas de moda, acessórios, alimentação e muito mais em Brusque.",
 };
 
-export default async function LojasPage() {
-  const [segments, stores] = await Promise.all([
+export default async function LojasPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
+  const [{ q }, segments, stores] = await Promise.all([
+    searchParams,
     getAllSegments(),
     getAllStores(),
   ]);
@@ -28,10 +33,13 @@ export default async function LojasPage() {
         stats={[
           { label: "Marcas e operações", value: `${stores.length}+` },
           { label: "Segmentos para explorar", value: String(segments.length) },
-          { label: "Funcionamento", value: "09h - 19h" },
         ]}
       />
-      <StoreDirectory segments={segments} stores={stores} />
+      <StoreDirectory
+        segments={segments}
+        stores={stores}
+        initialQuery={q ?? ""}
+      />
     </>
   );
 }

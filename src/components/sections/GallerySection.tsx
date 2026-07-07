@@ -36,13 +36,16 @@ export function GallerySection({ images }: GallerySectionProps) {
         />
 
         <AnimateOnScroll>
-          <div className="mb-10 grid grid-cols-2 gap-4 rounded-2xl border border-border-default bg-white p-6 sm:grid-cols-4 sm:gap-8 sm:p-8">
+          <div className="mb-10 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
             {highlights.map((item) => (
-              <div key={item.label} className="text-center sm:text-left">
-                <p className="font-display text-3xl font-bold text-brand-navy sm:text-4xl">
+              <div
+                key={item.label}
+                className="flex flex-col items-center justify-center rounded-2xl border border-border-default bg-white px-4 py-7 text-center shadow-card sm:py-9"
+              >
+                <p className="font-display text-5xl font-bold leading-none text-brand-navy sm:text-6xl">
                   {item.value}
                 </p>
-                <p className="mt-1 text-xs uppercase tracking-[0.14em] text-text-muted sm:text-sm">
+                <p className="mt-3 text-xs uppercase tracking-[0.14em] text-text-muted sm:text-sm">
                   {item.label}
                 </p>
               </div>

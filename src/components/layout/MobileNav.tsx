@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
-import { X } from "lucide-react";
+import { X, Search } from "lucide-react";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { siteContact } from "@/lib/site";
 import { formatPhone } from "@/lib/utils";
@@ -18,6 +19,15 @@ interface MobileNavProps {
 export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const router = useRouter();
+  const [search, setSearch] = useState("");
+
+  const handleSearch = (event: React.FormEvent) => {
+    event.preventDefault();
+    const term = search.trim();
+    router.push(term ? `/lojas?q=${encodeURIComponent(term)}` : "/lojas");
+    onClose();
+  };
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -114,6 +124,22 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
 
             {/* Nav links */}
             <nav className="p-5" aria-label="Menu principal">
+              <form
+                onSubmit={handleSearch}
+                role="search"
+                className="mb-4 flex items-center gap-2 rounded-pill border border-border-default bg-surface-soft px-4 py-2.5 focus-within:border-brand-coral"
+              >
+                <Search className="h-4 w-4 shrink-0 text-text-muted" />
+                <input
+                  type="search"
+                  value={search}
+                  onChange={(event) => setSearch(event.target.value)}
+                  placeholder="Qual loja você procura?"
+                  aria-label="Qual loja você procura?"
+                  className="w-full bg-transparent text-sm text-text-primary outline-none placeholder:text-text-muted"
+                />
+              </form>
+
               <div className="flex flex-col gap-1">
                 {links.map((link, i) => (
                   <motion.div

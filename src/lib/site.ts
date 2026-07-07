@@ -1,7 +1,6 @@
 export const siteNavigation = [
   { label: "Home", href: "/" },
   { label: "Lojas", href: "/lojas" },
-  { label: "Localização", href: "/localizacao" },
   { label: "Stop Cred", href: "/stop-cred" },
   { label: "Cadastro", href: "/cadastro" },
   { label: "Atacado", href: "/atacado" },
