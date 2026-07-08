@@ -38,8 +38,8 @@ export function GallerySection({ images }: GallerySectionProps) {
 
         <AnimateOnScroll className="mb-10">
           <InstitutionalVideo
-            src="/videos/video-insti.mp4"
-            poster="/videos/video-insti-poster.jpg"
+            src="https://mayoqfpgidrxfis3.public.blob.vercel-storage.com/videos/video-insti.mp4"
+            poster="https://mayoqfpgidrxfis3.public.blob.vercel-storage.com/videos/video-insti-poster.jpg"
           />
         </AnimateOnScroll>
 
