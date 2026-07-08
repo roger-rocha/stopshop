@@ -96,8 +96,8 @@ export type PostInput = z.infer<typeof postSchema>;
 
 export const eventSchema = z.object({
   title: z.string().min(2, "Informe o título."),
-  description: z.string().min(1, "Informe a descrição."),
-  image: z.string().min(1, "Envie uma imagem para o evento."),
+  description: z.string().default(""),
+  image: z.string().min(1, "Envie a arte do banner."),
   dateLabel: z.string().min(1, "Informe a data (ex.: 01 a 12 de Maio)."),
   startDate: optionalString,
   endDate: optionalString,

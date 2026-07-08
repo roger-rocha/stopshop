@@ -40,29 +40,28 @@ export function EventForm({ event }: EventFormProps) {
         />
       </Field>
 
-      <Field
-        label="Descrição"
-        hint="Texto curto exibido sobre o banner do evento"
-        error={errors.description?.[0]}
-      >
-        <textarea
-          name="description"
-          defaultValue={event?.description ?? ""}
-          required
-          rows={3}
-          className={textareaCls}
-        />
-      </Field>
-
       <ImageUpload
         name="image"
-        label="Imagem do evento"
-        hint="Banner do evento — formato widescreen (16:9) fica melhor"
+        label="Arte do banner"
+        hint="A arte aparece em formato panorâmico na home (ex.: 1600×500). Inclua o texto da ação na própria arte."
         defaultValue={event?.image}
         folder="agenda"
         variant="wide"
         error={errors.image?.[0]}
       />
+
+      <Field
+        label="Descrição"
+        hint="Opcional — anotação interna, não aparece no banner"
+        error={errors.description?.[0]}
+      >
+        <textarea
+          name="description"
+          defaultValue={event?.description ?? ""}
+          rows={2}
+          className={textareaCls}
+        />
+      </Field>
 
       <Field
         label="Data (texto exibido)"
@@ -104,30 +103,17 @@ export function EventForm({ event }: EventFormProps) {
         </Field>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Field
-          label="Texto do botão (CTA)"
-          hint="Opcional, ex.: Ver participantes"
-          error={errors.ctaLabel?.[0]}
-        >
-          <input
-            name="ctaLabel"
-            defaultValue={event?.ctaLabel ?? ""}
-            className={inputCls}
-          />
-        </Field>
-        <Field
-          label="Link do botão"
-          hint="Opcional, ex.: /lojas"
-          error={errors.ctaHref?.[0]}
-        >
-          <input
-            name="ctaHref"
-            defaultValue={event?.ctaHref ?? ""}
-            className={inputCls}
-          />
-        </Field>
-      </div>
+      <Field
+        label="Link do banner"
+        hint="Opcional — o banner inteiro vira um link, ex.: /lojas ou URL externa"
+        error={errors.ctaHref?.[0]}
+      >
+        <input
+          name="ctaHref"
+          defaultValue={event?.ctaHref ?? ""}
+          className={inputCls}
+        />
+      </Field>
 
       <Field
         label="Ordem"
