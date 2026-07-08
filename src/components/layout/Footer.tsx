@@ -28,7 +28,7 @@ export function Footer({ contact }: FooterProps) {
             <div>
               <Link href="/" className="inline-block" aria-label="Stop Shop">
                 <Image
-                  src="/logos/logo-stopshop.png"
+                  src="/logos/logo-new.png"
                   alt="Stop Shop — Ninho da Moda"
                   width={131}
                   height={150}

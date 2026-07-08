@@ -53,7 +53,7 @@ export function AdminShell({
           <div className="px-6 py-6">
             <Link href="/admin" className="block">
               <Image
-                src="/logos/logo-stopshop.png"
+                src="/logos/logo-new.png"
                 alt="Stop Shop — Ninho da Moda"
                 width={131}
                 height={150}

@@ -54,7 +54,7 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" aria-label="Stop Shop" className="inline-flex items-center">
             <Image
-              src="/logos/logo-stopshop.png"
+              src="/logos/logo-new.png"
               alt="Stop Shop — Ninho da Moda"
               width={131}
               height={150}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Check, BadgePercent, HandCoins, ShieldCheck } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
+import { StopCredCard } from "@/components/ui/StopCredCard";
 import { stopCredBenefits } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -45,42 +46,57 @@ export default function StopCredPage() {
         ]}
       />
 
-      <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-16">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="rounded-[32px] border border-border-default bg-[image:var(--gradient-brand-diagonal)] p-8 text-white shadow-card sm:p-10">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
-              Benefícios
-            </p>
-            <div className="mt-6 space-y-4">
-              {stopCredBenefits.map((benefit) => (
-                <div key={benefit} className="flex items-start gap-3 rounded-2xl bg-white/10 p-4">
-                  <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/14">
-                    <Check className="h-4 w-4" />
-                  </div>
-                  <p className="text-sm leading-relaxed text-white/82">{benefit}</p>
-                </div>
-              ))}
-            </div>
+      <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
+        {/* Vitrine: cartão 3D + benefícios (mesmo destaque da home) */}
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="flex justify-center lg:justify-start">
+            <StopCredCard />
           </div>
 
-          <div className="grid gap-6">
-            {pillars.map((pillar) => (
-              <div
-                key={pillar.title}
-                className="rounded-[28px] border border-border-default bg-white p-7 shadow-card"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-coral/10 text-brand-coral">
-                  <pillar.icon className="h-5 w-5" />
-                </div>
-                <h2 className="mt-5 font-display text-3xl font-bold text-text-primary">
-                  {pillar.title}
-                </h2>
-                <p className="mt-3 text-base leading-relaxed text-text-secondary">
-                  {pillar.description}
-                </p>
-              </div>
-            ))}
+          <div>
+            <h2 className="font-display text-[length:var(--font-size-heading)] font-bold text-text-primary">
+              Seu crediário sem complicação
+            </h2>
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-text-secondary">
+              Uma solução prática para clientes de Brusque e região comprarem com
+              mais flexibilidade e atendimento próximo.
+            </p>
+
+            <ul className="mt-8 space-y-3.5">
+              {stopCredBenefits.map((benefit) => (
+                <li key={benefit} className="flex items-center gap-3">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-coral shadow-[0_3px_10px_-2px_rgba(255,107,107,0.55)]">
+                    <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
+                  </span>
+                  <span className="text-text-secondary">{benefit}</span>
+                </li>
+              ))}
+            </ul>
+
+            <p className="mt-6 text-sm text-text-muted">
+              Válido para residentes de Brusque e região.
+            </p>
           </div>
+        </div>
+
+        {/* Pilares */}
+        <div className="mt-16 grid gap-6 sm:mt-20 sm:grid-cols-2 lg:grid-cols-3">
+          {pillars.map((pillar) => (
+            <div
+              key={pillar.title}
+              className="rounded-[28px] border border-border-default bg-white p-7 shadow-card transition-shadow duration-300 hover:shadow-[0_20px_50px_-20px_rgba(11,20,43,0.25)]"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-coral/10 text-brand-coral">
+                <pillar.icon className="h-5 w-5" />
+              </div>
+              <h3 className="mt-5 font-display text-2xl font-bold text-text-primary">
+                {pillar.title}
+              </h3>
+              <p className="mt-3 text-base leading-relaxed text-text-secondary">
+                {pillar.description}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
     </>

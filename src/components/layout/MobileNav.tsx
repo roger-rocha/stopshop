@@ -105,7 +105,7 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
                 className="inline-flex items-center"
               >
                 <Image
-                  src="/logos/logo-stopshop.png"
+                  src="/logos/logo-new.png"
                   alt="Stop Shop — Ninho da Moda"
                   width={131}
                   height={150}
