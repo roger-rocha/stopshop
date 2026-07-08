@@ -105,11 +105,11 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
                 className="inline-flex items-center"
               >
                 <Image
-                  src="/logo.png"
+                  src="/logos/logo-stopshop.png"
                   alt="Stop Shop — Ninho da Moda"
                   width={131}
                   height={150}
-                  className="h-11 w-auto"
+                  className="h-14 w-auto"
                 />
               </Link>
               <button
