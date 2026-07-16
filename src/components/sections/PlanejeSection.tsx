@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import {
-  Hotel,
   Bus,
   ParkingSquare,
   Clock,
@@ -15,14 +14,6 @@ import { SectionBackground } from "@/components/ui/SectionBackground";
 import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
 
 const items = [
-  {
-    icon: Hotel,
-    title: "Hotéis parceiros",
-    description:
-      "Rede de hospedagem com tarifas especiais para clientes e excursões do Stop Shop.",
-    href: "/contato",
-    cta: "Ver hotéis",
-  },
   {
     icon: Bus,
     title: "Excursões e grupos",
