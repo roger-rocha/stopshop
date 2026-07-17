@@ -7,6 +7,7 @@ import {
   Clock,
   UtensilsCrossed,
   MapPinned,
+  Accessibility,
   ArrowUpRight,
 } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -54,6 +55,14 @@ const items = [
     href: "https://visitebrusque.com.br",
     external: true,
     cta: "Conhecer a cidade",
+  },
+  {
+    icon: Accessibility,
+    title: "Acessibilidade",
+    description:
+      "Espaço acessível com rampas, elevadores, vagas reservadas e banheiros adaptados para todos.",
+    href: "/localizacao",
+    cta: "Saiba mais",
   },
 ];
 
