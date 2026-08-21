@@ -13,10 +13,10 @@ export const siteNavCta = {
 } as const;
 
 export const siteSocialLinks = [
-  { label: "Instagram", href: "https://instagram.com/stopshopbrusque" },
-  { label: "Facebook", href: "https://facebook.com/stopshopbrusque" },
-  { label: "YouTube", href: "https://youtube.com/@stopshopbrusque" },
-  { label: "TikTok", href: "https://tiktok.com/@stopshopbrusque" },
+  { label: "Instagram", href: "https://www.instagram.com/stopshopbrusque" },
+  { label: "Facebook", href: "https://www.facebook.com/stopshopbrusque" },
+  { label: "YouTube", href: "https://www.youtube.com/user/NINHODAMODA" },
+  { label: "TikTok", href: "https://www.tiktok.com/@oninhodamodastop" },
 ] as const;
 
 /** Coluna "Institucional" do rodapé. */

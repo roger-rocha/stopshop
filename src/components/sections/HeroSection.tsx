@@ -106,7 +106,9 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
       <div className="relative flex flex-1 items-center px-5 pb-20 pt-32 sm:px-8 sm:pb-24 sm:pt-40">
         <div className="mx-auto w-full max-w-7xl">
-          <div className="max-w-3xl">
+          {/* Largura pensada para a maior linha do título ("O ninho da moda de
+              Brusque."), já que as quebras são explícitas e não devem requebrar. */}
+          <div className="max-w-5xl">
             {hero.eyebrow && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
