@@ -5,11 +5,9 @@ import { AnchorBrandsStrip } from "@/components/sections/AnchorBrandsStrip";
 import { SegmentCarousel } from "@/components/sections/SegmentCarousel";
 import { FeaturedStores } from "@/components/sections/FeaturedStores";
 import { AgendaSection } from "@/components/sections/AgendaSection";
-import { AtacadoCTA } from "@/components/sections/AtacadoCTA";
 import { GallerySection } from "@/components/sections/GallerySection";
-import { PlanejeSection } from "@/components/sections/PlanejeSection";
 import { InstagramFeed } from "@/components/sections/InstagramFeed";
-import { StopCredSection } from "@/components/sections/StopCredSection";
+import { SocialLinksSection } from "@/components/sections/SocialLinksSection";
 import { MapSection } from "@/components/sections/MapSection";
 import {
   getActiveEvents,
@@ -120,11 +118,9 @@ export default async function HomePage() {
       <AnchorBrandsStrip />
       <SegmentCarousel segments={segments} />
       <FeaturedStores stores={featuredStores} />
-      <AtacadoCTA />
       <GallerySection images={galleryImages} />
-      <PlanejeSection />
       <InstagramFeed />
-      <StopCredSection />
+      <SocialLinksSection />
       <MapSection />
     </>
   );

@@ -21,6 +21,7 @@ function parseStoreForm(formData: FormData) {
     slug: formData.get("slug"),
     photo: formData.get("photo") ?? "",
     storefront: formData.get("storefront") ?? "",
+    description: formData.get("description") ?? "",
     instagram: formData.get("instagram") ?? "",
     categories: formData.get("categories") ?? "",
     segment: formData.get("segment"),

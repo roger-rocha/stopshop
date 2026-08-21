@@ -2,9 +2,9 @@ import "server-only";
 import { desc, eq } from "drizzle-orm";
 import { db, schema } from "@/db";
 import {
+  defaultHeroContent,
   siteContact,
   siteHighlights,
-  stopCredBenefits,
   wholesaleBenefits,
 } from "@/lib/site";
 import type { ContactSettings, HeroSettings } from "@/lib/validators";
@@ -172,13 +172,9 @@ async function getSetting<T>(key: string, fallback: T): Promise<T> {
 }
 
 export const defaultHero: HeroSettings = {
-  eyebrow: "O Ninho da Moda · Brusque, SC",
-  title: "30 anos de tradição. Mais de 160 lojas. O ninho da moda de Brusque.",
-  titleHighlight: "Mais de 160 lojas.",
+  ...defaultHeroContent,
   image: "",
   slides: [],
-  ctaLabel: "Explore as lojas",
-  ctaHref: "/lojas",
 };
 
 export const defaultContact: ContactSettings = {
@@ -211,8 +207,4 @@ export async function getHighlights() {
 
 export async function getWholesaleBenefits() {
   return getSetting<readonly string[]>("wholesaleBenefits", wholesaleBenefits);
-}
-
-export async function getStopCredBenefits() {
-  return getSetting<readonly string[]>("stopCredBenefits", stopCredBenefits);
 }

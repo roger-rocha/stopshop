@@ -55,7 +55,7 @@ export function StoreSearch({
   tone = "solid",
   className,
   onNavigate,
-  placeholder = "Qual loja você procura?",
+  placeholder = "O que você está buscando?",
 }: StoreSearchProps) {
   const router = useRouter();
   const [query, setQuery] = useState("");

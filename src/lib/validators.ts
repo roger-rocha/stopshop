@@ -31,6 +31,7 @@ export const storeSchema = z.object({
     .regex(slugRegex, "Slug deve conter apenas letras minúsculas, números e hífens."),
   photo: z.string().default(""),
   storefront: optionalString,
+  description: z.string().default(""),
   instagram: optionalString,
   categories: csvList.pipe(z.array(z.string())),
   segment: z.string().min(1, "Selecione um segmento."),

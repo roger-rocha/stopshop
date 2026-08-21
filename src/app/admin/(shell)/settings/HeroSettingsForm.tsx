@@ -20,7 +20,10 @@ export function HeroSettingsForm({ hero }: { hero: HeroSettings }) {
         <input name="eyebrow" defaultValue={hero.eyebrow} className={inputCls} />
       </Field>
 
-      <Field label="Título principal">
+      <Field
+        label="Título principal"
+        hint="Cada quebra de linha vira uma linha no site"
+      >
         <textarea
           name="title"
           defaultValue={hero.title}

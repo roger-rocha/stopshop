@@ -1,17 +1,37 @@
 export const siteNavigation = [
   { label: "Home", href: "/" },
+  { label: "Sobre", href: "/sobre" },
   { label: "Lojas", href: "/lojas" },
-  { label: "Agenda", href: "/agenda" },
-  { label: "Stop Cred", href: "/stop-cred" },
-  { label: "Cadastro", href: "/cadastro" },
-  { label: "Atacado", href: "/atacado" },
+  { label: "Serviços", href: "/servicos" },
   { label: "Contato", href: "/contato" },
 ] as const;
+
+/** Botão contornado exibido ao final do menu (desktop e mobile). */
+export const siteNavCta = {
+  label: "Abra uma loja",
+  href: "/abra-uma-loja",
+} as const;
 
 export const siteSocialLinks = [
   { label: "Instagram", href: "https://instagram.com/stopshopbrusque" },
   { label: "Facebook", href: "https://facebook.com/stopshopbrusque" },
+  { label: "YouTube", href: "https://youtube.com/@stopshopbrusque" },
+  { label: "TikTok", href: "https://tiktok.com/@stopshopbrusque" },
 ] as const;
+
+/** Coluna "Institucional" do rodapé. */
+export const siteInstitutionalLinks = [
+  { label: "Política de Privacidade", href: "/politica-de-privacidade" },
+  { label: "Política de Cookies", href: "/politica-de-cookies" },
+  { label: "Trabalhe Conosco", href: "/trabalhe-conosco" },
+] as const;
+
+/** Horário das lojas — exibido no rodapé e na página de Lojas. */
+export const storeOpeningHours = {
+  title: "Lojas e Quiosques",
+  weekdays: "Seg às Sáb — 9h às 19h",
+  sunday: "Domingo — horário especial, consultar",
+} as const;
 
 export const siteContact = {
   phone: "4732557000",
@@ -29,6 +49,15 @@ export const siteContact = {
   temperature: "24,3º",
 } as const;
 
+/** Texto padrão do hero — usado pelos defaults do CMS e pelo seed/scripts. */
+export const defaultHeroContent = {
+  eyebrow: "O Ninho da Moda · Brusque, SC",
+  title: "30 anos de tradição.\nMais de 160 marcas.\nO ninho da moda de Brusque.",
+  titleHighlight: "Mais de 160 marcas.",
+  ctaLabel: "",
+  ctaHref: "/lojas",
+} as const;
+
 export const siteHighlights = [
   "Mais de 160 marcas de moda",
   "Quatro pavimentos estruturados",
@@ -41,11 +70,4 @@ export const wholesaleBenefits = [
   "Área de descanso para guias e motoristas",
   "Mix de moda feminina, masculina, infantil e segmentos complementares",
   "Estrutura com estacionamento para ônibus, vans e carros",
-] as const;
-
-export const stopCredBenefits = [
-  "Anuidade zero",
-  "Primeiro vencimento em 30 dias",
-  "Parcelamento em até 6x sem juros",
-  "Atendimento direto com a equipe Stop Shop",
 ] as const;

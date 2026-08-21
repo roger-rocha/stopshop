@@ -2,7 +2,6 @@ import {
   getContact,
   getHero,
   getHighlights,
-  getStopCredBenefits,
   getWholesaleBenefits,
 } from "@/lib/server/queries";
 import { PageHeader } from "../_components/PageHeader";
@@ -14,12 +13,11 @@ export const dynamic = "force-dynamic";
 export const metadata = { title: "Configurações" };
 
 export default async function SettingsPage() {
-  const [hero, contact, highlights, wholesale, stopCred] = await Promise.all([
+  const [hero, contact, highlights, wholesale] = await Promise.all([
     getHero(),
     getContact(),
     getHighlights(),
     getWholesaleBenefits(),
-    getStopCredBenefits(),
   ]);
 
   return (
@@ -44,10 +42,6 @@ export default async function SettingsPage() {
 
         <Section title="Benefícios de atacado" description="Lista usada na página de atacado.">
           <ListSettingsForm settingKey="wholesaleBenefits" items={[...wholesale]} />
-        </Section>
-
-        <Section title="Benefícios Stop Cred" description="Lista exibida na página do cartão.">
-          <ListSettingsForm settingKey="stopCredBenefits" items={[...stopCred]} />
         </Section>
       </div>
     </div>

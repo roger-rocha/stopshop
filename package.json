@@ -12,7 +12,8 @@
     "db:studio": "drizzle-kit studio",
     "db:seed": "tsx --env-file=.env.local src/db/seed.ts",
     "setup:env": "tsx scripts/setup-env.ts",
-    "setup": "pnpm setup:env && pnpm db:push && pnpm db:seed"
+    "setup": "pnpm setup:env && pnpm db:push && pnpm db:seed",
+    "content:update-hero": "tsx --env-file=.env.local scripts/update-hero.ts"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

@@ -10,7 +10,7 @@ import { StatusMessage } from "./StatusMessage";
 
 const initial: SettingsState = { status: "idle" };
 
-type ListKey = "highlights" | "wholesaleBenefits" | "stopCredBenefits";
+type ListKey = "highlights" | "wholesaleBenefits";
 
 interface ListSettingsFormProps {
   settingKey: ListKey;

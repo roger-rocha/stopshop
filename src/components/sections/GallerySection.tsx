@@ -9,7 +9,7 @@ import type { GalleryImage } from "@/db/schema";
 
 const highlights = [
   { value: "30+", label: "anos de história" },
-  { value: "160+", label: "lojas em um só lugar" },
+  { value: "160+", label: "marcas em um só lugar" },
   { value: "4", label: "pavimentos planejados" },
   { value: "310+", label: "vagas de estacionamento" },
 ];

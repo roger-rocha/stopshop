@@ -9,7 +9,7 @@ import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MobileNav } from "./MobileNav";
 import { StoreSearch } from "./StoreSearch";
-import { siteNavigation } from "@/lib/site";
+import { siteNavCta, siteNavigation } from "@/lib/site";
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -77,6 +77,20 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
+
+            {/* CTA contornado — sempre ao final do menu */}
+            <Link
+              href={siteNavCta.href}
+              aria-current={pathname === siteNavCta.href ? "page" : undefined}
+              className={cn(
+                "ml-2 rounded-pill border px-4 py-2 text-sm font-semibold transition-colors",
+                useSolidStyle
+                  ? "border-brand-coral text-brand-coral hover:bg-brand-coral hover:text-white"
+                  : "border-white/70 text-white hover:bg-white hover:text-brand-navy"
+              )}
+            >
+              {siteNavCta.label}
+            </Link>
           </div>
 
           {/* Search — desktop */}

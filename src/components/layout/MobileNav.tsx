@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { X } from "lucide-react";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { StoreSearch } from "./StoreSearch";
-import { siteContact } from "@/lib/site";
+import { siteContact, siteNavCta } from "@/lib/site";
 import { formatPhone } from "@/lib/utils";
 
 interface MobileNavProps {
@@ -135,6 +135,22 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
                   </motion.div>
                 ))}
               </div>
+
+              {/* CTA contornado — mesmo item do final do menu desktop */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 + links.length * 0.04 }}
+                className="mt-2"
+              >
+                <Link
+                  href={siteNavCta.href}
+                  onClick={onClose}
+                  className="block rounded-pill border border-brand-coral px-4 py-3 text-center text-base font-semibold text-brand-coral transition-colors hover:bg-brand-coral hover:text-white"
+                >
+                  {siteNavCta.label}
+                </Link>
+              </motion.div>
 
               {/* CTA */}
               <motion.div

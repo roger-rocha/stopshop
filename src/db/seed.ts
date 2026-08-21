@@ -7,10 +7,10 @@ import { seedEvents } from "@/lib/data/agenda";
 import { seedGalleryImages } from "@/lib/data/gallery";
 import { seedInstagramPosts } from "@/lib/data/instagram";
 import {
+  defaultHeroContent,
   siteContact,
   siteHighlights,
   wholesaleBenefits,
-  stopCredBenefits,
 } from "@/lib/site";
 
 async function seed() {
@@ -107,14 +107,7 @@ async function seed() {
   const defaults: Array<{ key: string; value: unknown }> = [
     {
       key: "hero",
-      value: {
-        eyebrow: "O Ninho da Moda · Brusque, SC",
-        title: "30 anos de tradição. Mais de 160 lojas. O ninho da moda de Brusque.",
-        titleHighlight: "Mais de 160 lojas.",
-        image: "",
-        ctaLabel: "Explore as lojas",
-        ctaHref: "/lojas",
-      },
+      value: { ...defaultHeroContent, image: "", slides: [] },
     },
     {
       key: "contact",
@@ -134,7 +127,6 @@ async function seed() {
     },
     { key: "highlights", value: siteHighlights },
     { key: "wholesaleBenefits", value: wholesaleBenefits },
-    { key: "stopCredBenefits", value: stopCredBenefits },
   ];
 
   for (const { key, value } of defaults) {

@@ -111,6 +111,19 @@ export function StoreForm({ segments, store }: StoreFormProps) {
       </div>
 
       <Field
+        label="Descrição"
+        hint="Texto curto exibido no guia de lojas"
+        error={errors.description?.[0]}
+      >
+        <textarea
+          name="description"
+          defaultValue={store?.description ?? ""}
+          rows={3}
+          className={inputCls}
+        />
+      </Field>
+
+      <Field
         label="Categorias"
         hint="Separe por vírgula. Ex.: Moda Feminina, Moda Masculina"
         error={errors.categories?.[0]}

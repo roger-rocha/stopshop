@@ -73,7 +73,7 @@ export async function saveContactAction(
 }
 
 export async function saveListSettingAction(
-  key: "highlights" | "wholesaleBenefits" | "stopCredBenefits",
+  key: "highlights" | "wholesaleBenefits",
   _prev: SettingsState,
   formData: FormData
 ): Promise<SettingsState> {

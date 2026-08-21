@@ -9,12 +9,15 @@ const BASE_URL = "https://stopshop.com.br";
 
 const STATIC_ROUTES = [
   "/",
+  "/sobre",
   "/lojas",
+  "/servicos",
+  "/abra-uma-loja",
   "/localizacao",
-  "/stop-cred",
-  "/cadastro",
-  "/atacado",
   "/contato",
+  "/trabalhe-conosco",
+  "/politica-de-privacidade",
+  "/politica-de-cookies",
   "/blog",
 ] as const;
 

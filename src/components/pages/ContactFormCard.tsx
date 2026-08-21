@@ -1,14 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 export function ContactFormCard() {
   const [submitted, setSubmitted] = useState(false);
+  // O form usa noValidate, então o aceite dos termos é conferido aqui.
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
+        if (!acceptedTerms) return;
         setSubmitted(true);
       }}
       className="rounded-[32px] border border-border-default bg-white p-8 shadow-card sm:p-10"
@@ -90,9 +94,36 @@ export function ContactFormCard() {
             />
           </div>
 
+          <div className="mt-5">
+            <label
+              htmlFor="contact-terms"
+              className="flex items-start gap-3 text-sm text-text-secondary"
+            >
+              <input
+                id="contact-terms"
+                name="terms"
+                type="checkbox"
+                checked={acceptedTerms}
+                onChange={(event) => setAcceptedTerms(event.target.checked)}
+                className="mt-0.5 h-4 w-4 shrink-0 rounded border-border-default text-brand-coral focus:ring-brand-coral/30"
+              />
+              <span>
+                Li e aceito os{" "}
+                <Link
+                  href="/politica-de-privacidade"
+                  className="font-medium text-brand-coral underline underline-offset-2"
+                >
+                  termos e condições
+                </Link>{" "}
+                e a política de privacidade.
+              </span>
+            </label>
+          </div>
+
           <button
             type="submit"
-            className="mt-4 rounded-button bg-brand-coral px-6 py-3 font-semibold text-white hover:bg-brand-coral-dark"
+            disabled={!acceptedTerms}
+            className="mt-4 rounded-button bg-brand-coral px-6 py-3 font-semibold text-white transition-opacity hover:bg-brand-coral-dark disabled:cursor-not-allowed disabled:opacity-50"
           >
             Enviar mensagem
           </button>

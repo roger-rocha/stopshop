@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Mail, Phone } from "lucide-react";
-import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { ContactFormCard } from "@/components/pages/ContactFormCard";
 import { PageHero } from "@/components/ui/PageHero";
 import { FAQSection } from "@/components/sections/FAQSection";
@@ -20,18 +19,7 @@ export default function ContatoPage() {
         title="Nossa equipe está pronta para ajudar"
         description="Fale conosco para tirar dúvidas sobre o empreendimento, planejar sua visita ou obter informações sobre serviços e oportunidades."
         actions={[
-          {
-            label: "WhatsApp",
-            href: `https://wa.me/${siteContact.whatsapp}?text=Olá! Gostaria de informações sobre o Stop Shop.`,
-            external: true,
-            variant: "whatsapp",
-          },
           { label: "Ver localização", href: "/localizacao", variant: "secondary" },
-        ]}
-        stats={[
-          { label: "Telefone", value: "(47) 3255-7000" },
-          { label: "Atendimento", value: "Seg - Sáb" },
-          { label: "E-mail", value: "Comercial" },
         ]}
       />
 
@@ -65,23 +53,6 @@ export default function ContatoPage() {
                 className="mt-3 inline-block text-base text-text-secondary hover:text-brand-coral"
               >
                 {siteContact.email}
-              </a>
-            </article>
-
-            <article className="rounded-[28px] border border-border-default bg-white p-7 shadow-card">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-whatsapp/10 text-whatsapp">
-                <WhatsAppIcon className="h-5 w-5" />
-              </div>
-              <h2 className="mt-5 font-display text-3xl font-bold text-text-primary">
-                WhatsApp
-              </h2>
-              <a
-                href={`https://wa.me/${siteContact.whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-block text-base text-text-secondary hover:text-whatsapp"
-              >
-                Fale com nossa equipe
               </a>
             </article>
           </div>

@@ -1,24 +1,37 @@
 "use client";
 
+import Image from "next/image";
 import { MapPin, Navigation, Clock } from "lucide-react";
 import { AnimateOnScroll } from "@/components/motion/AnimateOnScroll";
 import { siteContact } from "@/lib/site";
 
-const mapEmbedSrc =
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3561.5!2d-48.9183!3d-27.0978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94df1db8fba3b2db%3A0x4c8e1e1e1e1e1e1e!2sRodovia+Ant%C3%B4nio+Heil%2C+635+-+Santa+Terezinha%2C+Brusque+-+SC!5e0!3m2!1spt-BR!2sbr";
+// O mapa incorporado saiu do lugar: o fundo agora é uma foto do Stop Shop e os
+// botões continuam levando para Google Maps / Waze.
+const backgroundImage = "/images/stopshop-hero.png";
 
 export function MapSection() {
   return (
-    <section className="relative overflow-hidden bg-brand-navy">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-0 lg:grid-cols-[420px_1fr]">
-        <AnimateOnScroll className="px-[var(--spacing-section-x)] py-[var(--spacing-section-y)] lg:py-20">
+    <section className="relative isolate overflow-hidden bg-brand-navy">
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src={backgroundImage}
+          alt="Fachada do Stop Shop em Brusque"
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[rgba(8,12,40,0.95)] via-[rgba(8,12,40,0.75)] to-[rgba(8,12,40,0.35)]" />
+      </div>
+
+      <div className="mx-auto max-w-7xl px-[var(--spacing-section-x)] py-[var(--spacing-section-y)]">
+        <AnimateOnScroll className="max-w-xl">
           <span className="text-sm font-semibold uppercase tracking-[0.15em] text-brand-gold">
             Como chegar
           </span>
           <h2 className="mt-3 font-display text-[length:var(--font-size-heading)] font-bold text-white">
             Estamos em Brusque, SC
           </h2>
-          <p className="mt-4 max-w-md text-base leading-relaxed text-white/75">
+          <p className="mt-4 text-base leading-relaxed text-white/75">
             Localização estratégica com acesso facilitado, estacionamento e
             infraestrutura para receber clientes de toda a região.
           </p>
@@ -65,20 +78,6 @@ export function MapSection() {
             </a>
           </div>
         </AnimateOnScroll>
-
-        <div className="relative min-h-[360px] lg:min-h-[520px]">
-          <iframe
-            src={mapEmbedSrc}
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Localização do Stop Shop no Google Maps"
-            className="absolute inset-0 h-full w-full"
-          />
-        </div>
       </div>
     </section>
   );

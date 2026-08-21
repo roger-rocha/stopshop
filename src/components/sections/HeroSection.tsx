@@ -50,17 +50,29 @@ function HeroBackground({ slides }: { slides: string[] }) {
   );
 }
 
-function renderTitle(title: string, highlight: string) {
-  if (!highlight || !title.includes(highlight)) {
-    return title;
+function renderHighlight(text: string, highlight: string) {
+  if (!highlight || !text.includes(highlight)) {
+    return text;
   }
-  const parts = title.split(highlight);
+  const parts = text.split(highlight);
   return parts.map((part, index) => (
     <Fragment key={index}>
       {part}
       {index < parts.length - 1 && (
         <em className="not-italic text-brand-coral-light">{highlight}</em>
       )}
+    </Fragment>
+  ));
+}
+
+// Quebras de linha do título são explícitas: cada "\n" salvo no admin vira uma
+// linha própria, para o texto não depender de onde o navegador decide quebrar.
+function renderTitle(title: string, highlight: string) {
+  const lines = title.split(/\r?\n/).filter((line) => line.trim().length > 0);
+  return lines.map((line, index) => (
+    <Fragment key={index}>
+      {index > 0 && <br />}
+      {renderHighlight(line, highlight)}
     </Fragment>
   ));
 }
