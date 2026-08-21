@@ -52,7 +52,7 @@ export const siteContact = {
 /** Texto padrão do hero — usado pelos defaults do CMS e pelo seed/scripts. */
 export const defaultHeroContent = {
   eyebrow: "O Ninho da Moda · Brusque, SC",
-  title: "30 anos de tradição.\nMais de 160 marcas.\nO ninho da moda de Brusque.",
+  title: "30 anos de tradição.\nMais de 160 marcas.\nO ninho da moda de\nBrusque.",
   titleHighlight: "Mais de 160 marcas.",
   ctaLabel: "",
   ctaHref: "/lojas",

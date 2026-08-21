@@ -67,11 +67,20 @@ function renderHighlight(text: string, highlight: string) {
 
 // Quebras de linha do título são explícitas: cada "\n" salvo no admin vira uma
 // linha própria, para o texto não depender de onde o navegador decide quebrar.
+//
+// Abaixo de 375px nem a maior linha cabe, e forçar a quebra deixaria cada uma
+// delas requebrando com palavras órfãs. Ali o <br> é escondido e o espaço ao
+// lado dele emenda o texto, que volta a fluir naturalmente.
 function renderTitle(title: string, highlight: string) {
   const lines = title.split(/\r?\n/).filter((line) => line.trim().length > 0);
   return lines.map((line, index) => (
     <Fragment key={index}>
-      {index > 0 && <br />}
+      {index > 0 && (
+        <>
+          {" "}
+          <br className="hidden min-[375px]:inline" />
+        </>
+      )}
       {renderHighlight(line, highlight)}
     </Fragment>
   ));
@@ -106,9 +115,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
 
       <div className="relative flex flex-1 items-center px-5 pb-20 pt-32 sm:px-8 sm:pb-24 sm:pt-40">
         <div className="mx-auto w-full max-w-7xl">
-          {/* Largura pensada para a maior linha do título ("O ninho da moda de
-              Brusque."), já que as quebras são explícitas e não devem requebrar. */}
-          <div className="max-w-5xl">
+          <div className="max-w-3xl">
             {hero.eyebrow && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
