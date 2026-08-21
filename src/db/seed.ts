@@ -6,6 +6,7 @@ import { segments as mockSegments } from "@/lib/data/segments";
 import { seedEvents } from "@/lib/data/agenda";
 import { seedGalleryImages } from "@/lib/data/gallery";
 import { seedInstagramPosts } from "@/lib/data/instagram";
+import { legalPageDefaults, legalPages } from "@/lib/data/legal";
 import {
   defaultHeroContent,
   siteContact,
@@ -127,6 +128,11 @@ async function seed() {
     },
     { key: "highlights", value: siteHighlights },
     { key: "wholesaleBenefits", value: wholesaleBenefits },
+    // Políticas institucionais — editáveis em /admin/institucional
+    ...legalPages.map((page) => {
+      const { title, description, body } = legalPageDefaults[page.slug];
+      return { key: page.settingKey, value: { title, description, body } };
+    }),
   ];
 
   for (const { key, value } of defaults) {

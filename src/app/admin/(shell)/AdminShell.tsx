@@ -11,6 +11,8 @@ import {
   CalendarDays,
   Images,
   Instagram,
+  Briefcase,
+  Scale,
   Settings,
   LogOut,
   ExternalLink,
@@ -33,6 +35,8 @@ const navItems: NavItem[] = [
   { href: "/admin/agenda", label: "Agenda", icon: CalendarDays },
   { href: "/admin/gallery", label: "Galeria", icon: Images },
   { href: "/admin/instagram", label: "Instagram", icon: Instagram },
+  { href: "/admin/vagas", label: "Vagas", icon: Briefcase },
+  { href: "/admin/institucional", label: "Institucional", icon: Scale },
   { href: "/admin/settings", label: "Configurações", icon: Settings },
 ];
 

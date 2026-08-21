@@ -1,5 +1,5 @@
 import "server-only";
-import { desc, eq } from "drizzle-orm";
+import { asc, desc, eq } from "drizzle-orm";
 import { db, schema } from "@/db";
 import {
   defaultHeroContent,
@@ -7,7 +7,16 @@ import {
   siteHighlights,
   wholesaleBenefits,
 } from "@/lib/site";
-import type { ContactSettings, HeroSettings } from "@/lib/validators";
+import {
+  legalPageDefaults,
+  legalPageBySlug,
+  type LegalPageSlug,
+} from "@/lib/data/legal";
+import type {
+  ContactSettings,
+  HeroSettings,
+  LegalPageInput,
+} from "@/lib/validators";
 
 export async function getAllStores() {
   return db.select().from(schema.stores).orderBy(schema.stores.name);
@@ -207,4 +216,69 @@ export async function getHighlights() {
 
 export async function getWholesaleBenefits() {
   return getSetting<readonly string[]>("wholesaleBenefits", wholesaleBenefits);
+}
+
+export type LegalPage = LegalPageInput & {
+  slug: LegalPageSlug;
+  /** ISO (YYYY-MM-DD) da última edição — vem do registro salvo, ou do default. */
+  updatedAt: string;
+};
+
+/**
+ * Lê a política do banco e cai no texto padrão do código quando ainda não há
+ * registro salvo — é o que mantém as páginas de pé antes do primeiro seed.
+ */
+export async function getLegalPage(slug: LegalPageSlug): Promise<LegalPage> {
+  const fallback = legalPageDefaults[slug];
+  const entry = legalPageBySlug(slug);
+  if (!entry) {
+    return { slug, ...fallback, updatedAt: fallback.fallbackDate };
+  }
+
+  const [row] = await db
+    .select()
+    .from(schema.settings)
+    .where(eq(schema.settings.key, entry.settingKey))
+    .limit(1);
+
+  if (!row) {
+    return { slug, ...fallback, updatedAt: fallback.fallbackDate };
+  }
+
+  try {
+    const saved = JSON.parse(row.value) as Partial<LegalPageInput>;
+    return {
+      slug,
+      title: saved.title || fallback.title,
+      description: saved.description || fallback.description,
+      body: saved.body || fallback.body,
+      updatedAt: new Date(row.updatedAt * 1000).toISOString().slice(0, 10),
+    };
+  } catch {
+    return { slug, ...fallback, updatedAt: fallback.fallbackDate };
+  }
+}
+
+export async function getAllJobOpenings() {
+  return db
+    .select()
+    .from(schema.jobOpenings)
+    .orderBy(asc(schema.jobOpenings.position), desc(schema.jobOpenings.id));
+}
+
+export async function getPublishedJobOpenings() {
+  return db
+    .select()
+    .from(schema.jobOpenings)
+    .where(eq(schema.jobOpenings.published, true))
+    .orderBy(asc(schema.jobOpenings.position), desc(schema.jobOpenings.id));
+}
+
+export async function getJobOpeningById(id: number) {
+  const [row] = await db
+    .select()
+    .from(schema.jobOpenings)
+    .where(eq(schema.jobOpenings.id, id))
+    .limit(1);
+  return row ?? null;
 }

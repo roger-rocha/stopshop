@@ -126,6 +126,33 @@ export const instagramPostSchema = z.object({
 
 export type InstagramPostInput = z.infer<typeof instagramPostSchema>;
 
+export const jobAreas = ["stop-shop", "lojistas"] as const;
+
+export const jobOpeningSchema = z.object({
+  title: z.string().min(2, "Informe o título da vaga."),
+  area: z.enum(jobAreas),
+  company: optionalString,
+  type: optionalString,
+  location: optionalString,
+  description: z.string().default(""),
+  applyTo: optionalString,
+  published: z.preprocess(
+    (v) => v === "on" || v === true || v === "true",
+    z.boolean()
+  ),
+  position: z.coerce.number().int().min(0).default(0),
+});
+
+export type JobOpeningInput = z.infer<typeof jobOpeningSchema>;
+
+export const legalPageSchema = z.object({
+  title: z.string().min(2, "Informe o título da página."),
+  description: z.string().min(2, "Informe a descrição exibida no topo."),
+  body: z.string().min(10, "Informe o conteúdo da política."),
+});
+
+export type LegalPageInput = z.infer<typeof legalPageSchema>;
+
 export const heroSettingsSchema = z.object({
   eyebrow: z.string().default(""),
   title: z.string().min(1, "Informe o título do hero."),

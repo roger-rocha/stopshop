@@ -25,3 +25,15 @@ export function whatsappLink(phone: string, message?: string): string {
   }
   return url;
 }
+
+/**
+ * Formata uma data ISO (YYYY-MM-DD) como DD/MM/AAAA.
+ * A conversão é feita na string para não escorregar um dia por fuso horário,
+ * como aconteceria com `new Date("2026-08-21").toLocaleDateString()`.
+ */
+export function formatDateBR(isoDate: string): string {
+  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(isoDate);
+  if (!match) return isoDate;
+  const [, year, month, day] = match;
+  return `${day}/${month}/${year}`;
+}

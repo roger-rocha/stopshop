@@ -6,6 +6,8 @@ import {
   CalendarDays,
   Images,
   Instagram,
+  Briefcase,
+  Scale,
   Settings,
 } from "lucide-react";
 import { db, schema } from "@/db";
@@ -23,6 +25,8 @@ async function loadCounts() {
     eventsTotal,
     galleryTotal,
     instagramTotal,
+    jobsTotal,
+    jobsPublished,
   ] = await Promise.all([
     db.$count(schema.stores),
     db.$count(schema.stores, eq(schema.stores.featured, true)),
@@ -32,6 +36,8 @@ async function loadCounts() {
     db.$count(schema.events),
     db.$count(schema.galleryImages),
     db.$count(schema.instagramPosts),
+    db.$count(schema.jobOpenings),
+    db.$count(schema.jobOpenings, eq(schema.jobOpenings.published, true)),
   ]);
   return {
     storesTotal,
@@ -42,6 +48,8 @@ async function loadCounts() {
     eventsTotal,
     galleryTotal,
     instagramTotal,
+    jobsTotal,
+    jobsPublished,
   };
 }
 
@@ -92,6 +100,20 @@ export default async function DashboardPage() {
       hint: "Publicações da grade da home",
     },
     {
+      href: "/admin/vagas",
+      icon: Briefcase,
+      label: "Vagas",
+      value: counts.jobsTotal,
+      hint: `${counts.jobsPublished} publicadas`,
+    },
+    {
+      href: "/admin/institucional",
+      icon: Scale,
+      label: "Institucional",
+      value: "2",
+      hint: "Políticas de privacidade e cookies",
+    },
+    {
       href: "/admin/settings",
       icon: Settings,
       label: "Configurações",
@@ -110,8 +132,8 @@ export default async function DashboardPage() {
           Olá! O que vamos atualizar hoje?
         </h1>
         <p className="mt-2 text-sm text-text-secondary">
-          Gerencie lojas, segmentos, posts, agenda, galeria e configurações do
-          site.
+          Gerencie lojas, segmentos, posts, agenda, galeria, vagas, políticas e
+          configurações do site.
         </p>
       </header>
 

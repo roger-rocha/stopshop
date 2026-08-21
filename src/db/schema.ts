@@ -129,6 +129,27 @@ export const instagramPosts = sqliteTable("instagram_posts", {
     .default(sql`(unixepoch())`),
 });
 
+export const jobOpenings = sqliteTable("job_openings", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  title: text("title").notNull(),
+  // "stop-shop" (administração) ou "lojistas" (vagas das lojas do shopping)
+  area: text("area").notNull().default("stop-shop"),
+  company: text("company"),
+  type: text("type"),
+  location: text("location"),
+  description: text("description").notNull().default(""),
+  /** Link de candidatura ou e-mail — normalizado na exibição. */
+  applyTo: text("apply_to"),
+  published: integer("published", { mode: "boolean" }).notNull().default(true),
+  position: integer("position").notNull().default(0),
+  createdAt: integer("created_at")
+    .notNull()
+    .default(sql`(unixepoch())`),
+  updatedAt: integer("updated_at")
+    .notNull()
+    .default(sql`(unixepoch())`),
+});
+
 export type User = typeof users.$inferSelect;
 export type Segment = typeof segments.$inferSelect;
 export type Store = typeof stores.$inferSelect;
@@ -137,3 +158,4 @@ export type Setting = typeof settings.$inferSelect;
 export type AgendaEvent = typeof events.$inferSelect;
 export type GalleryImage = typeof galleryImages.$inferSelect;
 export type InstagramPost = typeof instagramPosts.$inferSelect;
+export type JobOpening = typeof jobOpenings.$inferSelect;
