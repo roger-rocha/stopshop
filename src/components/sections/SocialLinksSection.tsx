@@ -16,7 +16,7 @@ export function SocialLinksSection() {
     <section className="bg-surface-light px-[var(--spacing-section-x)] py-[var(--spacing-section-y)]">
       <AnimateOnScroll className="mx-auto max-w-3xl text-center">
         <h2 className="font-display text-[length:var(--font-size-heading)] font-bold text-text-primary">
-          Acompanhe o shopping nas redes sociais
+          Acompanhe nas redes sociais
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-lg text-text-secondary">
           Fique por dentro das promoções, horários de funcionamento e novidades
