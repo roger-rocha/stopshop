@@ -5,6 +5,11 @@ import { PendingContent } from "@/components/pages/PendingContent";
 import { getPublishedServices } from "@/lib/server/queries";
 import { storeOpeningHours } from "@/lib/site";
 
+// Pré-renderizada no build. As ações do admin já chamam revalidatePath, mas a
+// janela cobre escrita feita fora do painel (script de conteúdo, edição direta
+// no banco), que senão só apareceria no deploy seguinte.
+export const revalidate = 300;
+
 export const metadata: Metadata = {
   title: "Serviços",
   description:
