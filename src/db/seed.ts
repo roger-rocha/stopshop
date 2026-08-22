@@ -7,6 +7,7 @@ import { seedEvents } from "@/lib/data/agenda";
 import { seedGalleryImages } from "@/lib/data/gallery";
 import { seedInstagramPosts } from "@/lib/data/instagram";
 import { legalPageDefaults, legalPages } from "@/lib/data/legal";
+import { seedServices } from "@/lib/data/services";
 import {
   defaultHeroContent,
   siteContact,
@@ -103,6 +104,14 @@ async function seed() {
     );
   } else {
     console.log(`= Instagram já populado (${instagramCount})`);
+  }
+
+  const servicesCount = await db.$count(schema.services);
+  if (servicesCount === 0) {
+    await db.insert(schema.services).values(seedServices);
+    console.log(`✓ ${seedServices.length} serviços inseridos`);
+  } else {
+    console.log(`= Serviços já populados (${servicesCount})`);
   }
 
   const defaults: Array<{ key: string; value: unknown }> = [

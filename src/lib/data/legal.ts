@@ -6,8 +6,8 @@ import { siteContact } from "@/lib/site";
  * fallback usado enquanto nada foi salvo.
  *
  * ATENÇÃO: é um modelo genérico baseado na LGPD, não um parecer jurídico.
- * Os trechos entre colchetes precisam ser preenchidos e o texto revisado pelo
- * jurídico do Stop Shop antes de valer como política oficial.
+ * O texto precisa ser revisado pelo jurídico do Stop Shop antes de valer como
+ * política oficial.
  */
 
 export type LegalPageContent = {
@@ -22,9 +22,9 @@ const privacyBody = `## 1. Quem somos
 
 Esta política descreve como o **Stop Shop** trata os dados pessoais de quem visita este site e o shopping.
 
-- **Controlador:** Stop Shop — [razão social completa]
-- **CNPJ:** [preencher]
-- **Endereço:** ${siteContact.addressLine1}, ${siteContact.addressLine2} — ${siteContact.cityLine}
+- **Controlador:** Condomínio Stop Shop, pessoa jurídica de direito privado
+- **CNPJ:** 02.129.852/0001-09
+- **Endereço:** Rodovia Antônio Heil, 635 — Santa Terezinha, Brusque/SC, CEP 88352-501
 - **Contato:** [${siteContact.email}](mailto:${siteContact.email})
 
 ## 2. Quais dados coletamos

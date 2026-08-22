@@ -1,23 +1,43 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/PageHero";
-import { PendingContent } from "@/components/pages/PendingContent";
+import { AnchorBrandsStrip } from "@/components/sections/AnchorBrandsStrip";
+import { OpenStoreHero } from "@/components/pages/open-store/OpenStoreHero";
+import { OpenStoreFormats } from "@/components/pages/open-store/OpenStoreFormats";
+import { OpenStoreBenefits } from "@/components/pages/open-store/OpenStoreBenefits";
+import { OpenStoreProcess } from "@/components/pages/open-store/OpenStoreProcess";
+import { OpenStoreContactSection } from "@/components/pages/open-store/OpenStoreContactSection";
+import { OpenStoreFAQ } from "@/components/pages/open-store/OpenStoreFAQ";
+import { openStoreFaq } from "@/lib/data/open-store";
 
 export const metadata: Metadata = {
-  title: "Abra uma loja",
+  title: "Abra uma loja no Stop Shop",
   description:
-    "Quer abrir uma loja no Stop Shop? Fale com o time comercial e conheça as oportunidades disponíveis.",
+    "Lojas, quiosques e espaços de mídia no maior shopping de moda de Brusque, SC. Mais de 160 marcas, 30 anos de história e público comprador de todo o Brasil.",
 };
 
 export default function AbraUmaLojaPage() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: openStoreFaq.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+
   return (
     <>
-      <PageHero
-        eyebrow="Abra uma loja"
-        title="Faça parte do ninho da moda"
-        description="Converse com o nosso time comercial e conheça as oportunidades para instalar a sua marca no Stop Shop."
-        actions={[{ label: "Falar com o comercial", href: "/contato" }]}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <PendingContent note="As informações sobre disponibilidade de lojas e condições comerciais ainda serão definidas." />
+      <OpenStoreHero />
+      <AnchorBrandsStrip />
+      <OpenStoreFormats />
+      <OpenStoreBenefits />
+      <OpenStoreProcess />
+      <OpenStoreContactSection />
+      <OpenStoreFAQ />
     </>
   );
 }

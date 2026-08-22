@@ -7,6 +7,7 @@ import {
   Images,
   Instagram,
   Briefcase,
+  ConciergeBell,
   Scale,
   Settings,
 } from "lucide-react";
@@ -27,6 +28,8 @@ async function loadCounts() {
     instagramTotal,
     jobsTotal,
     jobsPublished,
+    servicesTotal,
+    servicesPublished,
   ] = await Promise.all([
     db.$count(schema.stores),
     db.$count(schema.stores, eq(schema.stores.featured, true)),
@@ -38,6 +41,8 @@ async function loadCounts() {
     db.$count(schema.instagramPosts),
     db.$count(schema.jobOpenings),
     db.$count(schema.jobOpenings, eq(schema.jobOpenings.published, true)),
+    db.$count(schema.services),
+    db.$count(schema.services, eq(schema.services.published, true)),
   ]);
   return {
     storesTotal,
@@ -50,6 +55,8 @@ async function loadCounts() {
     instagramTotal,
     jobsTotal,
     jobsPublished,
+    servicesTotal,
+    servicesPublished,
   };
 }
 
@@ -100,6 +107,13 @@ export default async function DashboardPage() {
       hint: "Publicações da grade da home",
     },
     {
+      href: "/admin/servicos",
+      icon: ConciergeBell,
+      label: "Serviços",
+      value: counts.servicesTotal,
+      hint: `${counts.servicesPublished} publicados`,
+    },
+    {
       href: "/admin/vagas",
       icon: Briefcase,
       label: "Vagas",
@@ -132,8 +146,8 @@ export default async function DashboardPage() {
           Olá! O que vamos atualizar hoje?
         </h1>
         <p className="mt-2 text-sm text-text-secondary">
-          Gerencie lojas, segmentos, posts, agenda, galeria, vagas, políticas e
-          configurações do site.
+          Gerencie lojas, segmentos, posts, agenda, galeria, serviços, vagas,
+          políticas e configurações do site.
         </p>
       </header>
 

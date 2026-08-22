@@ -7,7 +7,6 @@ import { FeaturedStores } from "@/components/sections/FeaturedStores";
 import { AgendaSection } from "@/components/sections/AgendaSection";
 import { GallerySection } from "@/components/sections/GallerySection";
 import { InstagramFeed } from "@/components/sections/InstagramFeed";
-import { SocialLinksSection } from "@/components/sections/SocialLinksSection";
 import { MapSection } from "@/components/sections/MapSection";
 import {
   getActiveEvents,
@@ -120,7 +119,6 @@ export default async function HomePage() {
       <FeaturedStores stores={featuredStores} />
       <GallerySection images={galleryImages} />
       <InstagramFeed />
-      <SocialLinksSection />
       <MapSection />
     </>
   );

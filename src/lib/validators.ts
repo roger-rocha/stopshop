@@ -145,6 +145,20 @@ export const jobOpeningSchema = z.object({
 
 export type JobOpeningInput = z.infer<typeof jobOpeningSchema>;
 
+export const serviceSchema = z.object({
+  name: z.string().min(2, "Informe o nome do serviço."),
+  category: z.string().default(""),
+  icon: z.string().default("destaque"),
+  description: z.string().default(""),
+  published: z.preprocess(
+    (v) => v === "on" || v === true || v === "true",
+    z.boolean()
+  ),
+  position: z.coerce.number().int().min(0).default(0),
+});
+
+export type ServiceInput = z.infer<typeof serviceSchema>;
+
 export const legalPageSchema = z.object({
   title: z.string().min(2, "Informe o título da página."),
   description: z.string().min(2, "Informe a descrição exibida no topo."),

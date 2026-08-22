@@ -274,6 +274,30 @@ export async function getPublishedJobOpenings() {
     .orderBy(asc(schema.jobOpenings.position), desc(schema.jobOpenings.id));
 }
 
+export async function getAllServices() {
+  return db
+    .select()
+    .from(schema.services)
+    .orderBy(asc(schema.services.position), asc(schema.services.name));
+}
+
+export async function getPublishedServices() {
+  return db
+    .select()
+    .from(schema.services)
+    .where(eq(schema.services.published, true))
+    .orderBy(asc(schema.services.position), asc(schema.services.name));
+}
+
+export async function getServiceById(id: number) {
+  const [row] = await db
+    .select()
+    .from(schema.services)
+    .where(eq(schema.services.id, id))
+    .limit(1);
+  return row ?? null;
+}
+
 export async function getJobOpeningById(id: number) {
   const [row] = await db
     .select()
