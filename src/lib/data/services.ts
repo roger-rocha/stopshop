@@ -2,9 +2,9 @@
  * Serviços iniciais da página /servicos.
  *
  * São apenas os que já estavam publicados no site (recuperados da antiga seção
- * "Planeje sua visita"), para não inventar comodidade que o shopping talvez não
- * tenha. O restante — wi-fi, caixa eletrônico, fraldário, achados e perdidos… —
- * deve ser cadastrado pelo cliente em /admin/servicos.
+ * "Planeje sua visita") mais o caixa eletrônico, para não inventar comodidade
+ * que o shopping talvez não tenha. O restante — wi-fi, fraldário, achados e
+ * perdidos… — deve ser cadastrado pelo cliente em /admin/servicos.
  */
 export const seedServices = [
   {
@@ -41,6 +41,15 @@ export const seedServices = [
     description:
       "Estrutura preparada para receber ônibus, vans e grupos com atendimento dedicado.",
     position: 3,
+    published: true,
+  },
+  {
+    name: "Caixa eletrônico",
+    category: "Conveniência",
+    icon: "caixa",
+    description:
+      "Caixa eletrônico dentro do shopping para saques e consultas durante o horário de funcionamento.",
+    position: 4,
     published: true,
   },
 ];
