@@ -249,36 +249,49 @@ export function StoreDirectory({
 }
 
 function StoreRow({ store }: { store: Store }) {
-  const logo = store.photo || store.storefront;
+  // O logo (PNG com fundo transparente) precisa de respiro e `contain`;
+  // a foto de fachada fica melhor preenchendo o quadro inteiro.
+  const isLogo = Boolean(store.photo);
+  const image = store.photo || store.storefront;
   const instagram = instagramUrl(store.instagram);
 
   return (
-    <article className="grid gap-4 py-6 sm:grid-cols-[96px_minmax(0,1fr)_auto] sm:items-start sm:gap-6">
-      <div className="relative h-20 w-24 shrink-0 overflow-hidden rounded-xl bg-surface-soft">
-        {logo ? (
+    <article className="group grid gap-4 py-6 sm:grid-cols-[minmax(0,180px)_minmax(0,1fr)_auto] sm:items-center sm:gap-7">
+      <div
+        className={cn(
+          "relative aspect-[4/3] w-full max-w-[220px] shrink-0 overflow-hidden rounded-[20px] border border-border-default sm:max-w-none",
+          isLogo ? "bg-white" : "bg-surface-soft"
+        )}
+      >
+        {image ? (
           <Image
-            src={logo}
+            src={image}
             alt={store.name}
             fill
-            className="object-contain p-3"
-            sizes="96px"
+            className={cn(
+              "transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+              isLogo
+                ? "object-contain p-5"
+                : "object-cover group-hover:scale-[1.04]"
+            )}
+            sizes="(min-width: 640px) 180px, 220px"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center text-text-muted">
-            <StoreIcon className="h-6 w-6" aria-hidden="true" />
+            <StoreIcon className="h-7 w-7" aria-hidden="true" />
           </div>
         )}
       </div>
 
       <div className="min-w-0">
-        <h4 className="font-display text-lg font-bold text-text-primary">
+        <h4 className="font-display text-xl font-bold text-text-primary">
           {store.name}
         </h4>
         <p className="mt-0.5 text-sm text-text-muted">
           {store.categories[0] ?? ""}
         </p>
         {store.description && (
-          <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+          <p className="mt-2 line-clamp-3 max-w-2xl text-sm leading-relaxed text-text-secondary">
             {store.description}
           </p>
         )}

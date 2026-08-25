@@ -32,7 +32,9 @@ export default async function LojasPage({
           { label: "Falar com a equipe", href: "/contato", variant: "ghost" },
         ]}
         stats={[
-          { label: "Marcas e operações", value: `${stores.length}+` },
+          // Número institucional do shopping — não é a contagem do catálogo,
+          // que lista só as lojas já cadastradas no admin.
+          { label: "Marcas e operações", value: "160+" },
           { label: "Segmentos para explorar", value: String(segments.length) },
         ]}
       >

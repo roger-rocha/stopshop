@@ -112,14 +112,15 @@ export function StoreForm({ segments, store }: StoreFormProps) {
 
       <Field
         label="Descrição"
-        hint="Texto curto exibido no guia de lojas"
+        hint="Texto informativo sobre a loja, exibido abaixo do nome no guia de lojas (2 a 3 linhas)"
         error={errors.description?.[0]}
       >
         <textarea
           name="description"
           defaultValue={store?.description ?? ""}
-          rows={3}
+          rows={4}
           className={inputCls}
+          placeholder="Ex.: Moda feminina casual e festa, com coleções novas toda semana e atendimento personalizado."
         />
       </Field>
 
