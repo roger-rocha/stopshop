@@ -26,6 +26,7 @@ function parseGalleryForm(formData: FormData) {
 function revalidateGallery() {
   revalidatePath("/admin/gallery");
   revalidatePath("/");
+  revalidatePath("/sobre");
 }
 
 export async function createGalleryImageAction(
