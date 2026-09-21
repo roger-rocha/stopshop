@@ -40,7 +40,7 @@ export function OpenStoreHero() {
         >
           <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-brand-gold" />
-            Abra uma loja
+            Abra sua loja
           </p>
 
           <h1 className="mt-7 font-display text-[clamp(2.6rem,5.4vw,4.75rem)] font-bold leading-[1.02] tracking-[-0.01em] text-balance">

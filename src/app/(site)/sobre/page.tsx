@@ -181,7 +181,7 @@ export default async function SobrePage() {
               <p className="mt-3 max-w-xl leading-relaxed text-white/80">Conheça as oportunidades para abrir sua loja no Stop Shop.</p>
             </div>
             <CTAButton href="/abra-uma-loja" variant="secondary" className="shrink-0 rounded-full">
-              Abra uma loja
+              Abra sua loja
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </CTAButton>
           </div>

@@ -9,7 +9,7 @@ import { OpenStoreFAQ } from "@/components/pages/open-store/OpenStoreFAQ";
 import { openStoreFaq } from "@/lib/data/open-store";
 
 export const metadata: Metadata = {
-  title: "Abra uma loja no Stop Shop",
+  title: "Abra sua loja no Stop Shop",
   description:
     "Lojas, quiosques e espaços de mídia no maior shopping de moda de Brusque, SC. Mais de 160 marcas, 30 anos de história e público comprador de todo o Brasil.",
 };

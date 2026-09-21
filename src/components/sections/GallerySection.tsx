@@ -30,9 +30,9 @@ export function GallerySection({ images }: GallerySectionProps) {
       <div className="relative mx-auto max-w-7xl px-[var(--spacing-section-x)]">
         <SectionHeader
           label="Sobre o Stop Shop"
-          title="Um espaço pensado para a experiência de compra"
-          highlight="experiência de compra"
-          subtitle="Ambientes planejados para facilitar a circulação, valorizar as lojas e tornar a visita mais confortável para clientes, lojistas e excursões."
+          title="Muito mais que compras. Um espaço para viver experiências."
+          highlight="viver experiências."
+          subtitle="O Stop Shop reúne moda, gastronomia, serviços, lazer e entretenimento em um ambiente pensado para tornar cada visita mais completa, confortável e especial."
           light
         />
 

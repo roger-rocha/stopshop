@@ -8,7 +8,7 @@ export const siteNavigation = [
 
 /** Botão contornado exibido ao final do menu (desktop e mobile). */
 export const siteNavCta = {
-  label: "Abra uma loja",
+  label: "Abra sua loja",
   href: "/abra-uma-loja",
 } as const;
 
