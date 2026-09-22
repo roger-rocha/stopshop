@@ -65,24 +65,15 @@ function renderHighlight(text: string, highlight: string) {
   ));
 }
 
-// Quebras de linha do título são explícitas: cada "\n" salvo no admin vira uma
-// linha própria, para o texto não depender de onde o navegador decide quebrar.
-//
-// Abaixo de 375px nem a maior linha cabe, e forçar a quebra deixaria cada uma
-// delas requebrando com palavras órfãs. Ali o <br> é escondido e o espaço ao
-// lado dele emenda o texto, que volta a fluir naturalmente.
+// Preserva as frases do CMS, mas une quebras dentro da mesma frase para
+// deixar o navegador equilibrar as linhas conforme a largura disponível.
 function renderTitle(title: string, highlight: string) {
-  const lines = title.split(/\r?\n/).filter((line) => line.trim().length > 0);
+  const lines = title.trim().split(/(?<=[.!?])\s*\r?\n/);
   return lines.map((line, index) => (
-    <Fragment key={index}>
-      {index > 0 && (
-        <>
-          {" "}
-          <br className="hidden min-[375px]:inline" />
-        </>
-      )}
-      {renderHighlight(line, highlight)}
-    </Fragment>
+    <span key={index} className="block text-balance">
+      {index > 0 && " "}
+      {renderHighlight(line.replace(/\s*\r?\n\s*/g, " "), highlight)}
+    </span>
   ));
 }
 
@@ -134,7 +125,7 @@ export function HeroSection({ hero }: HeroSectionProps) {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8, ease }}
-              className="mt-6 font-display text-[length:var(--font-size-hero)] font-bold leading-[1.05] text-white"
+              className="mt-6 font-display text-[clamp(2.25rem,4.6vw,3.5rem)] font-bold leading-[1.12] tracking-[-0.025em] text-white"
             >
               {renderTitle(hero.title, hero.titleHighlight)}
             </motion.h1>

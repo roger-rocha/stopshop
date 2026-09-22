@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import { Instagram, Search, Store as StoreIcon } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
+import { storeBelongsToSegment } from "@/lib/store-segments";
 import { cn, whatsappLink } from "@/lib/utils";
 import type { Segment, Store } from "@/db/schema";
 
@@ -46,13 +47,15 @@ export function StoreDirectory({
   const [query, setQuery] = useState(initialQuery);
   const [letter, setLetter] = useState<string | null>(null);
 
+  const activeSegment = segments.find((segment) => segment.slug === selectedSegment);
+
   const filteredStores = useMemo(() => {
     const q = normalize(query.trim());
 
     return stores
       .filter((store) => {
         const matchesSegment =
-          selectedSegment === "todos" || store.segment === selectedSegment;
+          selectedSegment === "todos" || (activeSegment !== undefined && storeBelongsToSegment(store, activeSegment));
 
         const matchesLetter =
           letter === null || initialLetter(store.name) === letter;
@@ -66,7 +69,7 @@ export function StoreDirectory({
         return matchesSegment && matchesLetter && matchesQuery;
       })
       .sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
-  }, [letter, query, selectedSegment, stores]);
+  }, [letter, query, selectedSegment, activeSegment, stores]);
 
   // Letras sem nenhuma loja (no segmento/busca atuais) ficam desabilitadas.
   const availableLetters = useMemo(() => {
@@ -74,7 +77,7 @@ export function StoreDirectory({
     const set = new Set<string>();
     for (const store of stores) {
       const matchesSegment =
-        selectedSegment === "todos" || store.segment === selectedSegment;
+        selectedSegment === "todos" || (activeSegment !== undefined && storeBelongsToSegment(store, activeSegment));
       const matchesQuery =
         q.length === 0 ||
         normalize(store.name).includes(q) ||
@@ -83,7 +86,7 @@ export function StoreDirectory({
       if (matchesSegment && matchesQuery) set.add(initialLetter(store.name));
     }
     return set;
-  }, [query, selectedSegment, stores]);
+  }, [query, selectedSegment, activeSegment, stores]);
 
   const grouped = useMemo(() => {
     const map = new Map<string, Store[]>();
@@ -98,11 +101,11 @@ export function StoreDirectory({
 
   const segmentCounts = useMemo(() => {
     const counts = new Map<string, number>();
-    for (const store of stores) {
-      counts.set(store.segment, (counts.get(store.segment) ?? 0) + 1);
+    for (const segment of segments) {
+      counts.set(segment.slug, stores.filter((store) => storeBelongsToSegment(store, segment)).length);
     }
     return counts;
-  }, [stores]);
+  }, [segments, stores]);
 
   return (
     <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-16">

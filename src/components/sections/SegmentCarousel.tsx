@@ -41,7 +41,7 @@ function SegmentCard({ name, slug, count, image }: SegmentCardData) {
         <div className="absolute bottom-0 left-0 right-0 p-5">
           <h3 className="font-display text-lg font-bold text-white">{name}</h3>
           <span className="mt-1.5 inline-block rounded-pill bg-white/90 px-2.5 py-0.5 text-xs font-medium text-brand-navy">
-            {count} lojas
+            {count} {count === 1 ? "loja" : "lojas"}
           </span>
           <span className="mt-3 flex w-fit items-center gap-1.5 rounded-pill bg-brand-coral px-3.5 py-1.5 text-xs font-semibold text-white shadow-card transition-transform group-hover:translate-x-0.5">
             Ver Lojas

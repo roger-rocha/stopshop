@@ -1,4 +1,5 @@
 import "server-only";
+import { storeBelongsToSegment } from "@/lib/store-segments";
 import { asc, desc, eq } from "drizzle-orm";
 import { db, schema } from "@/db";
 import {
@@ -50,18 +51,19 @@ export async function getStoreBySlug(slug: string) {
 }
 
 export async function getStoresBySegment(slug: string) {
-  return db
-    .select()
-    .from(schema.stores)
-    .where(eq(schema.stores.segment, slug))
-    .orderBy(schema.stores.name);
+  const [segment, stores] = await Promise.all([getSegmentBySlug(slug), getAllStores()]);
+  return segment ? stores.filter((store) => storeBelongsToSegment(store, segment)) : [];
 }
 
 export async function getAllSegments() {
-  return db
-    .select()
-    .from(schema.segments)
-    .orderBy(schema.segments.position, schema.segments.name);
+  const [segments, stores] = await Promise.all([
+    db.select().from(schema.segments).orderBy(schema.segments.position, schema.segments.name),
+    getAllStores(),
+  ]);
+  return segments.map((segment) => ({
+    ...segment,
+    storeCount: stores.filter((store) => storeBelongsToSegment(store, segment)).length,
+  }));
 }
 
 export async function getSegmentById(id: number) {

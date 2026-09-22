@@ -2,7 +2,8 @@
  * Serviços iniciais da página /servicos.
  *
  * São apenas os que já estavam publicados no site (recuperados da antiga seção
- * "Planeje sua visita") mais o caixa eletrônico, para não inventar comodidade
+ * "Planeje sua visita") mais o caixa eletrônico e os banheiros adaptados já
+ * descritos em acessibilidade, para não inventar comodidade
  * que o shopping talvez não tenha. O restante — wi-fi, fraldário, achados e
  * perdidos… — deve ser cadastrado pelo cliente em /admin/servicos.
  */
@@ -50,6 +51,14 @@ export const seedServices = [
     description:
       "Caixa eletrônico dentro do shopping para saques e consultas durante o horário de funcionamento.",
     position: 4,
+    published: true,
+  },
+  {
+    name: "Banheiros adaptados",
+    category: "Acessibilidade",
+    icon: "banheiro",
+    description: "Banheiros adaptados para uma visita mais acessível e confortável.",
+    position: 5,
     published: true,
   },
 ];

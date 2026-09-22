@@ -1,3 +1,5 @@
+import { categoryPhotos } from "./category-photos";
+
 type SeedSegment = {
   id: string;
   name: string;
@@ -7,7 +9,7 @@ type SeedSegment = {
   image?: string;
 };
 
-export const segments: SeedSegment[] = [
+const seedSegments: SeedSegment[] = [
   { id: "1", name: "Moda Feminina", slug: "moda-feminina", color: "#EA5D7A", storeCount: 45, image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80" },
   { id: "2", name: "Moda Masculina", slug: "moda-masculina", color: "#1B2A4A", storeCount: 30, image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80" },
   { id: "3", name: "Moda Infantil", slug: "moda-infantil", color: "#3BAA84", storeCount: 25, image: "https://images.unsplash.com/photo-1503944583220-79d8926ad5e2?w=800&q=80" },
@@ -32,3 +34,8 @@ export const segments: SeedSegment[] = [
   { id: "22", name: "Salão de beleza/barbearia", slug: "salao-de-beleza-barbearia", color: "#1B2A4A", storeCount: 0 },
   { id: "23", name: "Laboratório", slug: "laboratorio", color: "#1B2A4A", storeCount: 0 },
 ];
+
+export const segments: SeedSegment[] = seedSegments.map((segment) => ({
+  ...segment,
+  image: categoryPhotos[segment.slug] ?? segment.image,
+}));
