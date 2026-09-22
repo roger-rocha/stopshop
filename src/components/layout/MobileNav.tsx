@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 import { AnimatePresence, motion } from "motion/react";
 import { X } from "lucide-react";
 import { CTAButton } from "@/components/ui/CTAButton";
@@ -95,13 +95,7 @@ export function MobileNav({ isOpen, onClose, links }: MobileNavProps) {
                 aria-label="Stop Shop"
                 className="inline-flex items-center"
               >
-                <Image
-                  src="/logos/logo-new.png"
-                  alt="Stop Shop — Ninho da Moda"
-                  width={131}
-                  height={150}
-                  className="h-14 w-auto"
-                />
+                <BrandLogo compact />
               </Link>
               <button
                 ref={closeButtonRef}

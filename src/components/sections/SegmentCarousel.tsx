@@ -3,9 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ShoppingBag } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { StaggerChildren, StaggerItem } from "@/components/motion/StaggerChildren";
+import { useRef } from "react";
 import { SectionBackground } from "@/components/ui/SectionBackground";
 import type { Segment } from "@/db/schema";
 
@@ -17,7 +17,7 @@ interface SegmentCardData {
   name: string;
   slug: string;
   count: number;
-  image: string;
+  image: string | null;
 }
 
 function SegmentCard({ name, slug, count, image }: SegmentCardData) {
@@ -29,13 +29,14 @@ function SegmentCard({ name, slug, count, image }: SegmentCardData) {
         className="group relative overflow-hidden rounded-2xl"
         style={{ aspectRatio: "3/4" }}
       >
-        <Image
+        {image ? <Image
           src={image}
           alt={name}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-110"
           sizes="(max-width: 768px) 65vw, 25vw"
         />
+        : <div className="flex h-full items-center justify-center bg-brand-navy"><ShoppingBag aria-hidden="true" className="h-24 w-24 text-white/30" strokeWidth={1} /></div>}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/60 via-brand-navy/10 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-5">
           <h3 className="font-display text-lg font-bold text-white">{name}</h3>
@@ -53,13 +54,12 @@ function SegmentCard({ name, slug, count, image }: SegmentCardData) {
 }
 
 export function SegmentCarousel({ segments }: SegmentCarouselProps) {
-  const segmentCards: SegmentCardData[] = segments.slice(0, 6).map((segment) => ({
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const segmentCards: SegmentCardData[] = segments.map((segment) => ({
     name: segment.name,
     slug: segment.slug,
     count: segment.storeCount,
-    image:
-      segment.image ??
-      "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80",
+    image: segment.image,
   }));
 
   return (
@@ -82,23 +82,29 @@ export function SegmentCarousel({ segments }: SegmentCarouselProps) {
           light
         />
 
-        {/* Desktop: grid */}
-        <StaggerChildren className="hidden lg:grid grid-cols-3 gap-5">
-          {segmentCards.map((seg) => (
-            <StaggerItem key={seg.slug}>
-              <SegmentCard {...seg} />
-            </StaggerItem>
+        <div className="mb-5 flex justify-end gap-2">
+          {([-1, 1] as const).map((direction) => (
+            <button
+              key={direction}
+              type="button"
+              aria-label={direction === -1 ? "Categorias anteriores" : "Próximas categorias"}
+              onClick={() => {
+                const carousel = carouselRef.current;
+                if (carousel) carousel.scrollBy({ left: direction * carousel.clientWidth, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+              }}
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-border-default bg-white text-brand-navy hover:bg-surface-muted"
+            >
+              {direction === -1 ? <ArrowLeft className="h-5 w-5" /> : <ArrowRight className="h-5 w-5" />}
+            </button>
           ))}
-        </StaggerChildren>
-      </div>
-
-      {/* Mobile: horizontal scroll — full-bleed, contained to this section */}
-      <div className="flex gap-4 overflow-x-auto scroll-px-[var(--spacing-section-x)] snap-x snap-mandatory px-[var(--spacing-section-x)] pb-4 scrollbar-hide lg:hidden">
-        {segmentCards.map((seg) => (
-          <div key={seg.slug} className="w-[65vw] shrink-0 snap-start sm:w-[45vw]">
-            <SegmentCard {...seg} />
-          </div>
-        ))}
+        </div>
+        <div ref={carouselRef} role="region" aria-label="Categorias de lojas" tabIndex={0} className="scrollbar-hide flex snap-x snap-mandatory gap-5 overflow-x-auto pb-5">
+          {segmentCards.map((seg) => (
+            <div key={seg.slug} className="w-[75%] shrink-0 snap-start sm:w-[calc((100%-20px)/2)] lg:w-[calc((100%-40px)/3)]">
+              <SegmentCard {...seg} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

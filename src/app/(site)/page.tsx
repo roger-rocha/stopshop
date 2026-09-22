@@ -3,7 +3,6 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { OpeningHoursStrip } from "@/components/sections/OpeningHoursStrip";
 import { AnchorBrandsStrip } from "@/components/sections/AnchorBrandsStrip";
 import { SegmentCarousel } from "@/components/sections/SegmentCarousel";
-import { FeaturedStores } from "@/components/sections/FeaturedStores";
 import { AgendaSection } from "@/components/sections/AgendaSection";
 import { GallerySection } from "@/components/sections/GallerySection";
 import { InstagramFeed } from "@/components/sections/InstagramFeed";
@@ -12,7 +11,6 @@ import {
   getActiveEvents,
   getAllSegments,
   getContact,
-  getFeaturedStores,
   getGalleryImages,
   getHero,
 } from "@/lib/server/queries";
@@ -29,14 +27,12 @@ export default async function HomePage() {
   const [
     hero,
     segments,
-    featuredStores,
     contact,
     events,
     galleryImages,
   ] = await Promise.all([
     getHero(),
     getAllSegments(),
-    getFeaturedStores(6),
     getContact(),
     getActiveEvents(),
     getGalleryImages(),
@@ -116,7 +112,6 @@ export default async function HomePage() {
       <AgendaSection events={agendaEvents} />
       <AnchorBrandsStrip />
       <SegmentCarousel segments={segments} />
-      <FeaturedStores stores={featuredStores} />
       <GallerySection images={galleryImages} />
       <InstagramFeed />
       <MapSection />

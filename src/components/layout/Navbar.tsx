@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 import { usePathname } from "next/navigation";
 import { useScroll, useMotionValueEvent } from "motion/react";
 import { Menu } from "lucide-react";
@@ -46,14 +46,7 @@ export function Navbar() {
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 sm:py-5">
           {/* Logo */}
           <Link href="/" aria-label="Stop Shop" className="inline-flex items-center">
-            <Image
-              src="/logos/logo-new.png"
-              alt="Stop Shop — Ninho da Moda"
-              width={131}
-              height={150}
-              priority
-              className="h-16 w-auto sm:h-20"
-            />
+            <BrandLogo light={!useSolidStyle} />
           </Link>
 
           {/* Desktop Nav */}

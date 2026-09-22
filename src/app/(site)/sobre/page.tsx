@@ -40,11 +40,11 @@ const experiences = [
   },
   {
     icon: Bus,
-    title: "Compras no atacado",
+    title: "Excursões e grupos",
     description:
-      "Vem comprar para a sua loja? Conheça a estrutura para compradores e excursões, com apoio a guias e motoristas.",
-    href: "/atacado",
-    action: "Conheça o atacado",
+      "Planeje uma visita em grupo ao Stop Shop. Recebemos excursões com estrutura para ônibus e vans e apoio a guias e motoristas.",
+    href: "/contato",
+    action: "Planeje sua excursão",
   },
 ];
 

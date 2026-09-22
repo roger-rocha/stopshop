@@ -121,7 +121,7 @@ export function ServicesDirectory({ services }: { services: Service[] }) {
           // grid para opacity 0 e dependeria do observer disparar de novo — se
           // não disparasse, o conteúdo sumiria.
           amount={0.05}
-          className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          className="mt-6 grid grid-cols-2 gap-px overflow-hidden border border-border-default bg-border-default sm:grid-cols-3 lg:grid-cols-5"
         >
           {filtered.map((service) => (
             <StaggerItem key={service.id} className="h-full">
@@ -177,29 +177,13 @@ function CategoryPill({
 
 function ServiceCard({ service }: { service: Service }) {
   return (
-    <article className="group flex h-full flex-col rounded-[24px] border border-border-default bg-white p-6 shadow-card transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-card-hover">
-      <span
-        aria-hidden="true"
-        className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-coral/10 text-brand-coral transition-colors duration-300 group-hover:bg-brand-coral group-hover:text-white"
-      >
-        <ServiceIcon name={service.icon} className="h-5 w-5" />
+    <article className="flex h-full min-h-44 flex-col items-center justify-center bg-surface-soft px-4 py-8 text-center sm:min-h-48">
+      <span aria-hidden="true" className="text-brand-navy/65 [&_svg]:stroke-[1.25]">
+        <ServiceIcon name={service.icon} className="h-14 w-14 sm:h-16 sm:w-16" />
       </span>
-
-      <h2 className="mt-5 font-display text-lg font-bold leading-snug text-text-primary">
+      <h2 className="mt-4 text-sm font-medium leading-snug text-text-primary">
         {service.name}
       </h2>
-
-      {service.description && (
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-text-secondary">
-          {service.description}
-        </p>
-      )}
-
-      {service.category && (
-        <span className="mt-5 inline-flex w-fit rounded-pill bg-surface-muted px-3 py-1 text-xs font-medium text-text-secondary">
-          {service.category}
-        </span>
-      )}
     </article>
   );
 }
