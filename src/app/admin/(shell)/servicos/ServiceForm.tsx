@@ -51,7 +51,7 @@ export function ServiceForm({ service, categories }: ServiceFormProps) {
       <div className="grid gap-4 sm:grid-cols-2">
         <Field
           label="Categoria"
-          hint="Vira um filtro na página. Reaproveite as já usadas."
+          hint="Organize os serviços por categoria. Reaproveite as já usadas."
           error={errors.category?.[0]}
         >
           <input
@@ -91,13 +91,15 @@ export function ServiceForm({ service, categories }: ServiceFormProps) {
 
       <Field
         label="Descrição"
-        hint="Uma ou duas frases explicando o serviço"
+        hint="Texto exibido ao abrir o card no site. Inclua localização, horário, telefone e valor quando disponíveis. Use quebras de linha para separar as informações."
         error={errors.description?.[0]}
       >
         <textarea
           name="description"
           defaultValue={service?.description ?? ""}
-          rows={3}
+          rows={6}
+          maxLength={2000}
+          placeholder="Descreva o serviço e as informações úteis para o visitante."
           className={textareaCls}
         />
       </Field>

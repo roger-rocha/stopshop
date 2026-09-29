@@ -147,10 +147,10 @@ export const jobOpeningSchema = z.object({
 export type JobOpeningInput = z.infer<typeof jobOpeningSchema>;
 
 export const serviceSchema = z.object({
-  name: z.string().min(2, "Informe o nome do serviço."),
+  name: z.string().trim().min(2, "Informe o nome do serviço.").max(120, "Use até 120 caracteres."),
   category: z.string().default(""),
   icon: z.string().default("destaque"),
-  description: z.string().default(""),
+  description: z.string().trim().max(2000, "Use até 2000 caracteres na descrição.").default(""),
   published: z.preprocess(
     (v) => v === "on" || v === true || v === "true",
     z.boolean()

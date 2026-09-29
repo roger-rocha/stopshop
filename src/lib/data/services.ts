@@ -1,12 +1,4 @@
-/**
- * Serviços iniciais da página /servicos.
- *
- * São apenas os que já estavam publicados no site (recuperados da antiga seção
- * "Planeje sua visita") mais o caixa eletrônico e os banheiros adaptados já
- * descritos em acessibilidade, para não inventar comodidade
- * que o shopping talvez não tenha. O restante — wi-fi, fraldário, achados e
- * perdidos… — deve ser cadastrado pelo cliente em /admin/servicos.
- */
+/** Serviços iniciais, editáveis em /admin/servicos. O seed insere apenas os ausentes. */
 export const seedServices = [
   {
     name: "Estacionamento gratuito",
@@ -59,6 +51,38 @@ export const seedServices = [
     icon: "banheiro",
     description: "Banheiros adaptados para uma visita mais acessível e confortável.",
     position: 5,
+    published: true,
+  },
+  {
+    name: "Concierge / Achados e perdidos",
+    category: "Atendimento",
+    icon: "concierge",
+    description: "",
+    position: 6,
+    published: true,
+  },
+  {
+    name: "Espaço Família",
+    category: "Conveniência",
+    icon: "fraldario",
+    description: "",
+    position: 7,
+    published: true,
+  },
+  {
+    name: "Pet friendly",
+    category: "Conveniência",
+    icon: "pet",
+    description: "",
+    position: 8,
+    published: true,
+  },
+  {
+    name: "Wi-Fi",
+    category: "Conveniência",
+    icon: "wifi",
+    description: "",
+    position: 9,
     published: true,
   },
 ];

@@ -58,8 +58,9 @@ export default async function ServicosAdminPage() {
                           <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-button bg-brand-coral/10 text-brand-coral">
                             <ServiceIcon name={service.icon} className="h-4 w-4" />
                           </span>
-                          <span className="font-medium text-text-primary">
-                            {service.name}
+                          <span className="min-w-0">
+                            <span className="block font-medium text-text-primary">{service.name}</span>
+                            <span className="mt-1 line-clamp-2 max-w-md text-xs leading-relaxed text-text-secondary">{service.description || "Sem descrição — adicione os detalhes do serviço."}</span>
                           </span>
                         </span>
                       </td>
