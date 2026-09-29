@@ -30,7 +30,7 @@ export default async function BlogPage() {
       <PageHero
         eyebrow="Blog"
         title="Histórias, tendências e bastidores"
-        description="Conteúdos sobre moda, atacado e os movimentos do shopping em Brusque."
+        description="Conteúdos sobre moda, tendências e os movimentos do shopping em Brusque."
       />
 
       <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-16">

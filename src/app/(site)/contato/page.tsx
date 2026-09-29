@@ -8,7 +8,7 @@ import { siteContact } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contato",
   description:
-    "Entre em contato com a equipe do Stop Shop para informações sobre lojas, atendimento, cadastro e atacado.",
+    "Entre em contato com a equipe do Stop Shop para informações sobre lojas, atendimento e visitas ao shopping.",
 };
 
 export default function ContatoPage() {

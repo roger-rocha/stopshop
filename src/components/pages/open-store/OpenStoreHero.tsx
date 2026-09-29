@@ -11,7 +11,7 @@ import { keyFigures } from "@/lib/data/open-store";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const highlights = [
-  "Destino consolidado de atacado e varejo",
+  "Destino consolidado de compras no varejo",
   "Retorno comercial em até 2 dias úteis",
 ];
 

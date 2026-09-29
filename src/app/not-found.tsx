@@ -33,10 +33,10 @@ export default function NotFound() {
               Localização
             </Link>
             <Link
-              href="/atacado"
+              href="/servicos"
               className="rounded-full border border-border-subtle px-5 py-3 font-medium text-text-primary hover:border-brand-coral hover:text-brand-coral"
             >
-              Atacado
+              Serviços
             </Link>
             <Link
               href="/contato"

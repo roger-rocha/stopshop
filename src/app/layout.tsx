@@ -25,12 +25,12 @@ export const metadata: Metadata = {
     template: "%s | Stop Shop",
   },
   description:
-    "Mais de 160 marcas de moda em um só lugar. Visite o Stop Shop em Brusque, SC e aproveite preços de atacado e varejo.",
+    "Mais de 160 marcas de moda em um só lugar. Visite o Stop Shop em Brusque, SC e encontre moda e variedade para toda a família.",
   keywords: [
     "Stop Shop",
     "shopping Brusque",
     "moda Brusque",
-    "atacado Brusque",
+    "moda no varejo",
     "outlet Santa Catarina",
   ],
   openGraph: {

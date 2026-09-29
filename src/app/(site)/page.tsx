@@ -20,7 +20,7 @@ import { faqItems } from "@/lib/data/faq";
 export const metadata: Metadata = {
   title: "Stop Shop — Shopping de Moda em Brusque, SC | 160+ Marcas",
   description:
-    "Mais de 160 marcas de moda em um só lugar. Atacado e varejo com os melhores preços. Visite o Stop Shop em Brusque, SC.",
+    "Mais de 160 marcas de moda em um só lugar. Moda e variedade para toda a família. Visite o Stop Shop em Brusque, SC.",
 };
 
 export default async function HomePage() {
@@ -45,7 +45,7 @@ export default async function HomePage() {
     "@type": "ShoppingCenter",
     name: "Stop Shop",
     description:
-      "Shopping de moda com mais de 160 marcas. Atacado e varejo em Brusque, SC.",
+      "Shopping de moda com mais de 160 marcas. Compras de moda no varejo em Brusque, SC.",
     url: "https://stopshop.com.br",
     telephone: `+55${contact.phone}`,
     address: {

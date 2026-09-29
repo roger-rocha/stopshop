@@ -62,8 +62,8 @@ export default async function SobrePage() {
                 O ninho da moda de Brusque.
               </h1>
               <p className="mt-6 max-w-md text-lg leading-relaxed text-text-secondary">
-                Há mais de 30 anos, um ponto de encontro para quem ama moda
-                e para quem vive dela. Atacado e varejo em um só lugar.
+                Há mais de 30 anos, um ponto de encontro para quem ama moda.
+                Variedade e compras no varejo em um só lugar.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <CTAButton href="/lojas" className="rounded-full">Conheça nossas lojas</CTAButton>
@@ -116,10 +116,10 @@ export default async function SobrePage() {
                   e novas oportunidades.
                 </p>
                 <p>
-                  Somos um ponto de encontro para o atacado e o varejo: de quem
-                  vem escolher uma peça especial a quem chega em busca da próxima
-                  coleção para a sua loja. É essa mistura que dá vida ao nosso
-                  ninho da moda.
+                  Somos um ponto de encontro para quem busca uma peça especial,
+                  quer renovar o guarda-roupa ou escolher um presente. Moda e
+                  variedade para diferentes estilos e momentos da vida dão
+                  vida ao nosso ninho da moda.
                 </p>
               </div>
             </AnimateOnScroll>

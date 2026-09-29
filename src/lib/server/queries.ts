@@ -6,7 +6,6 @@ import {
   defaultHeroContent,
   siteContact,
   siteHighlights,
-  wholesaleBenefits,
 } from "@/lib/site";
 import {
   legalPageDefaults,
@@ -214,10 +213,6 @@ export async function getContact() {
 
 export async function getHighlights() {
   return getSetting<readonly string[]>("highlights", siteHighlights);
-}
-
-export async function getWholesaleBenefits() {
-  return getSetting<readonly string[]>("wholesaleBenefits", wholesaleBenefits);
 }
 
 export type LegalPage = LegalPageInput & {

@@ -31,6 +31,7 @@ export const storeSchema = z.object({
     .regex(slugRegex, "Slug deve conter apenas letras minúsculas, números e hífens."),
   photo: z.string().default(""),
   storefront: optionalString,
+  photos: z.array(z.string().trim().url("Informe uma URL de imagem válida.").refine((url) => url.startsWith("https://"), "Use imagens com URL HTTPS.")).max(12, "Envie até 12 fotos por loja.").default([]),
   description: z.string().default(""),
   instagram: optionalString,
   categories: csvList.pipe(z.array(z.string())),

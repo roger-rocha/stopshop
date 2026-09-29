@@ -1,6 +1,5 @@
 import {
   BadgePercent,
-  Bus,
   Building2,
   Handshake,
   LayoutGrid,
@@ -95,13 +94,7 @@ export const partnershipBenefits: Benefit[] = [
     icon: Users,
     title: "Público comprador",
     description:
-      "Fluxo diário de consumidores finais e lojistas multimarcas vindos de todo o Brasil em excursões organizadas.",
-  },
-  {
-    icon: Bus,
-    title: "Rota do atacado",
-    description:
-      "Brusque é destino consolidado de compras de moda. O Stop Shop está na principal rota de ônibus e vans.",
+      "Consumidores de Brusque e visitantes de outras regiões em busca de moda, variedade e uma experiência completa de compras.",
   },
   {
     icon: TrendingUp,
@@ -189,7 +182,7 @@ export const openStoreFaq: OpenStoreFAQ[] = [
     id: "segmentos",
     question: "Quais segmentos o Stop Shop está buscando?",
     answer:
-      "Moda feminina, masculina, infantil, calçados, acessórios, cosméticos e gastronomia. Marcas com apelo para atacado e varejo têm prioridade.",
+      "Moda feminina, masculina, infantil, calçados, acessórios, cosméticos e gastronomia. Buscamos marcas que complementem a experiência de compras no varejo.",
   },
   {
     id: "quiosque",

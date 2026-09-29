@@ -12,12 +12,6 @@ export const faqItems: FAQItem[] = [
       "Funcionamos de segunda a sábado das 09h às 19h. Domingos e feriados estamos fechados, exceto em datas especiais previamente anunciadas.",
   },
   {
-    id: "atacado",
-    question: "Posso comprar no atacado mesmo sem ser lojista?",
-    answer:
-      "Sim! No Stop Shop você encontra opções de atacado e varejo. Para compras no atacado, a maioria das lojas exige uma quantidade mínima por modelo (geralmente a partir de 6 peças). Não é necessário CNPJ.",
-  },
-  {
     id: "estacionamento",
     question: "O estacionamento é gratuito?",
     answer:

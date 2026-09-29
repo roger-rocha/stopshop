@@ -1,8 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
-import { Instagram, Search, Store as StoreIcon } from "lucide-react";
+import { StoreGallery } from "@/components/ui/StoreGallery";
+import { matchesStoreSearch, normalizeStoreSearch as normalize, isWholesaleSearch, retailSearchMessage } from "@/lib/store-search";
+import { Instagram, Search } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { storeBelongsToSegment } from "@/lib/store-segments";
 import { cn, whatsappLink } from "@/lib/utils";
@@ -17,13 +18,6 @@ interface StoreDirectoryProps {
 
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 const OTHER_LETTER = "#";
-
-// Remove acentos e caixa para busca/ordenação tolerantes.
-const normalize = (value: string) =>
-  value
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase();
 
 function initialLetter(name: string) {
   const first = normalize(name).charAt(0).toUpperCase();
@@ -49,44 +43,18 @@ export function StoreDirectory({
 
   const activeSegment = segments.find((segment) => segment.slug === selectedSegment);
 
-  const filteredStores = useMemo(() => {
-    const q = normalize(query.trim());
+  const matchingStores = useMemo(() => stores.filter((store) => {
+    const matchesSegment = selectedSegment === "todos" ||
+      (activeSegment !== undefined && storeBelongsToSegment(store, activeSegment));
+    return matchesSegment && matchesStoreSearch(store, query);
+  }).sort((a, b) => a.name.localeCompare(b.name, "pt-BR")), [query, selectedSegment, activeSegment, stores]);
 
-    return stores
-      .filter((store) => {
-        const matchesSegment =
-          selectedSegment === "todos" || (activeSegment !== undefined && storeBelongsToSegment(store, activeSegment));
+  const filteredStores = useMemo(() => matchingStores.filter((store) =>
+    letter === null || initialLetter(store.name) === letter
+  ), [letter, matchingStores]);
 
-        const matchesLetter =
-          letter === null || initialLetter(store.name) === letter;
-
-        const matchesQuery =
-          q.length === 0 ||
-          normalize(store.name).includes(q) ||
-          normalize(store.location).includes(q) ||
-          store.categories.some((category) => normalize(category).includes(q));
-
-        return matchesSegment && matchesLetter && matchesQuery;
-      })
-      .sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
-  }, [letter, query, selectedSegment, activeSegment, stores]);
-
-  // Letras sem nenhuma loja (no segmento/busca atuais) ficam desabilitadas.
-  const availableLetters = useMemo(() => {
-    const q = normalize(query.trim());
-    const set = new Set<string>();
-    for (const store of stores) {
-      const matchesSegment =
-        selectedSegment === "todos" || (activeSegment !== undefined && storeBelongsToSegment(store, activeSegment));
-      const matchesQuery =
-        q.length === 0 ||
-        normalize(store.name).includes(q) ||
-        normalize(store.location).includes(q) ||
-        store.categories.some((category) => normalize(category).includes(q));
-      if (matchesSegment && matchesQuery) set.add(initialLetter(store.name));
-    }
-    return set;
-  }, [query, selectedSegment, activeSegment, stores]);
+  const availableLetters = useMemo(() =>
+    new Set(matchingStores.map((store) => initialLetter(store.name))), [matchingStores]);
 
   const grouped = useMemo(() => {
     const map = new Map<string, Store[]>();
@@ -120,9 +88,9 @@ export function StoreDirectory({
             <Search className="h-4 w-4 shrink-0 text-text-muted" />
             <input
               value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Pesquisar por loja"
-              aria-label="Pesquisar por loja"
+              onChange={(event) => { setQuery(event.target.value); setLetter(null); }}
+              placeholder="Buscar loja, produto ou categoria"
+              aria-label="Buscar loja, produto ou categoria"
               className="w-full bg-transparent text-sm text-text-primary outline-none placeholder:text-text-muted"
             />
           </label>
@@ -239,10 +207,11 @@ export function StoreDirectory({
 
           {filteredStores.length === 0 && (
             <div className="mt-8 rounded-[28px] border border-dashed border-border-subtle bg-surface-soft px-6 py-12 text-center">
-              <p className="font-medium text-text-primary">Nenhuma loja encontrada.</p>
+              <p className="font-medium text-text-primary">{isWholesaleSearch(query) ? "Compras no varejo" : "Nenhuma loja encontrada."}</p>
               <p className="mt-2 text-sm text-text-secondary">
-                Tente outro termo de busca, letra ou categoria.
+                {isWholesaleSearch(query) ? retailSearchMessage : "Tente outro termo de busca, letra ou categoria."}
               </p>
+              <button type="button" onClick={() => { setQuery(""); setLetter(null); setSelectedSegment("todos"); }} className="mt-4 font-semibold text-brand-coral">Ver todas as lojas</button>
             </div>
           )}
         </div>
@@ -252,39 +221,11 @@ export function StoreDirectory({
 }
 
 function StoreRow({ store }: { store: Store }) {
-  // O logo (PNG com fundo transparente) precisa de respiro e `contain`;
-  // a foto de fachada fica melhor preenchendo o quadro inteiro.
-  const isLogo = Boolean(store.photo);
-  const image = store.photo || store.storefront;
   const instagram = instagramUrl(store.instagram);
 
   return (
     <article className="group grid gap-4 py-6 sm:grid-cols-[minmax(0,180px)_minmax(0,1fr)_auto] sm:items-center sm:gap-7">
-      <div
-        className={cn(
-          "relative aspect-[4/3] w-full max-w-[220px] shrink-0 overflow-hidden rounded-[20px] border border-border-default sm:max-w-none",
-          isLogo ? "bg-white" : "bg-surface-soft"
-        )}
-      >
-        {image ? (
-          <Image
-            src={image}
-            alt={store.name}
-            fill
-            className={cn(
-              "transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
-              isLogo
-                ? "object-contain p-5"
-                : "object-cover group-hover:scale-[1.04]"
-            )}
-            sizes="(min-width: 640px) 180px, 220px"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center text-text-muted">
-            <StoreIcon className="h-7 w-7" aria-hidden="true" />
-          </div>
-        )}
-      </div>
+      <StoreGallery store={store} preferLogo className="w-full max-w-[220px] shrink-0 rounded-[20px] border border-border-default bg-white sm:max-w-none" />
 
       <div className="min-w-0">
         <h4 className="font-display text-xl font-bold text-text-primary">

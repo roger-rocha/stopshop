@@ -11,10 +11,12 @@ import {
 } from "react";
 import { useRouter } from "next/navigation";
 import { Search, Store as StoreIcon } from "lucide-react";
+import { matchesStoreSearch, normalizeStoreSearch as normalize, isWholesaleSearch, retailSearchMessage } from "@/lib/store-search";
 import { cn } from "@/lib/utils";
 
 type StoreLite = {
   name: string;
+  description: string;
   slug: string;
   segment: string;
   categories: string[];
@@ -32,13 +34,6 @@ function loadStores(): Promise<StoreLite[]> {
   }
   return storesCache;
 }
-
-// Remove acentos e caixa para busca tolerante ("cafe" acha "Café").
-const normalize = (value: string) =>
-  value
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase();
 
 const MAX_RESULTS = 7;
 
@@ -75,17 +70,9 @@ export function StoreSearch({
     const q = normalize(query.trim());
     if (!q) return [] as StoreLite[];
     return stores
-      .filter(
-        (s) =>
-          normalize(s.name).includes(q) ||
-          s.categories.some((c) => normalize(c).includes(q))
-      )
+      .filter((store) => matchesStoreSearch(store, q))
       .slice(0, MAX_RESULTS);
   }, [query, stores]);
-
-  useEffect(() => {
-    setActiveIndex(-1);
-  }, [query]);
 
   // Fecha ao clicar fora.
   useEffect(() => {
@@ -151,6 +138,7 @@ export function StoreSearch({
           value={query}
           onChange={(event) => {
             setQuery(event.target.value);
+            setActiveIndex(-1);
             setOpen(true);
           }}
           onFocus={() => {
@@ -234,7 +222,7 @@ export function StoreSearch({
             </ul>
           ) : (
             <p className="px-4 py-6 text-center text-sm text-text-muted">
-              Nenhuma loja encontrada para “{query.trim()}”.
+              {isWholesaleSearch(query) ? retailSearchMessage : `Nenhuma loja encontrada para “${query.trim()}”.`}
             </p>
           )}
         </div>

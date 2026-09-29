@@ -33,6 +33,7 @@ export const stores = sqliteTable("stores", {
   slug: text("slug").notNull().unique(),
   photo: text("photo").notNull().default(""),
   storefront: text("storefront"),
+  photos: text("photos", { mode: "json" }).$type<string[]>().notNull().default([]),
   description: text("description").notNull().default(""),
   instagram: text("instagram"),
   categories: text("categories", { mode: "json" })

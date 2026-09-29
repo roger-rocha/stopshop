@@ -51,7 +51,7 @@ export function Footer({ contact }: FooterProps) {
                 />
               </Link>
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-text-secondary">
-                Mais de 160 marcas de moda em um só lugar. Atacado e varejo com os melhores preços de Brusque, SC.
+                Mais de 160 marcas de moda em um só lugar. Moda e variedade para suas compras em Brusque, SC.
               </p>
               <div className="mt-4 flex gap-3">
                 {siteSocialLinks.map((social) => {

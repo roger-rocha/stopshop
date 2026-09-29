@@ -21,6 +21,7 @@ function parseStoreForm(formData: FormData) {
     slug: formData.get("slug"),
     photo: formData.get("photo") ?? "",
     storefront: formData.get("storefront") ?? "",
+    photos: formData.getAll("photos"),
     description: formData.get("description") ?? "",
     instagram: formData.get("instagram") ?? "",
     categories: formData.get("categories") ?? "",
@@ -37,6 +38,7 @@ function revalidateStores() {
   revalidatePath("/admin/stores");
   revalidatePath("/");
   revalidatePath("/lojas");
+  revalidatePath("/api/stores/search");
   revalidatePath("/segmentos", "layout");
 }
 

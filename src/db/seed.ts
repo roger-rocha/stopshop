@@ -12,7 +12,6 @@ import {
   defaultHeroContent,
   siteContact,
   siteHighlights,
-  wholesaleBenefits,
 } from "@/lib/site";
 
 async function seed() {
@@ -136,7 +135,6 @@ async function seed() {
       },
     },
     { key: "highlights", value: siteHighlights },
-    { key: "wholesaleBenefits", value: wholesaleBenefits },
     // Políticas institucionais — editáveis em /admin/institucional
     ...legalPages.map((page) => {
       const { title, description, body } = legalPageDefaults[page.slug];

@@ -9,6 +9,7 @@ export async function GET() {
   const stores = await getAllStores();
   const list = stores.map((s) => ({
     name: s.name,
+    description: s.description,
     slug: s.slug,
     segment: s.segment,
     categories: s.categories,

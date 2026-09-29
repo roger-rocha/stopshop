@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import { Phone, Instagram, Store as StoreIcon } from "lucide-react";
+import { StoreGallery } from "./StoreGallery";
+import { Phone, Instagram } from "lucide-react";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { cn, whatsappLink } from "@/lib/utils";
 import type { Store } from "@/db/schema";
@@ -12,9 +12,6 @@ interface StoreCardProps {
 }
 
 export function StoreCard({ store, className }: StoreCardProps) {
-  const hasStorefront = store.storefront && store.storefront.length > 0;
-  const hasLogo = store.photo && store.photo.length > 0;
-  const image = hasStorefront ? store.storefront! : hasLogo ? store.photo : null;
   const segmentLabel = store.categories[0];
   const instagramUrl = store.instagram
     ? store.instagram.startsWith("http")
@@ -25,29 +22,13 @@ export function StoreCard({ store, className }: StoreCardProps) {
   return (
     <article className={cn("group flex h-full flex-col", className)}>
       {/* Image */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-surface-muted">
-        {image ? (
-          <Image
-            src={image}
-            alt={`Loja ${store.name}`}
-            fill
-            className={cn(
-              "transition-transform duration-500 group-hover:scale-105",
-              hasStorefront ? "object-cover" : "object-contain p-8"
-            )}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center text-text-muted">
-            <StoreIcon className="h-10 w-10" aria-hidden="true" />
-          </div>
-        )}
+      <StoreGallery store={store}>
         {segmentLabel && (
           <span className="absolute left-3 top-3 rounded-pill bg-white/95 px-3 py-1 text-[11px] font-semibold text-brand-navy shadow-card backdrop-blur-sm">
             {segmentLabel}
           </span>
         )}
-      </div>
+      </StoreGallery>
 
       {/* Info */}
       <div className="mt-3 flex flex-1 flex-col">

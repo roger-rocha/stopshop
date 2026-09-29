@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import {
   createStoreAction,
   updateStoreAction,
@@ -8,6 +8,7 @@ import {
 } from "@/lib/server/actions/stores";
 import { Field, inputCls } from "../_components/Field";
 import { ImageUpload } from "../_components/ImageUpload";
+import { StorePhotosManager } from "./StorePhotosManager";
 import type { Segment, Store } from "@/db/schema";
 
 const initial: StoreFormState = { status: "idle" };
@@ -18,6 +19,7 @@ interface StoreFormProps {
 }
 
 export function StoreForm({ segments, store }: StoreFormProps) {
+  const [uploadingPhotos, setUploadingPhotos] = useState(false);
   const action = store
     ? updateStoreAction.bind(null, store.id)
     : createStoreAction;
@@ -26,7 +28,7 @@ export function StoreForm({ segments, store }: StoreFormProps) {
   const errors = state.status === "error" ? state.fieldErrors ?? {} : {};
 
   return (
-    <form action={formAction} className="space-y-6">
+    <form action={formAction} onSubmit={(event) => { if (uploadingPhotos) event.preventDefault(); }} className="space-y-6">
       {state.status === "error" && !state.fieldErrors && (
         <div className="rounded-button bg-brand-coral/10 px-3 py-2 text-sm text-brand-coral">
           {state.message}
@@ -110,6 +112,8 @@ export function StoreForm({ segments, store }: StoreFormProps) {
         />
       </div>
 
+      <StorePhotosManager defaultPhotos={store?.photos ?? []} onUploadingChange={setUploadingPhotos} fieldError={errors.photos?.[0]} />
+
       <Field
         label="Descrição"
         hint="Texto informativo sobre a loja, exibido abaixo do nome no guia de lojas (2 a 3 linhas)"
@@ -189,7 +193,7 @@ export function StoreForm({ segments, store }: StoreFormProps) {
       <div className="flex items-center justify-end gap-3 border-t border-border-default pt-5">
         <button
           type="submit"
-          disabled={pending}
+          disabled={pending || uploadingPhotos}
           className="inline-flex items-center gap-2 rounded-button bg-brand-navy px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-navy/90 disabled:opacity-60"
         >
           {pending ? "Salvando…" : store ? "Salvar alterações" : "Criar loja"}

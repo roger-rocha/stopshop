@@ -2,7 +2,6 @@ import {
   getContact,
   getHero,
   getHighlights,
-  getWholesaleBenefits,
 } from "@/lib/server/queries";
 import { PageHeader } from "../_components/PageHeader";
 import { HeroSettingsForm } from "./HeroSettingsForm";
@@ -13,11 +12,10 @@ export const dynamic = "force-dynamic";
 export const metadata = { title: "Configurações" };
 
 export default async function SettingsPage() {
-  const [hero, contact, highlights, wholesale] = await Promise.all([
+  const [hero, contact, highlights] = await Promise.all([
     getHero(),
     getContact(),
     getHighlights(),
-    getWholesaleBenefits(),
   ]);
 
   return (
@@ -40,9 +38,7 @@ export default async function SettingsPage() {
           <ListSettingsForm settingKey="highlights" items={[...highlights]} />
         </Section>
 
-        <Section title="Benefícios de atacado" description="Lista usada na página de atacado.">
-          <ListSettingsForm settingKey="wholesaleBenefits" items={[...wholesale]} />
-        </Section>
+
       </div>
     </div>
   );

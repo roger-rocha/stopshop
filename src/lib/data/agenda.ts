@@ -27,19 +27,6 @@ export const seedEvents: SeedEvent[] = [
     position: 0,
   },
   {
-    title: "Excursão dos Lojistas",
-    description:
-      "Recepção especial para lojistas e excursões com áreas de descanso, café e atendimento exclusivo.",
-    image:
-      "https://images.unsplash.com/photo-1607082352121-fa243f3dde32?w=1600&q=80",
-    dateLabel: "Toda quinta-feira",
-    startDate: null,
-    endDate: null,
-    ctaLabel: "Saiba mais",
-    ctaHref: "/atacado",
-    position: 1,
-  },
-  {
     title: "Festival de Inverno",
     description:
       "Lançamentos das coleções de inverno com descontos exclusivos, food trucks e música ao vivo no estacionamento.",

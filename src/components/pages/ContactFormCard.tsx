@@ -77,7 +77,6 @@ export function ContactFormCard() {
                 <option value="">Departamento</option>
                 <option value="marketing">Marketing</option>
                 <option value="atendimento">Atendimento</option>
-                <option value="atacado">Atacado</option>
               </select>
             </div>
           </div>

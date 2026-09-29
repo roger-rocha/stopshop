@@ -64,10 +64,3 @@ export const siteHighlights = [
   "Praça de alimentação completa",
   "Dois estacionamentos externos gratuitos",
 ] as const;
-
-export const wholesaleBenefits = [
-  "Atendimento pensado para excursões e compradores multimarcas",
-  "Área de descanso para guias e motoristas",
-  "Mix de moda feminina, masculina, infantil e segmentos complementares",
-  "Estrutura com estacionamento para ônibus, vans e carros",
-] as const;
