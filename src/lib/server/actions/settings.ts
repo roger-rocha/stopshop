@@ -5,6 +5,7 @@ import { eq } from "drizzle-orm";
 import { db, schema } from "@/db";
 import { requireSession } from "@/lib/auth";
 import { contactSettingsSchema, heroSettingsSchema } from "@/lib/validators";
+import { openingScheduleSchema } from "@/lib/opening-schedule";
 
 export type SettingsState =
   | { status: "idle" }
@@ -70,6 +71,27 @@ export async function saveContactAction(
   await upsertSetting("contact", parsed.data);
   revalidateAll();
   return { status: "success", message: "Contato atualizado." };
+}
+
+export async function saveOpeningScheduleAction(
+  _prev: SettingsState,
+  formData: FormData
+): Promise<SettingsState> {
+  await requireSession();
+  let input: unknown;
+  try {
+    input = JSON.parse(String(formData.get("schedule") ?? ""));
+  } catch {
+    return { status: "error", message: "Não foi possível ler a agenda." };
+  }
+  const parsed = openingScheduleSchema.safeParse(input);
+  if (!parsed.success) {
+    return { status: "error", message: parsed.error.issues[0]?.message ?? "Revise as datas da agenda." };
+  }
+  parsed.data.entries.sort((a, b) => a.date.localeCompare(b.date));
+  await upsertSetting("openingSchedule", parsed.data);
+  revalidateAll();
+  return { status: "success", message: "Agenda de funcionamento atualizada." };
 }
 
 export async function saveListSettingAction(

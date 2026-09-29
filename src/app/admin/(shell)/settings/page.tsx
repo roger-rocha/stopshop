@@ -2,20 +2,23 @@ import {
   getContact,
   getHero,
   getHighlights,
+  getOpeningSchedule,
 } from "@/lib/server/queries";
 import { PageHeader } from "../_components/PageHeader";
 import { HeroSettingsForm } from "./HeroSettingsForm";
 import { ContactSettingsForm } from "./ContactSettingsForm";
 import { ListSettingsForm } from "./ListSettingsForm";
+import { OpeningScheduleForm } from "./OpeningScheduleForm";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Configurações" };
 
 export default async function SettingsPage() {
-  const [hero, contact, highlights] = await Promise.all([
+  const [hero, contact, highlights, openingSchedule] = await Promise.all([
     getHero(),
     getContact(),
     getHighlights(),
+    getOpeningSchedule(),
   ]);
 
   return (
@@ -32,6 +35,10 @@ export default async function SettingsPage() {
 
         <Section title="Contato">
           <ContactSettingsForm contact={contact} />
+        </Section>
+
+        <Section title="Agenda de funcionamento" description="Cadastre aberturas e fechamentos em domingos, feriados e datas especiais. Os meses aparecem automaticamente na home. Edite o horário habitual em Contato.">
+          <OpeningScheduleForm schedule={openingSchedule} />
         </Section>
 
         <Section title="Destaques da home" description="Lista de bullets exibida no site.">

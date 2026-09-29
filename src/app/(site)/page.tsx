@@ -13,7 +13,9 @@ import {
   getContact,
   getGalleryImages,
   getHero,
+  getOpeningSchedule,
 } from "@/lib/server/queries";
+import { shoppingMonth } from "@/lib/opening-schedule";
 import { withEventStatus } from "@/lib/events";
 import { faqItems } from "@/lib/data/faq";
 
@@ -23,6 +25,8 @@ export const metadata: Metadata = {
     "Mais de 160 marcas de moda em um só lugar. Moda e variedade para toda a família. Visite o Stop Shop em Brusque, SC.",
 };
 
+export const revalidate = 60;
+
 export default async function HomePage() {
   const [
     hero,
@@ -30,12 +34,14 @@ export default async function HomePage() {
     contact,
     events,
     galleryImages,
+    openingSchedule,
   ] = await Promise.all([
     getHero(),
     getAllSegments(),
     getContact(),
     getActiveEvents(),
     getGalleryImages(),
+    getOpeningSchedule(),
   ]);
 
   const agendaEvents = withEventStatus(events);
@@ -108,7 +114,7 @@ export default async function HomePage() {
       />
 
       <HeroSection hero={hero} />
-      <OpeningHoursStrip />
+      <OpeningHoursStrip schedule={openingSchedule} currentMonth={shoppingMonth()} regularHours={contact.hours} whatsapp={contact.whatsapp} />
       <AgendaSection events={agendaEvents} />
       <AnchorBrandsStrip />
       <SegmentCarousel segments={segments} />

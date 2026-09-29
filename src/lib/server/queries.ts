@@ -1,4 +1,5 @@
 import "server-only";
+import { openingScheduleSchema } from "@/lib/opening-schedule";
 import { storeBelongsToSegment } from "@/lib/store-segments";
 import { asc, desc, eq } from "drizzle-orm";
 import { db, schema } from "@/db";
@@ -209,6 +210,12 @@ export async function getHero() {
 
 export async function getContact() {
   return getSetting<ContactSettings>("contact", defaultContact);
+}
+
+export async function getOpeningSchedule() {
+  const saved = await getSetting<unknown>("openingSchedule", { entries: [] });
+  const parsed = openingScheduleSchema.safeParse(saved);
+  return parsed.success ? parsed.data : { entries: [] };
 }
 
 export async function getHighlights() {
