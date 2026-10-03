@@ -6,6 +6,7 @@ import { db, schema } from "@/db";
 import { requireSession } from "@/lib/auth";
 import { contactSettingsSchema, heroSettingsSchema } from "@/lib/validators";
 import { openingScheduleSchema } from "@/lib/opening-schedule";
+import { SITE_VISIBILITY_KEY } from "@/lib/server/site-visibility";
 
 export type SettingsState =
   | { status: "idle" }
@@ -33,6 +34,27 @@ async function upsertSetting(key: string, value: unknown) {
 function revalidateAll() {
   revalidatePath("/", "layout");
   revalidatePath("/admin/settings");
+}
+
+export async function saveSiteVisibilityAction(
+  _prev: SettingsState,
+  formData: FormData
+): Promise<SettingsState> {
+  await requireSession();
+  const visibility = formData.get("visibility");
+  if (visibility !== "maintenance" && visibility !== "published") {
+    return { status: "error", message: "Escolha a disponibilidade do site." };
+  }
+
+  const published = visibility === "published";
+  await upsertSetting(SITE_VISIBILITY_KEY, published);
+  revalidateAll();
+  return {
+    status: "success",
+    message: published
+      ? "Site publicado. Todos os visitantes já podem acessar."
+      : "Site em construção. Apenas administradores logados podem navegar.",
+  };
 }
 
 export async function saveHeroAction(

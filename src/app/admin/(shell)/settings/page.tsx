@@ -9,26 +9,33 @@ import { HeroSettingsForm } from "./HeroSettingsForm";
 import { ContactSettingsForm } from "./ContactSettingsForm";
 import { ListSettingsForm } from "./ListSettingsForm";
 import { OpeningScheduleForm } from "./OpeningScheduleForm";
+import { SiteVisibilityForm } from "./SiteVisibilityForm";
+import { getSitePublished } from "@/lib/server/site-visibility";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Configurações" };
 
 export default async function SettingsPage() {
-  const [hero, contact, highlights, openingSchedule] = await Promise.all([
+  const [hero, contact, highlights, openingSchedule, published] = await Promise.all([
     getHero(),
     getContact(),
     getHighlights(),
     getOpeningSchedule(),
+    getSitePublished(),
   ]);
 
   return (
     <div>
       <PageHeader
         title="Configurações"
-        description="Hero da home, dados de contato e listas exibidas no site."
+        description="Disponibilidade do site, hero da home, dados de contato e listas."
       />
 
       <div className="space-y-8">
+        <Section title="Disponibilidade do site">
+          <SiteVisibilityForm published={published} />
+        </Section>
+
         <Section title="Hero da home">
           <HeroSettingsForm hero={hero} />
         </Section>
