@@ -28,8 +28,13 @@ export async function loginAction(
     return { status: "error", message: result.error };
   }
 
-  const nextPath = (formData.get("next") as string | null) ?? "/admin";
-  redirect(nextPath || "/admin");
+  const nextPath = formData.get("next");
+  const safePath = typeof nextPath === "string" &&
+    (nextPath === "/admin" || nextPath.startsWith("/admin/")) &&
+    !/[\\\x00-\x20\x7f]/.test(nextPath)
+    ? nextPath
+    : "/admin";
+  redirect(safePath);
 }
 
 export async function logoutAction() {
