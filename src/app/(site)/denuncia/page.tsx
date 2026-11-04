@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
+import { getSeoMetadata } from "@/lib/server/seo";
 import { Lock, EyeOff, Clock } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { DenunciaFormCard } from "@/components/pages/DenunciaFormCard";
 
-export const metadata: Metadata = {
-  title: "Portal de Denúncia",
-  description:
-    "Canal seguro e confidencial do Stop Shop para registrar denúncias de conduta, assédio, fraude ou questões de segurança, de forma identificada ou anônima.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return getSeoMetadata("/denuncia", "/denuncia");
+}
 
 const commitments = [
   {

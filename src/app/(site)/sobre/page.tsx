@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getSeoMetadata } from "@/lib/server/seo";
 import Image from "next/image";
 import { ArrowRight, Bus, Coffee, ShoppingBag } from "lucide-react";
 import { AnimateOnScroll } from "@/components/motion/AnimateOnScroll";
@@ -8,11 +9,9 @@ import { InstitutionalVideo } from "@/components/ui/InstitutionalVideo";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getGalleryImages } from "@/lib/server/queries";
 
-export const metadata: Metadata = {
-  title: "Sobre",
-  description:
-    "Conheça a história do Stop Shop, o ninho da moda de Brusque, com mais de 160 marcas de moda em um só lugar.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return getSeoMetadata("/sobre", "/sobre");
+}
 
 const highlights = [
   { value: "30+", label: "anos de história" },

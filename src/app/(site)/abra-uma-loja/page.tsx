@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getSeoMetadata, getSeoSettings } from "@/lib/server/seo";
 import { AnchorBrandsStrip } from "@/components/sections/AnchorBrandsStrip";
 import { OpenStoreHero } from "@/components/pages/open-store/OpenStoreHero";
 import { OpenStoreFormats } from "@/components/pages/open-store/OpenStoreFormats";
@@ -7,14 +8,14 @@ import { OpenStoreProcess } from "@/components/pages/open-store/OpenStoreProcess
 import { OpenStoreContactSection } from "@/components/pages/open-store/OpenStoreContactSection";
 import { OpenStoreFAQ } from "@/components/pages/open-store/OpenStoreFAQ";
 import { openStoreFaq } from "@/lib/data/open-store";
+import { serializeJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Abra sua loja no Stop Shop",
-  description:
-    "Lojas, quiosques e espaços de mídia no maior shopping de moda de Brusque, SC. Mais de 160 marcas, 30 anos de história e público comprador de todo o Brasil.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return getSeoMetadata("/abra-uma-loja", "/abra-uma-loja");
+}
 
-export default function AbraUmaLojaPage() {
+export default async function AbraUmaLojaPage() {
+  const seo = await getSeoSettings();
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -27,10 +28,12 @@ export default function AbraUmaLojaPage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      {seo.structuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqSchema) }}
+        />
+      )}
       <OpenStoreHero />
       <AnchorBrandsStrip />
       <OpenStoreFormats />

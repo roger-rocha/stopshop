@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getSeoMetadata, getSeoSettings } from "@/lib/server/seo";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { OpeningHoursStrip } from "@/components/sections/OpeningHoursStrip";
 import { AnchorBrandsStrip } from "@/components/sections/AnchorBrandsStrip";
@@ -17,13 +18,11 @@ import {
 } from "@/lib/server/queries";
 import { shoppingMonth } from "@/lib/opening-schedule";
 import { withEventStatus } from "@/lib/events";
-import { faqItems } from "@/lib/data/faq";
+import { serializeJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Stop Shop — Shopping de Moda em Brusque, SC | 160+ Marcas",
-  description:
-    "Mais de 160 marcas de moda em um só lugar. Moda e variedade para toda a família. Visite o Stop Shop em Brusque, SC.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return getSeoMetadata("/", "/");
+}
 
 export const revalidate = 60;
 
@@ -35,6 +34,7 @@ export default async function HomePage() {
     events,
     galleryImages,
     openingSchedule,
+    seo,
   ] = await Promise.all([
     getHero(),
     getAllSegments(),
@@ -42,6 +42,7 @@ export default async function HomePage() {
     getActiveEvents(),
     getGalleryImages(),
     getOpeningSchedule(),
+    getSeoSettings(),
   ]);
 
   const agendaEvents = withEventStatus(events);
@@ -49,10 +50,12 @@ export default async function HomePage() {
   const shoppingCenterSchema = {
     "@context": "https://schema.org",
     "@type": "ShoppingCenter",
-    name: "Stop Shop",
-    description:
-      "Shopping de moda com mais de 160 marcas. Compras de moda no varejo em Brusque, SC.",
-    url: "https://stopshop.com.br",
+    name: seo.siteName,
+    description: seo.defaultDescription,
+    url: seo.siteUrl,
+    ...(seo.defaultImage && { image: new URL(seo.defaultImage, seo.siteUrl).href }),
+    ...(seo.logo && { logo: new URL(seo.logo, seo.siteUrl).href }),
+    ...(seo.socialLinks.length > 0 && { sameAs: seo.socialLinks }),
     telephone: `+55${contact.phone}`,
     address: {
       "@type": "PostalAddress",
@@ -85,33 +88,14 @@ export default async function HomePage() {
     numberOfStores: 160,
   };
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqItems.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(shoppingCenterSchema),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema),
-        }}
-      />
+      {seo.structuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(shoppingCenterSchema) }}
+        />
+      )}
 
       <HeroSection hero={hero} />
       <OpeningHoursStrip schedule={openingSchedule} currentMonth={shoppingMonth()} regularHours={contact.hours} whatsapp={contact.whatsapp} />

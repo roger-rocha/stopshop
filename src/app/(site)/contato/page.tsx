@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
+import { getSeoMetadata } from "@/lib/server/seo";
 import { Mail, Phone } from "lucide-react";
 import { ContactFormCard } from "@/components/pages/ContactFormCard";
 import { PageHero } from "@/components/ui/PageHero";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { siteContact } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contato",
-  description:
-    "Entre em contato com a equipe do Stop Shop para informações sobre lojas, atendimento e visitas ao shopping.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return getSeoMetadata("/contato", "/contato");
+}
 
 export default function ContatoPage() {
   return (

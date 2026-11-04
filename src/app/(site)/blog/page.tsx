@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
+import { getSeoMetadata } from "@/lib/server/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/ui/PageHero";
 import { getAllPosts } from "@/lib/server/queries";
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description:
-    "Acompanhe novidades, lançamentos e bastidores do Stop Shop em Brusque, SC.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return getSeoMetadata("/blog", "/blog");
+}
 
 const dateFormatter = new Intl.DateTimeFormat("pt-BR", {
   day: "2-digit",

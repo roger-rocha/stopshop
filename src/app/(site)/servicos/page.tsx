@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getSeoMetadata } from "@/lib/server/seo";
 import { PageHero } from "@/components/ui/PageHero";
 import { ServicesDirectory } from "@/components/pages/ServicesDirectory";
 import { PendingContent } from "@/components/pages/PendingContent";
@@ -10,11 +11,9 @@ import { storeOpeningHours } from "@/lib/site";
 // no banco), que senão só apareceria no deploy seguinte.
 export const revalidate = 300;
 
-export const metadata: Metadata = {
-  title: "Serviços",
-  description:
-    "Estacionamento, acessibilidade, praça de alimentação e demais comodidades disponíveis para quem visita o Stop Shop em Brusque, SC.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return getSeoMetadata("/servicos", "/servicos");
+}
 
 export default async function ServicosPage() {
   const services = await getPublishedServices();

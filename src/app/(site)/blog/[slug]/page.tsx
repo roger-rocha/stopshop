@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPostBySlug } from "@/lib/server/queries";
+import { getSeoMetadata } from "@/lib/server/seo";
 
 // Rendered on demand and cached (ISR) — avoids build-time queries to the
 // remote Turso DB, which can hang the build when the DB is slow to respond.
@@ -17,12 +18,19 @@ export async function generateMetadata({
 }: PostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
-  if (!post) return { title: "Post não encontrado" };
-  return {
-    title: post.title,
-    description: post.excerpt,
-    openGraph: { images: [post.image] },
-  };
+  if (!post || !post.published) notFound();
+  return getSeoMetadata(
+    `post:${post.id}`,
+    `/blog/${post.slug}`,
+    { title: post.title, description: post.excerpt, image: post.image },
+    {
+      openGraph: {
+        type: "article",
+        publishedTime: post.date,
+        modifiedTime: new Date(post.updatedAt * 1000).toISOString(),
+      },
+    },
+  );
 }
 
 const dateFormatter = new Intl.DateTimeFormat("pt-BR", {

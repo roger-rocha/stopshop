@@ -15,6 +15,7 @@ import {
   ConciergeBell,
   Scale,
   Settings,
+  Search,
   LogOut,
   ExternalLink,
 } from "lucide-react";
@@ -39,6 +40,7 @@ const navItems: NavItem[] = [
   { href: "/admin/servicos", label: "Serviços", icon: ConciergeBell },
   { href: "/admin/vagas", label: "Vagas", icon: Briefcase },
   { href: "/admin/institucional", label: "Institucional", icon: Scale },
+  { href: "/admin/seo", label: "SEO", icon: Search },
   { href: "/admin/settings", label: "Configurações", icon: Settings },
 ];
 
@@ -55,7 +57,7 @@ export function AdminShell({
     <div className="flex min-h-screen flex-col lg:flex-row">
       {/* Sidebar */}
       <aside className="border-b border-border-default bg-white lg:fixed lg:inset-y-0 lg:left-0 lg:w-64 lg:border-b-0 lg:border-r">
-        <div className="flex h-full flex-col">
+        <div className="flex h-full flex-col lg:overflow-y-auto">
           <div className="px-6 py-6">
             <Link href="/admin" className="block">
               <Image

@@ -10,6 +10,7 @@ import {
   ConciergeBell,
   Scale,
   Settings,
+  Search,
 } from "lucide-react";
 import { db, schema } from "@/db";
 import { eq } from "drizzle-orm";
@@ -128,6 +129,13 @@ export default async function DashboardPage() {
       hint: "Políticas de privacidade e cookies",
     },
     {
+      href: "/admin/seo",
+      icon: Search,
+      label: "SEO",
+      value: "Busca e compartilhamento",
+      hint: "Títulos, descrições e indexação",
+    },
+    {
       href: "/admin/settings",
       icon: Settings,
       label: "Configurações",
@@ -147,7 +155,7 @@ export default async function DashboardPage() {
         </h1>
         <p className="mt-2 text-sm text-text-secondary">
           Gerencie lojas, segmentos, posts, agenda, galeria, serviços, vagas,
-          políticas e configurações do site.
+          políticas, SEO e configurações do site.
         </p>
       </header>
 

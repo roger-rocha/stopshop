@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getSeoMetadata } from "@/lib/server/seo";
 import { LegalPageContent } from "@/components/pages/LegalPageContent";
 import { getLegalPage } from "@/lib/server/queries";
 
@@ -9,7 +10,10 @@ export const revalidate = 300;
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getLegalPage("politica-de-cookies");
-  return { title: page.title, description: page.description };
+  return getSeoMetadata("/politica-de-cookies", "/politica-de-cookies", {
+    title: page.title,
+    description: page.description,
+  });
 }
 
 export default async function PoliticaCookiesPage() {

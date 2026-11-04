@@ -31,6 +31,8 @@ function parsePostForm(formData: FormData) {
 
 function revalidatePosts() {
   revalidatePath("/admin/posts");
+  revalidatePath("/admin/seo", "layout");
+  revalidatePath("/sitemap.xml");
   revalidatePath("/blog");
   revalidatePath("/blog", "layout");
 }

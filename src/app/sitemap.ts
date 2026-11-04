@@ -1,52 +1,35 @@
 import type { MetadataRoute } from "next";
-import { getAllSegments, getAllPosts } from "@/lib/server/queries";
+import { resolvePageSeo } from "@/lib/seo";
+import { getSeoEntries, getSeoSettings } from "@/lib/server/seo";
 
-// Regenerated on demand and cached (ISR) so it picks up new content without a
-// redeploy, and so the DB query isn't a hard build-time dependency.
 export const revalidate = 3600;
 
-const BASE_URL = "https://stopshop.com.br";
-
-const STATIC_ROUTES = [
-  "/",
-  "/sobre",
-  "/lojas",
-  "/servicos",
-  "/abra-uma-loja",
-  "/localizacao",
-  "/contato",
-  "/trabalhe-conosco",
-  "/politica-de-privacidade",
-  "/politica-de-cookies",
-  "/blog",
-] as const;
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [segments, posts] = await Promise.all([
-    getAllSegments(),
-    getAllPosts({ onlyPublished: true }),
-  ]);
+  const seo = await getSeoSettings();
+  if (!seo.indexable) return [];
 
-  const staticRoutes: MetadataRoute.Sitemap = STATIC_ROUTES.map((path) => ({
-    url: `${BASE_URL}${path}`,
-    lastModified: new Date(),
-    changeFrequency: path === "/" ? "weekly" : "monthly",
-    priority: path === "/" ? 1 : 0.7,
-  }));
+  const entries = await getSeoEntries();
 
-  const segmentRoutes: MetadataRoute.Sitemap = segments.map((segment) => ({
-    url: `${BASE_URL}/segmentos/${segment.slug}`,
-    lastModified: new Date(segment.updatedAt * 1000),
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
+  return entries.flatMap((entry) => {
+    if (!entry.published) return [];
+    const resolved = resolvePageSeo(seo, entry.settings, entry.defaults, entry.path);
+    const url = new URL(entry.path, seo.siteUrl).href;
+    if (
+      !resolved.indexable ||
+      !resolved.includeInSitemap ||
+      resolved.canonical !== url
+    ) {
+      return [];
+    }
 
-  const postRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${BASE_URL}/blog/${post.slug}`,
-    lastModified: new Date(post.updatedAt * 1000),
-    changeFrequency: "yearly",
-    priority: 0.5,
-  }));
+    const changeFrequency = entry.path === "/" ? "weekly" : entry.group === "Blog" ? "yearly" : "monthly";
+    const priority = entry.path === "/" ? 1 : entry.group === "Blog" ? 0.5 : entry.group === "Segmentos" ? 0.6 : 0.7;
 
-  return [...staticRoutes, ...segmentRoutes, ...postRoutes];
+    return [{
+      url,
+      ...(entry.updatedAt && { lastModified: new Date(entry.updatedAt * 1000) }),
+      changeFrequency,
+      priority,
+    }];
+  });
 }

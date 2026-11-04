@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { PageHero } from "@/components/ui/PageHero";
 import { StoreCard } from "@/components/ui/StoreCard";
 import { getSegmentBySlug, getStoresBySegment } from "@/lib/server/queries";
+import { getSeoMetadata } from "@/lib/server/seo";
 
 // Rendered on demand and cached (ISR) — avoids build-time queries to the
 // remote Turso DB, which can hang the build when the DB is slow to respond.
@@ -18,14 +19,17 @@ export async function generateMetadata({
   const { slug } = await params;
   const segment = await getSegmentBySlug(slug);
 
-  if (!segment) {
-    return { title: "Segmento não encontrado" };
-  }
+  if (!segment) notFound();
 
-  return {
-    title: segment.name,
-    description: `Explore as lojas do segmento ${segment.name} no Stop Shop.`,
-  };
+  return getSeoMetadata(
+    `segment:${segment.id}`,
+    `/segmentos/${segment.slug}`,
+    {
+      title: segment.name,
+      description: `Explore as lojas do segmento ${segment.name} no Stop Shop.`,
+      image: segment.image || undefined,
+    },
+  );
 }
 
 export default async function SegmentPage({ params }: SegmentPageProps) {

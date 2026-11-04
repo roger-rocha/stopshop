@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
+import { getSeoMetadata } from "@/lib/server/seo";
 import { MapPin, Car, Bus, Clock3, Navigation } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { siteContact } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Localização",
-  description:
-    "Veja como chegar ao Stop Shop em Brusque, consulte horários de funcionamento e conheça a estrutura de estacionamento.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return getSeoMetadata("/localizacao", "/localizacao");
+}
 
 const logistics = [
   {

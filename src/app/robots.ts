@@ -1,15 +1,20 @@
 import type { MetadataRoute } from "next";
+import { getSeoSettings } from "@/lib/server/seo";
 
-const BASE_URL = "https://stopshop.com.br";
+export const revalidate = 3600;
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const seo = await getSeoSettings();
+
   return {
+    // Public pages stay crawlable so search engines can read their noindex tags.
+    // The maintenance proxy separately blocks crawling while the site is closed.
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/admin", "/admin/"],
+      disallow: ["/admin", "/api/"],
     },
-    sitemap: `${BASE_URL}/sitemap.xml`,
-    host: BASE_URL,
+    ...(seo.indexable && { sitemap: new URL("/sitemap.xml", seo.siteUrl).href }),
+    host: seo.siteUrl,
   };
 }

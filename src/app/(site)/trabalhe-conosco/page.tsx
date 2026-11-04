@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getSeoMetadata } from "@/lib/server/seo";
 import { PageHero } from "@/components/ui/PageHero";
 import { TrabalheConoscoPaths } from "@/components/pages/TrabalheConoscoPaths";
 import { getPublishedJobOpenings } from "@/lib/server/queries";
@@ -8,11 +9,9 @@ import { getPublishedJobOpenings } from "@/lib/server/queries";
 // no banco), que senão só apareceria no deploy seguinte.
 export const revalidate = 300;
 
-export const metadata: Metadata = {
-  title: "Trabalhe Conosco",
-  description:
-    "Vagas na administração do Stop Shop e nas lojas do shopping em Brusque, SC.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return getSeoMetadata("/trabalhe-conosco", "/trabalhe-conosco");
+}
 
 export default async function TrabalheConoscoPage() {
   const jobs = await getPublishedJobOpenings();

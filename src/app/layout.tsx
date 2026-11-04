@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display } from "next/font/google";
 import localFont from "next/font/local";
+import { getSeoSettings } from "@/lib/server/seo";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -18,27 +19,37 @@ const matter = localFont({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://stopshop.com.br"),
-  title: {
-    default: "Stop Shop — Shopping de Moda em Brusque, SC",
-    template: "%s | Stop Shop",
-  },
-  description:
-    "Mais de 160 marcas de moda em um só lugar. Visite o Stop Shop em Brusque, SC e encontre moda e variedade para toda a família.",
-  keywords: [
-    "Stop Shop",
-    "shopping Brusque",
-    "moda Brusque",
-    "moda no varejo",
-    "outlet Santa Catarina",
-  ],
-  openGraph: {
-    type: "website",
-    locale: "pt_BR",
-    siteName: "Stop Shop",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getSeoSettings();
+
+  return {
+    metadataBase: new URL(seo.siteUrl),
+    title: { default: seo.defaultTitle, template: seo.titleTemplate },
+    description: seo.defaultDescription,
+    openGraph: {
+      type: "website",
+      locale: "pt_BR",
+      siteName: seo.siteName,
+      title: seo.defaultTitle,
+      description: seo.defaultDescription,
+      ...(seo.defaultImage && {
+        images: [{ url: seo.defaultImage, alt: seo.defaultImageAlt }],
+      }),
+    },
+    twitter: {
+      card: seo.defaultImage ? "summary_large_image" : "summary",
+      title: seo.defaultTitle,
+      description: seo.defaultDescription,
+      ...(seo.defaultImage && {
+        images: [{ url: seo.defaultImage, alt: seo.defaultImageAlt }],
+      }),
+    },
+    verification: {
+      ...(seo.googleVerification && { google: seo.googleVerification }),
+      ...(seo.bingVerification && { other: { "msvalidate.01": seo.bingVerification } }),
+    },
+  };
+}
 
 export default function RootLayout({
   children,

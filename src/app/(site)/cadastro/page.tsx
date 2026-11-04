@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
+import { getSeoMetadata } from "@/lib/server/seo";
 import { FileText, UserRoundPlus, WalletCards } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 
-export const metadata: Metadata = {
-  title: "Cadastro",
-  description:
-    "Faça seu cadastro e conheça as vantagens para clientes do Stop Shop, com atendimento prático e benefícios exclusivos.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return getSeoMetadata("/cadastro", "/cadastro");
+}
 
 const steps = [
   {

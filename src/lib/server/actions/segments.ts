@@ -28,6 +28,8 @@ function parseSegmentForm(formData: FormData) {
 
 function revalidateSegments() {
   revalidatePath("/admin/segments");
+  revalidatePath("/admin/seo", "layout");
+  revalidatePath("/sitemap.xml");
   revalidatePath("/");
   revalidatePath("/lojas");
   revalidatePath("/segmentos", "layout");
