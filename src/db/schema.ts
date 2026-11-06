@@ -92,6 +92,8 @@ export const events = sqliteTable("events", {
   dateLabel: text("date_label").notNull(),
   startDate: text("start_date"),
   endDate: text("end_date"),
+  startTime: text("start_time"),
+  endTime: text("end_time"),
   ctaLabel: text("cta_label"),
   ctaHref: text("cta_href"),
   position: integer("position").notNull().default(0),

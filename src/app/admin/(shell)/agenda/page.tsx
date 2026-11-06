@@ -15,7 +15,7 @@ export default async function AgendaPage() {
     <div>
       <PageHeader
         title="Agenda"
-        description={`${events.length} eventos cadastrados`}
+        description={`${events.length} eventos cadastrados. Eventos com data também aparecem no calendário da home.`}
         action={
           <Link
             href="/admin/agenda/new"
@@ -44,6 +44,7 @@ export default async function AgendaPage() {
                 <tr>
                   <th className="px-5 py-3 font-medium">Evento</th>
                   <th className="px-5 py-3 font-medium">Data</th>
+                  <th className="px-5 py-3 font-medium">Calendário</th>
                   <th className="px-5 py-3 font-medium">Status</th>
                   <th className="px-5 py-3"></th>
                 </tr>
@@ -58,6 +59,25 @@ export default async function AgendaPage() {
                       </td>
                       <td className="px-5 py-3 text-text-secondary">
                         {event.dateLabel}
+                      </td>
+                      <td className="px-5 py-3 text-text-secondary">
+                        {event.startDate ? (
+                          <>
+                            <p className="whitespace-nowrap">
+                              {event.startDate.split("-").reverse().join("/")}
+                              {event.endDate && event.endDate !== event.startDate && (
+                                <> a {event.endDate.split("-").reverse().join("/")}</>
+                              )}
+                            </p>
+                            <p className="mt-1 whitespace-nowrap text-xs text-text-muted">
+                              {event.startTime && event.endTime
+                                ? `${event.startTime} às ${event.endTime}`
+                                : "Horário a confirmar"}
+                            </p>
+                          </>
+                        ) : (
+                          <span className="text-text-muted">Somente banner</span>
+                        )}
                       </td>
                       <td className="px-5 py-3">
                         <span

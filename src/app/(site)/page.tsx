@@ -9,7 +9,7 @@ import { GallerySection } from "@/components/sections/GallerySection";
 import { InstagramFeed } from "@/components/sections/InstagramFeed";
 import { MapSection } from "@/components/sections/MapSection";
 import {
-  getActiveEvents,
+  getAllEvents,
   getAllSegments,
   getContact,
   getGalleryImages,
@@ -17,7 +17,8 @@ import {
   getOpeningSchedule,
 } from "@/lib/server/queries";
 import { shoppingMonth } from "@/lib/opening-schedule";
-import { withEventStatus } from "@/lib/events";
+import { toAgendaBanners } from "@/lib/events";
+import { toCalendarEvents } from "@/lib/event-calendar";
 import { serializeJsonLd } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -39,13 +40,13 @@ export default async function HomePage() {
     getHero(),
     getAllSegments(),
     getContact(),
-    getActiveEvents(),
+    getAllEvents(),
     getGalleryImages(),
     getOpeningSchedule(),
     getSeoSettings(),
   ]);
 
-  const agendaEvents = withEventStatus(events);
+  const agendaEvents = toAgendaBanners(events);
 
   const shoppingCenterSchema = {
     "@context": "https://schema.org",
@@ -98,7 +99,7 @@ export default async function HomePage() {
       )}
 
       <HeroSection hero={hero} />
-      <OpeningHoursStrip schedule={openingSchedule} currentMonth={shoppingMonth()} regularHours={contact.hours} whatsapp={contact.whatsapp} />
+      <OpeningHoursStrip schedule={openingSchedule} events={toCalendarEvents(events)} currentMonth={shoppingMonth()} regularHours={contact.hours} whatsapp={contact.whatsapp} />
       <AgendaSection events={agendaEvents} />
       <AnchorBrandsStrip />
       <SegmentCarousel segments={segments} />

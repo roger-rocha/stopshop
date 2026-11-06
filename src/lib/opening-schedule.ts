@@ -17,9 +17,13 @@ export const openingScheduleSchema = z.object({
 export type OpeningSchedule = z.infer<typeof openingScheduleSchema>;
 export type OpeningDate = OpeningSchedule["entries"][number];
 
+export function shoppingDate(now = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Sao_Paulo", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(now);
+  return `${parts.find((part) => part.type === "year")!.value}-${parts.find((part) => part.type === "month")!.value}-${parts.find((part) => part.type === "day")!.value}`;
+}
+
 export function shoppingMonth(now = new Date()) {
-  const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Sao_Paulo", year: "numeric", month: "2-digit" }).formatToParts(now);
-  return `${parts.find((part) => part.type === "year")!.value}-${parts.find((part) => part.type === "month")!.value}`;
+  return shoppingDate(now).slice(0, 7);
 }
 
 export function scheduleMonths(entries: OpeningDate[], currentMonth: string) {

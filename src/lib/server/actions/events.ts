@@ -23,6 +23,8 @@ function parseEventForm(formData: FormData) {
     dateLabel: formData.get("dateLabel"),
     startDate: formData.get("startDate") ?? "",
     endDate: formData.get("endDate") ?? "",
+    startTime: formData.get("startTime") ?? "",
+    endTime: formData.get("endTime") ?? "",
     ctaLabel: formData.get("ctaLabel") ?? "",
     ctaHref: formData.get("ctaHref") ?? "",
     position: formData.get("position") ?? 0,

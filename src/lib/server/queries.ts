@@ -1,5 +1,5 @@
 import "server-only";
-import { openingScheduleSchema } from "@/lib/opening-schedule";
+import { openingScheduleSchema, shoppingDate } from "@/lib/opening-schedule";
 import { storeBelongsToSegment } from "@/lib/store-segments";
 import { asc, desc, eq } from "drizzle-orm";
 import { db, schema } from "@/db";
@@ -120,7 +120,7 @@ export async function getAllEvents() {
 // Esconde eventos já encerrados — um evento sem data é tratado como permanente.
 export async function getActiveEvents() {
   const all = await getAllEvents();
-  const today = new Date().toISOString().slice(0, 10);
+  const today = shoppingDate();
   return all.filter((event) => {
     const effectiveEnd = event.endDate ?? event.startDate;
     return !effectiveEnd || effectiveEnd >= today;

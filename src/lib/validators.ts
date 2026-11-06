@@ -101,11 +101,30 @@ export const eventSchema = z.object({
   description: z.string().default(""),
   image: z.string().min(1, "Envie a arte do banner."),
   dateLabel: z.string().min(1, "Informe a data (ex.: 01 a 12 de Maio)."),
-  startDate: optionalString,
-  endDate: optionalString,
+  startDate: optionalString.pipe(z.iso.date("Informe uma data de início válida.").nullable()),
+  endDate: optionalString.pipe(z.iso.date("Informe uma data de fim válida.").nullable()),
+  startTime: optionalString.pipe(z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, "Informe um horário de início válido (HH:mm).").nullable()),
+  endTime: optionalString.pipe(z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, "Informe um horário de fim válido (HH:mm).").nullable()),
   ctaLabel: optionalString,
   ctaHref: optionalString,
   position: z.coerce.number().int().min(0).default(0),
+}).superRefine((event, ctx) => {
+  if (event.endDate && !event.startDate) {
+    ctx.addIssue({ code: "custom", path: ["endDate"], message: "Informe a data de início antes da data de fim." });
+  } else if (event.startDate && event.endDate && event.endDate < event.startDate) {
+    ctx.addIssue({ code: "custom", path: ["endDate"], message: "A data de fim deve ser igual ou posterior à data de início." });
+  }
+
+  if ((event.startTime || event.endTime) && !event.startDate) {
+    ctx.addIssue({ code: "custom", path: ["startDate"], message: "Informe a data do evento para cadastrar os horários." });
+  }
+  if (event.startTime && !event.endTime) {
+    ctx.addIssue({ code: "custom", path: ["endTime"], message: "Informe também o horário de fim." });
+  } else if (event.endTime && !event.startTime) {
+    ctx.addIssue({ code: "custom", path: ["startTime"], message: "Informe também o horário de início." });
+  } else if (event.startTime && event.endTime && event.endTime <= event.startTime) {
+    ctx.addIssue({ code: "custom", path: ["endTime"], message: "O horário de fim deve ser depois do horário de início no mesmo dia." });
+  }
 });
 
 export type EventInput = z.infer<typeof eventSchema>;

@@ -25,7 +25,7 @@ export default async function EditEventPage({ params }: PageProps) {
     <div>
       <PageHeader
         title={event.title}
-        description={`Editando • ${event.dateLabel}`}
+        description={`Editando • ${event.dateLabel}. Eventos com data também aparecem no calendário da home.`}
         backHref="/admin/agenda"
         action={
           <DeleteButton

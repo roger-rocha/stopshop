@@ -5,13 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { CalendarDays, ChevronLeft, ChevronRight } from "lucide-react";
-import { eventStatusLabel, type AgendaEventWithStatus } from "@/lib/events";
+import { eventStatusLabel, type AgendaBanner } from "@/lib/events";
 import { cn } from "@/lib/utils";
 
 const ROTATE_INTERVAL = 6000;
 
 interface AgendaSectionProps {
-  events: AgendaEventWithStatus[];
+  events: AgendaBanner[];
 }
 
 export function AgendaSection({ events }: AgendaSectionProps) {
