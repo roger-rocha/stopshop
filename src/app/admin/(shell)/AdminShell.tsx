@@ -14,6 +14,7 @@ import {
   Briefcase,
   ConciergeBell,
   Scale,
+  ShieldCheck,
   Settings,
   Search,
   LogOut,
@@ -40,6 +41,7 @@ const navItems: NavItem[] = [
   { href: "/admin/servicos", label: "Serviços", icon: ConciergeBell },
   { href: "/admin/vagas", label: "Vagas", icon: Briefcase },
   { href: "/admin/institucional", label: "Institucional", icon: Scale },
+  { href: "/admin/canal-de-denuncias", label: "Canal de Denúncias", icon: ShieldCheck },
   { href: "/admin/seo", label: "SEO", icon: Search },
   { href: "/admin/settings", label: "Configurações", icon: Settings },
 ];

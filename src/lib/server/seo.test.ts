@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { sql } from "drizzle-orm";
 import { DEFAULT_PAGE_SEO, DEFAULT_SEO_SETTINGS, resolvePageSeo, SEO_PAGE_PREFIX, SEO_SETTINGS_KEY } from "../seo";
+import { DEFAULT_REPORTING_CHANNEL, REPORTING_CHANNEL_KEY } from "../reporting-channel";
 
 let directory: string;
 let db: typeof import("@/db").db;
@@ -119,6 +120,23 @@ test("legal page previews use CMS metadata as their fallback", async () => {
   await setting("legalPrivacy", { title: "Privacidade revisada", description: "Como tratamos seus dados.", body: "Texto da política atualizado." });
   const entry = (await seo.getSeoEntries()).find((item) => item.key === "/politica-de-privacidade");
   assert.deepEqual(entry?.defaults, { title: "Privacidade revisada", description: "Como tratamos seus dados." });
+});
+
+test("reporting channel content feeds SEO previews and sitemap dates while preserving SEO overrides", async () => {
+  const config = { ...DEFAULT_REPORTING_CHANNEL, eyebrow: "Canal de Ética", metaDescription: "Fale com a equipe responsável.", email: "relatos@example.com" };
+  await setting(REPORTING_CHANNEL_KEY, config);
+  const { getReportingChannel } = await import("./reporting-channel");
+  assert.deepEqual(await getReportingChannel(), config);
+  const entry = (await seo.getSeoEntries()).find((item) => item.key === "/denuncia");
+  assert.deepEqual(entry?.defaults, { title: config.eyebrow, description: config.metaDescription });
+  assert.equal(entry?.updatedAt, 1_800_000_000);
+  let metadata = await seo.getSeoMetadata("/denuncia", "/denuncia", entry?.defaults);
+  assert.equal(metadata.description, config.metaDescription);
+  await setting(`${SEO_PAGE_PREFIX}/denuncia`, { ...DEFAULT_PAGE_SEO, description: "Resumo personalizado no SEO." });
+  metadata = await seo.getSeoMetadata("/denuncia", "/denuncia", entry?.defaults);
+  assert.equal(metadata.description, "Resumo personalizado no SEO.");
+  const item = (await sitemap()).find((row) => row.url.endsWith("/denuncia"));
+  assert.equal(item?.lastModified?.toString(), new Date(1_800_000_000_000).toString());
 });
 
 test("global noindex empties the sitemap but keeps crawlers able to read public noindex tags", async () => {

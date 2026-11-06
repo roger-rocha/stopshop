@@ -9,6 +9,7 @@ import {
   Briefcase,
   ConciergeBell,
   Scale,
+  ShieldCheck,
   Settings,
   Search,
 } from "lucide-react";
@@ -129,6 +130,13 @@ export default async function DashboardPage() {
       hint: "Políticas de privacidade e cookies",
     },
     {
+      href: "/admin/canal-de-denuncias",
+      icon: ShieldCheck,
+      label: "Canal de Denúncias",
+      value: "Canais de atendimento",
+      hint: "Textos, e-mail e formulário externo",
+    },
+    {
       href: "/admin/seo",
       icon: Search,
       label: "SEO",
@@ -155,7 +163,7 @@ export default async function DashboardPage() {
         </h1>
         <p className="mt-2 text-sm text-text-secondary">
           Gerencie lojas, segmentos, posts, agenda, galeria, serviços, vagas,
-          políticas, SEO e configurações do site.
+          políticas, canal de denúncias, SEO e configurações do site.
         </p>
       </header>
 

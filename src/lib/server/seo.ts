@@ -18,6 +18,7 @@ import {
   type SeoEntry,
 } from "@/lib/seo";
 import { getLegalPage } from "./queries";
+import { getReportingChannelRecord } from "./reporting-channel";
 
 function parseObject(value?: string): Record<string, unknown> {
   try {
@@ -52,12 +53,13 @@ export async function getSeoMetadata(key: string, path: string, defaults?: SeoDe
 
 /** Stable entity IDs keep SEO overrides attached when a post or segment changes slug. */
 export const getSeoEntries = cache(async (): Promise<SeoEntry[]> => {
-  const [rows, posts, segments, privacy, cookies] = await Promise.all([
+  const [rows, posts, segments, privacy, cookies, reporting] = await Promise.all([
     db.select().from(schema.settings).where(like(schema.settings.key, "seo:%")),
     db.select({ id: schema.posts.id, title: schema.posts.title, slug: schema.posts.slug, excerpt: schema.posts.excerpt, image: schema.posts.image, published: schema.posts.published, updatedAt: schema.posts.updatedAt }).from(schema.posts).orderBy(schema.posts.title),
     db.select({ id: schema.segments.id, name: schema.segments.name, slug: schema.segments.slug, image: schema.segments.image, updatedAt: schema.segments.updatedAt }).from(schema.segments).orderBy(schema.segments.name),
     getLegalPage("politica-de-privacidade"),
     getLegalPage("politica-de-cookies"),
+    getReportingChannelRecord(),
   ]);
   const saved = new Map(rows.map((row) => [row.key, row]));
   const globalUpdatedAt = saved.get(SEO_SETTINGS_KEY)?.updatedAt ?? 0;
@@ -76,8 +78,10 @@ export const getSeoEntries = cache(async (): Promise<SeoEntry[]> => {
       const legal = page.path === "/politica-de-privacidade" ? privacy : page.path === "/politica-de-cookies" ? cookies : null;
       return entry({
         key: page.path, path: page.path, label: page.label, group: "Páginas", published: true,
-        defaults: legal ? { title: legal.title, description: legal.description } : { title: page.title, description: page.description },
-        updatedAt: legal ? Date.parse(legal.updatedAt) / 1000 : undefined,
+        defaults: legal ? { title: legal.title, description: legal.description }
+          : page.path === "/denuncia" ? { title: reporting.config.eyebrow, description: reporting.config.metaDescription }
+          : { title: page.title, description: page.description },
+        updatedAt: legal ? Date.parse(legal.updatedAt) / 1000 : page.path === "/denuncia" ? reporting.updatedAt : undefined,
       });
     }),
     ...posts.map((post) => entry({

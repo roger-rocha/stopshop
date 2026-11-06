@@ -1,64 +1,63 @@
 import type { Metadata } from "next";
 import { getSeoMetadata } from "@/lib/server/seo";
-import { Lock, EyeOff, Clock } from "lucide-react";
+import { Lock, ListChecks } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
-import { DenunciaFormCard } from "@/components/pages/DenunciaFormCard";
+import { ReportingChannelsCard } from "@/components/pages/ReportingChannelsCard";
+import { getReportingChannel } from "@/lib/server/reporting-channel";
+
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return getSeoMetadata("/denuncia", "/denuncia");
+  const config = await getReportingChannel();
+  return getSeoMetadata("/denuncia", "/denuncia", {
+    title: config.eyebrow,
+    description: config.metaDescription,
+  });
 }
 
-const commitments = [
-  {
-    icon: Lock,
-    title: "Confidencial",
-    description: "As informações são tratadas com sigilo e acesso restrito à equipe responsável.",
-  },
-  {
-    icon: EyeOff,
-    title: "Anônimo se preferir",
-    description: "Você pode registrar sua denúncia sem se identificar. Nenhum dado é obrigatório.",
-  },
-  {
-    icon: Clock,
-    title: "Análise cuidadosa",
-    description: "Cada manifestação é apurada com responsabilidade e imparcialidade pela nossa equipe.",
-  },
-];
-
-export default function DenunciaPage() {
+export default async function DenunciaPage() {
+  const config = await getReportingChannel();
   return (
-    <>
+    <div className="[overflow-wrap:anywhere]">
       <PageHero
-        eyebrow="Portal de Denúncia"
-        title="Um canal seguro para você se manifestar"
-        description="O Stop Shop mantém um canal de denúncias para receber relatos de condutas inadequadas, assédio, fraude ou questões de segurança. Sua manifestação é importante e será tratada com sigilo."
+        eyebrow={config.eyebrow}
+        title={config.title}
+        description={config.subtitle}
       />
 
       <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-16">
-        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+        <p className="max-w-3xl whitespace-pre-line text-base leading-8 text-text-secondary">
+          {config.introduction}
+        </p>
+        <div className="mt-10 grid items-start gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
           <div className="space-y-5">
-            {commitments.map((item) => (
-              <article
-                key={item.title}
-                className="rounded-[28px] border border-border-default bg-white p-7 shadow-card"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-coral/10 text-brand-coral">
-                  <item.icon className="h-5 w-5" />
-                </div>
-                <h2 className="mt-5 font-display text-2xl font-bold text-text-primary">
-                  {item.title}
-                </h2>
-                <p className="mt-3 text-base leading-relaxed text-text-secondary">
-                  {item.description}
-                </p>
-              </article>
-            ))}
+            <article className="rounded-[28px] border border-border-default bg-white p-7 shadow-card">
+              <ListChecks className="h-6 w-6 text-brand-coral" aria-hidden="true" />
+              <h2 className="mt-5 font-display text-2xl font-bold text-text-primary">
+                {config.situationsTitle}
+              </h2>
+              <ul className="mt-4 list-disc space-y-3 pl-5 leading-relaxed text-text-secondary marker:text-brand-coral">
+                {config.situations.map((situation, index) => <li key={index}>{situation}</li>)}
+              </ul>
+            </article>
+            <article className="rounded-[28px] border border-border-default bg-white p-7 shadow-card">
+              <Lock className="h-6 w-6 text-brand-coral" aria-hidden="true" />
+              <h2 className="mt-5 font-display text-2xl font-bold text-text-primary">
+                {config.protectionTitle}
+              </h2>
+              <p className="mt-3 whitespace-pre-line text-base leading-relaxed text-text-secondary">
+                {config.protectionText}
+              </p>
+            </article>
           </div>
 
-          <DenunciaFormCard />
+          <ReportingChannelsCard config={config} />
+        </div>
+        <div className="mt-12 max-w-3xl">
+          <h2 className="font-display text-2xl font-bold text-text-primary">{config.complianceTitle}</h2>
+          <p className="mt-4 whitespace-pre-line text-base leading-8 text-text-secondary">{config.complianceText}</p>
         </div>
       </section>
-    </>
+    </div>
   );
 }
