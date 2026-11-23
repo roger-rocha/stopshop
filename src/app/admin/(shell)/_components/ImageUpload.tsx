@@ -15,8 +15,11 @@ interface ImageUploadProps {
   defaultValue?: string | null;
   /** Prefixo do caminho no Blob, ex.: "stores", "segments", "hero". */
   folder: string;
-  /** "logo" usa preview quadrado com object-contain; "wide" usa 16:9 com object-cover. */
-  variant?: "wide" | "logo";
+  /**
+   * Formato do preview, igual ao uso no site: "wide" 16:9, "banner" 16:5 (agenda, 1600x500),
+   * "square" 1:1 (Instagram) e "logo" quadrado pequeno com object-contain.
+   */
+  variant?: "wide" | "banner" | "square" | "logo";
 }
 
 export function ImageUpload({
@@ -57,10 +60,17 @@ export function ImageUpload({
 
   const displayError = error ?? uploadError ?? undefined;
   const isLogo = variant === "logo";
+  const frameCls = {
+    wide: "aspect-video w-full max-w-xl",
+    banner: "aspect-[16/5] w-full",
+    square: "aspect-square w-full max-w-xs",
+    // Xadrez atrás do logo: PNG branco com fundo transparente continua visível.
+    logo: "aspect-square max-w-[160px] bg-[conic-gradient(#e7e2da_25%,#fff_0_50%,#e7e2da_0_75%,#fff_0)] bg-[length:16px_16px]",
+  }[variant];
 
   return (
     <div className="space-y-1">
-      <span className="text-sm font-medium text-text-primary">{label}</span>
+      <span className="block text-sm font-medium text-text-primary">{label}</span>
 
       {/* Carrega a URL no formulário — mesma interface do antigo campo de texto. */}
       <input type="hidden" name={name} value={url} />
@@ -69,7 +79,7 @@ export function ImageUpload({
         <div
           className={cn(
             "relative overflow-hidden rounded-button border border-border-default bg-surface-muted",
-            isLogo ? "aspect-square max-w-[160px]" : "aspect-video w-full"
+            frameCls
           )}
         >
           {url ? (

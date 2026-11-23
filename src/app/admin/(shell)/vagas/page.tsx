@@ -49,8 +49,8 @@ export default async function VagasPage() {
               <thead className="bg-surface-soft text-left text-xs uppercase tracking-wider text-text-muted">
                 <tr>
                   <th className="px-5 py-3 font-medium">Vaga</th>
-                  <th className="px-5 py-3 font-medium">Onde aparece</th>
-                  <th className="px-5 py-3 font-medium">Status</th>
+                  <th className="hidden px-5 py-3 font-medium md:table-cell">Onde aparece</th>
+                  <th className="hidden px-5 py-3 font-medium sm:table-cell">Status</th>
                   <th className="px-5 py-3"></th>
                 </tr>
               </thead>
@@ -67,10 +67,10 @@ export default async function VagasPage() {
                         </span>
                       )}
                     </td>
-                    <td className="px-5 py-3 text-text-secondary">
+                    <td className="hidden px-5 py-3 text-text-secondary md:table-cell">
                       {areaLabel[job.area] ?? job.area}
                     </td>
-                    <td className="px-5 py-3">
+                    <td className="hidden px-5 py-3 sm:table-cell">
                       <span
                         className={cn(
                           "inline-flex rounded-pill px-2 py-0.5 text-xs font-medium",
@@ -82,7 +82,7 @@ export default async function VagasPage() {
                         {job.published ? "Publicada" : "Rascunho"}
                       </span>
                     </td>
-                    <td className="px-5 py-3 text-right">
+                    <td className="whitespace-nowrap px-5 py-3 text-right">
                       <Link
                         href={`/admin/vagas/${job.id}`}
                         className="inline-flex items-center gap-1 text-xs font-medium text-brand-navy hover:text-brand-coral"

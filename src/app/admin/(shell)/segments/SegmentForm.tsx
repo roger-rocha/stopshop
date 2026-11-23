@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { FormError } from "../_components/FormError";
+import { FormStatus } from "../_components/FormStatus";
 import {
   createSegmentAction,
   updateSegmentAction,
@@ -26,11 +26,6 @@ export function SegmentForm({ segment }: SegmentFormProps) {
 
   return (
     <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-6">
-      {state.status === "error" && (
-        <div className="rounded-button bg-brand-coral/10 px-3 py-2 text-sm text-brand-coral">
-          {state.message}
-        </div>
-      )}
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Nome" error={errors.name?.[0]}>
@@ -65,7 +60,7 @@ export function SegmentForm({ segment }: SegmentFormProps) {
       />
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <Field label="Cor (hex)" error={errors.color?.[0]}>
+        <Field label="Cor" error={errors.color?.[0]}>
           <input
             name="color"
             type="color"
@@ -102,7 +97,7 @@ export function SegmentForm({ segment }: SegmentFormProps) {
       </div>
 
       <div className="flex items-center justify-end gap-3 border-t border-border-default pt-5">
-        <FormError state={state} />
+        <FormStatus state={state} />
         <button
           type="submit"
           disabled={pending}

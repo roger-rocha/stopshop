@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { FormError } from "../_components/FormError";
+import { FormStatus } from "../_components/FormStatus";
 import {
   createInstagramPostAction,
   updateInstagramPostAction,
@@ -26,11 +26,6 @@ export function InstagramPostForm({ item }: InstagramPostFormProps) {
 
   return (
     <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-6">
-      {state.status === "error" && (
-        <div className="rounded-button bg-brand-coral/10 px-3 py-2 text-sm text-brand-coral">
-          {state.message}
-        </div>
-      )}
 
       <ImageUpload
         name="image"
@@ -38,7 +33,7 @@ export function InstagramPostForm({ item }: InstagramPostFormProps) {
         hint="Imagem do post do Instagram — fica recortada em quadrado na home"
         defaultValue={item?.image}
         folder="instagram"
-        variant="wide"
+        variant="square"
         error={errors.image?.[0]}
       />
 
@@ -78,12 +73,12 @@ export function InstagramPostForm({ item }: InstagramPostFormProps) {
           name="position"
           defaultValue={item?.position ?? 0}
           min={0}
-          className={inputCls}
+          className={`${inputCls} sm:max-w-40`}
         />
       </Field>
 
       <div className="flex items-center justify-end gap-3 border-t border-border-default pt-5">
-        <FormError state={state} />
+        <FormStatus state={state} />
         <button
           type="submit"
           disabled={pending}

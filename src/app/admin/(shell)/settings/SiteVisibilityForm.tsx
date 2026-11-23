@@ -1,12 +1,11 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { FormError } from "../_components/FormError";
+import { FormStatus } from "../_components/FormStatus";
 import {
   saveSiteVisibilityAction,
   type SettingsState,
 } from "@/lib/server/actions/settings";
-import { StatusMessage } from "./StatusMessage";
 
 const initial: SettingsState = { status: "idle" };
 
@@ -19,7 +18,6 @@ export function SiteVisibilityForm({ published }: { published: boolean }) {
 
   return (
     <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-5">
-      <StatusMessage state={state} />
 
       <p className="text-sm leading-relaxed text-text-secondary">
         Enquanto o site estiver em construção, os visitantes verão apenas a
@@ -28,7 +26,7 @@ export function SiteVisibilityForm({ published }: { published: boolean }) {
       </p>
 
       <fieldset disabled={pending} className="space-y-3">
-        <legend className="mb-3 text-sm font-medium text-text-primary">
+        <legend className="sr-only">
           Disponibilidade do site
         </legend>
 
@@ -85,7 +83,7 @@ export function SiteVisibilityForm({ published }: { published: boolean }) {
       </fieldset>
 
       <div className="flex items-center justify-end gap-3">
-        <FormError state={state} />
+        <FormStatus state={state} />
         <button
           type="submit"
           disabled={pending}

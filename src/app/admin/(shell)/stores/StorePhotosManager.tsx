@@ -66,7 +66,7 @@ export function StorePhotosManager({ defaultPhotos, onUploadingChange, fieldErro
 
   return (
     <div className="space-y-2">
-      <span className="text-sm font-medium text-text-primary">
+      <span className="block text-sm font-medium text-text-primary">
         Fotos da loja e dos produtos
       </span>
 

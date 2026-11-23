@@ -1,11 +1,11 @@
 "use client";
 
 import { useActionState } from "react";
-import { FormError } from "../_components/FormError";
+import { FormStatus } from "../_components/FormStatus";
+import { cn } from "@/lib/utils";
 import { saveLegalPageAction } from "@/lib/server/actions/legal";
 import type { SettingsState } from "@/lib/server/actions/settings";
 import { Field, inputCls, textareaCls } from "../_components/Field";
-import { StatusMessage } from "../settings/StatusMessage";
 import type { LegalPage } from "@/lib/server/queries";
 
 const initial: SettingsState = { status: "idle" };
@@ -16,7 +16,6 @@ export function LegalPageForm({ page }: { page: LegalPage }) {
 
   return (
     <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-5">
-      <StatusMessage state={state} />
 
       <Field label="Título">
         <input
@@ -46,12 +45,12 @@ export function LegalPageForm({ page }: { page: LegalPage }) {
           defaultValue={page.body}
           rows={26}
           required
-          className={`${textareaCls} font-mono text-xs leading-relaxed`}
+          className={cn(textareaCls, "font-mono leading-relaxed sm:text-xs")}
         />
       </Field>
 
       <div className="flex items-center justify-end gap-3 border-t border-border-default pt-5">
-        <FormError state={state} />
+        <FormStatus state={state} />
         <button
           type="submit"
           disabled={pending}

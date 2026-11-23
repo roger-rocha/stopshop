@@ -1,12 +1,11 @@
 "use client";
 
 import { useActionState } from "react";
-import { FormError } from "../_components/FormError";
+import { FormStatus } from "../_components/FormStatus";
 import { saveHeroAction, type SettingsState } from "@/lib/server/actions/settings";
 import { Field, inputCls, textareaCls } from "../_components/Field";
 import { HeroSlidesManager } from "./HeroSlidesManager";
 import type { HeroSettings } from "@/lib/validators";
-import { StatusMessage } from "./StatusMessage";
 
 const initial: SettingsState = { status: "idle" };
 
@@ -15,7 +14,6 @@ export function HeroSettingsForm({ hero }: { hero: HeroSettings }) {
 
   return (
     <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-5">
-      <StatusMessage state={state} />
 
       <Field label="Eyebrow" hint="Texto pequeno acima do título">
         <input name="eyebrow" defaultValue={hero.eyebrow} className={inputCls} />
@@ -65,7 +63,7 @@ export function HeroSettingsForm({ hero }: { hero: HeroSettings }) {
       </div>
 
       <div className="flex items-center justify-end gap-3">
-        <FormError state={state} />
+        <FormStatus state={state} />
         <button
           type="submit"
           disabled={pending}

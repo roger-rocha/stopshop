@@ -1,7 +1,8 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { FormError } from "../_components/FormError";
+import { CheckboxField } from "../_components/CheckboxField";
+import { FormStatus } from "../_components/FormStatus";
 import {
   createStoreAction,
   updateStoreAction,
@@ -30,11 +31,6 @@ export function StoreForm({ segments, store }: StoreFormProps) {
 
   return (
     <form action={formAction} onReset={(event) => event.preventDefault()} onSubmit={(event) => { if (uploadingPhotos) event.preventDefault(); }} className="space-y-6">
-      {state.status === "error" && (
-        <div className="rounded-button bg-brand-coral/10 px-3 py-2 text-sm text-brand-coral">
-          {state.message}
-        </div>
-      )}
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Nome" error={errors.name?.[0]}>
@@ -178,20 +174,16 @@ export function StoreForm({ segments, store }: StoreFormProps) {
         </Field>
       </div>
 
-      <Field label="Destaque" hint="Exibir entre as lojas em destaque na home">
-        <label className="mt-1 inline-flex items-center gap-2">
-          <input
-            type="checkbox"
-            name="featured"
-            defaultChecked={store?.featured ?? false}
-            className="h-4 w-4 rounded border-border-default text-brand-coral focus:ring-brand-coral/30"
-          />
-          <span className="text-sm text-text-secondary">Em destaque</span>
-        </label>
-      </Field>
+      <CheckboxField
+        label="Destaque"
+        name="featured"
+        option="Em destaque"
+        hint="Exibir entre as lojas em destaque na home"
+        defaultChecked={store?.featured ?? false}
+      />
 
       <div className="flex items-center justify-end gap-3 border-t border-border-default pt-5">
-        <FormError state={state} />
+        <FormStatus state={state} />
         <button
           type="submit"
           disabled={pending || uploadingPhotos}

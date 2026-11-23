@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useState, type SyntheticEvent } from "react";
-import { FormError } from "../_components/FormError";
+import { FormStatus } from "../_components/FormStatus";
 import {
   createEventAction,
   updateEventAction,
@@ -53,11 +53,6 @@ export function EventForm({ event }: EventFormProps) {
 
   return (
     <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-6">
-      {state.status === "error" && (
-        <div role="alert" className="rounded-button bg-brand-coral/10 px-3 py-2 text-sm text-brand-coral">
-          {state.message}
-        </div>
-      )}
 
       <Field label="Título" error={errors.title?.[0]}>
         <input
@@ -73,7 +68,7 @@ export function EventForm({ event }: EventFormProps) {
         hint="A mesma arte aparece no carrossel da home e no cartão do evento no calendário (ex.: 1600×500). Inclua o texto da ação na própria arte."
         defaultValue={event?.image}
         folder="agenda"
-        variant="wide"
+        variant="banner"
         error={errors.image?.[0]}
       />
 
@@ -181,12 +176,12 @@ export function EventForm({ event }: EventFormProps) {
           type="number"
           {...field("position")}
           min={0}
-          className={inputCls}
+          className={`${inputCls} sm:max-w-40`}
         />
       </Field>
 
       <div className="flex items-center justify-end gap-3 border-t border-border-default pt-5">
-        <FormError state={state} />
+        <FormStatus state={state} />
         <button
           type="submit"
           disabled={pending}

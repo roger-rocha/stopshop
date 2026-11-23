@@ -1,11 +1,10 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { FormError } from "../_components/FormError";
+import { FormStatus } from "../_components/FormStatus";
 import { saveOpeningScheduleAction, type SettingsState } from "@/lib/server/actions/settings";
 import type { OpeningSchedule } from "@/lib/opening-schedule";
 import { Field, inputCls } from "../_components/Field";
-import { StatusMessage } from "./StatusMessage";
 
 type Row = { id: string; date: string; label: string; closed: boolean; opens: string; closes: string };
 const initial: SettingsState = { status: "idle" };
@@ -19,7 +18,6 @@ export function OpeningScheduleForm({ schedule }: { schedule: OpeningSchedule })
 
   return (
     <form action={action} onReset={(event) => event.preventDefault()} className="space-y-5">
-      <StatusMessage state={state} />
       <input type="hidden" name="schedule" value={JSON.stringify({ entries: rows.map(({ date, label, closed, opens, closes }) => ({ date, label, closed, opens, closes })) })} />
       <fieldset disabled={pending} className="space-y-4 disabled:opacity-60">
         {rows.length === 0 && <p className="text-sm text-text-secondary">Nenhuma data especial cadastrada. A home orientará o visitante a consultar o atendimento.</p>}
@@ -30,7 +28,7 @@ export function OpeningScheduleForm({ schedule }: { schedule: OpeningSchedule })
               <Field label="Data"><input type="date" required value={row.date} onChange={(event) => update(row.id, { date: event.target.value })} className={inputCls} /></Field>
               <Field label="Descrição (opcional)"><input maxLength={80} value={row.label} onChange={(event) => update(row.id, { label: event.target.value })} placeholder="Ex.: feriado ou domingo de compras" className={inputCls} /></Field>
             </div>
-            <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={row.closed} onChange={(event) => update(row.id, { closed: event.target.checked })} />Fechado nesta data</label>
+            <label className="flex min-h-11 w-fit cursor-pointer items-center gap-3 rounded-button border border-border-default bg-white px-3 text-sm text-text-primary transition-colors hover:bg-surface-muted"><input type="checkbox" checked={row.closed} onChange={(event) => update(row.id, { closed: event.target.checked })} className="h-4 w-4 shrink-0 accent-brand-navy" />Fechado nesta data</label>
             {!row.closed && <div className="grid gap-4 sm:grid-cols-2">
               <Field label="Abertura"><input type="time" required value={row.opens} onChange={(event) => update(row.id, { opens: event.target.value })} className={inputCls} /></Field>
               <Field label="Fechamento"><input type="time" required value={row.closes} onChange={(event) => update(row.id, { closes: event.target.value })} className={inputCls} /></Field>
@@ -39,7 +37,7 @@ export function OpeningScheduleForm({ schedule }: { schedule: OpeningSchedule })
         ))}
         <button type="button" onClick={() => setRows((items) => [...items, { id: crypto.randomUUID(), date: "", label: "", closed: false, opens: "09:00", closes: "19:00" }])} className="rounded-button border border-border-default px-4 py-2 text-sm font-medium hover:bg-surface-soft">Adicionar data</button>
       </fieldset>
-      <div className="flex items-center justify-end gap-3"><FormError state={state} /><button type="submit" disabled={pending} className="rounded-button bg-brand-navy px-5 py-2 text-sm font-medium text-white hover:bg-brand-navy/90 disabled:opacity-60">{pending ? "Salvando…" : "Salvar agenda"}</button></div>
+      <div className="flex items-center justify-end gap-3"><FormStatus state={state} /><button type="submit" disabled={pending} className="rounded-button bg-brand-navy px-5 py-2 text-sm font-medium text-white hover:bg-brand-navy/90 disabled:opacity-60">{pending ? "Salvando…" : "Salvar agenda"}</button></div>
     </form>
   );
 }

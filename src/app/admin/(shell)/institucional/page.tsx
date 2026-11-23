@@ -21,11 +21,12 @@ export default async function InstitucionalPage() {
       />
 
       <div className="overflow-hidden rounded-[20px] border border-border-default bg-white shadow-card">
+        <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-surface-soft text-left text-xs uppercase tracking-wider text-text-muted">
             <tr>
               <th className="px-5 py-3 font-medium">Página</th>
-              <th className="px-5 py-3 font-medium">Última atualização</th>
+              <th className="hidden px-5 py-3 font-medium sm:table-cell">Última atualização</th>
               <th className="px-5 py-3"></th>
             </tr>
           </thead>
@@ -40,10 +41,10 @@ export default async function InstitucionalPage() {
                     /{page.slug}
                   </span>
                 </td>
-                <td className="px-5 py-3 text-text-secondary">
+                <td className="hidden px-5 py-3 text-text-secondary sm:table-cell">
                   {formatDateBR(page.updatedAt)}
                 </td>
-                <td className="px-5 py-3 text-right">
+                <td className="whitespace-nowrap px-5 py-3 text-right">
                   <div className="inline-flex items-center gap-4">
                     <Link
                       href={`/${page.slug}`}
@@ -66,6 +67,7 @@ export default async function InstitucionalPage() {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   );

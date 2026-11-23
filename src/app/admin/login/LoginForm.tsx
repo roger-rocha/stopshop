@@ -19,7 +19,7 @@ export function LoginForm({ next }: { next: string }) {
           name="email"
           required
           autoComplete="email"
-          className="mt-1 w-full rounded-button border border-border-default bg-white px-3 py-2 text-sm text-text-primary outline-none focus:border-brand-coral focus:ring-2 focus:ring-brand-coral/30"
+          className="mt-1 w-full rounded-button border border-border-default bg-white px-3 py-2 text-base text-text-primary outline-none focus:border-brand-coral focus:ring-2 focus:ring-brand-coral/30 sm:text-sm"
         />
       </label>
 
@@ -30,7 +30,7 @@ export function LoginForm({ next }: { next: string }) {
           name="password"
           required
           autoComplete="current-password"
-          className="mt-1 w-full rounded-button border border-border-default bg-white px-3 py-2 text-sm text-text-primary outline-none focus:border-brand-coral focus:ring-2 focus:ring-brand-coral/30"
+          className="mt-1 w-full rounded-button border border-border-default bg-white px-3 py-2 text-base text-text-primary outline-none focus:border-brand-coral focus:ring-2 focus:ring-brand-coral/30 sm:text-sm"
         />
       </label>
 

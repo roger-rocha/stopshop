@@ -1,14 +1,13 @@
 "use client";
 
 import { useActionState } from "react";
-import { FormError } from "../_components/FormError";
+import { FormStatus } from "../_components/FormStatus";
 import {
   saveContactAction,
   type SettingsState,
 } from "@/lib/server/actions/settings";
-import { Field, inputCls } from "../_components/Field";
+import { Field, inputCls, textareaCls } from "../_components/Field";
 import type { ContactSettings } from "@/lib/validators";
-import { StatusMessage } from "./StatusMessage";
 
 const initial: SettingsState = { status: "idle" };
 
@@ -17,7 +16,6 @@ export function ContactSettingsForm({ contact }: { contact: ContactSettings }) {
 
   return (
     <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-5">
-      <StatusMessage state={state} />
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Telefone" hint="Apenas dígitos (DDD + número)">
@@ -77,21 +75,20 @@ export function ContactSettingsForm({ contact }: { contact: ContactSettings }) {
         </Field>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Horários">
-          <input name="hours" defaultValue={contact.hours} className={inputCls} />
-        </Field>
-        <Field label="Observação (domingos)">
-          <input
-            name="sundayNote"
-            defaultValue={contact.sundayNote}
-            className={inputCls}
-          />
-        </Field>
-      </div>
+      <Field label="Horários">
+        <input name="hours" defaultValue={contact.hours} className={inputCls} />
+      </Field>
+      <Field label="Observação (domingos)">
+        <textarea
+          name="sundayNote"
+          defaultValue={contact.sundayNote}
+          rows={2}
+          className={textareaCls}
+        />
+      </Field>
 
       <div className="flex items-center justify-end gap-3">
-        <FormError state={state} />
+        <FormStatus state={state} />
         <button
           type="submit"
           disabled={pending}

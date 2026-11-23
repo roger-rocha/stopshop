@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 import {
   Store,
   Layers,
@@ -147,7 +148,7 @@ export default async function DashboardPage() {
       href: "/admin/settings",
       icon: Settings,
       label: "Configurações",
-      value: "—",
+      value: "Site e contato",
       hint: "Hero, contato e listas",
     },
   ];
@@ -187,7 +188,14 @@ export default async function DashboardPage() {
               <p className="mt-5 text-sm font-medium text-text-secondary">
                 {card.label}
               </p>
-              <p className="mt-1 font-display text-3xl font-bold text-text-primary">
+              <p
+                className={cn(
+                  "mt-1 text-text-primary",
+                  /^\d/.test(String(card.value))
+                    ? "font-display text-3xl font-bold"
+                    : "text-lg font-semibold"
+                )}
+              >
                 {card.value}
               </p>
               <p className="mt-1 text-xs text-text-muted">{card.hint}</p>

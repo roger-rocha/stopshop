@@ -1,7 +1,9 @@
 "use client";
 
 import { useActionState } from "react";
-import { FormError } from "../_components/FormError";
+import { CheckboxField } from "../_components/CheckboxField";
+import { ImageUpload } from "../_components/ImageUpload";
+import { FormStatus } from "../_components/FormStatus";
 import {
   createPostAction,
   updatePostAction,
@@ -23,11 +25,6 @@ export function PostForm({ post }: PostFormProps) {
 
   return (
     <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-6">
-      {state.status === "error" && (
-        <div className="rounded-button bg-brand-coral/10 px-3 py-2 text-sm text-brand-coral">
-          {state.message}
-        </div>
-      )}
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Título" error={errors.title?.[0]}>
@@ -61,18 +58,15 @@ export function PostForm({ post }: PostFormProps) {
         />
       </Field>
 
-      <Field
-        label="Imagem (URL)"
-        hint="Imagem de capa do post"
+      <ImageUpload
+        name="image"
+        label="Imagem de capa"
+        hint="Exibida no card e no topo do post"
+        defaultValue={post?.image}
+        folder="posts"
+        variant="wide"
         error={errors.image?.[0]}
-      >
-        <input
-          name="image"
-          defaultValue={post?.image ?? ""}
-          required
-          className={inputCls}
-        />
-      </Field>
+      />
 
       <div className="grid gap-4 sm:grid-cols-3">
         <Field label="Data" error={errors.date?.[0]}>
@@ -119,20 +113,16 @@ export function PostForm({ post }: PostFormProps) {
         />
       </Field>
 
-      <Field label="Status">
-        <label className="mt-1 inline-flex items-center gap-2">
-          <input
-            type="checkbox"
-            name="published"
-            defaultChecked={post?.published ?? true}
-            className="h-4 w-4 rounded border-border-default text-brand-coral focus:ring-brand-coral/30"
-          />
-          <span className="text-sm text-text-secondary">Publicado</span>
-        </label>
-      </Field>
+      <CheckboxField
+        label="Status"
+        name="published"
+        option="Publicado"
+        hint="Desmarque para salvar como rascunho"
+        defaultChecked={post?.published ?? true}
+      />
 
       <div className="flex items-center justify-end gap-3 border-t border-border-default pt-5">
-        <FormError state={state} />
+        <FormStatus state={state} />
         <button
           type="submit"
           disabled={pending}

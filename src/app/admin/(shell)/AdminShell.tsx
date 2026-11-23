@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
@@ -19,6 +20,8 @@ import {
   Search,
   LogOut,
   ExternalLink,
+  Menu,
+  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { logoutAction } from "@/lib/server/actions/auth";
@@ -54,75 +57,90 @@ export function AdminShell({
   email: string;
 }) {
   const pathname = usePathname();
+  // Guarda em qual rota o menu foi aberto: ao navegar, ele fecha sozinho no celular.
+  const [openOn, setOpenOn] = useState<string | null>(null);
+  const menuOpen = openOn === pathname;
 
   return (
     <div className="flex min-h-screen flex-col lg:flex-row">
       {/* Sidebar */}
       <aside className="border-b border-border-default bg-white lg:fixed lg:inset-y-0 lg:left-0 lg:w-64 lg:border-b-0 lg:border-r">
         <div className="flex h-full flex-col lg:overflow-y-auto">
-          <div className="px-6 py-6">
-            <Link href="/admin" className="block">
+          <div className="flex items-center justify-between gap-4 px-5 py-3 lg:block lg:px-6 lg:py-6">
+            <Link href="/admin" className="flex items-center gap-3 lg:block">
               <Image
                 src="/logos/logo-new.png"
                 alt="Stop Shop — Ninho da Moda"
                 width={131}
                 height={150}
-                className="h-12 w-auto"
+                className="h-9 w-auto lg:h-12"
               />
-              <span className="mt-2 block text-[11px] font-medium uppercase tracking-[0.18em] text-text-muted">
+              <span className="block text-[11px] font-medium uppercase tracking-[0.18em] text-text-muted lg:mt-2">
                 Painel administrativo
               </span>
             </Link>
+            <button
+              type="button"
+              onClick={() => setOpenOn(menuOpen ? null : pathname)}
+              aria-expanded={menuOpen}
+              aria-controls="admin-menu"
+              className="inline-flex min-h-11 items-center gap-2 rounded-button border border-border-default px-3 text-sm font-medium text-text-primary transition-colors hover:bg-surface-soft lg:hidden"
+            >
+              {menuOpen ? <X className="h-4 w-4" aria-hidden="true" /> : <Menu className="h-4 w-4" aria-hidden="true" />}
+              Menu
+            </button>
           </div>
 
-          <nav className="flex-1 px-3 pb-4">
-            <ul className="space-y-1">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                const active = item.exact
-                  ? pathname === item.href
-                  : pathname === item.href || pathname.startsWith(`${item.href}/`);
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        "flex items-center gap-3 rounded-button px-3 py-2 text-sm font-medium transition-colors",
-                        active
-                          ? "bg-brand-navy text-white"
-                          : "text-text-secondary hover:bg-surface-soft hover:text-text-primary"
-                      )}
-                    >
-                      <Icon className="h-4 w-4" />
-                      {item.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+          <div id="admin-menu" className={cn(menuOpen ? "flex" : "hidden", "flex-1 flex-col lg:flex")}>
+            <nav className="flex-1 px-3 pb-4">
+              <ul className="space-y-1">
+                {navItems.map((item) => {
+                  const Icon = item.icon;
+                  const active = item.exact
+                    ? pathname === item.href
+                    : pathname === item.href || pathname.startsWith(`${item.href}/`);
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className={cn(
+                          "flex items-center gap-3 rounded-button px-3 py-2 text-sm font-medium transition-colors",
+                          active
+                            ? "bg-brand-navy text-white"
+                            : "text-text-secondary hover:bg-surface-soft hover:text-text-primary"
+                        )}
+                      >
+                        <Icon className="h-4 w-4" />
+                        {item.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
 
-          <div className="border-t border-border-default px-3 py-3">
-            <Link
-              href="/"
-              target="_blank"
-              className="flex items-center gap-2 rounded-button px-3 py-2 text-xs text-text-muted hover:text-text-primary"
-            >
-              <ExternalLink className="h-3.5 w-3.5" />
-              Ver site
-            </Link>
-            <div className="mt-2 rounded-button bg-surface-soft px-3 py-2 text-xs text-text-secondary">
-              {email}
-            </div>
-            <form action={logoutAction} className="mt-2">
-              <button
-                type="submit"
-                className="flex w-full items-center gap-2 rounded-button px-3 py-2 text-sm text-text-secondary transition-colors hover:bg-surface-soft hover:text-brand-coral"
+            <div className="border-t border-border-default px-3 py-3">
+              <Link
+                href="/"
+                target="_blank"
+                className="flex items-center gap-2 rounded-button px-3 py-2 text-xs text-text-muted hover:text-text-primary"
               >
-                <LogOut className="h-4 w-4" />
-                Sair
-              </button>
-            </form>
+                <ExternalLink className="h-3.5 w-3.5" />
+                Ver site
+              </Link>
+              <div className="mt-2 rounded-button bg-surface-soft px-3 py-2 text-xs text-text-secondary">
+                {email}
+              </div>
+              <form action={logoutAction} className="mt-2">
+                <button
+                  type="submit"
+                  className="flex w-full items-center gap-2 rounded-button px-3 py-2 text-sm text-text-secondary transition-colors hover:bg-surface-soft hover:text-brand-coral"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Sair
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </aside>

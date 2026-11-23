@@ -86,7 +86,7 @@ export const postSchema = z.object({
     .min(2, "Informe o slug.")
     .regex(slugRegex, "Slug deve conter apenas letras minúsculas, números e hífens."),
   excerpt: z.string().min(1, "Informe um resumo."),
-  image: z.string().min(1, "Informe a URL da imagem."),
+  image: z.string().min(1, "Envie a imagem de capa."),
   date: z.string().min(1, "Informe a data."),
   category: z.string().min(1, "Informe a categoria."),
   readingTime: z

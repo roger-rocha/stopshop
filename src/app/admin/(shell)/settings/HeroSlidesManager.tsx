@@ -53,7 +53,7 @@ export function HeroSlidesManager({ defaultSlides }: HeroSlidesManagerProps) {
 
   return (
     <div className="space-y-2">
-      <span className="text-sm font-medium text-text-primary">
+      <span className="block text-sm font-medium text-text-primary">
         Imagens do banner (carrossel)
       </span>
 

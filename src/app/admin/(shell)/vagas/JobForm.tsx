@@ -1,7 +1,8 @@
 "use client";
 
 import { useActionState } from "react";
-import { FormError } from "../_components/FormError";
+import { CheckboxField } from "../_components/CheckboxField";
+import { FormStatus } from "../_components/FormStatus";
 import {
   createJobAction,
   updateJobAction,
@@ -23,11 +24,6 @@ export function JobForm({ job }: JobFormProps) {
 
   return (
     <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-6">
-      {state.status === "error" && (
-        <div className="rounded-button bg-brand-coral/10 px-3 py-2 text-sm text-brand-coral">
-          {state.message}
-        </div>
-      )}
 
       <Field label="Título da vaga" error={errors.title?.[0]}>
         <input
@@ -115,17 +111,13 @@ export function JobForm({ job }: JobFormProps) {
       </Field>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Publicada" hint="Desmarque para esconder a vaga do site">
-          <label className="mt-1 inline-flex items-center gap-2">
-            <input
-              type="checkbox"
-              name="published"
-              defaultChecked={job?.published ?? true}
-              className="h-4 w-4 rounded border-border-default text-brand-coral focus:ring-brand-coral/30"
-            />
-            <span className="text-sm text-text-secondary">Visível no site</span>
-          </label>
-        </Field>
+        <CheckboxField
+          label="Publicada"
+          name="published"
+          option="Visível no site"
+          hint="Desmarque para esconder a vaga do site"
+          defaultChecked={job?.published ?? true}
+        />
         <Field
           label="Ordem"
           hint="Menor número aparece primeiro"
@@ -142,7 +134,7 @@ export function JobForm({ job }: JobFormProps) {
       </div>
 
       <div className="flex items-center justify-end gap-3 border-t border-border-default pt-5">
-        <FormError state={state} />
+        <FormStatus state={state} />
         <button
           type="submit"
           disabled={pending}

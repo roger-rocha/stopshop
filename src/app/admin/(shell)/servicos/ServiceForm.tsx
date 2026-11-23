@@ -1,7 +1,8 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { FormError } from "../_components/FormError";
+import { CheckboxField } from "../_components/CheckboxField";
+import { FormStatus } from "../_components/FormStatus";
 import {
   createServiceAction,
   updateServiceAction,
@@ -33,11 +34,6 @@ export function ServiceForm({ service, categories }: ServiceFormProps) {
 
   return (
     <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-6">
-      {state.status === "error" && (
-        <div className="rounded-button bg-brand-coral/10 px-3 py-2 text-sm text-brand-coral">
-          {state.message}
-        </div>
-      )}
 
       <Field label="Nome do serviço" error={errors.name?.[0]}>
         <input
@@ -70,7 +66,7 @@ export function ServiceForm({ service, categories }: ServiceFormProps) {
         </Field>
 
         <Field label="Ícone" error={errors.icon?.[0]}>
-          <div className="mt-1 flex items-center gap-3">
+          <div className="flex items-center gap-3">
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-button bg-brand-coral/10 text-brand-coral">
               <ServiceIcon name={icon} className="h-5 w-5" />
             </span>
@@ -106,17 +102,13 @@ export function ServiceForm({ service, categories }: ServiceFormProps) {
       </Field>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Publicado" hint="Desmarque para esconder o serviço do site">
-          <label className="mt-1 inline-flex items-center gap-2">
-            <input
-              type="checkbox"
-              name="published"
-              defaultChecked={service?.published ?? true}
-              className="h-4 w-4 rounded border-border-default text-brand-coral focus:ring-brand-coral/30"
-            />
-            <span className="text-sm text-text-secondary">Visível no site</span>
-          </label>
-        </Field>
+        <CheckboxField
+          label="Publicado"
+          name="published"
+          option="Visível no site"
+          hint="Desmarque para esconder o serviço do site"
+          defaultChecked={service?.published ?? true}
+        />
         <Field
           label="Ordem"
           hint="Menor número aparece primeiro"
@@ -133,7 +125,7 @@ export function ServiceForm({ service, categories }: ServiceFormProps) {
       </div>
 
       <div className="flex items-center justify-end gap-3 border-t border-border-default pt-5">
-        <FormError state={state} />
+        <FormStatus state={state} />
         <button
           type="submit"
           disabled={pending}

@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { Plus, Pencil } from "lucide-react";
-import { getAllStores } from "@/lib/server/queries";
+import { getAllSegments, getAllStores } from "@/lib/server/queries";
 import { PageHeader } from "../_components/PageHeader";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Lojas" };
 
 export default async function StoresPage() {
-  const stores = await getAllStores();
+  const [stores, segments] = await Promise.all([getAllStores(), getAllSegments()]);
+  const segmentName = new Map(segments.map((s) => [s.slug, s.name]));
 
   return (
     <div>
@@ -39,9 +40,9 @@ export default async function StoresPage() {
               <thead className="bg-surface-soft text-left text-xs uppercase tracking-wider text-text-muted">
                 <tr>
                   <th className="px-5 py-3 font-medium">Nome</th>
-                  <th className="px-5 py-3 font-medium">Segmento</th>
-                  <th className="px-5 py-3 font-medium">Localização</th>
-                  <th className="px-5 py-3 font-medium">Destaque</th>
+                  <th className="hidden px-5 py-3 font-medium sm:table-cell">Segmento</th>
+                  <th className="hidden px-5 py-3 font-medium md:table-cell">Localização</th>
+                  <th className="hidden px-5 py-3 font-medium sm:table-cell">Destaque</th>
                   <th className="px-5 py-3"></th>
                 </tr>
               </thead>
@@ -50,11 +51,13 @@ export default async function StoresPage() {
                   <tr key={store.id} className="hover:bg-surface-soft/50">
                     <td className="px-5 py-3 font-medium text-text-primary">
                       {store.name}
-                      <span className="ml-2 text-xs text-text-muted">/{store.slug}</span>
+                      <span className="mt-0.5 block text-xs font-normal text-text-muted">/{store.slug}</span>
                     </td>
-                    <td className="px-5 py-3 text-text-secondary">{store.segment}</td>
-                    <td className="px-5 py-3 text-text-secondary">{store.location}</td>
-                    <td className="px-5 py-3">
+                    <td className="hidden px-5 py-3 text-text-secondary sm:table-cell">
+                      {segmentName.get(store.segment) ?? store.segment}
+                    </td>
+                    <td className="hidden px-5 py-3 text-text-secondary md:table-cell">{store.location}</td>
+                    <td className="hidden px-5 py-3 sm:table-cell">
                       {store.featured ? (
                         <span className="inline-flex rounded-pill bg-brand-coral/10 px-2 py-0.5 text-xs font-medium text-brand-coral">
                           Sim
@@ -63,7 +66,7 @@ export default async function StoresPage() {
                         <span className="text-xs text-text-muted">—</span>
                       )}
                     </td>
-                    <td className="px-5 py-3 text-right">
+                    <td className="whitespace-nowrap px-5 py-3 text-right">
                       <Link
                         href={`/admin/stores/${store.id}`}
                         className="inline-flex items-center gap-1 text-xs font-medium text-brand-navy hover:text-brand-coral"

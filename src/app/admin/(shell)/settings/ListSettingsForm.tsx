@@ -1,13 +1,12 @@
 "use client";
 
 import { useActionState } from "react";
-import { FormError } from "../_components/FormError";
+import { FormStatus } from "../_components/FormStatus";
 import {
   saveListSettingAction,
   type SettingsState,
 } from "@/lib/server/actions/settings";
-import { textareaCls } from "../_components/Field";
-import { StatusMessage } from "./StatusMessage";
+import { Field, textareaCls } from "../_components/Field";
 
 const initial: SettingsState = { status: "idle" };
 
@@ -24,22 +23,18 @@ export function ListSettingsForm({ settingKey, items }: ListSettingsFormProps) {
 
   return (
     <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-4">
-      <StatusMessage state={state} />
 
-      <label className="block">
-        <span className="text-sm font-medium text-text-primary">
-          Itens (um por linha)
-        </span>
+      <Field label="Itens" hint="Um item por linha">
         <textarea
           name="items"
           defaultValue={items.join("\n")}
           rows={Math.max(4, items.length + 1)}
-          className={`${textareaCls} mt-1`}
+          className={textareaCls}
         />
-      </label>
+      </Field>
 
       <div className="flex items-center justify-end gap-3">
-        <FormError state={state} />
+        <FormStatus state={state} />
         <button
           type="submit"
           disabled={pending}

@@ -43,8 +43,8 @@ export default async function AgendaPage() {
               <thead className="bg-surface-soft text-left text-xs uppercase tracking-wider text-text-muted">
                 <tr>
                   <th className="px-5 py-3 font-medium">Evento</th>
-                  <th className="px-5 py-3 font-medium">Data</th>
-                  <th className="px-5 py-3 font-medium">Calendário</th>
+                  <th className="hidden px-5 py-3 font-medium md:table-cell">Data</th>
+                  <th className="hidden px-5 py-3 font-medium sm:table-cell">Calendário</th>
                   <th className="px-5 py-3 font-medium">Status</th>
                   <th className="px-5 py-3"></th>
                 </tr>
@@ -56,11 +56,14 @@ export default async function AgendaPage() {
                     <tr key={event.id} className="hover:bg-surface-soft/50">
                       <td className="px-5 py-3 font-medium text-text-primary">
                         {event.title}
+                        <span className="mt-0.5 block text-xs font-normal text-text-muted md:hidden">
+                          {event.dateLabel}
+                        </span>
                       </td>
-                      <td className="px-5 py-3 text-text-secondary">
+                      <td className="hidden px-5 py-3 text-text-secondary md:table-cell">
                         {event.dateLabel}
                       </td>
-                      <td className="px-5 py-3 text-text-secondary">
+                      <td className="hidden px-5 py-3 text-text-secondary sm:table-cell">
                         {event.startDate ? (
                           <>
                             <p className="whitespace-nowrap">
@@ -93,7 +96,7 @@ export default async function AgendaPage() {
                           {eventStatusLabel[status]}
                         </span>
                       </td>
-                      <td className="px-5 py-3 text-right">
+                      <td className="whitespace-nowrap px-5 py-3 text-right">
                         <Link
                           href={`/admin/agenda/${event.id}`}
                           className="inline-flex items-center gap-1 text-xs font-medium text-brand-navy hover:text-brand-coral"

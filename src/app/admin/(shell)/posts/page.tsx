@@ -39,9 +39,9 @@ export default async function PostsPage() {
               <thead className="bg-surface-soft text-left text-xs uppercase tracking-wider text-text-muted">
                 <tr>
                   <th className="px-5 py-3 font-medium">Título</th>
-                  <th className="px-5 py-3 font-medium">Categoria</th>
-                  <th className="px-5 py-3 font-medium">Data</th>
-                  <th className="px-5 py-3 font-medium">Status</th>
+                  <th className="hidden px-5 py-3 font-medium md:table-cell">Categoria</th>
+                  <th className="hidden px-5 py-3 font-medium md:table-cell">Data</th>
+                  <th className="hidden px-5 py-3 font-medium sm:table-cell">Status</th>
                   <th className="px-5 py-3"></th>
                 </tr>
               </thead>
@@ -52,9 +52,9 @@ export default async function PostsPage() {
                       {post.title}
                       <span className="ml-2 text-xs text-text-muted">/{post.slug}</span>
                     </td>
-                    <td className="px-5 py-3 text-text-secondary">{post.category}</td>
-                    <td className="px-5 py-3 text-text-secondary">{post.date}</td>
-                    <td className="px-5 py-3">
+                    <td className="hidden px-5 py-3 text-text-secondary md:table-cell">{post.category}</td>
+                    <td className="hidden whitespace-nowrap px-5 py-3 text-text-secondary md:table-cell">{post.date}</td>
+                    <td className="hidden px-5 py-3 sm:table-cell">
                       {post.published ? (
                         <span className="inline-flex rounded-pill bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-700">
                           Publicado
@@ -65,7 +65,7 @@ export default async function PostsPage() {
                         </span>
                       )}
                     </td>
-                    <td className="px-5 py-3 text-right">
+                    <td className="whitespace-nowrap px-5 py-3 text-right">
                       <Link
                         href={`/admin/posts/${post.id}`}
                         className="inline-flex items-center gap-1 text-xs font-medium text-brand-navy hover:text-brand-coral"
