@@ -18,6 +18,12 @@ const csvList = z
           .filter(Boolean)
   );
 
+const nonNegativeInt = () =>
+  z.coerce
+    .number({ error: "Informe um número." })
+    .int("Use um número inteiro.")
+    .min(0, "Use um número igual ou maior que zero.");
+
 const optionalString = z
   .string()
   .optional()
@@ -56,8 +62,8 @@ export const segmentSchema = z.object({
     .string()
     .optional()
     .transform((v) => (v && v.trim().length > 0 ? v.trim() : null)),
-  storeCount: z.coerce.number().int().min(0).default(0),
-  position: z.coerce.number().int().min(0).default(0),
+  storeCount: nonNegativeInt().default(0),
+  position: nonNegativeInt().default(0),
 });
 
 export type SegmentInput = z.infer<typeof segmentSchema>;
@@ -107,7 +113,7 @@ export const eventSchema = z.object({
   endTime: optionalString.pipe(z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, "Informe um horário de fim válido (HH:mm).").nullable()),
   ctaLabel: optionalString,
   ctaHref: optionalString,
-  position: z.coerce.number().int().min(0).default(0),
+  position: nonNegativeInt().default(0),
 }).superRefine((event, ctx) => {
   if (event.endDate && !event.startDate) {
     ctx.addIssue({ code: "custom", path: ["endDate"], message: "Informe a data de início antes da data de fim." });
@@ -132,7 +138,7 @@ export type EventInput = z.infer<typeof eventSchema>;
 export const galleryImageSchema = z.object({
   image: z.string().min(1, "Envie uma imagem."),
   alt: z.string().min(1, "Descreva a imagem (usado para acessibilidade)."),
-  position: z.coerce.number().int().min(0).default(0),
+  position: nonNegativeInt().default(0),
 });
 
 export type GalleryImageInput = z.infer<typeof galleryImageSchema>;
@@ -141,7 +147,7 @@ export const instagramPostSchema = z.object({
   image: z.string().min(1, "Envie uma imagem."),
   alt: z.string().min(1, "Descreva a imagem (usado para acessibilidade)."),
   link: optionalString,
-  position: z.coerce.number().int().min(0).default(0),
+  position: nonNegativeInt().default(0),
 });
 
 export type InstagramPostInput = z.infer<typeof instagramPostSchema>;
@@ -160,7 +166,7 @@ export const jobOpeningSchema = z.object({
     (v) => v === "on" || v === true || v === "true",
     z.boolean()
   ),
-  position: z.coerce.number().int().min(0).default(0),
+  position: nonNegativeInt().default(0),
 });
 
 export type JobOpeningInput = z.infer<typeof jobOpeningSchema>;
@@ -174,7 +180,7 @@ export const serviceSchema = z.object({
     (v) => v === "on" || v === true || v === "true",
     z.boolean()
   ),
-  position: z.coerce.number().int().min(0).default(0),
+  position: nonNegativeInt().default(0),
 });
 
 export type ServiceInput = z.infer<typeof serviceSchema>;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { FormError } from "../_components/FormError";
 import {
   createPostAction,
   updatePostAction,
@@ -21,8 +22,8 @@ export function PostForm({ post }: PostFormProps) {
   const errors = state.status === "error" ? state.fieldErrors ?? {} : {};
 
   return (
-    <form action={formAction} className="space-y-6">
-      {state.status === "error" && !state.fieldErrors && (
+    <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-6">
+      {state.status === "error" && (
         <div className="rounded-button bg-brand-coral/10 px-3 py-2 text-sm text-brand-coral">
           {state.message}
         </div>
@@ -39,13 +40,12 @@ export function PostForm({ post }: PostFormProps) {
         </Field>
         <Field
           label="Slug"
-          hint="ex.: alto-verao-2026"
+          hint="Opcional: se ficar em branco, é gerado pelo título (ex.: alto-verao-2026)"
           error={errors.slug?.[0]}
         >
           <input
             name="slug"
             defaultValue={post?.slug ?? ""}
-            required
             className={inputCls}
           />
         </Field>
@@ -132,6 +132,7 @@ export function PostForm({ post }: PostFormProps) {
       </Field>
 
       <div className="flex items-center justify-end gap-3 border-t border-border-default pt-5">
+        <FormError state={state} />
         <button
           type="submit"
           disabled={pending}

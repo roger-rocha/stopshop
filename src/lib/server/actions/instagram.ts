@@ -38,7 +38,7 @@ export async function createInstagramPostAction(
   if (!parsed.success) {
     return {
       status: "error",
-      message: "Verifique os campos.",
+      message: "Não foi possível salvar. Corrija os campos marcados em vermelho.",
       fieldErrors: parsed.error.flatten().fieldErrors,
     };
   }
@@ -61,7 +61,7 @@ export async function updateInstagramPostAction(
   if (!parsed.success) {
     return {
       status: "error",
-      message: "Verifique os campos.",
+      message: "Não foi possível salvar. Corrija os campos marcados em vermelho.",
       fieldErrors: parsed.error.flatten().fieldErrors,
     };
   }

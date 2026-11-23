@@ -27,7 +27,7 @@ export async function saveLegalPageAction(
   if (!parsed.success) {
     return {
       status: "error",
-      message: parsed.error.issues[0]?.message ?? "Verifique os campos.",
+      message: parsed.error.issues[0]?.message ?? "Não foi possível salvar. Corrija os campos marcados em vermelho.",
     };
   }
 

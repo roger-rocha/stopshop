@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useState } from "react";
+import { FormError } from "../_components/FormError";
 import {
   saveSiteVisibilityAction,
   type SettingsState,
@@ -17,7 +18,7 @@ export function SiteVisibilityForm({ published }: { published: boolean }) {
   );
 
   return (
-    <form action={formAction} className="space-y-5">
+    <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-5">
       <StatusMessage state={state} />
 
       <p className="text-sm leading-relaxed text-text-secondary">
@@ -83,7 +84,8 @@ export function SiteVisibilityForm({ published }: { published: boolean }) {
         </label>
       </fieldset>
 
-      <div className="flex justify-end">
+      <div className="flex items-center justify-end gap-3">
+        <FormError state={state} />
         <button
           type="submit"
           disabled={pending}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useState, type SyntheticEvent } from "react";
+import { FormError } from "../_components/FormError";
 import {
   createEventAction,
   updateEventAction,
@@ -51,7 +52,7 @@ export function EventForm({ event }: EventFormProps) {
   }
 
   return (
-    <form action={formAction} className="space-y-6">
+    <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-6">
       {state.status === "error" && (
         <div role="alert" className="rounded-button bg-brand-coral/10 px-3 py-2 text-sm text-brand-coral">
           {state.message}
@@ -185,6 +186,7 @@ export function EventForm({ event }: EventFormProps) {
       </Field>
 
       <div className="flex items-center justify-end gap-3 border-t border-border-default pt-5">
+        <FormError state={state} />
         <button
           type="submit"
           disabled={pending}

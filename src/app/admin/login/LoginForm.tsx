@@ -9,7 +9,7 @@ export function LoginForm({ next }: { next: string }) {
   const [state, formAction, pending] = useActionState(loginAction, initial);
 
   return (
-    <form action={formAction} className="mt-8 space-y-4">
+    <form action={formAction} onReset={(event) => event.preventDefault()} className="mt-8 space-y-4">
       <input type="hidden" name="next" value={next} />
 
       <label className="block">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { FormError } from "../_components/FormError";
 import {
   createGalleryImageAction,
   updateGalleryImageAction,
@@ -24,8 +25,8 @@ export function GalleryImageForm({ item }: GalleryImageFormProps) {
   const errors = state.status === "error" ? state.fieldErrors ?? {} : {};
 
   return (
-    <form action={formAction} className="space-y-6">
-      {state.status === "error" && !state.fieldErrors && (
+    <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-6">
+      {state.status === "error" && (
         <div className="rounded-button bg-brand-coral/10 px-3 py-2 text-sm text-brand-coral">
           {state.message}
         </div>
@@ -69,6 +70,7 @@ export function GalleryImageForm({ item }: GalleryImageFormProps) {
       </Field>
 
       <div className="flex items-center justify-end gap-3 border-t border-border-default pt-5">
+        <FormError state={state} />
         <button
           type="submit"
           disabled={pending}

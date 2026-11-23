@@ -4,6 +4,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { db, schema } from "@/db";
+import { slugFromForm } from "@/lib/slug";
+import { isUniqueViolation } from "@/lib/server/db-errors";
 import { requireSession } from "@/lib/auth";
 import { postSchema } from "@/lib/validators";
 
@@ -18,7 +20,7 @@ export type PostFormState =
 function parsePostForm(formData: FormData) {
   return postSchema.safeParse({
     title: formData.get("title"),
-    slug: formData.get("slug"),
+    slug: slugFromForm(formData.get("slug"), formData.get("title")),
     excerpt: formData.get("excerpt"),
     image: formData.get("image"),
     date: formData.get("date"),
@@ -46,7 +48,7 @@ export async function createPostAction(
   if (!parsed.success) {
     return {
       status: "error",
-      message: "Verifique os campos.",
+      message: "Não foi possível salvar. Corrija os campos marcados em vermelho.",
       fieldErrors: parsed.error.flatten().fieldErrors,
     };
   }
@@ -56,7 +58,7 @@ export async function createPostAction(
     return {
       status: "error",
       message:
-        error instanceof Error && error.message.includes("UNIQUE")
+        isUniqueViolation(error)
           ? "Já existe um post com esse slug."
           : "Não foi possível salvar o post.",
     };
@@ -75,7 +77,7 @@ export async function updatePostAction(
   if (!parsed.success) {
     return {
       status: "error",
-      message: "Verifique os campos.",
+      message: "Não foi possível salvar. Corrija os campos marcados em vermelho.",
       fieldErrors: parsed.error.flatten().fieldErrors,
     };
   }
@@ -88,7 +90,7 @@ export async function updatePostAction(
     return {
       status: "error",
       message:
-        error instanceof Error && error.message.includes("UNIQUE")
+        isUniqueViolation(error)
           ? "Já existe um post com esse slug."
           : "Não foi possível atualizar o post.",
     };

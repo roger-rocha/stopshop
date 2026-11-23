@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { FormError } from "../_components/FormError";
 import {
   saveContactAction,
   type SettingsState,
@@ -15,7 +16,7 @@ export function ContactSettingsForm({ contact }: { contact: ContactSettings }) {
   const [state, formAction, pending] = useActionState(saveContactAction, initial);
 
   return (
-    <form action={formAction} className="space-y-5">
+    <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-5">
       <StatusMessage state={state} />
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -89,7 +90,8 @@ export function ContactSettingsForm({ contact }: { contact: ContactSettings }) {
         </Field>
       </div>
 
-      <div className="flex justify-end">
+      <div className="flex items-center justify-end gap-3">
+        <FormError state={state} />
         <button
           type="submit"
           disabled={pending}

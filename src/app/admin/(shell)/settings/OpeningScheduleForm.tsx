@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useState } from "react";
+import { FormError } from "../_components/FormError";
 import { saveOpeningScheduleAction, type SettingsState } from "@/lib/server/actions/settings";
 import type { OpeningSchedule } from "@/lib/opening-schedule";
 import { Field, inputCls } from "../_components/Field";
@@ -17,7 +18,7 @@ export function OpeningScheduleForm({ schedule }: { schedule: OpeningSchedule })
   }
 
   return (
-    <form action={action} className="space-y-5">
+    <form action={action} onReset={(event) => event.preventDefault()} className="space-y-5">
       <StatusMessage state={state} />
       <input type="hidden" name="schedule" value={JSON.stringify({ entries: rows.map(({ date, label, closed, opens, closes }) => ({ date, label, closed, opens, closes })) })} />
       <fieldset disabled={pending} className="space-y-4 disabled:opacity-60">
@@ -38,7 +39,7 @@ export function OpeningScheduleForm({ schedule }: { schedule: OpeningSchedule })
         ))}
         <button type="button" onClick={() => setRows((items) => [...items, { id: crypto.randomUUID(), date: "", label: "", closed: false, opens: "09:00", closes: "19:00" }])} className="rounded-button border border-border-default px-4 py-2 text-sm font-medium hover:bg-surface-soft">Adicionar data</button>
       </fieldset>
-      <div className="flex justify-end"><button type="submit" disabled={pending} className="rounded-button bg-brand-navy px-5 py-2 text-sm font-medium text-white hover:bg-brand-navy/90 disabled:opacity-60">{pending ? "Salvando…" : "Salvar agenda"}</button></div>
+      <div className="flex items-center justify-end gap-3"><FormError state={state} /><button type="submit" disabled={pending} className="rounded-button bg-brand-navy px-5 py-2 text-sm font-medium text-white hover:bg-brand-navy/90 disabled:opacity-60">{pending ? "Salvando…" : "Salvar agenda"}</button></div>
     </form>
   );
 }

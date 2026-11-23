@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { FormError } from "../_components/FormError";
 import {
   saveListSettingAction,
   type SettingsState,
@@ -22,7 +23,7 @@ export function ListSettingsForm({ settingKey, items }: ListSettingsFormProps) {
   const [state, formAction, pending] = useActionState(action, initial);
 
   return (
-    <form action={formAction} className="space-y-4">
+    <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-4">
       <StatusMessage state={state} />
 
       <label className="block">
@@ -37,7 +38,8 @@ export function ListSettingsForm({ settingKey, items }: ListSettingsFormProps) {
         />
       </label>
 
-      <div className="flex justify-end">
+      <div className="flex items-center justify-end gap-3">
+        <FormError state={state} />
         <button
           type="submit"
           disabled={pending}

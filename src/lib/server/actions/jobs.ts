@@ -43,7 +43,7 @@ export async function createJobAction(
   if (!parsed.success) {
     return {
       status: "error",
-      message: "Verifique os campos.",
+      message: "Não foi possível salvar. Corrija os campos marcados em vermelho.",
       fieldErrors: parsed.error.flatten().fieldErrors,
     };
   }
@@ -66,7 +66,7 @@ export async function updateJobAction(
   if (!parsed.success) {
     return {
       status: "error",
-      message: "Verifique os campos.",
+      message: "Não foi possível salvar. Corrija os campos marcados em vermelho.",
       fieldErrors: parsed.error.flatten().fieldErrors,
     };
   }

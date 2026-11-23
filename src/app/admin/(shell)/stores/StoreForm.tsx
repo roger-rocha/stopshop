@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useState } from "react";
+import { FormError } from "../_components/FormError";
 import {
   createStoreAction,
   updateStoreAction,
@@ -28,8 +29,8 @@ export function StoreForm({ segments, store }: StoreFormProps) {
   const errors = state.status === "error" ? state.fieldErrors ?? {} : {};
 
   return (
-    <form action={formAction} onSubmit={(event) => { if (uploadingPhotos) event.preventDefault(); }} className="space-y-6">
-      {state.status === "error" && !state.fieldErrors && (
+    <form action={formAction} onReset={(event) => event.preventDefault()} onSubmit={(event) => { if (uploadingPhotos) event.preventDefault(); }} className="space-y-6">
+      {state.status === "error" && (
         <div className="rounded-button bg-brand-coral/10 px-3 py-2 text-sm text-brand-coral">
           {state.message}
         </div>
@@ -46,13 +47,12 @@ export function StoreForm({ segments, store }: StoreFormProps) {
         </Field>
         <Field
           label="Slug"
-          hint="Use letras minúsculas e hífens, ex.: hering"
+          hint="Opcional: se ficar em branco, é gerado pelo nome (ex.: Éfata Plus → efata-plus)"
           error={errors.slug?.[0]}
         >
           <input
             name="slug"
             defaultValue={store?.slug ?? ""}
-            required
             className={inputCls}
           />
         </Field>
@@ -191,6 +191,7 @@ export function StoreForm({ segments, store }: StoreFormProps) {
       </Field>
 
       <div className="flex items-center justify-end gap-3 border-t border-border-default pt-5">
+        <FormError state={state} />
         <button
           type="submit"
           disabled={pending || uploadingPhotos}

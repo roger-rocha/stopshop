@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { FormError } from "../_components/FormError";
 import {
   createSegmentAction,
   updateSegmentAction,
@@ -24,8 +25,8 @@ export function SegmentForm({ segment }: SegmentFormProps) {
   const errors = state.status === "error" ? state.fieldErrors ?? {} : {};
 
   return (
-    <form action={formAction} className="space-y-6">
-      {state.status === "error" && !state.fieldErrors && (
+    <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-6">
+      {state.status === "error" && (
         <div className="rounded-button bg-brand-coral/10 px-3 py-2 text-sm text-brand-coral">
           {state.message}
         </div>
@@ -42,13 +43,12 @@ export function SegmentForm({ segment }: SegmentFormProps) {
         </Field>
         <Field
           label="Slug"
-          hint="Use letras minúsculas e hífens, ex.: moda-feminina"
+          hint="Opcional: se ficar em branco, é gerado pelo nome (ex.: Moda Feminina → moda-feminina)"
           error={errors.slug?.[0]}
         >
           <input
             name="slug"
             defaultValue={segment?.slug ?? ""}
-            required
             className={inputCls}
           />
         </Field>
@@ -102,6 +102,7 @@ export function SegmentForm({ segment }: SegmentFormProps) {
       </div>
 
       <div className="flex items-center justify-end gap-3 border-t border-border-default pt-5">
+        <FormError state={state} />
         <button
           type="submit"
           disabled={pending}

@@ -33,7 +33,7 @@ export function ReportingChannelForm({ config }: { config: ReportingChannelConfi
   }
 
   return (
-    <form action={formAction} className="space-y-6">
+    <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-6">
       <div className="rounded-[20px] border border-border-default bg-surface-soft p-5 text-sm leading-relaxed text-text-secondary">
         <p>
           O e-mail abre o aplicativo de e-mail do visitante. O formulário abre um site externo,

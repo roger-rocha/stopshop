@@ -4,6 +4,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { db, schema } from "@/db";
+import { slugFromForm } from "@/lib/slug";
+import { isUniqueViolation } from "@/lib/server/db-errors";
 import { requireSession } from "@/lib/auth";
 import { storeSchema } from "@/lib/validators";
 
@@ -18,7 +20,7 @@ export type StoreFormState =
 function parseStoreForm(formData: FormData) {
   return storeSchema.safeParse({
     name: formData.get("name"),
-    slug: formData.get("slug"),
+    slug: slugFromForm(formData.get("slug"), formData.get("name")),
     photo: formData.get("photo") ?? "",
     storefront: formData.get("storefront") ?? "",
     photos: formData.getAll("photos"),
@@ -51,7 +53,7 @@ export async function createStoreAction(
   if (!parsed.success) {
     return {
       status: "error",
-      message: "Verifique os campos.",
+      message: "Não foi possível salvar. Corrija os campos marcados em vermelho.",
       fieldErrors: parsed.error.flatten().fieldErrors,
     };
   }
@@ -61,7 +63,7 @@ export async function createStoreAction(
     return {
       status: "error",
       message:
-        error instanceof Error && error.message.includes("UNIQUE")
+        isUniqueViolation(error)
           ? "Já existe uma loja com esse slug."
           : "Não foi possível salvar a loja.",
     };
@@ -80,7 +82,7 @@ export async function updateStoreAction(
   if (!parsed.success) {
     return {
       status: "error",
-      message: "Verifique os campos.",
+      message: "Não foi possível salvar. Corrija os campos marcados em vermelho.",
       fieldErrors: parsed.error.flatten().fieldErrors,
     };
   }
@@ -93,7 +95,7 @@ export async function updateStoreAction(
     return {
       status: "error",
       message:
-        error instanceof Error && error.message.includes("UNIQUE")
+        isUniqueViolation(error)
           ? "Já existe uma loja com esse slug."
           : "Não foi possível atualizar a loja.",
     };

@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { FormError } from "../_components/FormError";
 import { saveLegalPageAction } from "@/lib/server/actions/legal";
 import type { SettingsState } from "@/lib/server/actions/settings";
 import { Field, inputCls, textareaCls } from "../_components/Field";
@@ -14,7 +15,7 @@ export function LegalPageForm({ page }: { page: LegalPage }) {
   const [state, formAction, pending] = useActionState(action, initial);
 
   return (
-    <form action={formAction} className="space-y-5">
+    <form action={formAction} onReset={(event) => event.preventDefault()} className="space-y-5">
       <StatusMessage state={state} />
 
       <Field label="Título">
@@ -50,6 +51,7 @@ export function LegalPageForm({ page }: { page: LegalPage }) {
       </Field>
 
       <div className="flex items-center justify-end gap-3 border-t border-border-default pt-5">
+        <FormError state={state} />
         <button
           type="submit"
           disabled={pending}
