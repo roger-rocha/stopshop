@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { upload } from "@vercel/blob/client";
 import { ImagePlus, Loader2, X, ChevronUp, ChevronDown } from "lucide-react";
+import { ACCEPTED_FORMATS_ERROR, ACCEPTED_IMAGE_TYPES, MAX_IMAGE_BYTES, imageSpecs } from "@/lib/image-specs";
+import { ImageSpecHint } from "../_components/ImageSpecHint";
 
 interface StorePhotosManagerProps {
   defaultPhotos: string[];
@@ -25,8 +27,8 @@ export function StorePhotosManager({ defaultPhotos, onUploadingChange, fieldErro
       return;
     }
     const selected = Array.from(files);
-    if (selected.some((file) => !["image/jpeg", "image/png", "image/webp", "image/avif", "image/gif"].includes(file.type) || file.size > 8 * 1024 * 1024)) {
-      setError("Use JPG, PNG, WebP, AVIF ou GIF de até 8 MB por foto.");
+    if (selected.some((file) => !ACCEPTED_IMAGE_TYPES.includes(file.type) || file.size > MAX_IMAGE_BYTES)) {
+      setError(ACCEPTED_FORMATS_ERROR);
       return;
     }
     setUploading(true);
@@ -150,7 +152,7 @@ export function StorePhotosManager({ defaultPhotos, onUploadingChange, fieldErro
       <input
         ref={inputRef}
         type="file"
-        accept="image/jpeg,image/png,image/webp,image/avif,image/gif"
+        accept={ACCEPTED_IMAGE_TYPES.join(",")}
         multiple
         className="hidden"
         onChange={(e) => {
@@ -162,10 +164,13 @@ export function StorePhotosManager({ defaultPhotos, onUploadingChange, fieldErro
       {error || fieldError ? (
         <span className="block text-xs text-brand-coral">{error || fieldError}</span>
       ) : (
-        <span className="block text-xs text-text-muted">
-          Até 12 fotos de 8 MB cada. Reordene pelas setas; as fotos ficam
-          disponíveis no card e na galeria ampliada da loja.
-        </span>
+        <>
+          <span className="block text-xs text-text-muted">
+            Até 12 fotos. Reordene pelas setas; as fotos ficam disponíveis no
+            card e na galeria ampliada da loja.
+          </span>
+          <ImageSpecHint spec={imageSpecs.storePhotos} />
+        </>
       )}
     </div>
   );

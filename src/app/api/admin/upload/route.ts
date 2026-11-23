@@ -1,16 +1,7 @@
 import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-
-const ALLOWED_CONTENT_TYPES = [
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "image/avif",
-  "image/gif",
-];
-
-const MAX_SIZE_BYTES = 8 * 1024 * 1024; // 8 MB
+import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_BYTES } from "@/lib/image-specs";
 
 export async function POST(request: Request): Promise<NextResponse> {
   const body = (await request.json()) as HandleUploadBody;
@@ -27,9 +18,9 @@ export async function POST(request: Request): Promise<NextResponse> {
           throw new Error("Não autorizado.");
         }
         return {
-          allowedContentTypes: ALLOWED_CONTENT_TYPES,
+          allowedContentTypes: ACCEPTED_IMAGE_TYPES,
           addRandomSuffix: true,
-          maximumSizeInBytes: MAX_SIZE_BYTES,
+          maximumSizeInBytes: MAX_IMAGE_BYTES,
         };
       },
       // Só dispara em produção, via webhook da Vercel. Não dependemos disso:

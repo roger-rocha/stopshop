@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { anchorBrands } from "@/lib/data/anchor-brands";
-import { cn } from "@/lib/utils";
+import type { BrandLogo as Brand } from "@/lib/brand-logos";
 
-export function AnchorBrandsStrip() {
+/** Faixa de logos gerenciada em /admin/marcas; sem logos, a seção não aparece. */
+export function AnchorBrandsStrip({ brands }: { brands: Brand[] }) {
+  if (brands.length === 0) return null;
   // Duplicate the list so the marquee can loop seamlessly
-  const loop = [...anchorBrands, ...anchorBrands];
+  const loop = [...brands, ...brands];
 
   return (
     <section className="relative overflow-hidden border-y border-border-default bg-white py-8">
@@ -38,32 +39,16 @@ export function AnchorBrandsStrip() {
   );
 }
 
-function BrandLogo({ brand }: { brand: (typeof anchorBrands)[number] }) {
+function BrandLogo({ brand }: { brand: Brand }) {
   return (
-    <div
-      className={cn(
-        "flex h-16 shrink-0 items-center justify-center px-3",
-        brand.anchor && "min-w-[160px]"
-      )}
-    >
-      {brand.logo ? (
-        <Image
-          src={brand.logo}
-          alt={brand.name}
-          width={160}
-          height={64}
-          className="h-12 w-auto object-contain opacity-80 transition-opacity hover:opacity-100"
-        />
-      ) : (
-        <span
-          className={cn(
-            "font-display text-xl font-bold tracking-tight",
-            brand.anchor ? "text-brand-navy" : "text-text-secondary"
-          )}
-        >
-          {brand.name}
-        </span>
-      )}
+    <div className="flex h-16 shrink-0 items-center justify-center px-3">
+      <Image
+        src={brand.logo}
+        alt={brand.name}
+        width={400}
+        height={96}
+        className="h-12 w-auto max-w-[200px] object-contain opacity-80 transition-opacity hover:opacity-100"
+      />
     </div>
   );
 }

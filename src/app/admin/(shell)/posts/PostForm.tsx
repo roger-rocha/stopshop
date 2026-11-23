@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { CheckboxField } from "../_components/CheckboxField";
 import { ImageUpload } from "../_components/ImageUpload";
+import { imageSpecs } from "@/lib/image-specs";
 import { FormStatus } from "../_components/FormStatus";
 import {
   createPostAction,
@@ -62,6 +63,7 @@ export function PostForm({ post }: PostFormProps) {
         name="image"
         label="Imagem de capa"
         hint="Exibida no card e no topo do post"
+        spec={imageSpecs.postCover}
         defaultValue={post?.image}
         folder="posts"
         variant="wide"

@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { upload } from "@vercel/blob/client";
 import { ImagePlus, Loader2, X, ChevronUp, ChevronDown } from "lucide-react";
+import { ACCEPTED_FORMATS_ERROR, ACCEPTED_IMAGE_TYPES, MAX_IMAGE_BYTES, imageSpecs } from "@/lib/image-specs";
+import { ImageSpecHint } from "../_components/ImageSpecHint";
 
 interface HeroSlidesManagerProps {
   defaultSlides: string[];
@@ -18,6 +20,10 @@ export function HeroSlidesManager({ defaultSlides }: HeroSlidesManagerProps) {
 
   async function handleFiles(files: FileList | null) {
     if (!files || files.length === 0) return;
+    if (Array.from(files).some((file) => !ACCEPTED_IMAGE_TYPES.includes(file.type) || file.size > MAX_IMAGE_BYTES)) {
+      setError(ACCEPTED_FORMATS_ERROR);
+      return;
+    }
     setUploading(true);
     setError(null);
     try {
@@ -136,7 +142,7 @@ export function HeroSlidesManager({ defaultSlides }: HeroSlidesManagerProps) {
       <input
         ref={inputRef}
         type="file"
-        accept="image/*"
+        accept={ACCEPTED_IMAGE_TYPES.join(",")}
         multiple
         className="hidden"
         onChange={(e) => {
@@ -148,10 +154,13 @@ export function HeroSlidesManager({ defaultSlides }: HeroSlidesManagerProps) {
       {error ? (
         <span className="block text-xs text-brand-coral">{error}</span>
       ) : (
-        <span className="block text-xs text-text-muted">
-          Envie uma ou mais imagens. Elas giram automaticamente no banner da
-          home. Sem imagens, o vídeo padrão é exibido.
-        </span>
+        <>
+          <span className="block text-xs text-text-muted">
+            Envie uma ou mais imagens. Elas giram automaticamente no banner da
+            home. Sem imagens, o vídeo padrão é exibido.
+          </span>
+          <ImageSpecHint spec={imageSpecs.heroSlide} />
+        </>
       )}
     </div>
   );

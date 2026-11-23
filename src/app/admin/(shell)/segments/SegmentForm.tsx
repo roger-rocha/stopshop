@@ -9,6 +9,7 @@ import {
 } from "@/lib/server/actions/segments";
 import { Field, inputCls } from "../_components/Field";
 import { ImageUpload } from "../_components/ImageUpload";
+import { imageSpecs } from "@/lib/image-specs";
 import type { Segment } from "@/db/schema";
 
 const initial: SegmentFormState = { status: "idle" };
@@ -53,9 +54,10 @@ export function SegmentForm({ segment }: SegmentFormProps) {
         name="image"
         label="Imagem do segmento"
         hint="Imagem exibida nos cards de segmento do site"
+        spec={imageSpecs.segment}
         defaultValue={segment?.image}
         folder="segments"
-        variant="wide"
+        variant="portrait"
         error={errors.image?.[0]}
       />
 

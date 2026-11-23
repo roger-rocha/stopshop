@@ -11,6 +11,7 @@ import { MapSection } from "@/components/sections/MapSection";
 import {
   getAllEvents,
   getAllSegments,
+  getBrandLogos,
   getContact,
   getGalleryImages,
   getHero,
@@ -36,6 +37,7 @@ export default async function HomePage() {
     galleryImages,
     openingSchedule,
     seo,
+    brandLogos,
   ] = await Promise.all([
     getHero(),
     getAllSegments(),
@@ -44,6 +46,7 @@ export default async function HomePage() {
     getGalleryImages(),
     getOpeningSchedule(),
     getSeoSettings(),
+    getBrandLogos(),
   ]);
 
   const agendaEvents = toAgendaBanners(events);
@@ -101,7 +104,7 @@ export default async function HomePage() {
       <HeroSection hero={hero} />
       <OpeningHoursStrip schedule={openingSchedule} events={toCalendarEvents(events)} currentMonth={shoppingMonth()} regularHours={contact.hours} whatsapp={contact.whatsapp} />
       <AgendaSection events={agendaEvents} />
-      <AnchorBrandsStrip />
+      <AnchorBrandsStrip brands={brandLogos} />
       <SegmentCarousel segments={segments} />
       <GallerySection images={galleryImages} />
       <InstagramFeed />

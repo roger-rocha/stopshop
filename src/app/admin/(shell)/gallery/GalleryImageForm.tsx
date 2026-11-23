@@ -9,6 +9,7 @@ import {
 } from "@/lib/server/actions/gallery";
 import { Field, inputCls } from "../_components/Field";
 import { ImageUpload } from "../_components/ImageUpload";
+import { imageSpecs } from "@/lib/image-specs";
 import type { GalleryImage } from "@/db/schema";
 
 const initial: GalleryFormState = { status: "idle" };
@@ -31,6 +32,7 @@ export function GalleryImageForm({ item }: GalleryImageFormProps) {
         name="image"
         label="Imagem"
         hint="Foto interna do Stop Shop — ambientes, corredores, lojas"
+        spec={imageSpecs.gallery}
         defaultValue={item?.image}
         folder="gallery"
         variant="wide"

@@ -6,6 +6,7 @@ import { DEFAULT_PAGE_SEO, resolvePageSeo, type PageSeo, type SeoEntry, type Seo
 import { savePageSeoAction, type SeoActionState } from "@/lib/server/actions/seo";
 import { Field, inputCls, textareaCls } from "../_components/Field";
 import { CharacterGuide, SeoImageField, SeoPreview, SeoStatus, SeoToggle, seoButtonCls } from "./SeoComponents";
+import { imageSpecs } from "@/lib/image-specs";
 
 const initial: SeoActionState = { status: "idle" };
 
@@ -28,7 +29,7 @@ export function SeoPageForm({ entry, settings }: { entry: SeoEntry; settings: Se
         <div className="min-w-0 space-y-5">
           <Field label="Título para os buscadores" hint={entry.path === "/" ? "O título da página inicial não recebe o complemento do site." : `O formato ${settings.titleTemplate} será aplicado automaticamente.`} error={error("title")}><input name="title" value={values.title} onChange={(event) => set("title", event.target.value)} placeholder={defaultTitle} maxLength={200} className={inputCls} /><CharacterGuide value={preview.title} recommended={60} /></Field>
           <Field label="Descrição para os buscadores" error={error("description")}><textarea name="description" value={values.description} onChange={(event) => set("description", event.target.value)} placeholder={fallback.description} maxLength={500} rows={4} className={textareaCls} /><CharacterGuide value={preview.description} recommended={160} /></Field>
-          <SeoImageField error={error("image")} onUploadingChange={setUploading} name="image" label="Imagem de compartilhamento desta página" value={values.image} onChange={(value) => set("image", value)} hint="Sugestão: 1200 × 630 px. Sem uma imagem própria, será usada a imagem do conteúdo ou o padrão do site." />
+          <SeoImageField error={error("image")} onUploadingChange={setUploading} name="image" label="Imagem de compartilhamento desta página" value={values.image} onChange={(value) => set("image", value)} hint="Sem uma imagem própria, será usada a imagem do conteúdo ou o padrão do site." spec={imageSpecs.shareImage} />
           <Field label="Descrição da imagem" error={error("imageAlt")}><input name="imageAlt" value={values.imageAlt} onChange={(event) => set("imageAlt", event.target.value)} placeholder={fallback.imageAlt} maxLength={200} className={inputCls} /></Field>
         </div>
         <SeoPreview title={preview.title} description={preview.description} url={preview.canonical} siteName={settings.siteName} image={preview.image} imageAlt={preview.imageAlt} />

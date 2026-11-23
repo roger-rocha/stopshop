@@ -10,6 +10,7 @@ import {
 } from "@/lib/server/actions/stores";
 import { Field, inputCls } from "../_components/Field";
 import { ImageUpload } from "../_components/ImageUpload";
+import { imageSpecs } from "@/lib/image-specs";
 import { StorePhotosManager } from "./StorePhotosManager";
 import type { Segment, Store } from "@/db/schema";
 
@@ -91,7 +92,8 @@ export function StoreForm({ segments, store }: StoreFormProps) {
         <ImageUpload
           name="photo"
           label="Foto / Logo"
-          hint="Logo da marca — PNG com fundo transparente fica melhor"
+          hint="Logo da marca"
+          spec={imageSpecs.storeLogo}
           defaultValue={store?.photo}
           folder="stores"
           variant="logo"
@@ -100,10 +102,11 @@ export function StoreForm({ segments, store }: StoreFormProps) {
         <ImageUpload
           name="storefront"
           label="Foto da fachada"
-          hint="Imagem grande exibida no card da loja"
+          hint="Imagem principal do card da loja"
+          spec={imageSpecs.storefront}
           defaultValue={store?.storefront}
           folder="stores"
-          variant="wide"
+          variant="photo"
           error={errors.storefront?.[0]}
         />
       </div>

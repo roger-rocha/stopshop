@@ -227,3 +227,15 @@ export const contactSettingsSchema = z.object({
 });
 
 export type ContactSettings = z.infer<typeof contactSettingsSchema>;
+
+export const aboutHeroSchema = z.object({
+  image: z
+    .string()
+    .trim()
+    .min(1, "Envie a imagem do topo da página Sobre.")
+    .refine((value) => value.startsWith("https://") || value.startsWith("/"), "Envie a imagem do topo da página Sobre."),
+  alt: z.string().trim().min(3, "Descreva a imagem (usado para acessibilidade).").max(200, "Use até 200 caracteres."),
+  caption: z.string().trim().max(120, "Use até 120 caracteres na legenda.").default(""),
+});
+
+export type AboutHero = z.infer<typeof aboutHeroSchema>;

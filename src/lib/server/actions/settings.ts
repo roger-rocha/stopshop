@@ -4,9 +4,10 @@ import { revalidatePath } from "next/cache";
 import { eq } from "drizzle-orm";
 import { db, schema } from "@/db";
 import { requireSession } from "@/lib/auth";
-import { contactSettingsSchema, heroSettingsSchema } from "@/lib/validators";
+import { aboutHeroSchema, contactSettingsSchema, heroSettingsSchema } from "@/lib/validators";
 import { openingScheduleSchema } from "@/lib/opening-schedule";
 import { SITE_VISIBILITY_KEY } from "@/lib/server/site-visibility";
+import { BRAND_LOGOS_KEY, brandLogosSchema } from "@/lib/brand-logos";
 
 export type SettingsState =
   | { status: "idle" }
@@ -130,4 +131,43 @@ export async function saveListSettingAction(
   await upsertSetting(key, items);
   revalidateAll();
   return { status: "success", message: "Lista atualizada." };
+}
+
+export async function saveBrandLogosAction(
+  _prev: SettingsState,
+  formData: FormData
+): Promise<SettingsState> {
+  await requireSession();
+  let input: unknown;
+  try {
+    input = JSON.parse(String(formData.get("brands") ?? ""));
+  } catch {
+    return { status: "error", message: "Não foi possível ler a lista de logos." };
+  }
+  const parsed = brandLogosSchema.safeParse(input);
+  if (!parsed.success) {
+    return { status: "error", message: parsed.error.issues[0]?.message ?? "Revise os logos." };
+  }
+  await upsertSetting(BRAND_LOGOS_KEY, parsed.data);
+  revalidateAll();
+  revalidatePath("/admin/marcas");
+  return { status: "success", message: "Logos atualizados no site." };
+}
+
+export async function saveAboutHeroAction(
+  _prev: SettingsState,
+  formData: FormData
+): Promise<SettingsState> {
+  await requireSession();
+  const parsed = aboutHeroSchema.safeParse({
+    image: formData.get("image") ?? "",
+    alt: formData.get("alt") ?? "",
+    caption: formData.get("caption") ?? "",
+  });
+  if (!parsed.success) {
+    return { status: "error", message: parsed.error.issues[0]?.message ?? "Revise a imagem da página Sobre." };
+  }
+  await upsertSetting("aboutHero", parsed.data);
+  revalidateAll();
+  return { status: "success", message: "Imagem da página Sobre atualizada." };
 }

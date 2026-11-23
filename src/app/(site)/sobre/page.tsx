@@ -7,7 +7,7 @@ import { MapSection } from "@/components/sections/MapSection";
 import { CTAButton } from "@/components/ui/CTAButton";
 import { InstitutionalVideo } from "@/components/ui/InstitutionalVideo";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { getGalleryImages } from "@/lib/server/queries";
+import { getAboutHero, getGalleryImages } from "@/lib/server/queries";
 
 export async function generateMetadata(): Promise<Metadata> {
   return getSeoMetadata("/sobre", "/sobre");
@@ -48,7 +48,8 @@ const experiences = [
 ];
 
 export default async function SobrePage() {
-  const images = (await getGalleryImages()).slice(0, 4);
+  const [gallery, aboutHero] = await Promise.all([getGalleryImages(), getAboutHero()]);
+  const images = gallery.slice(0, 4);
 
   return (
     <>
@@ -72,15 +73,17 @@ export default async function SobrePage() {
             <figure className="min-w-0">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] outline-1 -outline-offset-1 outline-black/10 lg:aspect-[6/5]">
                 <Image
-                  src="/images/stopshop-hero.png"
-                  alt="Fachada do Stop Shop em Brusque, com o ninho da moda na entrada"
+                  src={aboutHero.image}
+                  alt={aboutHero.alt}
                   fill
                   priority
                   sizes="(min-width: 1280px) 640px, (min-width: 1024px) 55vw, calc(100vw - 40px)"
                   className="object-cover object-[45%_center]"
                 />
               </div>
-              <figcaption className="mt-3 text-sm text-text-secondary">Brusque, Santa Catarina</figcaption>
+              {aboutHero.caption && (
+                <figcaption className="mt-3 text-sm text-text-secondary">{aboutHero.caption}</figcaption>
+              )}
             </figure>
           </div>
           <dl aria-label="O Stop Shop em números" className="mt-10 grid grid-cols-2 gap-x-6 gap-y-7 border-t border-border-subtle pt-8 lg:mt-12 lg:grid-cols-4">

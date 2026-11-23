@@ -4,6 +4,8 @@ import { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { upload } from "@vercel/blob/client";
 import { Check, Globe2, ImagePlus, Loader2, Upload, X } from "lucide-react";
+import { ACCEPTED_FORMATS_ERROR, ACCEPTED_IMAGE_TYPES, MAX_IMAGE_BYTES, type ImageSpec } from "@/lib/image-specs";
+import { ImageSpecHint } from "../_components/ImageSpecHint";
 import type { SeoActionState } from "@/lib/server/actions/seo";
 import { inputCls } from "../_components/Field";
 
@@ -43,13 +45,17 @@ export function SeoToggle({ name, label, hint, checked, onChange }: { name: stri
   );
 }
 
-export function SeoImageField({ name, label, value, onChange, hint, error: fieldError, onUploadingChange }: { name: string; label: string; value: string; onChange: (value: string) => void; hint?: string; error?: string; onUploadingChange?: (value: boolean) => void }) {
+export function SeoImageField({ name, label, value, onChange, hint, spec, error: fieldError, onUploadingChange }: { name: string; label: string; value: string; onChange: (value: string) => void; hint?: string; spec?: ImageSpec; error?: string; onUploadingChange?: (value: boolean) => void }) {
   const input = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
   const [progress, setProgress] = useState(0);
   async function handleUpload(file?: File) {
     if (!file) return;
+    if (!ACCEPTED_IMAGE_TYPES.includes(file.type) || file.size > MAX_IMAGE_BYTES) {
+      setError(ACCEPTED_FORMATS_ERROR);
+      return;
+    }
     setUploading(true);
     onUploadingChange?.(true);
     setError("");
@@ -76,8 +82,9 @@ export function SeoImageField({ name, label, value, onChange, hint, error: field
         </button>
         {value && <button type="button" disabled={uploading} onClick={() => onChange("")} className="inline-flex min-h-11 items-center gap-1 rounded-button px-3 text-xs text-text-secondary hover:bg-surface-soft"><X className="h-4 w-4" aria-hidden="true" />Remover</button>}
       </div>
-      <input ref={input} type="file" accept="image/jpeg,image/png,image/webp,image/avif" className="hidden" aria-label={`Enviar ${label.toLowerCase()}`} onChange={(event) => { void handleUpload(event.target.files?.[0]); event.target.value = ""; }} />
+      <input ref={input} type="file" accept={ACCEPTED_IMAGE_TYPES.join(",")} className="hidden" aria-label={`Enviar ${label.toLowerCase()}`} onChange={(event) => { void handleUpload(event.target.files?.[0]); event.target.value = ""; }} />
       {hint && <p className="text-xs leading-relaxed text-text-muted">{hint}</p>}
+      {spec && <ImageSpecHint spec={spec} />}
       {(fieldError || error) && <p role="alert" className="text-xs text-red-700">{fieldError || error}</p>}
     </div>
   );

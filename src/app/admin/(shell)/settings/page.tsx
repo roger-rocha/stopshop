@@ -1,4 +1,5 @@
 import {
+  getAboutHero,
   getContact,
   getHero,
   getHighlights,
@@ -6,6 +7,7 @@ import {
 } from "@/lib/server/queries";
 import { PageHeader } from "../_components/PageHeader";
 import { HeroSettingsForm } from "./HeroSettingsForm";
+import { AboutHeroForm } from "./AboutHeroForm";
 import { ContactSettingsForm } from "./ContactSettingsForm";
 import { ListSettingsForm } from "./ListSettingsForm";
 import { OpeningScheduleForm } from "./OpeningScheduleForm";
@@ -16,19 +18,20 @@ export const dynamic = "force-dynamic";
 export const metadata = { title: "Configurações" };
 
 export default async function SettingsPage() {
-  const [hero, contact, highlights, openingSchedule, published] = await Promise.all([
+  const [hero, contact, highlights, openingSchedule, published, aboutHero] = await Promise.all([
     getHero(),
     getContact(),
     getHighlights(),
     getOpeningSchedule(),
     getSitePublished(),
+    getAboutHero(),
   ]);
 
   return (
     <div>
       <PageHeader
         title="Configurações"
-        description="Disponibilidade do site, hero da home, dados de contato e listas."
+        description="Disponibilidade do site, hero da home, página Sobre, dados de contato e listas."
       />
 
       <div className="space-y-8">
@@ -38,6 +41,10 @@ export default async function SettingsPage() {
 
         <Section title="Hero da home">
           <HeroSettingsForm hero={hero} />
+        </Section>
+
+        <Section title="Página Sobre" description="Imagem exibida no topo da página Sobre.">
+          <AboutHeroForm about={aboutHero} />
         </Section>
 
         <Section title="Contato">

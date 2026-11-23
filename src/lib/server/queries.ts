@@ -1,5 +1,7 @@
 import "server-only";
 import { openingScheduleSchema, shoppingDate } from "@/lib/opening-schedule";
+import { BRAND_LOGOS_KEY, brandLogosSchema, defaultBrandLogos } from "@/lib/brand-logos";
+import { aboutHeroSchema, type AboutHero } from "@/lib/validators";
 import { storeBelongsToSegment } from "@/lib/store-segments";
 import { asc, desc, eq } from "drizzle-orm";
 import { db, schema } from "@/db";
@@ -216,6 +218,27 @@ export async function getOpeningSchedule() {
   const saved = await getSetting<unknown>("openingSchedule", { entries: [] });
   const parsed = openingScheduleSchema.safeParse(saved);
   return parsed.success ? parsed.data : { entries: [] };
+}
+
+export const defaultAboutHero: AboutHero = {
+  image: "/images/stopshop-hero.png",
+  alt: "Fachada do Stop Shop em Brusque, com o ninho da moda na entrada",
+  caption: "Brusque, Santa Catarina",
+};
+
+/** Imagem do topo da página Sobre; sem registro salvo (ou inválido), usa a foto padrão. */
+export async function getAboutHero() {
+  const saved = await getSetting<unknown>("aboutHero", null);
+  const parsed = aboutHeroSchema.safeParse(saved);
+  return parsed.success ? parsed.data : defaultAboutHero;
+}
+
+/** Logos da faixa de marcas; sem lista salva (ou inválida), usa os logos padrão. */
+export async function getBrandLogos() {
+  const saved = await getSetting<unknown>(BRAND_LOGOS_KEY, null);
+  if (saved === null) return defaultBrandLogos;
+  const parsed = brandLogosSchema.safeParse(saved);
+  return parsed.success ? parsed.data : defaultBrandLogos;
 }
 
 export async function getHighlights() {

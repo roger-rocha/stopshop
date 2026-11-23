@@ -9,6 +9,7 @@ import {
 } from "@/lib/server/actions/events";
 import { Field, inputCls, textareaCls } from "../_components/Field";
 import { ImageUpload } from "../_components/ImageUpload";
+import { imageSpecs } from "@/lib/image-specs";
 import type { AgendaEvent } from "@/db/schema";
 
 const initial: EventFormState = { status: "idle" };
@@ -65,7 +66,8 @@ export function EventForm({ event }: EventFormProps) {
       <ImageUpload
         name="image"
         label="Arte do banner"
-        hint="A mesma arte aparece no carrossel da home e no cartão do evento no calendário (ex.: 1600×500). Inclua o texto da ação na própria arte."
+        hint="A mesma arte aparece no carrossel da home e no cartão do evento no calendário. Inclua o texto da ação na própria arte."
+        spec={imageSpecs.eventBanner}
         defaultValue={event?.image}
         folder="agenda"
         variant="banner"

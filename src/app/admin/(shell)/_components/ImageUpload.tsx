@@ -5,6 +5,8 @@ import Image from "next/image";
 import { upload } from "@vercel/blob/client";
 import { ImagePlus, Loader2, Upload, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ACCEPTED_FORMATS_ERROR, ACCEPTED_IMAGE_TYPES, MAX_IMAGE_BYTES, type ImageSpec } from "@/lib/image-specs";
+import { ImageSpecHint } from "./ImageSpecHint";
 
 interface ImageUploadProps {
   /** Nome do campo — vai como input hidden, exatamente como o antigo campo de texto. */
@@ -17,9 +19,12 @@ interface ImageUploadProps {
   folder: string;
   /**
    * Formato do preview, igual ao uso no site: "wide" 16:9, "banner" 16:5 (agenda, 1600x500),
-   * "square" 1:1 (Instagram) e "logo" quadrado pequeno com object-contain.
+   * "photo" 4:3 (lojas), "portrait" 3:4 (segmentos), "square" 1:1 (Instagram)
+   * e "logo" quadrado pequeno com object-contain.
    */
-  variant?: "wide" | "banner" | "square" | "logo";
+  variant?: "wide" | "banner" | "photo" | "portrait" | "square" | "logo";
+  /** Medida ideal e cuidados de corte, exibidos sob o campo. */
+  spec?: ImageSpec;
 }
 
 export function ImageUpload({
@@ -30,6 +35,7 @@ export function ImageUpload({
   defaultValue,
   folder,
   variant = "wide",
+  spec,
 }: ImageUploadProps) {
   const [url, setUrl] = useState(defaultValue ?? "");
   const [uploading, setUploading] = useState(false);
@@ -39,6 +45,10 @@ export function ImageUpload({
 
   async function handleFile(file: File | undefined) {
     if (!file) return;
+    if (!ACCEPTED_IMAGE_TYPES.includes(file.type) || file.size > MAX_IMAGE_BYTES) {
+      setUploadError(ACCEPTED_FORMATS_ERROR);
+      return;
+    }
     setUploading(true);
     setUploadError(null);
     setProgress(0);
@@ -63,6 +73,8 @@ export function ImageUpload({
   const frameCls = {
     wide: "aspect-video w-full max-w-xl",
     banner: "aspect-[16/5] w-full",
+    photo: "aspect-[4/3] w-full max-w-xl",
+    portrait: "aspect-[3/4] w-full max-w-60",
     square: "aspect-square w-full max-w-xs",
     // Xadrez atrás do logo: PNG branco com fundo transparente continua visível.
     logo: "aspect-square max-w-[160px] bg-[conic-gradient(#e7e2da_25%,#fff_0_50%,#e7e2da_0_75%,#fff_0)] bg-[length:16px_16px]",
@@ -135,7 +147,7 @@ export function ImageUpload({
         <input
           ref={inputRef}
           type="file"
-          accept="image/*"
+          accept={ACCEPTED_IMAGE_TYPES.join(",")}
           className="hidden"
           onChange={(e) => {
             handleFile(e.target.files?.[0]);
@@ -147,6 +159,7 @@ export function ImageUpload({
       {hint && !displayError && (
         <span className="block text-xs text-text-muted">{hint}</span>
       )}
+      {spec && !displayError && <ImageSpecHint spec={spec} />}
       {displayError && (
         <span className="block text-xs text-brand-coral">{displayError}</span>
       )}

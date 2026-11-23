@@ -9,13 +9,14 @@ import { OpenStoreContactSection } from "@/components/pages/open-store/OpenStore
 import { OpenStoreFAQ } from "@/components/pages/open-store/OpenStoreFAQ";
 import { openStoreFaq } from "@/lib/data/open-store";
 import { serializeJsonLd } from "@/lib/seo";
+import { getBrandLogos } from "@/lib/server/queries";
 
 export async function generateMetadata(): Promise<Metadata> {
   return getSeoMetadata("/abra-uma-loja", "/abra-uma-loja");
 }
 
 export default async function AbraUmaLojaPage() {
-  const seo = await getSeoSettings();
+  const [seo, brandLogos] = await Promise.all([getSeoSettings(), getBrandLogos()]);
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -35,7 +36,7 @@ export default async function AbraUmaLojaPage() {
         />
       )}
       <OpenStoreHero />
-      <AnchorBrandsStrip />
+      <AnchorBrandsStrip brands={brandLogos} />
       <OpenStoreFormats />
       <OpenStoreBenefits />
       <OpenStoreProcess />

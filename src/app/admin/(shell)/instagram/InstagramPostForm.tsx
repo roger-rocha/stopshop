@@ -9,6 +9,7 @@ import {
 } from "@/lib/server/actions/instagram";
 import { Field, inputCls } from "../_components/Field";
 import { ImageUpload } from "../_components/ImageUpload";
+import { imageSpecs } from "@/lib/image-specs";
 import type { InstagramPost } from "@/db/schema";
 
 const initial: InstagramFormState = { status: "idle" };
@@ -30,7 +31,8 @@ export function InstagramPostForm({ item }: InstagramPostFormProps) {
       <ImageUpload
         name="image"
         label="Imagem da publicação"
-        hint="Imagem do post do Instagram — fica recortada em quadrado na home"
+        hint="Imagem do post do Instagram"
+        spec={imageSpecs.instagram}
         defaultValue={item?.image}
         folder="instagram"
         variant="square"

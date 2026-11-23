@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import {
   Store,
   Layers,
+  Tags,
   FileText,
   CalendarDays,
   Images,
@@ -16,6 +17,7 @@ import {
 } from "lucide-react";
 import { db, schema } from "@/db";
 import { eq } from "drizzle-orm";
+import { getBrandLogos } from "@/lib/server/queries";
 
 export const dynamic = "force-dynamic";
 
@@ -64,7 +66,7 @@ async function loadCounts() {
 }
 
 export default async function DashboardPage() {
-  const counts = await loadCounts();
+  const [counts, brandLogos] = await Promise.all([loadCounts(), getBrandLogos()]);
 
   const cards = [
     {
@@ -80,6 +82,13 @@ export default async function DashboardPage() {
       label: "Segmentos",
       value: counts.segmentsTotal,
       hint: "Categorias do site",
+    },
+    {
+      href: "/admin/marcas",
+      icon: Tags,
+      label: "Marcas",
+      value: brandLogos.length,
+      hint: "Logos da faixa de marcas",
     },
     {
       href: "/admin/posts",
