@@ -72,6 +72,10 @@ export default function LocalizacaoPage() {
               <div className="rounded-2xl border border-white/12 bg-white/10 p-5 backdrop-blur-sm">
                 <p className="text-xs uppercase tracking-[0.18em] text-white/60">Funcionamento</p>
                 <p className="mt-2 text-lg font-medium">{siteContact.hours}</p>
+                <p className="mt-2 text-sm font-medium text-white/85">Domingos: horário especial*</p>
+                <p className="mt-1 text-xs text-white/60">
+                  *Divulgado antecipadamente em nossos canais.
+                </p>
               </div>
               <div className="rounded-2xl border border-white/12 bg-white/10 p-5 backdrop-blur-sm">
                 <p className="text-xs uppercase tracking-[0.18em] text-white/60">Contato</p>
