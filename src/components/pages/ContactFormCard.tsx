@@ -1,20 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState, useState } from "react";
 import Link from "next/link";
+import { sendContactMessageAction } from "@/lib/server/actions/contact";
+import { contactDepartments, type ContactFormState } from "@/lib/contact-form";
+
+const initial: ContactFormState = { status: "idle" };
 
 export function ContactFormCard() {
-  const [submitted, setSubmitted] = useState(false);
+  const [state, formAction, pending] = useActionState(sendContactMessageAction, initial);
   // O form usa noValidate, então o aceite dos termos é conferido aqui.
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const submitted = state.status === "success";
 
   return (
     <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        if (!acceptedTerms) return;
-        setSubmitted(true);
-      }}
+      action={formAction}
+      // Mantém o que a pessoa digitou se o envio falhar (o React limpa o form após a action).
+      onReset={(event) => event.preventDefault()}
       className="rounded-[32px] border border-border-default bg-white p-8 shadow-card sm:p-10"
       noValidate
     >
@@ -75,8 +78,9 @@ export function ContactFormCard() {
                 className="w-full rounded-button border border-border-subtle bg-surface-soft px-4 py-3 text-text-secondary outline-none focus:border-brand-coral focus:ring-1 focus:ring-brand-coral"
               >
                 <option value="">Departamento</option>
-                <option value="marketing">Marketing</option>
-                <option value="atendimento">Atendimento</option>
+                {Object.entries(contactDepartments).map(([value, label]) => (
+                  <option key={value} value={value}>{label}</option>
+                ))}
               </select>
             </div>
           </div>
@@ -119,12 +123,24 @@ export function ContactFormCard() {
             </label>
           </div>
 
+          {/* Armadilha para robôs: escondido de pessoas e leitores de tela. */}
+          <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+            <label htmlFor="contact-website">Não preencha este campo</label>
+            <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+          </div>
+
+          {state.status === "error" && (
+            <p className="mt-4 text-sm text-red-700" role="alert">
+              {state.message}
+            </p>
+          )}
+
           <button
             type="submit"
-            disabled={!acceptedTerms}
+            disabled={!acceptedTerms || pending}
             className="mt-4 rounded-button bg-brand-coral px-6 py-3 font-semibold text-white transition-opacity hover:bg-brand-coral-dark disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Enviar mensagem
+            {pending ? "Enviando..." : "Enviar mensagem"}
           </button>
         </>
       )}
